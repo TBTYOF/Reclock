@@ -25,8 +25,8 @@ Rails.application.routes.draw do
   end
 
   namespace :on_store_users do
+  	get '', to:'on_store_users#home'
     resources :on_store_users ,only:[:show, :edit, :update] do
-    	get '', to:'on_store_users#home'
     	get '/form' => 'on_store_users#form', as: 'form'
     	get '/sales' => 'on_store_users#sales', as: 'sales'
     	resources :reviews, only:[:index, :destroy]

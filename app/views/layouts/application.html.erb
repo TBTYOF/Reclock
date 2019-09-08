@@ -10,6 +10,16 @@
   </head>
 
   <body>
-    <%= yield %>
+    <!--URLの先頭に'admin'があれば'true'-->
+    <% if request.fullpath.match?(/^\/admins\/*/) %>
+      <%= render "/layouts/admins_header" %>
+    <% elsif request.fullpath.match?(/^\/on_store_users\/*/) %>
+      <%= render "/layouts/on_store_users_header" %>
+    <% else %>
+      <%= render "/layouts/users_header" %>
+    <% end %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
