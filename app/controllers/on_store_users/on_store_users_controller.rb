@@ -1,5 +1,6 @@
 class OnStoreUsers::OnStoreUsersController < ApplicationController
 	def home
+		@on_store_user = current_user
 		render 'on_store_users/home'
 	end
 

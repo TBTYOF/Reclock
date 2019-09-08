@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2019_09_08_072700) do
   end
 
   create_table "on_store_users", force: :cascade do |t|
-    t.string "email"
+    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -139,18 +139,18 @@ ActiveRecord::Schema.define(version: 2019_09_08_072700) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "on_store_user_id"
+    t.integer "order_id"
     t.integer "user_id"
     t.string "title"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["on_store_user_id"], name: "index_reviews_on_on_store_user_id"
+    t.index ["order_id"], name: "index_reviews_on_order_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
+    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

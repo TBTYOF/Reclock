@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :users do
+  	get '/about' => 'users#about', as: 'about'
+  	get '/shops/' => 'on_store_users#index', as: 'on_store_users_index'
+  	get '/shops/:id' => 'on_store_users#show', as: 'on_store_users_show'
     resources :users ,only:[:show, :edit, :update] do
-    	get '/about' => 'users#about', as: 'about'
   		resources :inquiries, only:[:new, :create] do
   			resources :replies, only:[:new, :create]
   		end
@@ -20,14 +22,12 @@ Rails.application.routes.draw do
   			end
 		  end
   	end
-  	get '/shops/' => 'on_store_users#index', as: 'on_store_users_index'
-  	get '/shops/:id' => 'on_store_users#show', as: 'on_store_users_show'
   end
 
   namespace :on_store_users do
   	get '', to:'on_store_users#home'
+  	get '/form' => 'on_store_users#form', as: 'form'
     resources :on_store_users ,only:[:show, :edit, :update] do
-    	get '/form' => 'on_store_users#form', as: 'form'
     	get '/sales' => 'on_store_users#sales', as: 'sales'
     	resources :reviews, only:[:index, :destroy]
     	resources :inquiries, only:[:index, :show] do
