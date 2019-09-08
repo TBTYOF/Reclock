@@ -32,6 +32,20 @@ class DeviseCreateOnStoreUsers < ActiveRecord::Migration[5.2]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      t.string :owner_name
+      t.string :owner_name_kana
+      t.string :image_id
+      t.string :business_hours
+      t.string :holiday
+      t.string :telephone_number
+      t.string :email
+      t.string :postal_code
+      t.string :address
+      t.string :closest_station
+      t.string :parking
+      t.string :greeting
+      t.boolean :is_public, default: false, null: false
+      t.boolean :is_quit, default: false, null: false
 
       t.timestamps null: false
     end

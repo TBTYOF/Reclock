@@ -1,0 +1,2 @@
+class MinorCategory < ApplicationRecord
+end
