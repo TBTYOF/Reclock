@@ -7,6 +7,10 @@ class OnStoreUsers::InquiriesController < ApplicationController
 		
 	end
 
+	def index
+		
+	end
+
 	def show
 		
 	end

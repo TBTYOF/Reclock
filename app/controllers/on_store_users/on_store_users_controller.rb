@@ -1,6 +1,6 @@
 class OnStoreUsers::OnStoreUsersController < ApplicationController
 	def home
-		
+		render 'on_store_users/home'
 	end
 
 	def form

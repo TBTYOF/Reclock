@@ -25,18 +25,27 @@ Rails.application.routes.draw do
 
   namespace :on_store_users do
     resources :on_store_users ,only:[:show, :edit, :update] do
-    	get '/about' => 'users#about', as: 'about'
-  		resources :inquiries, only:[:new, :create] do
+    	get '', to:'on_store_users#home'
+    	get '/form' => 'on_store_users#form', as: 'form'
+    	get '/sales' => 'on_store_users#sales', as: 'sales'
+    	resources :reviews, only:[:index, :destroy]
+    	resources :inquiries, only:[:index, :show] do
   			resources :replies, only:[:new, :create]
   		end
-  		resources :orders, only:[:index, :show] do
-  			resources :reviews, except:[:index, :show]
+  		resources :orders, except:[:create, :destroy] do
 		 		resources :inquiries, only:[:new, :create] do
   				resources :replies, only:[:new, :create]
   			end
 		  end
   	end
-  	get '/shops/' => 'on_store_users#index', as: 'on_store_users_index'
-  	get '/shops/:id' => 'on_store_users#show', as: 'on_store_users_show'
+  end
+
+  namespace :admins do
+    get '', to:'admins#home'
+    resources :orders, only:[:index, :show]
+    resources :users, only:[:index, :show]
+    resources :on_store_users, only:[:index, :show]
+    resources :inquiries, only:[:index, :show]
+    resources :reviews, only:[:index, :show]
   end
 end
