@@ -7,19 +7,19 @@
       <% if on_store_user_signed_in? %>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <%= link_to '管理台帳', on_store_users_on_store_user_orders_path(@on_store_user) %>
+            <%= link_to '管理台帳', on_store_users_on_store_user_orders_path(current_on_store_user) %>
           </li>
           <li>
-          	<%= link_to '問合せ一覧', on_store_users_on_store_user_inquiries_path(current_user) %>
+          	<%= link_to '問合せ一覧', on_store_users_on_store_user_inquiries_path(current_on_store_user) %>
           </li>
           <li>
-            <%= link_to '売上', on_store_users_on_store_user_sales_path(current_user) %>
+            <%= link_to '売上', on_store_users_on_store_user_sales_path(current_on_store_user) %>
           </li>
           <li>
-            <%= link_to 'レビュー一覧', on_store_users_on_store_user_reviews_path(current_user) %>
+            <%= link_to 'レビュー一覧', on_store_users_on_store_user_reviews_path(current_on_store_user) %>
           </li>
           <li>
-            <%= link_to 'マイページ', on_store_users_on_store_user_path(current_user) %>
+            <%= link_to 'マイページ', on_store_users_on_store_user_path(current_on_store_user) %>
           </li>
           <li>
              <%= link_to 'ログアウト', destroy_on_store_user_session_url, method: :delete %>
