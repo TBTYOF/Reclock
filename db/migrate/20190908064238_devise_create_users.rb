@@ -35,7 +35,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :name_kana
       t.string :telephone_number
-      t.string :email
       t.string :postal_code
       t.string :address
       t.boolean :is_quit, default: false, null: false
