@@ -7,4 +7,19 @@ class Users::UsersController < ApplicationController
 
   def show
   end
+
+  def home
+  end
+
+  def about
+  end
+
+  def withdrawal
+  	
+  end
+
+  def quit
+  	
+  end
+
 end
