@@ -9,12 +9,15 @@ Rails.application.routes.draw do
   namespace :users do
     resources :users ,only:[:show, :edit, :update] do
     	get '/about' => 'users#about', as: 'about'
-  		resource :delivery_addresses, only:[:create, :update, :destroy]
-  		resources :carts, only:[:create,:index,:update, :destroy]
       get '/orders/buy' => 'orders#new', as: 'orders_new'
-  		resources :inquiries, only:[:new, :create]
-  		resources :replies, only:[:new, :create]
-  		resources :reviews, except:[:index, :show]
+  		resources :inquiries, only:[:new, :create] do
+  			resources :replies, only:[:new, :create]
+  		end
+  		resources :orders, only:[:index, :show] do
+		 		resources :inquiries, only:[:new, :create] do
+  				resources :replies, only:[:new, :create]
+  			end
+		  end
   	end
   	resources :on_store_users, only:[:index, :show] do
 	 		resources :favorites, only:[:create, :destroy]
