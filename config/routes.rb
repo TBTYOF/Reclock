@@ -9,18 +9,34 @@ Rails.application.routes.draw do
   namespace :users do
     resources :users ,only:[:show, :edit, :update] do
     	get '/about' => 'users#about', as: 'about'
-      get '/orders/buy' => 'orders#new', as: 'orders_new'
   		resources :inquiries, only:[:new, :create] do
   			resources :replies, only:[:new, :create]
   		end
   		resources :orders, only:[:index, :show] do
+  			resources :reviews, except:[:index, :show]
 		 		resources :inquiries, only:[:new, :create] do
   				resources :replies, only:[:new, :create]
   			end
 		  end
   	end
-  	resources :on_store_users, only:[:index, :show] do
-	 		resources :favorites, only:[:create, :destroy]
-	  end
+  	get '/shops/' => 'on_store_users#index', as: 'on_store_users_index'
+  	get '/shops/:id' => 'on_store_users#show', as: 'on_store_users_show'
+  end
+
+  namespace :on_store_users do
+    resources :on_store_users ,only:[:show, :edit, :update] do
+    	get '/about' => 'users#about', as: 'about'
+  		resources :inquiries, only:[:new, :create] do
+  			resources :replies, only:[:new, :create]
+  		end
+  		resources :orders, only:[:index, :show] do
+  			resources :reviews, except:[:index, :show]
+		 		resources :inquiries, only:[:new, :create] do
+  				resources :replies, only:[:new, :create]
+  			end
+		  end
+  	end
+  	get '/shops/' => 'on_store_users#index', as: 'on_store_users_index'
+  	get '/shops/:id' => 'on_store_users#show', as: 'on_store_users_show'
   end
 end
