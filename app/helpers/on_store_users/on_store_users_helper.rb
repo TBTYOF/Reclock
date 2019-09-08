@@ -1,0 +1,2 @@
+module OnStoreUsers::OnStoreUsersHelper
+end
