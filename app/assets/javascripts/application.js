@@ -16,3 +16,12 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).on('turbolinks:load', function(){
+	$('.menu-trigger').on('click', function(){
+		$(this).toggleClass('active');
+		$('#sp-menu').fadeToggle();
+		$('#container').fadeToggle();
+		return false;
+	});
+});

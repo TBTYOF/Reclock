@@ -1,1 +1,41 @@
-_users_header.html.erb
+
+  <div class="nav navbar-nav navbar-right">
+    <p>メニュー三</p>
+  </div>
+</div>
+
+<header class="container-fluid">
+	<div class="navbar-header">
+    <%= link_to 'Re:clock', root_path, class: "navbar-brand active",id: "top" %>
+  </div>
+
+	<div id="sp-menu">
+
+		<h3 style="text-align: center; margin: 50px;">Re:clock</h3>
+
+		<% if user_signed_in? %>
+			<ul>
+				<li><%= link_to '修理店を検索', users_on_store_users_index_path, class: "menu-text font_2" %></li>
+				<li><%= link_to 'マイページ', users_user_path, class: "menu-text font_2" %></li>
+				<li><%= link_to 'Re:clockとは', users_about_path, class: "menu-text font_2" %></li>
+				<li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "menu-text font_2" %></li>
+			</ul>
+		<% else %>
+			<ul>
+				<li><%= link_to 'Re:clockとは', users_about_path, class: "menu-text font_2"  %></li>
+				<li><%= link_to '修理店を検索', users_on_store_users_index_path, class: "menu-text font_2" %></li>
+				<li><%= link_to '新規会員登録', new_user_registration_path, class: "menu-text font_2" %></li>
+				<li><%= link_to 'ログイン', new_user_session_path, class: "menu-text font_2" %></li>
+			</ul>
+		<% end %>
+	</div>
+
+	<div id="hm-icon">
+		<a href="javascript:location.href = location;" class="menu-trigger">
+			<span></span>
+			<span></span>
+			<span></span>
+		</a>
+	</div>
+
+</header>
