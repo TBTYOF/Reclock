@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name,
                                                        :name_kana,
                                                        :telephone_number,
-                                                       :postal_code,
+                                                       :postcode,
                                                        :address])
   end
 end
