@@ -17,7 +17,6 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-
 // ハンバーガーメニュー
 $(document).on('turbolinks:load', function(){
 	$('.trigger').on('click', function(){

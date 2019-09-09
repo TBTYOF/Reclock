@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2019_09_08_072700) do
     t.string "business_hours"
     t.string "holiday"
     t.string "telephone_number"
-    t.string "postal_code"
+    t.string "postcode"
     t.string "address"
     t.string "closest_station"
     t.string "parking"
@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(version: 2019_09_08_072700) do
     t.string "name"
     t.string "name_kana"
     t.string "telephone_number"
-    t.string "postal_code"
+    t.string "postcode"
     t.string "address"
     t.boolean "is_quit", default: false, null: false
     t.datetime "created_at", null: false

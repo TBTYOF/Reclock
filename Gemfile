@@ -77,3 +77,5 @@ gem "cocoon"
 gem 'payjp'
 
 gem 'ransack'
+
+gem 'rails-i18n'

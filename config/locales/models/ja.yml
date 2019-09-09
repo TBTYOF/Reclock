@@ -1,0 +1,9 @@
+ja:
+  attributes:
+    name:             「名前」
+    email:            「メールアドレス」
+    password:         「パスワード」
+    name_kana:        「ふりがな」
+    telephone_number: 「電話番号」
+    postcode:         「郵便番号」
+    address:          「住所」

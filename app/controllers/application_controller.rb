@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
 	def after_sign_in_path_for(resource)
     if resource.class == Admin
@@ -18,5 +19,14 @@ class ApplicationController < ActionController::Base
     else
     	new_on_store_user_session_session_path
     end
+  end
+
+  protected
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name,
+                                                       :name_kana,
+                                                       :telephone_number,
+                                                       :postcode,
+                                                       :address])
   end
 end

@@ -38,7 +38,7 @@ class DeviseCreateOnStoreUsers < ActiveRecord::Migration[5.2]
       t.string  :business_hours
       t.string  :holiday
       t.string  :telephone_number
-      t.string  :postal_code
+      t.string  :postcode
       t.string  :address
       t.string  :closest_station
       t.string  :parking
