@@ -8,33 +8,33 @@
 			<div class="" style="padding: 10%; ">
 				<ul class="list-group" style="list-style: none;">
 					<li>
-						<strong><%= link_to 'Re:clock', root_path, style: "color: #fff; font-size: 51px;" %></strong>
+						<strong><%= link_to 'Re:clock', root_path, class: "font-size5 menu-text" %></strong>
 					</li>
 					<% if user_signed_in? %>
 						<li>
-							<%= link_to '修理店を検索', users_on_store_users_index_path, class: "menu-text" %>
+							<%= link_to '修理店を検索', users_on_store_users_index_path, class: "font-size4 menu-text", style: "color: #fff;" %>
 						</li>
 						<li>
-							<%= link_to 'マイページ', users_user_path(current_user), class: "menu-text" %>
+							<%= link_to 'マイページ', users_user_path(current_user), class: "font-size4 menu-text" %>
 						</li>
 						<li>
-							<%= link_to 'Re:clockとは', users_about_path, class: "menu-text" %>
+							<%= link_to 'Re:clockについて', users_about_path, class: "font-size4 menu-text" %>
 						</li>
 						<li>
-							<%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "menu-text" %>
+							<%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "font-size4 menu-text" %>
 						</li>
 					<% else %>
 						<li>
-							<%= link_to 'Re:clockとは', users_about_path, class: "menu-text"  %>
+							<%= link_to 'Re:clockについて', users_about_path, class: "font-size4 menu-text" %>
 						</li>
 						<li>
-							<%= link_to '修理店を検索', users_on_store_users_index_path, class: "menu-text" %>
+							<%= link_to '修理店を検索', users_on_store_users_index_path, class: "font-size4 menu-text" %>
 						</li>
 						<li>
-							<%= link_to '新規会員登録', new_user_registration_path, class: "menu-text" %>
+							<%= link_to '新規会員登録', new_user_registration_path, class: "font-size4 menu-text" %>
 						</li>
 						<li>
-							<%= link_to 'ログイン', new_user_session_path, class: "menu-text" %>
+							<%= link_to 'ログイン', new_user_session_path, class: "font-size4 menu-text" %>
 						</li>
 					<% end %>
 				</ul>
