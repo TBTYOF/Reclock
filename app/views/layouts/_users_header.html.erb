@@ -15,7 +15,7 @@
 							<%= link_to '修理店を検索', users_on_store_users_index_path, class: "menu-text" %>
 						</li>
 						<li>
-							<%= link_to 'マイページ', users_user_path, class: "menu-text" %>
+							<%= link_to 'マイページ', users_user_path(current_user), class: "menu-text" %>
 						</li>
 						<li>
 							<%= link_to 'Re:clockとは', users_about_path, class: "menu-text" %>
