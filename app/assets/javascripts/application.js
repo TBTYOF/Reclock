@@ -13,4 +13,23 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require jquery
+//= require bootstrap-sprockets
 //= require_tree .
+
+
+// ハンバーガーメニュー
+$(document).on('turbolinks:load', function(){
+	$('.trigger').on('click', function(){
+		$('.menu-trigger').toggleClass('active');
+
+		if($('#sp-menu').hasClass('off')){
+	    $('#sp-menu').removeClass('off');
+	    $('#sp-menu').animate({'marginRight':'100%'},300).addClass('on');
+	  }else{
+	    $('#sp-menu').addClass('off');
+	    $('#sp-menu').animate({'marginRight':'0px'},300);
+	  }
+		return false;
+	});
+});
