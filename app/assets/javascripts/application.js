@@ -18,10 +18,18 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function(){
-	$('.menu-trigger').on('click', function(){
-		$(this).toggleClass('active');
-		$('#sp-menu').fadeToggle();
-		$('#container').fadeToggle();
+	$('.trigger').on('click', function(){
+		$('.menu-trigger').toggleClass('active');
+
+		if($('#sp-menu').hasClass('off')){
+	    $('#sp-menu').removeClass('off');
+	    $('#sp-menu').animate({'marginRight':'100%'},400).addClass('on');
+	    $('.moji').animate({'left':'-100%'},400).addClass('on');
+	  }else{
+	    $('#sp-menu').addClass('off');
+	    $('#sp-menu').animate({'marginRight':'0px'},400);
+	    $('.moji').animate({'marginRight':'0px'},400);
+	  }
 		return false;
 	});
 });

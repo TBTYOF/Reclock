@@ -71,17 +71,19 @@
 }
 
 
-
 #sp-menu {
 	position: fixed;
 	top: 0;
-	left: 0;
-	background: #000;
-	color: #fff;
+	right: -100%;
 	width: 100%;
 	min-height: 100%;
-	display: none;
 	z-index: 9;
+}
+
+.menu-image {
+	min-height: 100%;
+	background-image: url(/menue.jpeg);
+	background-size: cover;
 }
 
 #sp-menu li {
@@ -94,3 +96,15 @@
   text-decoration: none;
   font-weight: bold;
 }
+
+.toji {
+ position: absolute;
+ right: 6%;
+ top: 23px;
+ z-index: 10;
+ font-size: 38px;
+ }
+
+ .moji {
+ font-size: 38px;
+ }

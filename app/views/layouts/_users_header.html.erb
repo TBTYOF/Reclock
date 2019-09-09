@@ -1,41 +1,45 @@
-
-  <div class="nav navbar-nav navbar-right">
-    <p>メニュー三</p>
-  </div>
-</div>
-
 <header class="container-fluid">
 	<div class="navbar-header">
     <%= link_to 'Re:clock', root_path, class: "navbar-brand active",id: "top" %>
   </div>
 
-	<div id="sp-menu">
+	<div id="sp-menu" class="off">
+		<div style="width: 100%; height: 100%; background-color: rgba(222, 184, 135, 0.7);">
+			<div class="col-md-3">
+				<%= link_to 'Re:clock', admins_path, class: "" %>
+			<% if user_signed_in? %>
+				<ul>
+					<li><%= link_to '修理店を検索', users_on_store_users_index_path, class: "" %></li>
+					<li><%= link_to 'マイページ', users_user_path, class: "" %></li>
+					<li><%= link_to 'Re:clockとは', users_about_path, class: "" %></li>
+					<li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "" %></li>
+				</ul>
+			<% else %>
+				<ul>
+					<li><%= link_to 'Re:clockとは', users_about_path, class: ""  %></li>
+					<li><%= link_to '修理店を検索', users_on_store_users_index_path, class: "" %></li>
+					<li><%= link_to '新規会員登録', new_user_registration_path, class: "" %></li>
+					<li><%= link_to 'ログイン', new_user_session_path, class: "" %></li>
+				</ul>
+			<% end %>
+			</div>
+			<div class="col-md-9"></div>
+		</div>
+		
+		<div class="col-md-9 menu-image"></div>
 
-		<h3 style="text-align: center; margin: 50px;">Re:clock</h3>
+		<p style="" class="toji trigger">閉じる</p>
+	</div>
 
-		<% if user_signed_in? %>
-			<ul>
-				<li><%= link_to '修理店を検索', users_on_store_users_index_path, class: "menu-text font_2" %></li>
-				<li><%= link_to 'マイページ', users_user_path, class: "menu-text font_2" %></li>
-				<li><%= link_to 'Re:clockとは', users_about_path, class: "menu-text font_2" %></li>
-				<li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "menu-text font_2" %></li>
-			</ul>
-		<% else %>
-			<ul>
-				<li><%= link_to 'Re:clockとは', users_about_path, class: "menu-text font_2"  %></li>
-				<li><%= link_to '修理店を検索', users_on_store_users_index_path, class: "menu-text font_2" %></li>
-				<li><%= link_to '新規会員登録', new_user_registration_path, class: "menu-text font_2" %></li>
-				<li><%= link_to 'ログイン', new_user_session_path, class: "menu-text font_2" %></li>
-			</ul>
-		<% end %>
+	<div class="nav navbar-right" style="margin: 20px 6% 0 0;">
+		<p style="" class="moji">メニュー</p>
 	</div>
 
 	<div id="hm-icon">
-		<a href="javascript:location.href = location;" class="menu-trigger">
+		<a href="javascript:location.href = location;" class="menu-trigger trigger">
 			<span></span>
 			<span></span>
 			<span></span>
 		</a>
 	</div>
-
 </header>
