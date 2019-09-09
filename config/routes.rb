@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   	get '/shops/' => 'on_store_users#index', as: 'on_store_users_index'
   	get '/shops/:id' => 'on_store_users#show', as: 'on_store_users_show'
     resources :users ,only:[:show, :edit, :update] do
+      get '/withdrawal' => 'users#withdrawal', as: 'withdrawal'
   		resources :inquiries, only:[:new, :create] do
   			resources :replies, only:[:new, :create]
   		end
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
   	get '/form' => 'on_store_users#form', as: 'form'
     resources :on_store_users ,only:[:show, :edit, :update] do
     	get '/sales' => 'on_store_users#sales', as: 'sales'
+      get '/withdrawal' => 'on_store_users#withdrawal', as: 'withdrawal'
     	resources :reviews, only:[:index, :destroy]
     	resources :inquiries, only:[:index, :show] do
   			resources :replies, only:[:new, :create]
