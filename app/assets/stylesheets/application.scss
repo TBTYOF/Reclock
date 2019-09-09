@@ -16,6 +16,11 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+ html, body {
+  height: 100%;
+}
+
+// ハンバーガーメニュー
   #hm-icon {
  position: fixed;
  right: 2%;
@@ -70,41 +75,43 @@
 	background-color: #fff;
 }
 
-
 #sp-menu {
 	position: fixed;
 	top: 0;
 	right: -100%;
 	width: 100%;
-	min-height: 100%;
+	height: 100%;
 	z-index: 9;
-}
-
-.menu-image {
-	min-height: 100%;
+	background-color: #DEB887;
 	background-image: url(/menue.jpeg);
 	background-size: cover;
 }
 
 #sp-menu li {
-	text-align: center;
 	margin-bottom: 30px;
+}
+
+.list-container {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(222, 184, 135, 0.7);
 }
 
 .menu-text{
   color: #fff;
-  text-decoration: none;
-  font-weight: bold;
+  font-size: 36px;
 }
 
-.toji {
+.close-menu {
  position: absolute;
  right: 6%;
  top: 23px;
  z-index: 10;
  font-size: 38px;
+ color: #fff;
  }
 
- .moji {
+ .open {
  font-size: 38px;
+ color: #111;
  }

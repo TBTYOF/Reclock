@@ -17,18 +17,18 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
+
+// ハンバーガーメニュー
 $(document).on('turbolinks:load', function(){
 	$('.trigger').on('click', function(){
 		$('.menu-trigger').toggleClass('active');
 
 		if($('#sp-menu').hasClass('off')){
 	    $('#sp-menu').removeClass('off');
-	    $('#sp-menu').animate({'marginRight':'100%'},400).addClass('on');
-	    $('.moji').animate({'left':'-100%'},400).addClass('on');
+	    $('#sp-menu').animate({'marginRight':'100%'},300).addClass('on');
 	  }else{
 	    $('#sp-menu').addClass('off');
-	    $('#sp-menu').animate({'marginRight':'0px'},400);
-	    $('.moji').animate({'marginRight':'0px'},400);
+	    $('#sp-menu').animate({'marginRight':'0px'},300);
 	  }
 		return false;
 	});
