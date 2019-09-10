@@ -17,18 +17,18 @@ Admin.create!( name: "Administrater",
 30.times do |n|
 	last_name = %w[山口 安倍 後藤 伊藤 斎藤 高橋 高田 高山 山田 藤本 藤井 藤崎 伊達 プルースト]
 	first_name = %w[家康 義経 家光 光圀 忠家 義久 サルヴァドール 信長 小次郎 武蔵 豊久 元就 正宗 氏政]
-	owner_name = "#{last_name[rand(1..14)]}#{first_name[rand(1..14)]}"
+	owner_name = "#{last_name[rand(0..13)]}#{first_name[rand(0..13)]}"
 	last_name_kana = %w[やまぐち あべ ごとう いとう さいとう たかはし たかだ たかやま やまだ ふじもと ふじい ふじさき だて ぷるーすと]
 	first_name_kana = %w[いえやす よすつね いえみつ みつくに ただいえ よしひさ さるゔぁどーる のぶなが こじろう むさし とよひさ もとなり まさむね うじまさ]
-	owner_name_kana = "#{last_name_kana[rand(1..14)]}#{first_name_kana[rand(1..14)]}"
+	owner_name_kana = "#{last_name_kana[rand(0..13)]}#{first_name_kana[rand(0..13)]}"
 	shop1 = %w[山口 安倍 後藤 伊藤 斎藤 高橋 高田 高山 山田 藤本 藤井 藤崎 伊達 プルースト]
 	shop2 = %w[工房 店 Shop ワークス (株) .co 修理店]
-	shop_name = "#{shop1[rand(1..14)]}#{shop2[rand(1..7)]}"
+	shop_name = "#{shop1[rand(0..13)]}#{shop2[rand(0..6)]}"
 	telephone_number = format('%011d',(rand(10..19))**7) # 適当な11桁
 	email = "#{(0...8).map{ ('A'..'Z').to_a[rand(26)] }.join}@seeds.com"
 	postcode = format('%07d',(rand(10..19))**5) # 適当な7桁
 	address1 = %w[神奈川県横浜市 神奈川県川崎市 神奈川県相模原市 神奈川県厚木市 神奈川県海老名市 神奈川県藤沢市]
-	address = "#{address1[rand(1..6)]}〇〇区〇〇町"
+	address = "#{address1[rand(0..5)]}〇〇区〇〇町"
 	parking = %w[有り 無し 店の前にスペース有り タイムズ提携]
 	business_hours = %w[9:00~18:00 10時から19時 AM9時~PM5時 不定期]
 	holiday = %w[土日 水曜金曜 年中無休 土日・祝日 月曜日 火曜金曜 金曜土曜 不定期]
