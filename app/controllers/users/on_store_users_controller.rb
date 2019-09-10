@@ -1,6 +1,7 @@
 class Users::OnStoreUsersController < ApplicationController
 	def index
-		@shops = OnStoreUser.all
+		@shops = OnStoreUser.page(params[:page]).reverse_order
+		@shop = @shops.first
 	end
 
 	def show

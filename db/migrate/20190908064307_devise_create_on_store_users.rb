@@ -34,6 +34,7 @@ class DeviseCreateOnStoreUsers < ActiveRecord::Migration[5.2]
 
       t.string  :owner_name
       t.string  :owner_name_kana
+      t.string  :shop_name
       t.string  :image_id
       t.string  :business_hours
       t.string  :holiday

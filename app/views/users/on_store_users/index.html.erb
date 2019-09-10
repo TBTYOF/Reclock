@@ -1,1 +1,14 @@
-index.html.erb
+<div class="container">
+	<h2 class="font-size4">修理店一覧</h2>
+	<div class="col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+		<%= attachment_image_tag @shop, :image, :fill, 200, 200, format: 'jpeg', fallback: "/no_image.jpg", size:'300x300' %>
+		<h3>@shop.name</h3>
+		<table>
+			<tbody>
+				<tr>
+					<td>data</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
