@@ -5,4 +5,8 @@ class OnStoreUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   attachment :image
+
+  def self.serch_address(address)
+  	where("address like ?", "%#{address}%")
+	end
 end
