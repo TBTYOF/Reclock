@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2019_09_08_072700) do
     t.string "last_sign_in_ip"
     t.string "owner_name"
     t.string "owner_name_kana"
+    t.string "shop_name"
     t.string "image_id"
     t.string "business_hours"
     t.string "holiday"
