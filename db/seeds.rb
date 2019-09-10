@@ -24,7 +24,8 @@ Admin.create!( name: "Administrater",
 	telephone_number = format('%011d',(rand(10..19))**7) # 適当な11桁
 	email = "#{(0...8).map{ ('A'..'Z').to_a[rand(26)] }.join}@seeds.com"
 	postcode = format('%07d',(rand(10..19))**5) # 適当な7桁
-	address = "東京都渋谷区神南1丁目19番11号パークウェースクエア#{rand(100)}-#{rand(100)}"
+	address1 = %w[神奈川県横浜市 神奈川県川崎市 神奈川県相模原市 神奈川県厚木市 神奈川県海老名市 神奈川県藤沢市]
+	address = "#{address1[rand(1..6)]}〇〇区〇〇町"
 	parking = %w[有り 無し 店の前にスペース有り タイムズ提携]
 	business_hours = %w[9:00~18:00 10時から19時 AM9時~PM5時 不定期]
 	holiday = %w[土日 水曜金曜 年中無休 土日・祝日 月曜日 火曜金曜 金曜土曜 不定期]
