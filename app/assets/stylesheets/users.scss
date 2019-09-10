@@ -27,3 +27,30 @@
 .cell-body {
 	width: 75%;
 }
+
+// マイページ
+#tab-menu li {
+  float: left;
+  list-style-type: none;
+  width: 15%;
+}
+#tab-menu a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 15px;
+  text-align: center;
+  background: #000;
+  border: 1px solid #000;
+  border-bottom: none;
+}
+
+#tab-menu .active {
+  background: #fff;
+  color: #000;
+}
+
+#tab-menu {
+  margin-bottom: 0;
+  padding-left: 0;
+}
