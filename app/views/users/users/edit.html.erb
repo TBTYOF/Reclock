@@ -1,2 +1,56 @@
-<h1>Users::Users#edit</h1>
-<p>Find me in app/views/users/users/edit.html.erb</p>
+<div class="container">
+  <div class="col-sm-3 col-xs-3"></div>
+
+  <div class="col-sm-6 col-xs-6" style="margin-bottom: 50px;">
+    <h2 class="font-size4" style="margin-bottom: 30px;">会員情報編集</h2>
+    <%= form_with model: @user, url: users_user_path, local: true do |f| %>
+      <%#= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="field font-size2 col-sm-6 col-xs-6" style="margin-bottom: 15px">
+            <%= f.label :name, "(氏名)" %><br />
+            <%= f.text_field :name, autofocus: true, class: "col-sm-11 col-xs-11", placeholder: '氏名:', autocomplete: "name" %>
+          </div>
+          <div class="field font-size2 col-sm-6 col-xs-6">
+            <%= f.label :name_kana, "(かな)" %><br />
+            <%= f.text_field :name_kana, class: "col-sm-11 col-xs-11", placeholder: 'ふりがな:', autocomplete: "name-kana" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field font-size2 col-sm-6 col-xs-6" style="margin-bottom: 10px">
+            <%= f.label :postcode, "〒 郵便番号" %><br />
+            <%= f.telephone_field :postcode, placeholder: 'ハイフン無し:', autocomplete: "postcode", id: "postcode" %>
+          </div>
+        </div>
+        <div class="row address-form">
+          <div class="field font-size2 col-sm-12 col-xs-12" style="margin-bottom: 15px">
+            <%= f.label :address, "住所" %><br />(「建物名」「号室」などもご入力ください)
+            <%= f.text_area :address, rows:2, class: "col-sm-12 col-xs-12", style: "resize: none; ", id: "address" %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field font-size2 col-sm-10 col-xs-10" style="margin-bottom: 10px">
+            <%= f.label :telephone_number, "電話番号" %><br />
+            <%= f.telephone_field :telephone_number, placeholder: '電話番号:', class: "col-sm-10 col-xs-10", autocomplete: "telephone_number" %>
+          </div>
+          <div class="field font-size2 col-sm-10 col-xs-10" style="margin-bottom: 15px">
+            <%= f.label :email, "メールアドレス" %><br />
+            <%= f.email_field :email, placeholder: 'メールアドレス:', class: "col-sm-10 col-xs-10", autocomplete: "email" %>
+          </div>
+        </div>
+
+        <div class="actions col-sm-9 col-xs-9" style="margin-bottom: 20px">
+        	<%= f.submit "編集を確定", class: "btn btn-info font-size2" %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row">
+    	<h2 class="font-size4" style="margin-bottom: 30px;">クレジットカード登録</h2>
+    	<p class="btn btn-info" style="background-color: yellow; color: black;">クレジットカード情報入力</p>
+    </div>
+  </div>
+</div>
