@@ -13,7 +13,7 @@
 				<%= attachment_image_tag shop, :image, :fill, 350, 350, format: 'jpeg', fallback: "/no_image.jpg", size:'350x350' %>
 			</div>
 			<div class="col-sm-7">
-				<h3 class="font-size3" style="margin-top: 0;"><%= shop.shop_name %></h3>
+				<h3 class="font-size3" style="margin-top: 0;"><%= link_to shop.shop_name, users_on_store_users_show_path(shop) %></h3>
 				<table class="table font-size2">
 					<tbody>
 						<tr>
@@ -27,10 +27,6 @@
 						<tr>
 							<td class="cell-title">電話番号</td>
 							<td class="cell-body"><%= shop.telephone_number %></td>
-						</tr>
-						<tr>
-							<td class="cell-title">最寄駅</td>
-							<td class="cell-body"><%= shop.closest_station %></td>
 						</tr>
 						<tr>
 							<td class="cell-title">住所</td>

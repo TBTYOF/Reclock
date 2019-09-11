@@ -1,0 +1,152 @@
+<div class="container">
+	<div class="row">
+			<div id="tab-menu1" class="col-sm-6 col-xs-6">
+        <a href="#tab1" class="active col-sm-3 col-xs-3 btn btn-default">店舗情報</a>
+        <a href="#tab2" class="col-sm-3 col-xs-3 btn btn-default">レビュー</a>
+        <a href="#tab3" class="col-sm-3 col-xs-3 btn btn-default">問合せフォーム</a>
+      </div>
+      <div class="col-sm-2 col-sm-offset-1">
+      	<%= link_to "修理を依頼する", new_users_user_order_path(current_user), class: "btn btn-success" %>
+      </div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+			<h2 class="font-size4"><%= @shop.shop_name %></h2>
+			<div class="row">
+				<div class="container-fluid" style="height: 300px; padding: 0;">
+					<div class="theTarget">
+						<div style="background-image: url(/image1.jpg);"></div>
+						<div style="background-image: url(/image3.jpg);"></div>
+						<div style="background-image: url(/image4.jpeg);"></div>
+					</div>
+				</div>
+			</div>
+
+			<div id="tab1" class="tab">
+				<div class="row">
+					<div class="col-sm-12">
+						<h3 class="font-size3">ご挨拶</h3>
+						<%= @shop.greeting %>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<h3 class="font-size3">サービス概要</h3>
+						<%= @shop.greeting %>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<h3 class="font-size3">店舗情報</h3>
+						<table class="table font-size2">
+							<tbody>
+								<tr>
+									<td class="cell-title">営業時間</td>
+									<td class="cell-body"><%= @shop.business_hours %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">定休日</td>
+									<td class="cell-body"><%= @shop.holiday %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">電話番号</td>
+									<td class="cell-body"><%= @shop.telephone_number %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">最寄駅</td>
+									<td class="cell-body"><%= @shop.closest_station %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">住所</td>
+									<td class="cell-body"><%= @shop.postcode %></td>
+								</tr>
+								<tr>
+									<td class="cell-title" style="border: none;"></td>
+									<td class="cell-body" style="border: none; "><%= @shop.address %></td>
+								</tr>
+								<tr>
+									<td class="cell-title" style="border: none;"></td>
+									<td class="cell-body" style="border: none;"><p class="btn btn-default" style="background-color: blue; color: white;">Google MAP</p></td>
+								</tr>
+								<tr>
+									<td class="cell-title">駐車場</td>
+									<td class="cell-body"><%= @shop.parking %></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div id="tab2" class="tab">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>注文一覧</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>data</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div id="tab3" class="tab">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>問合せ一覧</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>data</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script>
+	$('document').on('turbolinks:load', function(){
+		$('.theTarget').skippr();
+	});
+
+	$('.theTarget').skippr({
+		// "fade" or "slide"
+		transition: 'fade',
+		speed: 1000,
+		// easingの種類
+		easing: 'easeOutQuart',
+		// "block" or "bubble"
+		navType: 'bubble',
+		// "div" or "img"
+		childrenElementType: 'div',
+		arrows: true,
+		// スライドショーの自動再生
+		autoPlay: true,
+		autoPlayDuration: 4000,
+	// キーボードの矢印キーによるスライド送りの設定
+		keyboardOnAlways: true,
+	// 1枚目のスライド表示時に戻る矢印を表示するか
+		hidePrevious: false
+	});
+
+	$('.tab[id != "tab1"]').hide();
+
+	$('#tab-menu1 a').on('click', function() {
+  	$(".tab").hide();
+  	$("#tab-menu1 .active").removeClass("active");
+  	$(this).addClass("active");
+  	$($(this).attr("href")).show();
+  	return false;
+	});
+</script>
