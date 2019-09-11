@@ -9,4 +9,6 @@ class User < ApplicationRecord
   validates :telephone_number, presence: true
   validates :postcode, presence: true
   validates :address, presence: true
+
+  has_many :orders
 end

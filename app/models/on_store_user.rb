@@ -6,6 +6,8 @@ class OnStoreUser < ApplicationRecord
 
   attachment :image
 
+  has_many :orders
+
   def self.serch_address(address)
   	where("address like ?", "%#{address}%")
 	end
