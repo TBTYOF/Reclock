@@ -9,14 +9,14 @@ Rails.application.routes.draw do
 
   namespace :users do
   	get '/about' => 'users#about', as: 'about'
-  	get '/shops/' => 'on_store_users#index', as: 'on_store_users_index'
+  	get '/shops' => 'on_store_users#index', as: 'on_store_users_index'
   	get '/shops/:id' => 'on_store_users#show', as: 'on_store_users_show'
     resources :users ,only:[:show, :edit, :update] do
       get '/withdrawal' => 'users#withdrawal', as: 'withdrawal'
   		resources :inquiries, only:[:new, :create] do
   			resources :replies, only:[:new, :create]
   		end
-  		resources :orders, only:[:index, :show] do
+  		resources :orders, except:[:destroy] do
   			resources :reviews, except:[:index, :show]
 		 		resources :inquiries, only:[:new, :create] do
   				resources :replies, only:[:new, :create]

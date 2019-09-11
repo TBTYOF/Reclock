@@ -9,6 +9,6 @@ class Users::OnStoreUsersController < ApplicationController
 	end
 
 	def show
-		
+		@shop = OnStoreUser.find(params[:id])
 	end
 end
