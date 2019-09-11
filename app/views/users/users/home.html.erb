@@ -1,1 +1,169 @@
-home.html.erb
+<div class="container-fluid" style="height: 500px; padding: 0;">
+	<div class="theTarget">
+		<div style="background-image: url(/image1.jpg);"></div>
+		<div style="background-image: url(/image3.jpg);"></div>
+		<div style="background-image: url(/image4.jpeg);"></div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+
+			<div class="row">
+				<div class="col-sm-12">
+					<p class="font-size4">時計の修理でお困りではないですか？<br>私達が力になります！</p>
+				</div>
+			</div>
+
+			<section class="row">
+				<div class="col-sm-4">
+					<p class="btn btn-default font-size3" id="tutrial-trigger">初めての方へ</p>
+				</div>
+				<div class="col-sm-4">
+					<%= link_to "修理店を探す", users_on_store_users_index_path, class: "btn btn-default font-size3" %>
+				</div>
+				<div class="col-sm-4">
+					<%= link_to "出店希望の方へ", on_store_users_form_path, class: "btn btn-default font-size3" %>
+				</div>
+			</section>
+
+			<section class="row tutrial" style="display: none;">
+				<div class="">
+					<h3 class="font-size4">Re:clockとは</h3>
+					<p class="font-size3">
+						 時計修理受注サイトです。<br>
+						「見積」「集荷」「修理」「納品」までご提供しております。
+					</p>
+				</div>
+				<div class="row">
+						<h3 class="font-size4">ご利用の流れ</h3>
+				</div>
+				<div class="row font-size3">
+					<div class="col-sm-2">
+						<p>①探す</p>
+					</div>
+					<div class="col-sm-2">
+						<p>②申込む</p>
+					</div>
+					<div class="col-sm-2">
+						<p>③集荷 & 見積</p>
+					</div>
+					<div class="col-sm-2">
+						<p>④修理 & 納品</p>
+					</div>
+					<div class="col-sm-2">
+						<p>⑤支払 & 評価</p>
+					</div>
+					<div class="col-sm-6 font-size2">
+						<p>※②以降のサービスご利用には「会員登録」が必要になります</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="">
+						<h4 class="font-size4">①修理店を検索</h4>
+						<p class="font-size3">
+							まずは修理店の検索を行います。「お近くの修理店」や<br>
+							「時計の種類」でご希望に合った修理店を検索します。
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="">
+						<h4 class="font-size4">②修理依頼を申し込む</h4>
+						<p class="font-size3">
+							修理店が見つかったら「注文フォーム」に<br>
+							必要事項を記入し修理依頼を申込みます。<br>
+							申込み後、マイページから依頼内容が確認でき、<br>
+							修理に関する連絡を同ページ内で行います。<br>
+							<br>
+							※注文前にご不明な点がございましたら、<br>
+							各修理店の詳細ページからお問い合わせ出来ます。
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="">
+						<h4 class="font-size4">③集荷</h4>
+						<p class="font-size3">
+							ご希望の日時に修理店担当者が集荷にお伺い致します。<br>
+							また、直接店舗へお持ちいただく事も可能です。<br>
+						</p>
+						<h4 class="font-size4">　見積</h4>
+						<p class="font-size3">
+							お品物の状態によって修理内容が決まり、<br>
+							修理内容に応じて料金や納品予定日に変動がございます。<br>
+							また、状態によってはご希望に添えない事がございます。
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="">
+						<h4 class="font-size4">④修理</h4>
+						<p class="font-size3">
+							お客様のマイページからお預かりしたお品物の修理状況を<br>
+							確認頂けます。<br>
+							修理に関するお問合せがございましたら、<br>
+							「注文詳細」ページからお願い致します。<br>
+						</p>
+						<h4 class="font-size4">　納品</h4>
+						<p class="font-size3">
+							修理完了後、ご希望の日時にお届けに参ります。<br>
+							また、修理店へ直接取りに行くことも可能です。
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="">
+						<h4 class="font-size4">⑤支払</h4>
+						<p class="font-size3">
+							納品完了後、「注文詳細」ページで支払方法を<br>
+							選択してください。以下から選択頂けます。<br>
+							「現金でお支払い」<br>
+							「クレジットカードで支払い」（マイページで事前に登録）
+						</p>
+						<h4 class="font-size4">　評価</h4>
+						<p class="font-size3">
+							支払まで終わりましたら修理店を評価しましょう。<br>
+							今後のサービス発展のためにご協力をお願い致します！<br>
+						</p>
+					</div>
+				</div>
+			</section>
+
+		</div>
+	</div>
+</div>
+
+<script>
+	$('document').on('turbolinks:load', function(){
+		$('.theTarget').skippr();
+	});
+
+	$('.theTarget').skippr({
+		// "fade" or "slide"
+		transition: 'fade',
+		speed: 1000,
+		// easingの種類
+		easing: 'easeOutQuart',
+		// "block" or "bubble"
+		navType: 'bubble',
+		// "div" or "img"
+		childrenElementType: 'div',
+		arrows: true,
+		// スライドショーの自動再生
+		autoPlay: true,
+		autoPlayDuration: 4000,
+	// キーボードの矢印キーによるスライド送りの設定
+		keyboardOnAlways: true,
+	// 1枚目のスライド表示時に戻る矢印を表示するか
+		hidePrevious: false
+	});
+
+  $('#tutrial-trigger').on('click', function() {
+  	$('.row').slideDown();
+  	// スクロールトップの高さを取得(closest:マッチするセレクタを探す, next:最初に見つけたものの次を指定, offset:座標取得)
+  	var pos = $(this).closest('section').next().offset().top;
+    $('html, body').animate({scrollTop: pos});
+	});
+</script>
