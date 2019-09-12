@@ -9,11 +9,12 @@ class Users::OrdersController < ApplicationController
 		user = current_user
 		order = user.orders.new(order_params)
 		order.save
-		redirect_to root_path
+		redirect_to users_user_order_path(user, order)
 	end
 
 	def show
-		
+		@user = current_user
+		@order = Order.find(params[:id])
 	end
 
 	def edit
