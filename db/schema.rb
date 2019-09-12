@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 2019_09_08_072700) do
     t.text "symptom"
     t.integer "repair_status", default: 1, null: false
     t.text "repair_detail"
+    t.integer "payment"
     t.integer "charge"
     t.integer "delivery", default: 1, null: false
     t.datetime "delivery_day"
@@ -134,6 +135,7 @@ ActiveRecord::Schema.define(version: 2019_09_08_072700) do
   create_table "replies", force: :cascade do |t|
     t.integer "inquiry_id"
     t.text "body"
+    t.boolean "is_writer", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["inquiry_id"], name: "index_replies_on_inquiry_id"

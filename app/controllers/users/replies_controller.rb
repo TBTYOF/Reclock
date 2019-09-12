@@ -27,6 +27,6 @@ class Users::RepliesController < ApplicationController
 
 	private
 	def repliy_params
-		params.require(:reply).permit(:inquiry_id, :body)
+		params.require(:reply).permit(:inquiry_id, :body, :is_writer)
 	end
 end

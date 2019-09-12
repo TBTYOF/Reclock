@@ -1,58 +1,43 @@
 <div class="container">
   <div class="col-sm-9 col-xs-9 col-sm-offset-1 col-xs-offset-1" style="margin-bottom: 150px;">
-    <h2 class="font-size4" style="margin-bottom: 50px;">支払情報</h2>
-    <%= form_with model: @order, url: users_user_orders_path, local: true do |f| %>
-      <%#= render "devise/shared/error_messages", resource: resource %>
+    <% if @order.payment == nil %>
+      <h2 class="font-size4 payment" style="margin-bottom: 50px;">支払情報</h2>
+      <%= form_with model: @order, url: users_user_order_path(@user, @order) do |f| %>
+        <%#= render "devise/shared/error_messages", resource: resource %>
 
+        <div class="col-sm-12 col-xs-12 payment">
+          <div class="row">
+            <h4 style="margin-bottom: 20px;"><strong>支払方法</strong></h4>
+            <div class="col-md-4">
+              <ul style="list-style: none; padding-left: 10px;">
+                <li><label><%= f.radio_button :payment, :クレジット支払, checked: true, class: "" %> 現金支払</label></li>
+                <li><label><%= f.radio_button :payment, :銀行振込, class: "" %> 銀行振込</label></li>
+                <li><label><%= f.radio_button :payment, :クレジット支払, class: "" %> クレジット支払</label></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="actions col-sm-4 col-xs-4" style="margin-bottom: 20px">
+              <%= f.submit "評価する", data: { confirm: "支払方法を確定し、修理店を評価します。" }, class: "btn btn-info font-size3", id: "submit" %>
+            </div>
+            <div class="actions col-sm-4 col-xs-4" style="margin-bottom: 20px">
+              <%= f.submit "後でする", data: { confirm: "支払方法を確定します。" }, class: "btn btn-info font-size3" %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-xs-12" id="review"></div>
+      <% end %>
+    <% else %>
       <div class="col-sm-12 col-xs-12">
-        <div class="row">
-          <h4 style="margin-bottom: 20px;"><strong>支払方法</strong></h4>
-          <div class="col-md-4">
-            <ul style="list-style: none; padding-left: 10px;">
-              <li><label><%= f.radio_button :payment, :クレジット支払, checked: true, class: "" %> 現金支払</label></li>
-              <li><label><%= f.radio_button :payment, :銀行振込, class: "" %> 銀行振込</label></li>
-              <li><label><%= f.radio_button :payment, :クレジット支払, class: "" %> クレジット支払</label></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row" style="margin-bottom: 50px">
-        	<div class="field font-size3 col-sm-6 col-xs-6">
-            <%= f.label :maker, "メーカー" %><br />
-            <%= f.text_field :maker, class: "col-sm-11 col-xs-11", placeholder: 'メーカー名:', autocomplete: "name-kana" %>
-          </div>
-          <div class="field font-size3 col-sm-6 col-xs-6">
-            <%= f.label :model, "型番" %><br />
-            <%= f.text_field :model, class: "col-sm-11 col-xs-11", placeholder: '型番:', autocomplete: "name-kana" %>
-          </div>
-        </div>
-
-        <div class="row" style="margin-bottom: 50px">
-          <div class="field font-size3 col-sm-12 col-xs-12">
-            <%= f.label :symptom, "症状" %><br />
-            <%= f.text_area :symptom, rows:10, class: "col-sm-12 col-xs-12", placeholder: '症状を入力して下さい:', style: "resize: none; " %>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="field font-size3 col-sm-9 col-xs-9" style="margin-bottom: 30px">
-            <%= f.label :order_images_images, "時計の画像", class: "font-size3" %><br />
-            <%= f.attachment_field :order_images_images, multiple: true, class: "font-size2" %>
-          </div>
-        </div>
-
-         <div class="row">
-          <div class="field font-size3 col-sm-6 col-xs-6" style="margin-bottom: 50px">
-            <%= f.label :pickup, "集荷方法" %>
-            <%= f.select :pickup, Order.pickups.keys,class: "col-sm-11 col-xs-11" %>
-          </div>
-        </div>
-
-        <div class="actions col-sm-4 col-xs-4" style="margin-bottom: 20px">
-        	<%= f.submit "申込む", class: "btn btn-info font-size3", data: { confirm: "この情報で申込みます" } %>
-        </div>
+        <%= render '/users/reviews/new', order: @order, user: @user %>
       </div>
     <% end %>
-
   </div>
 </div>
+
+<script>
+  $('#submit').on('click', function() {
+    $(".payment").hide();
+  });
+</script>

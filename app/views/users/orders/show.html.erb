@@ -35,7 +35,6 @@
 						</table>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="col-sm-12">
 						<h3 class="font-size3">商品情報</h3>
@@ -59,7 +58,6 @@
 								</tr>
 							</tbody>
 						</table>
-
 						<div class="row">
 							<h3>画像</h3>
 							<div class="container-fluid" style="height: 400px; width: 700px; background-color: gray;">
@@ -72,7 +70,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="col-sm-12">
 						<h3 class="font-size3">修理状況</h3>
@@ -86,28 +83,30 @@
 						</table>
 					</div>
 				</div>
-
-				<div class="row">
-					<div class="col-sm-12">
-						<h3 class="font-size3">支払情報</h3>
-						<table class="table font-size2">
-							<tbody>
-								<tr>
-									<td class="cell-title">料金</td>
-									<td class="cell-body"></td>
-								</tr>
-								<tr>
-									<td class="cell-title">支払方法</td>
-									<td class="cell-body"></td>
-								</tr>
-								<tr>
-									<td class="cell-title"></td>
-									<td class="cell-body"><%= link_to '支払&評価へ進む', edit_users_user_order_path(@user, @order) %></td>
-								</tr>
-							</tbody>
-						</table>
+				<% if @order.repair_status != "集荷前" || @order.repair_status != "見積前" || @order.repair_status != "修理中" || @order.repair_status != "キャンセル" %>
+					<div class="row">
+						<div class="col-sm-12">
+							<h3 class="font-size3">支払情報</h3>
+							<table class="table font-size2">
+								<tbody>
+									<tr>
+										<td class="cell-title">料金</td>
+										<td class="cell-body"><%= @order.charge %></td>
+									</tr>
+									<tr>
+										<% if @order.payment == nil %>
+											<td class="cell-title"></td>
+											<td class="cell-body"><%= link_to '支払&評価へ進む', edit_users_user_order_path(@user, @order) %></td>
+										<% else %>
+											<td class="cell-title">支払方法</td>
+											<td class="cell-body"><%= @order.payment %></td>
+										<% end %>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
-				</div>
+				<% end %>
 			</div>
 
 			<!-- お問合せフォーム -->
@@ -115,13 +114,12 @@
 				<div class="row" id="inquiries">
 					<%= render '/users/orders/inquiry', order: @order %>
 				</div>
-
 				<div class="row">
-					<div class="">
+					<div class="col-sm-3">
 						<%= link_to '新規お問合せ', new_users_user_order_inquiry_path(@user, @order), method: :get, remote: true, class: "btn btn-default" %>
 					</div>
-					<div id="add"></div>
 				</div>
+				<div id="add"></div>
 			</div>
 
 			<!-- レビュー -->
