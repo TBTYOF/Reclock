@@ -1,4 +1,5 @@
 <div class="container">
+	<!-- タブメニュー -->
 	<div class="row">
 			<div id="tab-menu1" class="col-sm-6 col-xs-6">
         <a href="#tab1" class="active col-sm-3 col-xs-3 btn btn-default">注文詳細</a>
@@ -12,10 +13,10 @@
 
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+			<!-- 注文情報 -->
 			<div id="tab1" class="tab">
 				<div class="row">
 					<div class="col-sm-12">
-						<h3 class="font-size3">注文情報</h3>
 						<table class="table font-size2">
 							<tbody>
 								<tr>
@@ -99,27 +100,31 @@
 									<td class="cell-title">支払方法</td>
 									<td class="cell-body"></td>
 								</tr>
+								<tr>
+									<td class="cell-title"></td>
+									<td class="cell-body"><%= link_to '支払&評価へ進む', edit_users_user_order_path(@user, @order) %></td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 
+			<!-- お問合せフォーム -->
 			<div id="tab2" class="tab">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>注文一覧</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>data</td>
-						</tr>
-					</tbody>
-				</table>
+				<div class="row" id="inquiries">
+					<%= render '/users/orders/inquiry', order: @order %>
+				</div>
+
+				<div class="row">
+					<div class="">
+						<%= link_to '新規お問合せ', new_users_user_order_inquiry_path(@user, @order), method: :get, remote: true, class: "btn btn-default" %>
+					</div>
+					<div id="add"></div>
+				</div>
 			</div>
 
+			<!-- レビュー -->
 			<div id="tab3" class="tab">
 				<table class="table">
 					<thead>

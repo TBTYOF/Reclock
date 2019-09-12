@@ -1,0 +1,41 @@
+<div class="inquiry-form">
+	<%= form_with model: Inquiry.new, url: users_user_order_inquiries_path(@user, @order) do |f| %>
+		<div class="row">
+			<div class="field font-size3 col-sm-6 col-xs-6" style="margin-bottom: 30px">
+			  <%= f.label :title, "件名" %><br/>
+			  <%= f.text_field :title, class: "col-sm-6 col-xs-6" %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="field font-size3 col-sm-6 col-xs-6" style="margin-bottom: 30px">
+			  <%= f.label :body, "本文" %><br/>
+			  <%= f.text_area :body, class: "col-sm-6 col-xs-6" %>
+			</div>
+		</div>
+		<div class="actions col-sm-4 col-xs-4" style="margin-bottom: 20px">
+			<%= f.submit "投稿", class: "btn btn-info font-size3" %>
+		</div>
+	<% end %>
+</div>
+
+<script>
+	$(function() {
+    $(document).on('click', 'input[type=submit]', function() {
+    	// バリデーション
+      if ($('#inquiry_title').val() == '') {
+      	alert('未入力の項目があります');
+        return false;
+      }
+      if ($('#inquiry_body').val() == '') {
+      	alert('未入力の項目があります');
+        return false;
+      }
+      // フォーム見えなくする
+      $('.inquiry-form').addClass('hidden');
+      // 投稿したらトップへ戻る
+      $('body, html').animate({
+      	scrollTop:0
+			    }, 800);
+    })
+  })
+</script>

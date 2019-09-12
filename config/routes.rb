@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   		end
   		resources :orders, except:[:destroy] do
   			resources :reviews, except:[:index, :show]
+        get '/inquiries' => 'order#inquiry', as: 'inquiries'
 		 		resources :inquiries, only:[:new, :create] do
   				resources :replies, only:[:new, :create]
   			end

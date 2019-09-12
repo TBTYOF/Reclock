@@ -15,6 +15,10 @@ class Users::OrdersController < ApplicationController
 	def show
 		@user = current_user
 		@order = Order.find(params[:id])
+		@inquiry = Inquiry.new
+	end
+
+	def inquiry
 	end
 
 	def edit

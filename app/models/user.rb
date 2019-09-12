@@ -11,4 +11,6 @@ class User < ApplicationRecord
   validates :address, presence: true
 
   has_many :orders
+  has_many :inquiries
+  has_many :reviews
 end

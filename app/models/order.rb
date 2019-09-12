@@ -7,5 +7,7 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :on_store_user
   has_many :order_images, dependent: :destroy
+  has_many :inquiries, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   accepts_attachments_for :order_images, attachment: :image
 end
