@@ -1,33 +1,57 @@
 <div class="container">
 	<div class="row">
 			<div id="tab-menu1" class="col-sm-6 col-xs-6">
-        <a href="#tab1" class="active col-sm-3 col-xs-3 btn btn-default">店舗情報</a>
-        <a href="#tab2" class="col-sm-3 col-xs-3 btn btn-default">レビュー</a>
-        <a href="#tab3" class="col-sm-3 col-xs-3 btn btn-default">問合せフォーム</a>
+        <a href="#tab1" class="active col-sm-3 col-xs-3 btn btn-default">注文詳細</a>
+        <a href="#tab2" class="col-sm-3 col-xs-3 btn btn-default">お問合せ</a>
+        <a href="#tab3" class="col-sm-3 col-xs-3 btn btn-default">レビュー</a>
       </div>
       <div class="col-sm-2 col-sm-offset-1">
-      	<%= link_to "修理を依頼する", new_users_user_order_path(current_user, on_store_user_id: @shop.id), class: "btn btn-success" %>
+      	<p class="btn btn-success">QRコードを表示</p>
       </div>
 	</div>
 
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
-			<h2 class="font-size4"><%= @shop.shop_name %></h2>
-			<div class="row">
-				<div class="container-fluid" style="height: 300px; padding: 0;">
-					<div class="theTarget">
-						<div style="background-image: url(/image1.jpg);"></div>
-						<div style="background-image: url(/image3.jpg);"></div>
-						<div style="background-image: url(/image4.jpeg);"></div>
-					</div>
-				</div>
-			</div>
-
 			<div id="tab1" class="tab">
 				<div class="row">
 					<div class="col-sm-12">
-						<h3 class="font-size3">ご挨拶</h3>
-						<%= @shop.greeting %>
+						<h3 class="font-size3">注文情報</h3>
+						<table class="table font-size2">
+							<tbody>
+								<tr>
+									<td class="cell-title">受付日</td>
+									<td class="cell-body"><%= @order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@order.created_at.wday]}) %H:%M") %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">定休日</td>
+									<td class="cell-body"><%= @shop.holiday %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">電話番号</td>
+									<td class="cell-body"><%= @shop.telephone_number %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">最寄駅</td>
+									<td class="cell-body"><%= @shop.closest_station %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">住所</td>
+									<td class="cell-body"><%= @shop.postcode %></td>
+								</tr>
+								<tr>
+									<td class="cell-title" style="border: none;"></td>
+									<td class="cell-body" style="border: none; "><%= @shop.address %></td>
+								</tr>
+								<tr>
+									<td class="cell-title" style="border: none;"></td>
+									<td class="cell-body" style="border: none;"><p class="btn btn-default" style="background-color: blue; color: white;">Google MAP</p></td>
+								</tr>
+								<tr>
+									<td class="cell-title">駐車場</td>
+									<td class="cell-body"><%= @shop.parking %></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 
