@@ -11,7 +11,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+		<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
 			<div id="tab1" class="tab">
 				<div class="row">
 					<div class="col-sm-12">
@@ -23,32 +23,12 @@
 									<td class="cell-body"><%= @order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@order.created_at.wday]}) %H:%M") %></td>
 								</tr>
 								<tr>
-									<td class="cell-title">定休日</td>
-									<td class="cell-body"><%= @shop.holiday %></td>
+									<td class="cell-title">修理店</td>
+									<td class="cell-body"><%= link_to @order.on_store_user.shop_name, users_on_store_users_show_path(@order.on_store_user_id) %></td>
 								</tr>
 								<tr>
-									<td class="cell-title">電話番号</td>
-									<td class="cell-body"><%= @shop.telephone_number %></td>
-								</tr>
-								<tr>
-									<td class="cell-title">最寄駅</td>
-									<td class="cell-body"><%= @shop.closest_station %></td>
-								</tr>
-								<tr>
-									<td class="cell-title">住所</td>
-									<td class="cell-body"><%= @shop.postcode %></td>
-								</tr>
-								<tr>
-									<td class="cell-title" style="border: none;"></td>
-									<td class="cell-body" style="border: none; "><%= @shop.address %></td>
-								</tr>
-								<tr>
-									<td class="cell-title" style="border: none;"></td>
-									<td class="cell-body" style="border: none;"><p class="btn btn-default" style="background-color: blue; color: white;">Google MAP</p></td>
-								</tr>
-								<tr>
-									<td class="cell-title">駐車場</td>
-									<td class="cell-body"><%= @shop.parking %></td>
+									<td class="cell-title">集荷方法</td>
+									<td class="cell-body"><%= @order.pickup %></td>
 								</tr>
 							</tbody>
 						</table>
@@ -57,47 +37,67 @@
 
 				<div class="row">
 					<div class="col-sm-12">
-						<h3 class="font-size3">サービス概要</h3>
-						<%= @shop.greeting %>
+						<h3 class="font-size3">商品情報</h3>
+						<table class="table font-size2">
+							<tbody>
+								<tr>
+									<td class="cell-title">品種</td>
+									<td class="cell-body"><%= @order.variety %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">メーカー</td>
+									<td class="cell-body"><%= @order.maker %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">型番</td>
+									<td class="cell-body"><%= @order.model %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">症状</td>
+									<td class="cell-body"><%= @order.symptom %></td>
+								</tr>
+							</tbody>
+						</table>
+
+						<div class="row">
+							<h3>画像</h3>
+							<div class="container-fluid" style="height: 400px; width: 700px; background-color: gray;">
+								<div class="theTarget">
+									<% @order.order_images.each do |image| %>
+										<div style="padding-left: 40px;"><%= attachment_image_tag image, :image, :fill, 600, 400, format: 'jpeg' %></div>
+									<% end %>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-sm-12">
-						<h3 class="font-size3">店舗情報</h3>
+						<h3 class="font-size3">修理状況</h3>
 						<table class="table font-size2">
 							<tbody>
 								<tr>
-									<td class="cell-title">営業時間</td>
-									<td class="cell-body"><%= @shop.business_hours %></td>
+									<td class="cell-title">修理状況: <%= @order.repair_status %></td>
+									<td class="cell-body">更新日: <%= @order.updated_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@order.created_at.wday]}) %H:%M") %></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<h3 class="font-size3">支払情報</h3>
+						<table class="table font-size2">
+							<tbody>
+								<tr>
+									<td class="cell-title">料金</td>
+									<td class="cell-body"></td>
 								</tr>
 								<tr>
-									<td class="cell-title">定休日</td>
-									<td class="cell-body"><%= @shop.holiday %></td>
-								</tr>
-								<tr>
-									<td class="cell-title">電話番号</td>
-									<td class="cell-body"><%= @shop.telephone_number %></td>
-								</tr>
-								<tr>
-									<td class="cell-title">最寄駅</td>
-									<td class="cell-body"><%= @shop.closest_station %></td>
-								</tr>
-								<tr>
-									<td class="cell-title">住所</td>
-									<td class="cell-body"><%= @shop.postcode %></td>
-								</tr>
-								<tr>
-									<td class="cell-title" style="border: none;"></td>
-									<td class="cell-body" style="border: none; "><%= @shop.address %></td>
-								</tr>
-								<tr>
-									<td class="cell-title" style="border: none;"></td>
-									<td class="cell-body" style="border: none;"><p class="btn btn-default" style="background-color: blue; color: white;">Google MAP</p></td>
-								</tr>
-								<tr>
-									<td class="cell-title">駐車場</td>
-									<td class="cell-body"><%= @shop.parking %></td>
+									<td class="cell-title">支払方法</td>
+									<td class="cell-body"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -140,6 +140,29 @@
 </div>
 
 <script>
+	$('document').on('turbolinks:load', function(){
+		$('.theTarget').skippr();
+	});
+
+	$('.theTarget').skippr({
+		// "fade" or "slide"
+		transition: 'slide',
+		speed: 500,
+		// easingの種類
+		easing: 'easeOutQuart',
+		// "block" or "bubble"
+		navType: 'bubble',
+		// "div" or "img"
+		childrenElementType: 'div',
+		arrows: true,
+		// スライドショーの自動再生
+		autoPlay: false,
+	// キーボードの矢印キーによるスライド送りの設定
+		keyboardOnAlways: true,
+	// 1枚目のスライド表示時に戻る矢印を表示するか
+		hidePrevious: false
+	});
+
 	$('.tab[id != "tab1"]').hide();
 
 	$('#tab-menu1 a').on('click', function() {
