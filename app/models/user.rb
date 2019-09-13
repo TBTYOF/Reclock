@@ -13,4 +13,8 @@ class User < ApplicationRecord
   has_many :orders
   has_many :inquiries
   has_many :reviews
+
+  def review_by?(order)
+    reviews.where(order_id: order.id).exists?
+  end
 end

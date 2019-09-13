@@ -34,7 +34,13 @@ class Users::OrdersController < ApplicationController
 	def update
 		@user = current_user
 		@order = Order.find(params[:id])
-		# @order.update(order_params)
+		@order.update(order_params)
+		if @order.repair_status == "修理完了"
+			@order.repair_status = "支払済み"
+		else
+			@order.repair_status = "取引完了"
+		end
+		@order.save
 		if params[:commit] == "後でする"
 			redirect_to users_user_order_path(@user, @order)
 		else
