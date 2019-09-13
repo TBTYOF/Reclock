@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   			resources :replies, only:[:new, :create]
   		end
   		resources :orders, except:[:destroy] do
-  			resources :reviews, except:[:index, :show]
+  			resources :reviews, except:[:index]
+        get '/inquiries' => 'order#inquiry', as: 'inquiries'
 		 		resources :inquiries, only:[:new, :create] do
   				resources :replies, only:[:new, :create]
   			end

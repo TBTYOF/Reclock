@@ -10,6 +10,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
 			t.text :symptom
 			t.integer :repair_status, default: 1, null: false
 			t.text :repair_detail
+			t.integer :payment
 			t.integer :charge
 			t.integer :delivery, default: 1, null: false
 			t.datetime :delivery_day

@@ -4,6 +4,10 @@
     <%= form_with model: Order.new, url: users_user_orders_path, local: true do |f| %>
       <%#= render "devise/shared/error_messages", resource: resource %>
       <%= f.hidden_field :on_store_user_id, :value => @shop.id %>
+      <!-- 動作確認用コード -->
+      <%= f.hidden_field :charge, :value => 50000 %>
+      <%= f.hidden_field :repair_status, :value => '修理完了' %>
+      <!-- ここまで -->
 
       <div class="col-sm-12 col-xs-12">
         <div class="row">

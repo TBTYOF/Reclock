@@ -9,19 +9,46 @@ class Users::OrdersController < ApplicationController
 		user = current_user
 		order = user.orders.new(order_params)
 		order.save
-		redirect_to root_path
+		redirect_to users_user_order_path(user, order)
 	end
 
 	def show
-		
+		@user = current_user
+		@order = Order.find(params[:id])
+		@inquiry = Inquiry.new
+	end
+
+	def inquiry
 	end
 
 	def edit
-		
+		@user =current_user
+		@order = Order.find(params[:id])
+
+		respond_to do |format|
+	  	format.html
+	  	format.js
+	  end
 	end
 
 	def update
-		
+		@user = current_user
+		@order = Order.find(params[:id])
+		@order.update(order_params)
+		if @order.repair_status == "修理完了"
+			@order.repair_status = "支払済み"
+		else
+			@order.repair_status = "取引完了"
+		end
+		@order.save
+		if params[:commit] == "後でする"
+			redirect_to users_user_order_path(@user, @order)
+		else
+			respond_to do |format|
+		  	format.html
+		  	format.js {render '/users/reviews/new.js.erb', order: @order, user: @user}
+		  end
+		end
 	end
 
 	private
@@ -35,6 +62,7 @@ class Users::OrdersController < ApplicationController
 																	:symptom,
 																	:repair_status,
 																	:repair_detail,
+																	:payment,
 																	:charge,
 																	:delivery,
 																	:delivery_day,

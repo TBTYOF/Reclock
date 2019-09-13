@@ -1,0 +1,179 @@
+<div class="container">
+	<!-- タブメニュー -->
+	<div class="row">
+			<div id="tab-menu1" class="col-sm-6 col-xs-6">
+        <a href="#tab1" class="active col-sm-3 col-xs-3 btn btn-default">注文詳細</a>
+        <a href="#tab2" class="col-sm-3 col-xs-3 btn btn-default">お問合せ</a>
+        <a href="#tab3" class="col-sm-3 col-xs-3 btn btn-default">レビュー</a>
+      </div>
+      <div class="col-sm-2 col-sm-offset-1">
+      	<p class="btn btn-success">QRコードを表示</p>
+      </div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+			<!-- 注文情報 -->
+			<div id="tab1" class="tab">
+				<div class="row">
+					<div class="col-sm-12">
+						<table class="table font-size2">
+							<tbody>
+								<tr>
+									<td class="cell-title">受付日</td>
+									<td class="cell-body"><%= @order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@order.created_at.wday]}) %H:%M") %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">修理店</td>
+									<td class="cell-body"><%= link_to @order.on_store_user.shop_name, users_on_store_users_show_path(@order.on_store_user_id) %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">集荷方法</td>
+									<td class="cell-body"><%= @order.pickup %></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<h3 class="font-size3">商品情報</h3>
+						<table class="table font-size2">
+							<tbody>
+								<tr>
+									<td class="cell-title">品種</td>
+									<td class="cell-body"><%= @order.variety %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">メーカー</td>
+									<td class="cell-body"><%= @order.maker %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">型番</td>
+									<td class="cell-body"><%= @order.model %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">症状</td>
+									<td class="cell-body"><%= @order.symptom %></td>
+								</tr>
+							</tbody>
+						</table>
+						<% if @order.order_images.count != 0 %>
+							<div class="row">
+								<h3>画像</h3>
+								<div class="container-fluid" style="height: 400px; width: 700px; background-color: gray;">
+									<div class="theTarget">
+										<% @order.order_images.each do |image| %>
+											<div style="padding-left: 40px;"><%= attachment_image_tag image, :image, :fill, 600, 400, format: 'jpeg' %></div>
+										<% end %>
+									</div>
+								</div>
+							</div>
+						<% end %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<h3 class="font-size3">修理状況</h3>
+						<table class="table font-size2">
+							<tbody>
+								<tr>
+									<td class="cell-title">修理状況: <%= @order.repair_status %></td>
+									<td class="cell-body">更新日: <%= @order.updated_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@order.created_at.wday]}) %H:%M") %></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<% if @order.repair_status != "集荷前" || @order.repair_status != "見積前" || @order.repair_status != "修理中" || @order.repair_status != "キャンセル" %>
+					<div class="row">
+						<div class="col-sm-12">
+							<h3 class="font-size3">支払情報</h3>
+							<table class="table font-size2">
+								<tbody>
+									<tr>
+										<td class="cell-title">料金</td>
+										<td class="cell-body"><%= @order.charge %></td>
+									</tr>
+									<tr>
+										<% if @order.payment == nil %>
+											<td class="cell-title"></td>
+											<td class="cell-body"><%= link_to '支払&評価へ進む', edit_users_user_order_path(@user, @order) %></td>
+										<% else %>
+											<td class="cell-title">支払方法</td>
+											<td class="cell-body"><%= @order.payment %></td>
+										<% end %>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				<% end %>
+			</div>
+
+			<!-- お問合せフォーム -->
+			<div id="tab2" class="tab">
+				<div class="row" id="inquiries">
+					<%= render '/users/orders/inquiry', order: @order %>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<%= link_to '新規お問合せ', new_users_user_order_inquiry_path(@user, @order), method: :get, remote: true, class: "btn btn-default" %>
+					</div>
+				</div>
+				<div id="add"></div>
+			</div>
+
+			<!-- レビュー -->
+			<div id="tab3" class="tab">
+				<% if @user.review_by?(@order) %>
+					<div class="col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1" id="review-edit">
+						<%= render '/users/reviews/show', order: @order, user: @user %>
+					</div>
+				<% else %>
+					<div>
+						<div class="col-sm-12 col-xs-12" id="review">
+							<%= link_to "レビューを書く", new_users_user_order_review_path(@user, @order), remote: true, class: "btn btn-default font-size3" %>
+						</div>
+					</div>
+				<% end %>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script>
+	$('document').on('turbolinks:load', function(){
+		$('.theTarget').skippr();
+	});
+
+	$('.theTarget').skippr({
+		// "fade" or "slide"
+		transition: 'slide',
+		speed: 500,
+		// easingの種類
+		easing: 'easeOutQuart',
+		// "block" or "bubble"
+		navType: 'bubble',
+		// "div" or "img"
+		childrenElementType: 'div',
+		arrows: true,
+		// スライドショーの自動再生
+		autoPlay: false,
+	// キーボードの矢印キーによるスライド送りの設定
+		keyboardOnAlways: true,
+	// 1枚目のスライド表示時に戻る矢印を表示するか
+		hidePrevious: false
+	});
+
+	$('.tab[id != "tab1"]').hide();
+
+	$('#tab-menu1 a').on('click', function() {
+  	$(".tab").hide();
+  	$("#tab-menu1 .active").removeClass("active");
+  	$(this).addClass("active");
+  	$($(this).attr("href")).show();
+  	return false;
+	});
+</script>
