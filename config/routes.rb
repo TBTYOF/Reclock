@@ -13,13 +13,13 @@ Rails.application.routes.draw do
   	get '/shops/:id' => 'on_store_users#show', as: 'on_store_users_show'
     resources :users ,only:[:show, :edit, :update] do
       get '/withdrawal' => 'users#withdrawal', as: 'withdrawal'
-  		resources :inquiries, only:[:new, :create] do
+  		resources :inquiries, only:[:new, :create, :index, :show] do
   			resources :replies, only:[:new, :create]
   		end
   		resources :orders, except:[:destroy] do
   			resources :reviews, except:[:index]
         get '/inquiries' => 'order#inquiry', as: 'inquiries'
-		 		resources :inquiries, only:[:new, :create, :index, :show] do
+		 		resources :inquiries, only:[:new, :create] do
   				resources :replies, only:[:new, :create, :show]
   			end
 		  end

@@ -27,6 +27,26 @@ class Users::InquiriesController < ApplicationController
 		end
 	end
 
+	def index
+		respond_to do |format|
+		  format.html
+		  format.js
+		end
+	end
+
+	def show
+		@user = current_user
+		@inquiry = Inquiry.find(params[:id])
+		if params[:order_id] != nil
+			@order = Order.find(params[:order_id])
+		end
+
+		respond_to do |format|
+		  format.html
+		  format.js
+		 end
+	end
+
 	private
 	def inquiry_params
 		params.require(:inquiry).permit(:on_store_user_id,

@@ -1,49 +1,64 @@
-<% if @update == true %>
-	<% @inquiry.replies.each do |reply| %>
-		<tr>
-			<td></td>
-			<td>
+<!-- is_replyの有無で@inquiryを使うかinquiryを使うか判定する -->
+<% if @is_reply == true %>
+	<% @inquiry.replies.each_with_index do |reply,index| %>
+		<% index += 1 %>
+		<div class="row" style="margin-bottom: 30px;">
+			<div class="col-sm-2 col-xs-2">
+				<%= index %>.　
 				<!-- is_writerがfalseでユーザ投稿 -->
 				<% if reply.is_writer == false %>
 					あなたの返信
 				<% else %>
 					修理店からの返信
 				<% end %>
-			</td>
-			<td>
-				投稿日時： <%= reply.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[reply.created_at.wday]}) %H:%M") %>
-			</td>
-		</tr>
-		<tr>
-			<td style="border-top: none;"></td>
-			<td colspan="2" style="border-top: none;">
+			</div>
+			<div class="col-sm-4 col-xs-4">
+				<p>投稿日時： <%= reply.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[reply.created_at.wday]}) %H:%M") %></p>
+			</div>
+		</div>
+		<div class="row" style="margin-bottom: 50px;">
+			<p>
+				返信文：<br/>
 				<%= reply.body %>
-			</td>
-		</tr>
+			</p>
+		</div>
 	<% end %>
-	<tr colspan="2" id="replies-<%= @index %>"></tr>
+	<div class="col-sm-12 col-xs-12" id="replies-<%= @index %>">
+		<% if @order == nil %>
+			<%= link_to "返信", new_users_user_inquiry_reply_path(@user, @inquiry), remote: true, class: "btn btn-success" %>
+		<% else %>
+			<%= link_to "返信", new_users_user_order_inquiry_reply_path(@user, @order, @inquiry), remote: true, class: "btn btn-success" %>
+		<% end %>
+	</div>
 <% else %>
-	<% inquiry.replies.each do |reply| %>
-		<tr>
-			<td></td>
-			<td>
+	<% @inquiry.replies.each_with_index do |reply,index| %>
+		<% index += 1 %>
+		<div class="row" style="margin-bottom: 30px;">
+			<div class="col-sm-2 col-xs-2">
+				<%= index %>.　
 				<!-- is_writerがfalseでユーザ投稿 -->
 				<% if reply.is_writer == false %>
 					あなたの返信
 				<% else %>
 					修理店からの返信
 				<% end %>
-			</td>
-			<td>
-				投稿日時： <%= reply.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[reply.created_at.wday]}) %H:%M") %>
-			</td>
-		</tr>
-		<tr>
-			<td style="border-top: none;"></td>
-			<td colspan="2" style="border-top: none;">
+			</div>
+			<div class="col-sm-4 col-xs-4">
+				<p>投稿日時： <%= reply.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[reply.created_at.wday]}) %H:%M") %></p>
+			</div>
+		</div>
+		<div class="row" style="margin-bottom: 50px;">
+			<p>
+				返信文：<br/>
 				<%= reply.body %>
-			</td>
-		</tr>
+			</p>
+		</div>
 	<% end %>
-	<tr colspan="2" id="replies-<%= index %>"></tr>
+	<div class="col-sm-12 col-xs-12" id="replies-<%= @index %>">
+		<% if @order == nil %>
+			<%= link_to "返信", new_users_user_inquiry_reply_path(@user, inquiry), remote: true, class: "btn btn-success" %>
+		<% else %>
+			<%= link_to "返信", new_users_user_order_inquiry_reply_path(@user, @order, inquiry), remote: true, class: "btn btn-success" %>
+		<% end %>
+	</div>
 <% end %>

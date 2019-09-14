@@ -1,1 +1,1 @@
-$("#reply-<%= @index %>").html("<%= escape_javascript(render partial:'show', index: @index, inquiry: @inquiry, update: @update) %>");
+$("#reqlies").html("<%= escape_javascript(render partial:'/users/replies/show', index: @index, inquiry: @inquiry, is_reply: @is_reply) %>");

@@ -1,0 +1,38 @@
+<div class="row" style="margin-bottom: 50px;">
+	<div class="col-sm-4 col-xs-4">
+		<p>問合せ先： <%= link_to @inquiry.on_store_user.shop_name, users_on_store_users_show_path(@inquiry.on_store_user) %></p>
+	</div>
+	<% if @inquiry.order_id != nil %>
+		<div class="col-sm-4 col-xs-4">
+			<p>注文ID： <%= link_to @inquiry.order.id, users_user_order_path(@user, @inquiry.order) %></p>
+		</div>
+	<% end %>
+	<div class="col-sm-4 col-xs-4">
+		<%= link_to "一覧へ戻る", users_user_inquiries_path(@user), remote: true, class: "col-sm-4 col-xs-4 btn btn-default" %>
+	</div>
+</div>
+
+<div class="inquiry" style="margin-bottom: 50px;">
+	<div class="row" style="margin-bottom: 10px;">
+		<div class="col-sm-7 col-xs-7">
+			<p>件名： <%= @inquiry.title %></p>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-sm-4 col-xs-4">
+			<p>投稿日： <%= @inquiry.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@inquiry.created_at.wday]}) %H:%M") %></p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-10 col-xs-10">
+			<p>
+				本文：<br/>
+				<%= @inquiry.body %>
+			</p>
+		</div>
+	</div>
+</div>
+
+<div id="reqlies">
+	<%= render '/users/replies/show', order: @order, user: @user, inquiry: @inquiry %>
+</div>
