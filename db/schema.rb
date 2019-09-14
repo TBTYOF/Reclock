@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2019_09_08_072700) do
   end
 
   create_table "inquiries", force: :cascade do |t|
+    t.integer "on_store_user_id"
     t.integer "order_id"
     t.integer "user_id"
     t.string "title"

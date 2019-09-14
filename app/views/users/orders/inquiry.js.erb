@@ -1,1 +1,5 @@
-$("#inquiries").html("<%= escape_javascript(render partial:'/users/orders/inquiry', order: @order) %>");
+<% if @update == true %>
+	$("#reply-<%= @index %>").html("<%= escape_javascript(render partial:'/users/replies/show', index: @index, inquiry: @inquiry, update: @update) %>");
+<% else %>
+	$("#inquiries").html("<%= escape_javascript(render partial:'/users/orders/inquiry', order: @order) %>");
+<% end %>

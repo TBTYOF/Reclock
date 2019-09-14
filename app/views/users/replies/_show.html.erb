@@ -1,0 +1,49 @@
+<% if @update == true %>
+	<% @inquiry.replies.each do |reply| %>
+		<tr>
+			<td></td>
+			<td>
+				<!-- is_writerがfalseでユーザ投稿 -->
+				<% if reply.is_writer == false %>
+					あなたの返信
+				<% else %>
+					修理店からの返信
+				<% end %>
+			</td>
+			<td>
+				投稿日時： <%= reply.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[reply.created_at.wday]}) %H:%M") %>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-top: none;"></td>
+			<td colspan="2" style="border-top: none;">
+				<%= reply.body %>
+			</td>
+		</tr>
+	<% end %>
+	<tr colspan="2" id="replies-<%= @index %>"></tr>
+<% else %>
+	<% inquiry.replies.each do |reply| %>
+		<tr>
+			<td></td>
+			<td>
+				<!-- is_writerがfalseでユーザ投稿 -->
+				<% if reply.is_writer == false %>
+					あなたの返信
+				<% else %>
+					修理店からの返信
+				<% end %>
+			</td>
+			<td>
+				投稿日時： <%= reply.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[reply.created_at.wday]}) %H:%M") %>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-top: none;"></td>
+			<td colspan="2" style="border-top: none;">
+				<%= reply.body %>
+			</td>
+		</tr>
+	<% end %>
+	<tr colspan="2" id="replies-<%= index %>"></tr>
+<% end %>

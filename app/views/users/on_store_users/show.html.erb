@@ -84,18 +84,7 @@
 			</div>
 
 			<div id="tab2" class="tab">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>注文一覧</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>data</td>
-						</tr>
-					</tbody>
-				</table>
+				<%= render '/users/reviews/show', order: @order, user: @user %>
 			</div>
 
 			<div id="tab3" class="tab">

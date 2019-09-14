@@ -1,5 +1,5 @@
-<div class="reply-form">
-	<%= form_with model: Reply.new, url: users_user_order_inquiry_replies_path(@user, @order, @inquiry) do |f| %>
+<td colspan="3">
+	<%= form_with model: Reply.new, url: users_user_order_inquiry_replies_path(@user, @order, @inquiry, index: @index) do |f| %>
 		<div class="row">
 			<div class="field font-size3 col-sm-12 col-xs-12" style="margin-bottom: 30px">
 			  <%= f.label :body, "本文" %><br/>
@@ -10,7 +10,7 @@
 			<%= f.submit "返信", class: "btn btn-info font-size3" %>
 		</div>
 	<% end %>
-</div>
+</td>
 
 <script>
 	$(function() {

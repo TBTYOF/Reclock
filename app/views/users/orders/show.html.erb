@@ -20,6 +20,10 @@
 						<table class="table font-size2">
 							<tbody>
 								<tr>
+									<td class="cell-title">注文ID</td>
+									<td class="cell-body"><%= @order.id %></td>
+								</tr>
+								<tr>
 									<td class="cell-title">受付日</td>
 									<td class="cell-body"><%= @order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@order.created_at.wday]}) %H:%M") %></td>
 								</tr>

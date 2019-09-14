@@ -1,26 +1,32 @@
 <div class="container">
 	<h2 class="font-size4">マイページ</h2>
 	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+		<div class="col-sm-9 col-sm-offset-1 col-xs-9 col-xs-offset-1">
 
-			<ul id="tab-menu" class="clearfix">
-        <li><a href="#tab1" class="active">登録情報</a></li>
-        <li><a href="#tab2" class="">注文一覧</a></li>
-        <li><a href="#tab3" class="">問合せ一覧</a></li>
-      </ul>
+			<!-- タブメニュー -->
+		<div class="row">
+			<div id="tab-menu" class="col-sm-6 col-xs-6">
+	      <a href="#tab1" class="active col-sm-3 col-xs-3 btn btn-default">注文詳細</a>
+	      <a href="#tab2" class="col-sm-3 col-xs-3 btn btn-default">注文一覧</a>
+	      <a href="#tab3" class="col-sm-3 col-xs-3 btn btn-default">問合せ一覧</a>
+	    </div>
+	    <div class="col-sm-2 col-sm-offset-1">
+	      <p class="btn btn-success">QRコードを表示</p>
+	    </div>
+		</div>
 
 			<div id="tab1" class="tab">
 				<ul class="list-group">
 					<li class="list-group-item">名前</li>
-					<li class="list-group-item"><%= current_user.name %></li>
+					<li class="list-group-item"><%= @user.name %></li>
 					<li class="list-group-item">住所</li>
-					<li class="list-group-item"><%= current_user.postcode %></li>
-					<li class="list-group-item"><%= current_user.address %></li>
+					<li class="list-group-item"><%= @user.postcode %></li>
+					<li class="list-group-item"><%= @user.address %></li>
 					<li class="list-group-item">電話番号</li>
-					<li class="list-group-item"><%= current_user.telephone_number %></li>
+					<li class="list-group-item"><%= @user.telephone_number %></li>
 					<li class="list-group-item">メールアドレス</li>
-					<li class="list-group-item"><%= current_user.email %></li>
-					<li class="list-group-item"><%= link_to "登録情報を編集する", edit_users_user_path(current_user), class: "btn btn-info" %></li>
+					<li class="list-group-item"><%= @user.email %></li>
+					<li class="list-group-item"><%= link_to "登録情報を編集する", edit_users_user_path(@user), class: "btn btn-info" %></li>
 				</ul>
 			</div>
 
@@ -28,13 +34,31 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>注文一覧</th>
+							<th>修理状況</th>
+							<th>修理店</th>
+							<th>受付日</th>
+							<th>納品日</th>
+							<th>料金</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>data</td>
-						</tr>
+						<% @user.orders.reverse.each do |order| %>
+							<tr>
+								<td><%= order.repair_status %></td>
+								<td><%= order.on_store_user.shop_name %></td>
+								<td><%= order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %></td>
+								<td>
+									<% if order.delivery_day == nil %>
+										未納
+									<% else %>
+										<%= order.delivery_day.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %>
+									<% end %>
+								</td>
+								<td><%= order.charge %></td>
+								<td><%= link_to "明細を見る", users_user_order_path(@user, order), class: "btn btn-default" %></td>
+							</tr>
+						<% end %>
 					</tbody>
 				</table>
 			</div>
@@ -43,13 +67,37 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th>問合せ一覧</th>
+							<th>問合せ先</th>
+							<th>件名</th>
+							<th>注文ID</th>
+							<th>最終投稿日</th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>data</td>
-						</tr>
+						<% @user.inquiries.reverse.each do |inquiry| %>
+							<tr>
+								<td><%= link_to inquiry.on_store_user.shop_name, users_on_store_users_show_path(inquiry.on_store_user) %></td>
+								<td><%= inquiry.title %></td>
+								<td>
+									<% if inquiry.order_id == nil %>
+										無
+									<% else %>
+										<%= link_to inquiry.order_id, users_user_order_path(@user, inquiry.order_id) %>
+									<% end %>
+								</td>
+								<td>
+									<% if inquiry.replies.count == 0 %>
+										<%= inquiry.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[inquiry.created_at.wday]}) %H:%M") %>
+									<% else %>
+										<%= inquiry.replies.last.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[inquiry.replies.last.created_at.wday]}) %H:%M") %>
+									<% end %>
+								</td>
+								<td><%#= link_to "内容を見る", users_user_order_path(@user, order), class: "btn btn-default" %></td>
+								<td></td>
+							</tr>
+						<% end %>
 					</tbody>
 				</table>
 			</div>
