@@ -20,6 +20,10 @@
 						<table class="table font-size2">
 							<tbody>
 								<tr>
+									<td class="cell-title">注文ID</td>
+									<td class="cell-body"><%= @order.id %></td>
+								</tr>
+								<tr>
 									<td class="cell-title">受付日</td>
 									<td class="cell-body"><%= @order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@order.created_at.wday]}) %H:%M") %></td>
 								</tr>
@@ -112,16 +116,8 @@
 			</div>
 
 			<!-- お問合せフォーム -->
-			<div id="tab2" class="tab">
-				<div class="row" id="inquiries">
-					<%= render '/users/orders/inquiry', order: @order %>
-				</div>
-				<div class="row">
-					<div class="col-sm-3">
-						<%= link_to '新規お問合せ', new_users_user_order_inquiry_path(@user, @order), method: :get, remote: true, class: "btn btn-default" %>
-					</div>
-				</div>
-				<div id="add"></div>
+			<div id="tab2" class="tab inquiries">
+				<%= render '/users/inquiries/inquiry', order: @order %>
 			</div>
 
 			<!-- レビュー -->

@@ -1,0 +1,42 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th>問合せ先</th>
+			<th>件名</th>
+			<th>注文ID</th>
+			<th>最終投稿日</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% current_user.inquiries.reverse.each do |inquiry| %>
+			<tr>
+				<td><%= link_to inquiry.on_store_user.shop_name, users_on_store_users_show_path(inquiry.on_store_user) %></td>
+				<td><%= inquiry.title %></td>
+				<td>
+					<% if inquiry.order_id == nil %>
+						無
+					<% else %>
+						<%= link_to inquiry.order_id, users_user_order_path(current_user, inquiry.order_id) %>
+					<% end %>
+				</td>
+				<td>
+					<% if inquiry.replies.count == 0 %>
+						<%= inquiry.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[inquiry.created_at.wday]}) %H:%M") %>
+					<% else %>
+						<%= inquiry.replies.last.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[inquiry.replies.last.created_at.wday]}) %H:%M") %>
+					<% end %>
+				</td>
+				<td>
+					<% if inquiry.order_id == nil %>
+						<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry), remote: true, class: "btn btn-default" %>
+					<% else %>
+						<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, order_id: inquiry.order.id), remote: true, class: "btn btn-default" %>
+					<% end %>
+				</td>
+				<td></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
