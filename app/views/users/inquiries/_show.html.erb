@@ -8,7 +8,13 @@
 		</div>
 	<% end %>
 	<div class="col-sm-4 col-xs-4">
-		<%= link_to "一覧へ戻る", users_user_inquiries_path(@user), remote: true, class: "col-sm-4 col-xs-4 btn btn-default" %>
+		<% if @view_key == "order" %>
+			<%= link_to "一覧へ戻る", users_user_order_inquiries_path(@user, @view_valu), remote: true, class: "col-sm-4 col-xs-4 btn btn-default" %>
+		<% elsif @view_key == "shop" %>
+			<%= link_to "一覧へ戻る", users_user_inquiries_path(@user), remote: true, class: "col-sm-4 col-xs-4 btn btn-default" %>
+		<% else %>
+			<%= link_to "一覧へ戻る", users_user_inquiries_path(@user), remote: true, class: "col-sm-4 col-xs-4 btn btn-default" %>
+		<% end %>
 	</div>
 </div>
 

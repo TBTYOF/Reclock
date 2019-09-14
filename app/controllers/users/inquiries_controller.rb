@@ -21,7 +21,7 @@ class Users::InquiriesController < ApplicationController
 
 			respond_to do |format|
 		  	format.html
-		  	format.js {render '/users/orders/inquiry.js.erb', order: @order, user: @user}
+		  	format.js {render '/users/inquiries/inquiry.js.erb'}
 		  end
 		else
 		end
@@ -34,7 +34,20 @@ class Users::InquiriesController < ApplicationController
 		end
 	end
 
+	def inquiry
+		@order = Order.find(params[:order_id])
+
+		respond_to do |format|
+		  format.html
+		  format.js
+		 end
+	end
+
 	def show
+		if params[:view_key] != nil
+			@view_key = params[:view_key]
+			@view_valu = params[:view_valu]
+		end
 		@user = current_user
 		@inquiry = Inquiry.find(params[:id])
 		if params[:order_id] != nil

@@ -84,22 +84,20 @@
 			</div>
 
 			<div id="tab2" class="tab">
-				<%= render '/users/reviews/show', order: @order, user: @user %>
+				<div>
+					<% if @shop.orders.reviews.count != 0 %>
+						<% @shop.reviews.reverse.each do |review| %>
+						<% end %>
+					<% else %>
+						<div>
+							<p>まだレビューはありません</p>
+						</div>
+					<% end %>
+				</div>
 			</div>
 
-			<div id="tab3" class="tab">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>問合せ一覧</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>data</td>
-						</tr>
-					</tbody>
-				</table>
+			<div id="tab3" class="tab inquiries">
+				<%= render '/users/inquiries/inquiry', order: @order %>
 			</div>
 
 		</div>
