@@ -1,6 +1,6 @@
 <div class="row" style="margin-bottom: 50px;">
 	<div class="col-sm-4 col-xs-4">
-		<p>問合せ先： <%= link_to @inquiry.on_store_user.shop_name, users_on_store_users_show_path(@inquiry.on_store_user) %></p>
+		<p>問合せ先： <%= link_to @shop.shop_name, users_on_store_users_show_path(@shop) %></p>
 	</div>
 	<% if @inquiry.order_id != nil %>
 		<div class="col-sm-4 col-xs-4">
@@ -8,10 +8,10 @@
 		</div>
 	<% end %>
 	<div class="col-sm-4 col-xs-4">
-		<% if @view_key == "order" %>
-			<%= link_to "一覧へ戻る", users_user_order_inquiries_path(@user, @view_valu), remote: true, class: "col-sm-4 col-xs-4 btn btn-default" %>
-		<% elsif @view_key == "shop" %>
-			<%= link_to "一覧へ戻る", users_user_inquiries_path(@user), remote: true, class: "col-sm-4 col-xs-4 btn btn-default" %>
+		<% if @partial_key == "order" %>
+			<%= link_to "一覧へ戻る", users_user_inquiries_key_path(@user, @shop, order_id: @order), remote: true, class: "col-sm-4 col-xs-4 btn btn-default" %>
+		<% elsif @partial_key == "shop" %>
+			<%= link_to "一覧へ戻る", users_user_inquiries_key_path(@user, @shop), remote: true, class: "col-sm-4 col-xs-4 btn btn-default" %>
 		<% else %>
 			<%= link_to "一覧へ戻る", users_user_inquiries_path(@user), remote: true, class: "col-sm-4 col-xs-4 btn btn-default" %>
 		<% end %>
@@ -40,5 +40,5 @@
 </div>
 
 <div id="reqlies">
-	<%= render '/users/replies/show', order: @order, user: @user, inquiry: @inquiry %>
+	<%= render '/users/replies/show', order: @order, inquiry: @inquiry %>
 </div>

@@ -85,19 +85,19 @@
 
 			<div id="tab2" class="tab">
 				<div>
-					<% if @shop.orders.reviews.count != 0 %>
-						<% @shop.reviews.reverse.each do |review| %>
-						<% end %>
-					<% else %>
+					<%# if @shop.orders.reviews.count != 0 %>
+						<%# @shop.reviews.reverse.each do |review| %>
+						<%# end %>
+					<%# else %>
 						<div>
 							<p>まだレビューはありません</p>
 						</div>
-					<% end %>
+					<%# end %>
 				</div>
 			</div>
 
 			<div id="tab3" class="tab inquiries">
-				<%= render '/users/inquiries/inquiry', order: @order %>
+				<%= render '/users/inquiries/inquiry', inquiries: @inquiries, shop: @shop %>
 			</div>
 
 		</div>

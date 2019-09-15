@@ -1,9 +1,14 @@
-<% order = @order %>
-<% if order.inquiries.count == 0 %>
+<!-- 問合せの有無判定 -->
+<% if inquiries.count == 0 %>
 	<div style="height: 500px;">
 		<div id="add">
 			<p>まだお問合せはありません</p>
-			<%= link_to "新規問合せはこちら", new_users_user_order_inquiry_path(current_user, order), remote: true, class: "btn-default btn" %>
+			<!-- 注文に対する問合せかの分岐 -->
+			<% if defined? order %>
+				<%= link_to "新規問合せはこちら", users_user_inquiry_new_path(current_user, shop, order_id: order.id), remote: true, class: "btn-default btn" %>
+			<% else %>
+				<%= link_to "新規問合せはこちら", users_user_inquiry_new_path(current_user, shop), remote: true, class: "btn-default btn" %>
+			<% end %>
 		</div>
 	</div>
 <% else %>
@@ -18,12 +23,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% order.inquiries.reverse.each do |inquiry| %>
+			<% inquiries.reverse.each do |inquiry| %>
 				<tr>
 					<td><%= inquiry.title %></td>
 					<td>
 						<% if inquiry.order_id == nil %>
-							無
+							注文前
 						<% else %>
 							<%= link_to inquiry.order_id, users_user_order_path(current_user, inquiry.order_id) %>
 						<% end %>
@@ -37,9 +42,9 @@
 					</td>
 					<td>
 						<% if inquiry.order_id == nil %>
-							<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, view_key: "shop"), remote: true, class: "btn btn-default" %>
+							<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, shop_id: shop.id, partial_key: "shop"), remote: true, class: "btn btn-default" %>
 						<% else %>
-							<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, order_id: inquiry.order.id, view_key: "order", view_valu: order), remote: true, class: "btn btn-default" %>
+							<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, shop_id: shop.id, order_id: inquiry.order.id, partial_key: "order"), remote: true, class: "btn btn-default" %>
 						<% end %>
 					</td>
 					<td></td>
@@ -48,6 +53,11 @@
 		</tbody>
 	</table>
 	<div id="add">
-		<%= link_to "新規問合せはこちら", new_users_user_order_inquiry_path(current_user, order), remote: true, class: "btn-default btn" %>
+		<!-- 注文に対する問合せかの分岐 -->
+			<% if defined? order %>
+				<%= link_to "新規問合せはこちら", users_user_inquiry_new_path(current_user, shop, order_id: order.id), remote: true, class: "btn-default btn" %>
+			<% else %>
+				<%= link_to "新規問合せはこちら", users_user_inquiry_new_path(current_user, shop), remote: true, class: "btn-default btn" %>
+			<% end %>
 	</div>
 <% end %>

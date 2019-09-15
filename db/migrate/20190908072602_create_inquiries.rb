@@ -1,9 +1,9 @@
 class CreateInquiries < ActiveRecord::Migration[5.2]
   def change
     create_table :inquiries do |t|
-      t.integer :on_store_user_id
+      t.references :user, foreign_key: true
+      t.references :on_store_user, foreign_key: true
     	t.integer :order_id
-			t.integer :user_id
 			t.string :title
 			t.text :body
 			t.boolean :is_read, default: false, null: false

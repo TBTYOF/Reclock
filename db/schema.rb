@@ -31,14 +31,15 @@ ActiveRecord::Schema.define(version: 2019_09_08_072700) do
   end
 
   create_table "inquiries", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "on_store_user_id"
     t.integer "order_id"
-    t.integer "user_id"
     t.string "title"
     t.text "body"
     t.boolean "is_read", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_inquiries_on_user_id"
   end
 
   create_table "major_categories", force: :cascade do |t|
@@ -143,12 +144,14 @@ ActiveRecord::Schema.define(version: 2019_09_08_072700) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "order_id"
     t.integer "user_id"
+    t.integer "on_store_user_id"
+    t.integer "order_id"
     t.string "title"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["on_store_user_id"], name: "index_reviews_on_on_store_user_id"
     t.index ["order_id"], name: "index_reviews_on_order_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
