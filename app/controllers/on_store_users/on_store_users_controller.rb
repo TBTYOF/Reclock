@@ -42,7 +42,7 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 		params.require(:on_store_user).permit(:owner_name,
 																					:owner_name_kana,
 																					:shop_name,
-																					:image_id,
+																					:image,
 																					:business_hours,
 																					:holiday,
 																					:telephone_number,
@@ -52,7 +52,7 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 																					:parking,
 																					:greeting,
 																					:is_public,
-																					:is_quit
-																					on_store_user_images: [])
+																					:is_quit,
+																					on_store_user_images_images: [])
 	end
 end
