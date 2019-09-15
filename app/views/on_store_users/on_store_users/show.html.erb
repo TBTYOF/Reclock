@@ -1,0 +1,31 @@
+<div class="container">
+	<h2 class="font-size4">マイページ</h2>
+	<div class="row">
+		<div class="col-sm-9 col-sm-offset-1 col-xs-9 col-xs-offset-1">
+			<div id="tab1" class="tab">
+				<ul class="list-group">
+					<li class="list-group-item">代表者名</li>
+					<li class="list-group-item">
+						<%= current_on_store_user.owner_name %> (<%= current_on_store_user.owner_name_kana %>)
+					</li>
+					<li class="list-group-item">店舗名</li>
+					<li class="list-group-item"><%= current_on_store_user.shop_name %></li>
+					<li class="list-group-item">電話番号</li>
+					<li class="list-group-item"><%= current_on_store_user.telephone_number %></li>
+					<li class="list-group-item">メールアドレス</li>
+					<li class="list-group-item"><%= current_on_store_user.email %></li>
+					<li class="list-group-item">住所</li>
+					<li class="list-group-item"><%= current_on_store_user.postcode %></li>
+					<li class="list-group-item"><%= current_on_store_user.address %></li>
+					<li class="list-group-item">最寄駅</li>
+					<li class="list-group-item"><%= current_on_store_user.address %></li>
+					<li class="list-group-item">駐車場</li>
+					<li class="list-group-item"><%= current_on_store_user.address %></li>
+					<li class="list-group-item">
+						<%#= link_to "登録情報を編集する", edit_users_user_path(@user), class: "btn btn-info" %>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
