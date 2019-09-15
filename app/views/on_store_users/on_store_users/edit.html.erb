@@ -1,7 +1,7 @@
 <div class="container">
   <div class="col-sm-6 col-xs-6 col-sm-offset-2 col-xs-offset-2" style="margin-bottom: 50px;">
     <h2 class="font-size4" style="margin-bottom: 30px;">登録情報変更</h2>
-    <%= form_with model: @on_store_user, url: on_store_users_on_store_user_path, local: true do |f| %>
+    <%= form_for(@on_store_user, url: on_store_users_on_store_user_path) do |f| %>
       <%#= render "devise/shared/error_messages", resource: resource %>
       <div class="col-sm-12 col-xs-12">
 
@@ -96,6 +96,19 @@
               <%= f.label :on_store_user_images_images, "店舗詳細ページ：スライドショーの画像", class: "font-size3" %><br />
               店舗詳細ページのスライドショーに載せる画像を選択してください（複数枚選択出来ます）
               <%= f.attachment_field :on_store_user_images_images, multiple: true, class: "font-size2" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <h3>サービス概要編集</h3>
+          <div id="major_categories">
+            <%= f.fields_for :major_categories do |major_category| %>
+              <%= render 'major_category_fields', f: major_category %>
+            <% end %>
+
+            <div id="links">
+              <%= link_to_add_association 'add major_categories',f, :major_categories %>
             </div>
           </div>
         </div>

@@ -1,0 +1,11 @@
+<div class="nested-fields form-inline">
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="form-group">
+    <%= f.label :quote %>
+    <%= f.text_field :quote %>
+    <%= link_to_remove_association "曲を削除", f %>
+  </div>
+</div>

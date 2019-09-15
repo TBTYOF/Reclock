@@ -17,6 +17,9 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 
 	def edit
 		@on_store_user = current_on_store_user
+		@major_category = @on_store_user.major_categories.build
+		@middle_category = @major_category.middle_categories.build
+    @minor_category = @middle_category.minor_categories.build
 	end
 
 	def update
@@ -26,15 +29,12 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 	end
 
 	def sales
-		
 	end
 
 	def withdrawal
-		
 	end
 
 	def quit
-		
 	end
 
 	private
@@ -53,6 +53,9 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 																					:greeting,
 																					:is_public,
 																					:is_quit,
-																					on_store_user_images_images: [])
+																					on_store_user_images_images: [],
+																					major_categories_attributes: [:id, :name, :_destroy,
+                                          middle_categories_attributes: [:id, :name, :_destroy,
+                                          minor_categories: [:id, :name, :quote, :_destroy]]])
 	end
 end
