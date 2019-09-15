@@ -8,6 +8,7 @@ class OnStoreUser < ApplicationRecord
 
   has_many :orders
   has_many :inquiries
+  has_many :reviews
 
   def self.serch_address(address)
   	where("address like ?", "%#{address}%")

@@ -15,6 +15,7 @@ class Users::ReviewsController < ApplicationController
 		@order = Order.find(params[:order_id])
 		review = @user.reviews.new(review_params)
 		review.order_id = @order.id
+		review.on_store_user_id = @order.on_store_user.id
 		review.save
 		redirect_to users_user_order_path(@user, @order)
 	end
@@ -57,6 +58,6 @@ class Users::ReviewsController < ApplicationController
 
 	private
 	def review_params
-		params.require(:review).permit(:order_id, :user_id, :title, :body)
+		params.require(:review).permit(:order_id, :user_id, :on_store_user_id, :title, :body)
 	end
 end
