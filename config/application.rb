@@ -14,8 +14,6 @@ module Reclock
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
     # 東京時間設定
     config.time_zone = 'Tokyo'
-    # to auto load lib/ directory
-    config.autoload_paths += %W(#{config.root}/lib)
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

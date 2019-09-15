@@ -13,15 +13,16 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 	end
 
 	def show
-		
 	end
 
 	def edit
-		
+		@on_store_user = current_on_store_user
 	end
 
 	def update
-		
+		@on_store_user = OnStoreUser.find(params[:id])
+		@on_store_user.update(on_store_user_params)
+		redirect_to on_store_users_on_store_user_path(@on_store_user)
 	end
 
 	def sales
@@ -34,5 +35,24 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 
 	def quit
 		
+	end
+
+	private
+	def on_store_user_params
+		params.require(:on_store_user).permit(:owner_name,
+																					:owner_name_kana,
+																					:shop_name,
+																					:image_id,
+																					:business_hours,
+																					:holiday,
+																					:telephone_number,
+																					:postcode,
+																					:address,
+																					:closest_station,
+																					:parking,
+																					:greeting,
+																					:is_public,
+																					:is_quit
+																					on_store_user_images: [])
 	end
 end

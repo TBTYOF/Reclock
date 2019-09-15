@@ -22,18 +22,16 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-  # def configure_permitted_parameters
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:name,
-  #                                                      :name_kana,
-  #                                                      :telephone_number,
-  #                                                      :postcode,
-  #                                                      :address])
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name,
+                                                       :name_kana,
+                                                       :telephone_number,
+                                                       :postcode,
+                                                       :address,
 
-  def devise_parameter_sanitizer
-    if resource_class == User
-      UserParameterSanitizer.new(User, :user, params)
-    else
-      super # Use the default one
-    end
+                                                       :owner_name,
+                                                       :owner_name_kana,
+                                                       :shop_name
+                                                      ])
   end
 end
