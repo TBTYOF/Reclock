@@ -1,1 +1,41 @@
-on_store_users
+<div class="container">
+	<div class="row home">
+		<div class="col-md-8 col-md-offset-2 home_menu">
+			<div class="center jumbotron">
+				<div class="home_menu_item">
+					<%= link_to '管理台帳', on_store_users_on_store_user_orders_path(current_on_store_user), class:"btn btn-info btn-block" %>
+			  </div>
+				<div class="home_menu_item">
+					<%= link_to '問合せ一覧', on_store_users_on_store_user_inquiries_path(current_on_store_user), class:"btn btn-info btn-block" %>
+				</div>
+				<div class="home_menu_item">
+					<%= link_to '売上', on_store_users_on_store_user_sales_path(current_on_store_user), class:"btn btn-info btn-block" %>
+				</div>
+				<div class="home_menu_item">
+					<%= link_to 'レビュー一覧', on_store_users_on_store_user_reviews_path(current_on_store_user), class:"btn btn-info btn-block" %>
+				</div>
+				<div class="home_menu_item">
+					<%= link_to 'マイページ', on_store_users_on_store_user_path(current_on_store_user), class:"btn btn-info btn-block" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.home{
+		margin:30px 0
+	}
+
+	.center{
+		text-align:center;
+	}
+
+	.home_menu .btn{
+		font-size:50px;
+	}
+
+	.home_menu_item{
+		margin-bottom:40px;
+	}
+</style>
