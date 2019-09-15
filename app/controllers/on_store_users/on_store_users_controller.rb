@@ -4,7 +4,12 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 	end
 
 	def form
-		
+		@on_store_user = OnStoreUser.new
+		if params[:on_store_user].present?
+			@email = params[:on_store_user][:email]
+			OnStoreUserMailer.with(email: @email).welcome_stor_owner.deliver_later
+			redirect_to on_store_users_form_path
+		end
 	end
 
 	def show

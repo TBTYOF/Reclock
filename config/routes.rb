@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   namespace :on_store_users do
   	get '', to:'on_store_users#home'
   	get '/form' => 'on_store_users#form', as: 'form'
+    post '/form/ok' => 'on_store_users#form', as: 'form_ok'
     resources :on_store_users ,only:[:show, :edit, :update] do
     	get '/sales' => 'on_store_users#sales', as: 'sales'
       get '/withdrawal' => 'on_store_users#withdrawal', as: 'withdrawal'
@@ -53,5 +54,9 @@ Rails.application.routes.draw do
     resources :on_store_users, only:[:index, :show]
     resources :inquiries, only:[:index, :show]
     resources :reviews, only:[:index, :show]
+  end
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 end
