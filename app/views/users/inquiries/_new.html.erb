@@ -1,5 +1,9 @@
 <div class="inquiry-form">
-	<%= form_with model: Inquiry.new, url: users_user_order_inquiries_path(@user, @order) do |f| %>
+	<%= form_with model: Inquiry.new, url: users_user_inquiry_create_path(@user, @shop) do |f| %>
+		<!-- 注文に紐づく問合せかどうか -->
+		<% if defined? @order == false %>
+      <%= f.hidden_field :order_id, :value => @order.id %>
+     <% end %>
 		<div class="row">
 			<div class="field font-size3 col-sm-8 col-xs-8" style="margin-bottom: 30px">
 			  <%= f.label :title, "件名" %><br/>

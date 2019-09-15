@@ -1,1 +1,5 @@
-$(".inquiries").html("<%= escape_javascript(render partial:'/users/inquiries/inquiry', order: @order) %>");
+<% if defined? @order == false %>
+	$(".inquiries").html("<%= escape_javascript(render partial:'/users/inquiries/inquiry', :locals => { :inquiries => @inquiries, :order => @order, :shop => @shop }) %>");
+<% else %>
+	$(".inquiries").html("<%= escape_javascript(render partial:'/users/inquiries/inquiry', :locals => { :inquiries => @inquiries, :shop => @shop }) %>");
+<% end %>

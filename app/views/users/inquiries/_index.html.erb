@@ -16,7 +16,7 @@
 				<td><%= inquiry.title %></td>
 				<td>
 					<% if inquiry.order_id == nil %>
-						無
+						注文前
 					<% else %>
 						<%= link_to inquiry.order_id, users_user_order_path(current_user, inquiry.order_id) %>
 					<% end %>
@@ -30,10 +30,10 @@
 				</td>
 				<td>
 					<% if inquiry.order_id == nil %>
-						<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry), remote: true, class: "btn btn-default" %>
-					<% else %>
-						<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, order_id: inquiry.order.id), remote: true, class: "btn btn-default" %>
-					<% end %>
+							<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, shop_id: inquiry.on_store_user.id), remote: true, class: "btn btn-default" %>
+						<% else %>
+							<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, shop_id: inquiry.on_store_user.id, order_id: inquiry.order.id), remote: true, class: "btn btn-default" %>
+						<% end %>
 				</td>
 				<td></td>
 			</tr>

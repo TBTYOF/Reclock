@@ -1,8 +1,11 @@
 class Users::InquiriesController < ApplicationController
 	def new
-		@user = current_user
-		@order = Order.find(params[:order_id])
 		@inquiry = Inquiry.new
+		@user = current_user
+		@shop = OnStoreUser.find(params[:shop_id])
+		if params[:order_id]
+			@order = Order.find(params[:order_id])
+		end
 
 		respond_to do |format|
 	    format.html
@@ -11,19 +14,26 @@ class Users::InquiriesController < ApplicationController
 	end
 
 	def create
-		if params[:order_id]
-			@user = current_user
-			@order = Order.find(params[:order_id])
-			inquiry = @order.inquiries.new(inquiry_params)
-			inquiry.on_store_user_id = @order.on_store_user.id
-			inquiry.user_id = @user.id
-			inquiry.save
-
-			respond_to do |format|
-		  	format.html
-		  	format.js {render '/users/inquiries/inquiry.js.erb'}
-		  end
+		inquiry = current_user.inquiries.new(inquiry_params)
+		@shop = OnStoreUser.find(params[:shop_id])
+		inquiry.on_store_user_id = @shop.id
+		# 注文前の問合せか後か
+		if params[:inquiry][:order_id].present?
+			@order = Order.find(params[:inquiry][:order_id])
+			inquiry.order_id = @order.id
+		end
+		inquiry.save
+		if params[:inquiry][:order_id].present?
+			# partial表示のためのインスタンス変数（注文に対する）
+			@inquiries = @order.inquiries
 		else
+			# partial表示のためのインスタンス変数（注文前）
+			@inquiries = Inquiry.where(user_id: current_user, on_store_user_id:  @shop.id, order_id: nil)
+		end
+
+		respond_to do |format|
+		  format.html
+		  format.js {render '/users/inquiries/inquiry.js.erb'}
 		end
 	end
 
@@ -35,7 +45,13 @@ class Users::InquiriesController < ApplicationController
 	end
 
 	def inquiry
-		@order = Order.find(params[:order_id])
+		@shop = OnStoreUser.find(params[:shop_id])
+		if params[:order_id] != nil
+			@order = Order.find(params[:order_id])
+			@inquiries = @order.inquiries
+		else
+			@inquiries = Inquiry.where(user_id: current_user, on_store_user_id:  @shop.id, order_id: nil)
+		end
 
 		respond_to do |format|
 		  format.html
@@ -44,12 +60,12 @@ class Users::InquiriesController < ApplicationController
 	end
 
 	def show
-		if params[:view_key] != nil
-			@view_key = params[:view_key]
-			@view_valu = params[:view_valu]
-		end
 		@user = current_user
+		@shop = OnStoreUser.find(params[:shop_id])
 		@inquiry = Inquiry.find(params[:id])
+		if params[:partial_key] != nil
+			@partial_key = params[:partial_key]
+		end
 		if params[:order_id] != nil
 			@order = Order.find(params[:order_id])
 		end

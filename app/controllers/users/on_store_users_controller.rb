@@ -10,6 +10,6 @@ class Users::OnStoreUsersController < ApplicationController
 
 	def show
 		@shop = OnStoreUser.find(params[:id])
-		@order = current_user.inquiries.where(on_store_user_id: @shop.id)
+		@inquiries = Inquiry.where(user_id: current_user, on_store_user_id:  @shop.id, order_id: nil)
 	end
 end
