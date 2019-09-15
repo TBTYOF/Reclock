@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_09_08_072700) do
     t.boolean "is_read", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["on_store_user_id"], name: "index_inquiries_on_on_store_user_id"
     t.index ["user_id"], name: "index_inquiries_on_user_id"
   end
 
