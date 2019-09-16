@@ -27,6 +27,11 @@ class ApplicationController < ActionController::Base
                                                        :name_kana,
                                                        :telephone_number,
                                                        :postcode,
-                                                       :address])
+                                                       :address,
+
+                                                       :owner_name,
+                                                       :owner_name_kana,
+                                                       :shop_name
+                                                      ])
   end
 end

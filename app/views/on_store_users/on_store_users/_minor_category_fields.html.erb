@@ -1,0 +1,11 @@
+<div class="nested-fields form-inline">
+  <div class="form-group">
+    <%= f.label :name, "修理内容：" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="form-group">
+    <%= f.label :quote, "見積料金：" %>
+    <%= f.text_field :quote %>
+    <%= link_to_remove_association "この修理内容を削除", f %>
+  </div>
+</div>

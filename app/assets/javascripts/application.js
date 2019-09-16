@@ -16,6 +16,7 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+//= require cocoon
 
 // ハンバーガーメニュー
 $(document).on('turbolinks:load', function(){
