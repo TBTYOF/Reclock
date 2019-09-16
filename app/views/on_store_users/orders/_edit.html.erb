@@ -1,0 +1,26 @@
+<%= form_with model: @order, url: on_store_users_on_store_user_order_path(current_on_store_user, @order), method: :patch do |f| %>
+	<div class="row">
+		<div class="col-sm-3 col-xs-3"><%= f.label :variety, "品種" %></div>
+		<div class="col-sm-9 col-xs-9"><%= f.select :variety, Order.varieties.keys %></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3 col-xs-3"><%= f.label :maker, "メーカー" %></div>
+		<div class="col-sm-9 col-xs-9"><%= f.text_field :maker, class: "col-sm-11 col-xs-11", placeholder: 'メーカー名:', autocomplete: "maker" %></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3 col-xs-3"><%= f.label :model, "型番" %></div>
+		<div class="col-sm-9 col-xs-9"><%= f.text_field :model, class: "col-sm-11 col-xs-11", placeholder: '型番:', autocomplete: "model" %></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3 col-xs-3"><%= f.label :symptom, "症状" %></div>
+		<div class="col-sm-9 col-xs-9"><%= f.text_area :symptom, rows:10, class: "col-sm-12 col-xs-12", placeholder: '症状を入力して下さい:', style: "resize: none; " %></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3 col-xs-3"><%= f.label :order_images_images, "画像追加", class: "font-size3" %></div>
+		<div class="col-sm-9 col-xs-9"><%= f.attachment_field :order_images_images, multiple: true, class: "font-size2" %></div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3 col-xs-3"></div>
+		<div class="col-sm-9 col-xs-9"><%= f.submit "確定", class: "btn btn-info font-size3" %></div>
+	</div>
+<% end %>

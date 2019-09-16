@@ -70,41 +70,42 @@
 
 				<div class="row">
 					<div class="col-sm-12">
-						<h3 class="font-size3">商品情報</h3>
-						<table class="table font-size2">
-							<tbody>
-								<tr>
-									<td class="cell-title">品種</td>
-									<td class="cell-body"><%= @order.variety %></td>
-								</tr>
-								<tr>
-									<td class="cell-title">メーカー</td>
-									<td class="cell-body"><%= @order.maker %></td>
-								</tr>
-								<tr>
-									<td class="cell-title">型番</td>
-									<td class="cell-body"><%= @order.model %></td>
-								</tr>
-								<tr>
-									<td class="cell-title">症状</td>
-									<td class="cell-body"><%= @order.symptom %></td>
-								</tr>
-							</tbody>
-						</table>
-						<% if @order.order_images.count != 0 %>
+						<h3 class="font-size3">
+							商品情報　 <%= link_to "編集",edit_on_store_users_on_store_user_order_path(current_on_store_user, @order), remote: true, class: "btn btn-default" %>
+						</h3>
+						<div class="font-size2 row" id="item">
 							<div class="row">
-								<h3>画像</h3>
-								<div class="container-fluid" style="height: 400px; width: 700px; background-color: gray;">
-									<div class="theTarget">
-										<% @order.order_images.each do |image| %>
-											<div style="padding-left: 40px;"><%= attachment_image_tag image, :image, :fill, 600, 400, format: 'jpeg' %></div>
-										<% end %>
-									</div>
+								<div class="col-sm-3 col-xs-3">品種</div>
+								<div class="col-sm-9 col-xs-9"><%= @order.variety %></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 col-xs-3">メーカー</div>
+								<div class="col-sm-9 col-xs-9"><%= @order.maker %></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 col-xs-3">型番</div>
+								<div class="col-sm-9 col-xs-9"><%= @order.model %></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3 col-xs-3">症状</div>
+								<div class="col-sm-9 col-xs-9" style="word-break: break-all;"><%= @order.symptom %></div>
+							</div>
+						</div>
+					</div>
+					<% if @order.order_images.count != 0 %>
+						<div class="row">
+							<h3>画像</h3>
+							<div class="container-fluid" style="height: 400px; width: 700px; background-color: gray;">
+								<div class="theTarget">
+									<% @order.order_images.each do |image| %>
+										<div style="padding-left: 40px;"><%= attachment_image_tag image, :image, :fill, 600, 400, format: 'jpeg' %></div>
+									<% end %>
 								</div>
 							</div>
-						<% end %>
-					</div>
+						</div>
+					<% end %>
 				</div>
+			</div>
 
 				<div class="row">
 					<div class="col-sm-12">
@@ -112,7 +113,12 @@
 						<table class="table font-size2">
 							<tbody>
 								<tr>
-									<td class="cell-title">修理状況: <%= @order.repair_status %></td>
+									<td class="cell-title">
+										<%= form_with model: @order, url: on_store_users_on_store_user_order_path(current_on_store_user, @order), method: :patch do |f| %>
+											<%= f.select :repair_status, Order.repair_statuses.keys, class: "col-sm-6 col-xs-6" %>
+											<%= f.submit "aaa" %>
+										<% end %>
+									</td>
 									<td class="cell-body">更新日: <%= @order.updated_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@order.created_at.wday]}) %H:%M") %></td>
 								</tr>
 							</tbody>
