@@ -1,8 +1,8 @@
 <div class="nested-fields well well-compact">
   <div class="form-group">
-    <%= f.label :name %>
+    <%= f.label :name, "カテゴリー名：" %>
     <%= f.text_field :name %><br>
-    <%= link_to_remove_association "remove major_category", f %>
+    <%= link_to_remove_association "このカテゴリーを削除", f %>
   </div>
 
   <div class="middle_categories">
@@ -10,7 +10,7 @@
       <%= render 'middle_category_fields', f: middle_category %>
     <%end%>
     <div class="links">
-      <%= link_to_add_association "add middle_category", f, :middle_categories %>
+      <%= link_to_add_association "品種を追加", f, :middle_categories %>
     </div>
   </div>
 </div>

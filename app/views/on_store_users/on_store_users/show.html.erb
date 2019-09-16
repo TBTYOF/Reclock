@@ -62,6 +62,37 @@
 							未登録
 					<% end %>
 				</div>
+				<h3>サービス概要</h3>
+				<div class="col-sm-12 col-xs-12">
+					<% if current_on_store_user.major_categories.present? %>
+						<% current_on_store_user.major_categories.each_with_index do |major_category, index| %>
+							<div class="row">
+								<div class="col-sm-3">
+									<%= major_category.name %>
+								</div>
+								<% major_category.middle_categories.each_with_index do |middle_category, index| %>
+									<div class="col-sm-9">
+										<div class="col-sm-5">
+											<%= middle_category.name %>
+										</div>
+										<div class="col-sm-7">
+											<% middle_category.minor_categories.each_with_index do |minor_category, index| %>
+												<div class="col-sm-6">
+													<%= minor_category.name %>
+												</div>
+												<div class="col-sm-6">
+													<%= minor_category.quote %>
+												</div>
+											<% end %>
+										</div>
+									</div>
+								<% end %>
+							</div>
+						<% end %>
+					<% else %>
+						未登録
+					<% end %>
+				</div>
 			</div>
 
 

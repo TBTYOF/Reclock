@@ -25,6 +25,7 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 	def update
 		@on_store_user = OnStoreUser.find(params[:id])
 		@on_store_user.update(on_store_user_params)
+		binding.pry
 		redirect_to on_store_users_on_store_user_path(@on_store_user)
 	end
 
@@ -56,6 +57,6 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 																					on_store_user_images_images: [],
 																					major_categories_attributes: [:id, :name, :_destroy,
                                           middle_categories_attributes: [:id, :name, :_destroy,
-                                          minor_categories: [:id, :name, :quote, :_destroy]]])
+                                          minor_categories_attributes: [:id, :name, :quote, :_destroy]]])
 	end
 end
