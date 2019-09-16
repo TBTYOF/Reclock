@@ -4,7 +4,8 @@ class OnStoreUsers::OrdersController < ApplicationController
 	end
 
 	def show
-		
+		@order = Order.find(params[:id])
+		@index = params[:index]
 	end
 
 	def edit

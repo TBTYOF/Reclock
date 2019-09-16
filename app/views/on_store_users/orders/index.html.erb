@@ -16,7 +16,7 @@
 				<% current_on_store_user.orders.each_with_index.reverse_each do |order, index| %>
 					<% index += 1 %>
 					<tr>
-						<td><%= link_to index, on_store_users_on_store_user_order_path(current_on_store_user, order) %></td>
+						<td><%= link_to index, on_store_users_on_store_user_order_path(current_on_store_user, order, index: index) %></td>
 						<td><%= order.repair_status %></td>
 						<td><%= order.variety %></td>
 						<td><%= order.user.name %></td>
