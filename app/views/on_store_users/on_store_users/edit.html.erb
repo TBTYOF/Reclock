@@ -6,6 +6,18 @@
       <div class="col-sm-12 col-xs-12">
 
         <div class="row">
+          <h3>公開/非公開</h3>
+          <div class="row">
+            <div class="field font-size2" style="margin-bottom: 15px">
+              <label>
+                <%= f.radio_button :is_public, true,  style: "width: 25px; height: 25px;" %> 公開</label>
+              <label>
+                <%= f.radio_button :is_public, false, style: "width: 25px; height: 25px;" %> 非公開</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
           <h3>登録者情報</h3>
           <div class="row">
             <div class="field font-size2 col-sm-6 col-xs-6" style="margin-bottom: 15px">
