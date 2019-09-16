@@ -1,34 +1,43 @@
-<div id="tab2" class="tab">
-	<table class="table">
-		<thead>
-			<tr>
-				<th>管理No</th>
-				<th>修理状況</th>
-				<th>品種</th>
-				<th>お客様</th>
-				<th>電話番号</th>
-				<th>データ</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<% current_on_store_user.orders.reverse.each_with_index do |order, index| %>
+<div class="container">
+	<div class="col-sm-12 col-xs-12">
+		<table class="table">
+			<thead>
 				<tr>
-					<td><%= link_to '<%= index %>', on_store_users_on_store_user_order_path(current_on_store_user, order) %></td>
-					<td><%= order.repair_status %></td>
-					<td><%= link_to order.on_store_user.shop_name, users_on_store_users_show_path(order.on_store_user) %></td>
-					<td><%= order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %></td>
-					<td>
-					<% if order.delivery_day == nil %>
-					未納
-					<% else %>
-					<%= order.delivery_day.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %>
-					<% end %>
-					</td>
-					<td><%= order.charge %></td>
-					<td><%#= link_to "明細を見る", users_user_order_path(@user, order), class: "btn btn-default" %></td>
+					<th>管理No</th>
+					<th>修理状況</th>
+					<th>品種</th>
+					<th>お客様</th>
+					<th>電話番号</th>
+					<th>データ</th>
+					<th></th>
 				</tr>
-			<% end %>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<% current_on_store_user.orders.each_with_index.reverse_each do |order, index| %>
+					<% index += 1 %>
+					<tr>
+						<td><%= link_to index, on_store_users_on_store_user_order_path(current_on_store_user, order, index: index) %></td>
+						<td><%= order.repair_status %></td>
+						<td><%= order.variety %></td>
+						<td><%= order.user.name %></td>
+						<td><%= order.user.telephone_number %></td>
+						<td>
+							<% if order.delivery_day == nil %>
+								受付日：
+							<% else %>
+								納品日：
+							<% end %>
+						</td>
+						<td>
+							<% if order.delivery_day == nil %>
+								<%= order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %>
+							<% else %>
+								<%= order.delivery_day.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
 </div>
