@@ -10,5 +10,5 @@ class Order < ApplicationRecord
   has_many :order_images, dependent: :destroy
   has_many :inquiries, dependent: :destroy
   has_many :reviews, dependent: :destroy
-  accepts_attachments_for :order_images, attachment: :image
+  accepts_attachments_for :order_images, attachment: :image, append: true
 end

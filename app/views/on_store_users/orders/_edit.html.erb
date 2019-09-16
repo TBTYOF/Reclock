@@ -1,4 +1,8 @@
-<%= form_with model: @order, url: on_store_users_on_store_user_order_path(current_on_store_user, @order), method: :patch do |f| %>
+<div class="col-sm-3 col-xs-3" style="margin-top: 20px;">
+	<%= link_to "戻る",on_store_users_on_store_user_order_path(current_on_store_user, order), remote: true, class: "btn btn-default" %>
+</div>
+<div class="row"></div>
+<%= form_with model: order, url: on_store_users_on_store_user_order_path(current_on_store_user, order) do |f| %>
 	<div class="row">
 		<div class="col-sm-3 col-xs-3"><%= f.label :variety, "品種" %></div>
 		<div class="col-sm-9 col-xs-9"><%= f.select :variety, Order.varieties.keys %></div>
@@ -23,4 +27,16 @@
 		<div class="col-sm-3 col-xs-3"></div>
 		<div class="col-sm-9 col-xs-9"><%= f.submit "確定", class: "btn btn-info font-size3" %></div>
 	</div>
+	<% if order.order_images.present? %>
+		<div class="row">
+			<h3>画像</h3>
+			<div class="">
+				<% order.order_images.each_with_index do |image, index| %>
+					<% index += 1 %>
+					<h4>画像（<%= index %>）</h4><%= link_to "削除", on_store_users_on_store_user_order_order_image_path(current_on_store_user, order, image),  method: :delete, remote: true, data: { confirm: "削除します" }, class: "btn btn-danger" %>
+					<div style="padding-left: 40px;"><%= attachment_image_tag image, :image, :fill, 600, 400, format: 'jpeg' %></div>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
 <% end %>
