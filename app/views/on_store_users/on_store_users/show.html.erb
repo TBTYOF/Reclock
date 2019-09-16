@@ -33,6 +33,14 @@
 							未登録
 						<% end %>
 					</li>
+					<li class="list-group-item">店舗情報 公開/非公開</li>
+					<li class="list-group-item">
+						<% if current_on_store_user.is_public == true %>
+							公開中
+						<% else %>
+							非公開
+						<% end %>
+					</li>
 					<li class="list-group-item">
 						<%= link_to "登録情報を編集する", edit_on_store_users_on_store_user_path(current_on_store_user), class: "btn btn-info" %>
 					</li>
