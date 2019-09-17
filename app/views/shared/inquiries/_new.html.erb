@@ -1,5 +1,5 @@
 <div class="inquiry-form">
-	<%= form_with model: Inquiry.new, url: users_user_inquiry_create_path(@user, @shop) do |f| %>
+	<%= form_with model: Inquiry.new, url: @inquiry_creat_url do |f| %>
 		<!-- 注文に紐づく問合せかどうか -->
 		<% if defined? @order == false %>
       <%= f.hidden_field :order_id, :value => @order.id %>
