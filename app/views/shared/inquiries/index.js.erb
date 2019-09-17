@@ -1,1 +1,1 @@
-$(".inquiries").html("<%= escape_javascript(render partial:'/shared/inquiries/index') %>");
+$(".inquiries").html("<%= escape_javascript(render partial:'/shared/inquiries/index', :locals => { :user => @user }) %>");

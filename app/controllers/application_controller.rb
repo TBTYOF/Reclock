@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     elsif resource == :user
       root_path
     else
-    	new_on_store_user_session_session_path
+    	new_on_store_user_session_path
     end
   end
 

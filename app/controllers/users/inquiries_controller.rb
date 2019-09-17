@@ -39,6 +39,7 @@ class Users::InquiriesController < ApplicationController
 	end
 
 	def index
+		@user = current_user
 		respond_to do |format|
 		  format.html
 		  format.js {render '/shared/inquiries/index.js.erb'}
