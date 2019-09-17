@@ -27,10 +27,10 @@
 				<tr>
 					<td><%= inquiry.title %></td>
 					<td>
-						<% if inquiry.order_id == nil %>
-							注文前
-						<% else %>
+						<% if inquiry.order_id.present? %>
 							<%= link_to inquiry.order_id, users_user_order_path(current_user, inquiry.order_id) %>
+						<% else %>
+							注文前
 						<% end %>
 					</td>
 					<td>

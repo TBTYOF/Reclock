@@ -6,7 +6,6 @@
 			<th>注文ID</th>
 			<th>最終投稿日</th>
 			<th></th>
-			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -35,7 +34,6 @@
 							<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, shop_id: inquiry.on_store_user.id, order_id: inquiry.order.id), remote: true, class: "btn btn-default" %>
 						<% end %>
 				</td>
-				<td></td>
 			</tr>
 		<% end %>
 	</tbody>

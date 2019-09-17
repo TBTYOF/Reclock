@@ -3,13 +3,14 @@ class Users::InquiriesController < ApplicationController
 		@inquiry = Inquiry.new
 		@user = current_user
 		@shop = OnStoreUser.find(params[:shop_id])
+		@inquiry_creat_url = "/users/users/#{@user.id}/shops/#{@shop.id}/inquiry"
 		if params[:order_id]
 			@order = Order.find(params[:order_id])
 		end
 
 		respond_to do |format|
 	    format.html
-	    format.js
+	    format.js {render '/shared/inquiries/new.js.erb'}
 	   end
 	end
 
@@ -33,14 +34,14 @@ class Users::InquiriesController < ApplicationController
 
 		respond_to do |format|
 		  format.html
-		  format.js {render '/users/inquiries/inquiry.js.erb'}
+		  format.js {render '/shared/inquiries/inquiry.js.erb'}
 		end
 	end
 
 	def index
 		respond_to do |format|
 		  format.html
-		  format.js
+		  format.js {render '/shared/inquiries/index.js.erb'}
 		end
 	end
 
@@ -55,7 +56,7 @@ class Users::InquiriesController < ApplicationController
 
 		respond_to do |format|
 		  format.html
-		  format.js
+		  format.js {render '/shared/inquiries/inquiry.js.erb'}
 		 end
 	end
 
@@ -63,16 +64,18 @@ class Users::InquiriesController < ApplicationController
 		@user = current_user
 		@shop = OnStoreUser.find(params[:shop_id])
 		@inquiry = Inquiry.find(params[:id])
-		if params[:partial_key] != nil
+		@reply_new_url = "/users/users/#{@user.id}/inquiries/#{@inquiry.id}/replies/new"
+		if params[:partial_key].present?
 			@partial_key = params[:partial_key]
 		end
-		if params[:order_id] != nil
+		if params[:order_id].present?
 			@order = Order.find(params[:order_id])
+			@reply_new_url = "/users/users/#{@user.id}/orders/#{@order.id}/inquiries/#{@inquiry.id}/replies/new"
 		end
 
 		respond_to do |format|
 		  format.html
-		  format.js
+		  format.js {render '/shared/inquiries/show.js.erb'}
 		 end
 	end
 

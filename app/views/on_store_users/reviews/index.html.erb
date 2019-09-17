@@ -1,0 +1,49 @@
+<div class="container">
+	<% if current_on_store_user.reviews.present? %>
+		<table class="table">
+			<tbody>
+				<% current_on_store_user.reviews.reverse.each_with_index do |review, index| %>
+					<tr>
+						<td>タイトル：<%= review.title %></td>
+						<td>投稿日：<%= review.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[review.created_at.wday]}) %H:%M") %></td>
+						<td>投稿者：<%= review.user.name %></td>
+						<td><%= link_to '注文明細を見る', on_store_users_on_store_user_order_path(current_on_store_user, review.order), class: "btn btn-default" %></td>
+					</tr>
+					<tr style="word-break: break-all;">
+						<% if review.body.length > 300 %>
+							<td colspan="4" id="limit-body-<%= index %>"><%= review.body[0..300] %> ...</td>
+						<% else %>
+							<td colspan="4"><%= review.body %></td>
+						<% end %>
+					</tr>
+					<tr style="display: none; word-break: break-all;" id="body-<%= index %>">
+						<td colspan="4"><%= review.body %></td>
+					</tr>
+					<% if review.body.length > 300 %>
+						<tr class="trigger-<%= index %>">
+							<td></td>
+							<td>全文を表示</td>
+						</tr>
+						<tr style="display: none;" class="trigger-<%= index %>">
+							<td></td>
+							<td>　 戻す</td>
+						</tr>
+					<% end %>
+
+					<script>
+						$('.trigger-<%= index %>').on('click', function() {
+									$('#limit-body-<%= index %>').toggle();
+								$('#body-<%= index %>').toggle();
+								$('.trigger-<%= index %>').toggle();
+								return false;
+						});
+					</script>
+				<% end %>
+			</tbody>
+		</table>
+	<% else %>
+		<div>
+			<p>まだレビューはありません</p>
+		</div>
+	<% end %>
+</div>

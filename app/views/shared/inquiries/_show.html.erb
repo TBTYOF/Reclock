@@ -1,0 +1,55 @@
+<table class="table">
+	<thead>
+		<tr>
+			<% if defined? @partial_key %>
+			<% else %>
+				<th>問合せ先</th>
+			<% end %>
+			<th>件名</th>
+			<th>注文ID</th>
+			<th>最終投稿日</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<% if defined? @partial_key %>
+			<% else %>
+				<td><%= link_to @inquiry.on_store_user.shop_name, users_on_store_users_show_path(@inquiry.on_store_user) %></td>
+			<% end %>
+			<td><%= @inquiry.title %></td>
+			<td>
+				<% if @inquiry.order_id == nil %>
+					注文前
+				<% else %>
+					<%= link_to @inquiry.order_id, users_user_order_path(current_user, @inquiry.order_id) %>
+				<% end %>
+			</td>
+			<td>
+				<% if @inquiry.replies.count == 0 %>
+					<%= @inquiry.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@inquiry.created_at.wday]}) %H:%M") %>
+				<% else %>
+					<%= @inquiry.replies.last.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@inquiry.replies.last.created_at.wday]}) %H:%M") %>
+				<% end %>
+			</td>
+			<td>
+				<% if @partial_key == "order" %>
+					<%= link_to "一覧へ戻る", users_user_inquiries_key_path(@user, @shop, order_id: @order), remote: true, class: "btn btn-default" %>
+				<% elsif @partial_key == "shop" %>
+					<%= link_to "一覧へ戻る", users_user_inquiries_key_path(@user, @shop), remote: true, class: "btn btn-default" %>
+				<% else %>
+					<%= link_to "一覧へ戻る", users_user_inquiries_path(@user), remote: true, class: "btn btn-default" %>
+				<% end %>
+			</td>
+		</tr>
+		<tr>
+			<td>本文：</td>
+		</tr>
+		<tr>
+			<td colspan="5"><%= @inquiry.body %></td>
+		</tr>
+	</tbody>
+</table>
+<div id="reqlies">
+	<%= render '/shared/replies/show', order: @order, inquiry: @inquiry, reply_new_url: @reply_new_url %>
+</div>
