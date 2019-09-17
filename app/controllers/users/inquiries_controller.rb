@@ -18,6 +18,7 @@ class Users::InquiriesController < ApplicationController
 		inquiry = current_user.inquiries.new(inquiry_params)
 		@shop = OnStoreUser.find(params[:shop_id])
 		inquiry.on_store_user_id = @shop.id
+		inquiry.user_read = true
 		# 注文前の問合せか後か
 		if params[:inquiry][:order_id].present?
 			@order = Order.find(params[:inquiry][:order_id])
@@ -39,6 +40,7 @@ class Users::InquiriesController < ApplicationController
 	end
 
 	def index
+		@user = current_user
 		respond_to do |format|
 		  format.html
 		  format.js {render '/shared/inquiries/index.js.erb'}
@@ -72,6 +74,9 @@ class Users::InquiriesController < ApplicationController
 			@order = Order.find(params[:order_id])
 			@reply_new_url = "/users/users/#{@user.id}/orders/#{@order.id}/inquiries/#{@inquiry.id}/replies/new"
 		end
+		# 既読処理
+		@inquiry.user_read = true
+		@inquiry.save
 
 		respond_to do |format|
 		  format.html

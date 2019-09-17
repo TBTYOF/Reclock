@@ -1,0 +1,9 @@
+<div class="container">
+	<div class="inquiries">
+		<% if @user.inquiries.present? %>
+			<%= render '/shared/inquiries/index', user: @user %>
+		<% else %>
+			まだお問合せはありません
+		<% end %>
+	</div>
+</div>

@@ -6,7 +6,8 @@ class CreateInquiries < ActiveRecord::Migration[5.2]
     	t.integer :order_id
 			t.string :title
 			t.text :body
-			t.boolean :is_read, default: false, null: false
+			t.boolean :user_read, default: false, null: false
+      t.boolean :on_store_user_read, default: false, null: false
 
       t.timestamps
     end

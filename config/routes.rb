@@ -41,8 +41,8 @@ Rails.application.routes.draw do
   		end
   		resources :orders, except:[:create] do
         resources :order_images, only:[:destroy]
-		 		resources :inquiries, only:[:new, :create] do
-  				resources :replies, only:[:new, :create]
+		 		resources :inquiries, except:[:destroy, :edit, :update] do
+  				resources :replies, only:[:new, :create, :show]
   			end
 		  end
   	end

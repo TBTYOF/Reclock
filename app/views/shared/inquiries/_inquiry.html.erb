@@ -3,11 +3,15 @@
 	<div style="height: 500px;">
 		<div id="add">
 			<p>まだお問合せはありません</p>
-			<!-- 注文に対する問合せかの分岐 -->
-			<% if defined? order %>
-				<%= link_to "新規問合せはこちら", users_user_inquiry_new_path(current_user, shop, order_id: order.id), remote: true, class: "btn-default btn" %>
+			<% if user_signed_in? %>
+				<!-- 注文に対する問合せかの分岐 -->
+				<% if defined? order %>
+					<%= link_to "新規問合せはこちら", users_user_inquiry_new_path(current_user, shop, order_id: order.id), remote: true, class: "btn-default btn" %>
+				<% else %>
+					<%= link_to "新規問合せはこちら", users_user_inquiry_new_path(current_user, shop), remote: true, class: "btn-default btn" %>
+				<% end %>
 			<% else %>
-				<%= link_to "新規問合せはこちら", users_user_inquiry_new_path(current_user, shop), remote: true, class: "btn-default btn" %>
+				<%= link_to "新規問合せはこちら", new_on_store_users_on_store_user_order_inquiry_path(current_on_store_user, order), remote: true, class: "btn-default btn" %>
 			<% end %>
 		</div>
 	</div>
@@ -28,7 +32,11 @@
 					<td><%= inquiry.title %></td>
 					<td>
 						<% if inquiry.order_id.present? %>
-							<%= link_to inquiry.order_id, users_user_order_path(current_user, inquiry.order_id) %>
+							<% if user_signed_in? %>
+								<%= link_to inquiry.order_id, users_user_order_path(current_user, inquiry.order_id) %>
+							<% else %>
+								<%= link_to inquiry.order_id, on_store_users_on_store_user_order_path(current_on_store_user, inquiry.order_id) %>
+							<% end %>
 						<% else %>
 							注文前
 						<% end %>
@@ -41,23 +49,47 @@
 						<% end %>
 					</td>
 					<td>
-						<% if inquiry.order_id == nil %>
-							<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, shop_id: shop.id, partial_key: "shop"), remote: true, class: "btn btn-default" %>
+						<% if user_signed_in? %>
+							<% if inquiry.order_id == nil %>
+								<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, shop_id: shop.id, partial_key: "shop"), remote: true, class: "btn btn-default" %>
+							<% else %>
+								<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, shop_id: shop.id, order_id: inquiry.order.id, partial_key: "order"), remote: true, class: "btn btn-default" %>
+							<% end %>
 						<% else %>
-							<%= link_to "内容を見る", users_user_inquiry_path(current_user, inquiry, shop_id: shop.id, order_id: inquiry.order.id, partial_key: "order"), remote: true, class: "btn btn-default" %>
+							<%= link_to "内容を見る", on_store_users_on_store_user_order_inquiry_path(current_on_store_user, inquiry.order.id ,inquiry, partial_key: "order"), remote: true, class: "btn btn-default" %>
 						<% end %>
 					</td>
-					<td></td>
+					<td style="color: red;">
+					<% if user_signed_in? %>
+						<% if inquiry.user_read == false %>
+							<strong>未読</strong>
+						<% elsif inquiry.on_store_user_read == false %>
+							<strong>修理店未読</strong>
+						<% else %>
+						<% end %>
+					<% else %>
+						<% if inquiry.on_store_user_read == false %>
+							<strong>未読</strong>
+						<% elsif inquiry.user_read == false %>
+							<strong>お客様未読</strong>
+						<% else %>
+						<% end %>
+					<% end %>
+				</td>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
 	<div id="add">
-		<!-- 注文に対する問合せかの分岐 -->
+		<% if user_signed_in? %>
+			<!-- 注文に対する問合せかの分岐 -->
 			<% if defined? order %>
 				<%= link_to "新規問合せはこちら", users_user_inquiry_new_path(current_user, shop, order_id: order.id), remote: true, class: "btn-default btn" %>
 			<% else %>
 				<%= link_to "新規問合せはこちら", users_user_inquiry_new_path(current_user, shop), remote: true, class: "btn-default btn" %>
 			<% end %>
+		<% else %>
+			<%= link_to "新規問合せはこちら", new_on_store_users_on_store_user_order_inquiry_path(current_on_store_user, order), remote: true, class: "btn-default btn" %>
+		<% end %>
 	</div>
 <% end %>

@@ -19,8 +19,9 @@ class Users::RepliesController < ApplicationController
 		@inquiry = Inquiry.find(params[:inquiry_id])
 		reply = @inquiry.replies.new(repliy_params)
 		reply.save
-		# replyを返した時の判定（_showを表示するのに必要）
-		# @is_reply = true
+		# 未読処理
+		@inquiry.on_store_user_read = false
+		@inquiry.save
 
 		if params[:order_id] != nil
 			@order = Order.find(params[:order_id])

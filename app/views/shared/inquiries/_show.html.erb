@@ -3,7 +3,11 @@
 		<tr>
 			<% if defined? @partial_key %>
 			<% else %>
-				<th>問合せ先</th>
+				<% if user_signed_in? %>
+					<th>問合せ先</th>
+				<% else %>
+					<th>問合せ元</th>
+				<% end %>
 			<% end %>
 			<th>件名</th>
 			<th>注文ID</th>
@@ -14,15 +18,15 @@
 	<tbody>
 		<tr>
 			<% if defined? @partial_key %>
-			<% else %>
-				<td><%= link_to @inquiry.on_store_user.shop_name, users_on_store_users_show_path(@inquiry.on_store_user) %></td>
-			<% end %>
+				<% else %>
+					<td><%= link_to @inquiry.on_store_user.shop_name, users_on_store_users_show_path(@inquiry.on_store_user) %></td>
+				<% end %>
 			<td><%= @inquiry.title %></td>
 			<td>
 				<% if @inquiry.order_id == nil %>
 					注文前
 				<% else %>
-					<%= link_to @inquiry.order_id, users_user_order_path(current_user, @inquiry.order_id) %>
+					<%= link_to @inquiry.order_id, users_user_order_path(@user, @inquiry.order_id) %>
 				<% end %>
 			</td>
 			<td>
@@ -33,12 +37,20 @@
 				<% end %>
 			</td>
 			<td>
-				<% if @partial_key == "order" %>
-					<%= link_to "一覧へ戻る", users_user_inquiries_key_path(@user, @shop, order_id: @order), remote: true, class: "btn btn-default" %>
-				<% elsif @partial_key == "shop" %>
-					<%= link_to "一覧へ戻る", users_user_inquiries_key_path(@user, @shop), remote: true, class: "btn btn-default" %>
+				<% if user_signed_in? %>
+					<% if @partial_key == "order" %>
+						<%= link_to "一覧へ戻る", users_user_inquiries_key_path(@user, @shop, order_id: @order), remote: true, class: "btn btn-default" %>
+					<% elsif @partial_key == "shop" %>
+						<%= link_to "一覧へ戻る", users_user_inquiries_key_path(@user, @shop), remote: true, class: "btn btn-default" %>
+					<% else %>
+						<%= link_to "一覧へ戻る", users_user_inquiries_path(@user), remote: true, class: "btn btn-default" %>
+					<% end %>
 				<% else %>
-					<%= link_to "一覧へ戻る", users_user_inquiries_path(@user), remote: true, class: "btn btn-default" %>
+					<% if @partial_key == "order" %>
+						<%= link_to "一覧へ戻る", on_store_users_on_store_user_order_inquiries_path(@shop, @order, partial_key: "order"), remote: true, class: "btn btn-default" %>
+					<% else %>
+						<%= link_to "一覧へ戻る", on_store_users_on_store_user_inquiries_path(@shop), remote: true, class: "btn btn-default" %>
+					<% end %>
 				<% end %>
 			</td>
 		</tr>
@@ -50,6 +62,7 @@
 		</tr>
 	</tbody>
 </table>
+
 <div id="reqlies">
 	<%= render '/shared/replies/show', order: @order, inquiry: @inquiry, reply_new_url: @reply_new_url %>
 </div>
