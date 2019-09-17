@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     	get '/sales' => 'on_store_users#sales', as: 'sales'
       get '/withdrawal' => 'on_store_users#withdrawal', as: 'withdrawal'
     	resources :reviews, only:[:index, :destroy]
-    	resources :inquiries, except:[:destroy, :edit, :update] do
+    	resources :inquiries, only:[:index, :show] do
   			resources :replies, only:[:new, :create]
   		end
   		resources :orders, except:[:create] do

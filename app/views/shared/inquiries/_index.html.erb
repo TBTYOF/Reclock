@@ -12,26 +12,33 @@
 			<th>注文ID</th>
 			<th>最終投稿日</th>
 			<th></th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<% user.inquiries.reverse.each do |inquiry| %>
 			<tr>
-				<td>
-					<% if user_signed_in? %>
-						<%= link_to inquiry.on_store_user.shop_name, users_on_store_users_show_path(inquiry.on_store_user) %>
-					<% else %>
-						<%= inquiry.user.name %> 様
-					<% end %>
-				</td>
-				<td><%= inquiry.title %></td>
-				<td>
-					<% if inquiry.order_id == nil %>
-						注文前
-					<% else %>
-						<%= link_to inquiry.order_id, users_user_order_path(user, inquiry.order_id) %>
-					<% end %>
-				</td>
+				<% if user_signed_in? %>
+					<td><%= link_to inquiry.on_store_user.shop_name, users_on_store_users_show_path(inquiry.on_store_user) %></td>
+					<td><%= inquiry.title %></td>
+					<td>
+						<% if inquiry.order_id == nil %>
+							注文前
+						<% else %>
+							<%= link_to inquiry.order_id, users_user_order_path(user, inquiry.order_id) %>
+						<% end %>
+					</td>
+				<% else %>
+					<td><%= inquiry.user.name %> 様</td>
+					<td><%= inquiry.title %></td>
+					<td>
+						<% if inquiry.order_id == nil %>
+							注文前
+						<% else %>
+							<%= link_to inquiry.order_id, on_store_users_on_store_user_order_path(user, inquiry.order_id) %>
+						<% end %>
+					</td>
+				<% end %>
 				<td>
 					<% if inquiry.replies.count == 0 %>
 						<%= inquiry.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[inquiry.created_at.wday]}) %H:%M") %>
@@ -51,6 +58,23 @@
 							<%= link_to "内容を見る", on_store_users_on_store_user_inquiry_path(user, inquiry), remote: true, class: "btn btn-default" %>
 						<% else %>
 							<%= link_to "内容を見る", on_store_users_on_store_user_order_inquiry_path(user, inquiry.order.id,inquiry), remote: true, class: "btn btn-default" %>
+						<% end %>
+					<% end %>
+				</td>
+				<td style="color: red;">
+					<% if user_signed_in? %>
+						<% if inquiry.user_read == false %>
+							<strong>未読</strong>
+						<% elsif inquiry.on_store_user_read == false %>
+							<strong>修理店未読</strong>
+						<% else %>
+						<% end %>
+					<% else %>
+						<% if inquiry.on_store_user_read == false %>
+							<strong>未読</strong>
+						<% elsif inquiry.user_read == false %>
+							<strong>お客様未読</strong>
+						<% else %>
 						<% end %>
 					<% end %>
 				</td>

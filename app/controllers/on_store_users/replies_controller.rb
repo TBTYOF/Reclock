@@ -19,6 +19,9 @@ class OnStoreUsers::RepliesController < ApplicationController
 		reply = @inquiry.replies.new(repliy_params)
 		reply.is_writer = true
 		reply.save
+		# 未読処理
+		@inquiry.user_read = false
+		@inquiry.save
 
 		if params[:order_id] != nil
 			@order = Order.find(params[:order_id])

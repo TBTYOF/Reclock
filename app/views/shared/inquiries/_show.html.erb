@@ -47,7 +47,7 @@
 					<% end %>
 				<% else %>
 					<% if @partial_key == "order" %>
-						<%= link_to "一覧へ戻る", on_store_users_on_store_user_order_inquiries_path(@user, @shop, @order), remote: true, class: "btn btn-default" %>
+						<%= link_to "一覧へ戻る", on_store_users_on_store_user_order_inquiries_path(@shop, @order, partial_key: "order"), remote: true, class: "btn btn-default" %>
 					<% else %>
 						<%= link_to "一覧へ戻る", on_store_users_on_store_user_inquiries_path(@shop), remote: true, class: "btn btn-default" %>
 					<% end %>
