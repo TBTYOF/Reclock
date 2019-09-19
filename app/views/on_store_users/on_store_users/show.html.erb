@@ -51,15 +51,17 @@
 				<h3>ご挨拶</h3>
 				<div class="col-sm-12 col-xs-12">
 					<% if current_on_store_user.greeting.present? %>
-							<%= current_on_store_user.greeting %>
-						<% else %>
-							未登録
-						<% end %>
+						<%= current_on_store_user.greeting %>
+					<% else %>
+						未登録
+					<% end %>
 				</div>
+
 				<h3>店舗画像</h3>
 				<div class="col-sm-12 col-xs-12">
 					<%= attachment_image_tag current_on_store_user, :image, :fill, 350, 350, format: 'jpeg', fallback: "/no_image.jpg", size:'350x350' %>
 				</div>
+
 				<h3>スライドショー用画像</h3>
 				<div class="col-sm-12 col-xs-12">
 					<% if current_on_store_user.on_store_user_images.present? %>
@@ -70,6 +72,7 @@
 							未登録
 					<% end %>
 				</div>
+
 				<h3>サービス概要</h3>
 				<div class="col-sm-12 col-xs-12">
 					<% if current_on_store_user.major_categories.present? %>
@@ -78,8 +81,12 @@
 								<div class="col-sm-3">
 									<%= major_category.name %>
 								</div>
-								<% major_category.middle_categories.each do |middle_category| %>
-									<div class="col-sm-9">
+								<% major_category.middle_categories.each_with_index do |middle_category, i| %>
+									<% if i == 0 %>
+										<div class="col-sm-9">
+									<% else %>
+										<div class="col-sm-9 col-sm-offset-3">
+									<% end %>
 										<div class="col-sm-5">
 											<%= middle_category.name %>
 										</div>
@@ -102,7 +109,6 @@
 					<% end %>
 				</div>
 			</div>
-
 
 		</div>
 	</div>

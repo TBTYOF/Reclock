@@ -35,40 +35,39 @@
 
 				<div class="row">
 					<h3>サービス概要</h3>
-						<div class="col-sm-12 col-xs-12">
-							<% if @shop.major_categories.present? %>
-								<% @shop.major_categories.each do |major_category| %>
-									<div class="row">
-										<div class="col-sm-3">
-											<%= major_category.name %>
-										</div>
-										<% major_category.middle_categories.each_with_index do |middle_category, i| %>
-											<% if i == 0 %>
-												<div class="col-sm-9">
-											<% else %>
-												<div class="col-sm-9 col-sm-offset-3">
-											<% end %>
-												<div class="col-sm-5">
-													<%= middle_category.name %>
-												</div>
-												<div class="col-sm-7">
-													<% middle_category.minor_categories.each do |minor_category| %>
-														<div class="col-sm-6">
-															<%= minor_category.name %>
-														</div>
-														<div class="col-sm-6">
-															<%= minor_category.quote %>
-														</div>
-													<% end %>
-												</div>
-											</div>
-										<% end %>
+					<div class="col-sm-12 col-xs-12">
+						<% if @shop.major_categories.present? %>
+							<% @shop.major_categories.each do |major_category| %>
+								<div class="row">
+									<div class="col-sm-3">
+										<%= major_category.name %>
 									</div>
-								<% end %>
-							<% else %>
-								未登録
+									<% major_category.middle_categories.each_with_index do |middle_category, i| %>
+										<% if i == 0 %>
+											<div class="col-sm-9">
+										<% else %>
+											<div class="col-sm-9 col-sm-offset-3">
+										<% end %>
+											<div class="col-sm-5">
+												<%= middle_category.name %>
+											</div>
+											<div class="col-sm-7">
+												<% middle_category.minor_categories.each do |minor_category| %>
+													<div class="col-sm-6">
+														<%= minor_category.name %>
+													</div>
+													<div class="col-sm-6">
+														<%= minor_category.quote %>
+													</div>
+												<% end %>
+											</div>
+										</div>
+									<% end %>
+								</div>
 							<% end %>
-						</div>
+						<% else %>
+							未登録
+						<% end %>
 					</div>
 				</div>
 
@@ -166,7 +165,13 @@
 			</div>
 
 			<div id="tab3" class="tab inquiries">
-				<%= render '/shared/inquiries/inquiry', inquiries: @inquiries, shop: @shop %>
+				<% if user_signed_in? %>
+					<%= render '/shared/inquiries/inquiry', inquiries: @inquiries, shop: @shop %>
+				<% else %>
+					ログイン後にお問合せ出来ます
+					ログインは<%= link_to "こちら", new_user_session_path %>
+					新規登録は<%= link_to "こちら", new_user_registration_path %>
+				<% end %>
 			</div>
 
 		</div>

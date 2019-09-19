@@ -1,4 +1,13 @@
 class Users::UsersController < ApplicationController
+  before_action :authenticate_user!, except: [:home, :about]
+  # URL直入力弾く
+  before_action :ensure_correct_user, except:[:home, :about]
+  def ensure_correct_user
+    if current_user.id != params[:id].to_i
+      redirect_to root_path
+    end
+  end
+
   def edit
     @user = current_user
   end
@@ -22,11 +31,9 @@ class Users::UsersController < ApplicationController
   end
 
   def withdrawal
-  	
   end
 
   def quit
-  	
   end
 
   private

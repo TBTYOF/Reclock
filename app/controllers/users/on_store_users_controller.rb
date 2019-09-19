@@ -1,4 +1,5 @@
 class Users::OnStoreUsersController < ApplicationController
+
 	def index
 		if params[:address] == nil
 			@q = MiddleCategory.ransack(params[:q])
@@ -25,6 +26,7 @@ class Users::OnStoreUsersController < ApplicationController
     params.require(:q).permit(:major_category_name_or_name_or_minor_categories_name_cont)
   end
 
+  # major_category, middle_category, minor_categoryから店舗をキーワード検索
   def category_sarch(text)
 	    def same_exclusion(sarch_middle_categories)
 	      middle_categories = []
@@ -47,7 +49,6 @@ class Users::OnStoreUsersController < ApplicationController
 	          major_categories = major_categories + [results_middle_category]
 	          on_store_users = on_store_users + [results_middle_category.major_category.on_store_user]
 	        end
-	        # binding.pry
 	        if major_categories[i].major_category_id != results_middle_category.major_category_id
 	          i += 1
 	          major_categories = major_categories + [results_middle_category]

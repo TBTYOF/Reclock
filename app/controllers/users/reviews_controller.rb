@@ -1,4 +1,13 @@
 class Users::ReviewsController < ApplicationController
+	before_action :authenticate_user!
+	# URL直入力弾く
+	before_action :ensure_correct_user
+	def ensure_correct_user
+		if current_user.id != params[:user_id].to_i
+			redirect_to root_path
+		end
+	end
+
 	def new
 		@user = current_user
 		@order = Order.find(params[:order_id])

@@ -1,4 +1,6 @@
 class Users::RepliesController < ApplicationController
+	before_action :authenticate_user!
+
 	def new
 		@reply = Reply.new
 		@inquiry = Inquiry.find(params[:inquiry_id])

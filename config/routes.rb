@@ -30,11 +30,11 @@ Rails.application.routes.draw do
   end
 
   namespace :on_store_users do
-  	get '', to:'on_store_users#home'
   	get '/form' => 'on_store_users#form', as: 'form'
     post '/form/ok' => 'on_store_users#form', as: 'form_ok'
     resources :on_store_users ,only:[:show, :edit, :update] do
     	# get '/sales' => 'on_store_users#sales', as: 'sales'
+      get '/home' => 'on_store_users#home', as: 'home'
       get '/withdrawal' => 'on_store_users#withdrawal', as: 'withdrawal'
     	resources :reviews, only:[:index, :destroy]
     	resources :inquiries, only:[:index, :show] do

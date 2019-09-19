@@ -1,4 +1,6 @@
 class Admins::ReviewsController < ApplicationController
+	before_action :authenticate_admin!
+
 	def index
 		if params[:search].present?
 			@q = Review.ransack(search_params)
