@@ -9,14 +9,14 @@
 				<% end %>
 			</th>
 			<th>件名</th>
-			<th>注文ID</th>
-			<th>最終投稿日</th>
+			<th><%= sort_link(@q, :order_id, '注文ID') %></th>
+			<th><%= sort_link(@q, :created_at, '最終投稿日') %></th>
 			<th></th>
 			<th></th>
 		</tr>
 	</thead>
 	<tbody>
-		<% user.inquiries.reverse.each do |inquiry| %>
+		<% inquiries.each do |inquiry| %>
 			<tr>
 				<% if user_signed_in? %>
 					<td><%= link_to inquiry.on_store_user.shop_name, users_on_store_users_show_path(inquiry.on_store_user) %></td>
@@ -82,3 +82,5 @@
 		<% end %>
 	</tbody>
 </table>
+
+<%= paginate inquiries, class: "paginate" %>

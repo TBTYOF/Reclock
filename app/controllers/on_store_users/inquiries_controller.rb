@@ -28,9 +28,12 @@ class OnStoreUsers::InquiriesController < ApplicationController
 
 	def index
 		if params[:partial_key].present?
-			@shop = current_on_store_user
 			@order = Order.find(params[:order_id])
-			@inquiries = @order.inquiries
+			@shop = current_on_store_user
+			@q = @shop.inquiries.ransack(params[:q])
+			@inquiries = @q.result(distinct: true).page(params[:page]).reverse_order
+
+			@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
 
 			respond_to do |format|
 			  format.html
@@ -38,6 +41,10 @@ class OnStoreUsers::InquiriesController < ApplicationController
 			end
 		else
 			@user = current_on_store_user
+			@q = @user.inquiries.ransack(params[:q])
+			@inquiries = @q.result(distinct: true).page(params[:page]).reverse_order
+			@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
+
 
 			respond_to do |format|
 			  format.html
@@ -75,6 +82,14 @@ class OnStoreUsers::InquiriesController < ApplicationController
 																		:user_id,
 																		:title,
 																		:body,
-																		:is_read)
+																		:user_read,
+																		:on_store_user_read)
 	end
+
+	def search_params
+    params.require(:q).permit(:s,
+    													:user_name_cont,
+    													:user_read_in,
+    													:on_store_user_read_in)
+  end
 end

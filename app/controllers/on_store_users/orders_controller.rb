@@ -1,10 +1,17 @@
 class OnStoreUsers::OrdersController < ApplicationController
 	def index
+		if params[:search].present?
+			@search = current_on_store_user.orders.ransack(search_params)
+			@orders = @search.result(distinct: true).page(params[:page]).reverse_order
+		else
+			@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
+			@orders = @search.result(distinct: true).page(params[:page]).reverse_order
+		end
 	end
 
 	def show
+		@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
 		@order = Order.find(params[:id])
-		@index = params[:index]
 
 		respond_to do |format|
 	  	format.html
@@ -51,4 +58,12 @@ class OnStoreUsers::OrdersController < ApplicationController
 																	:delivery_day,
 																	order_images_images: [])
 	end
+
+	def search_params
+		params.require(:search).permit(:s,
+    															:user_name_cont,
+			   													:repair_status_eq,
+			   													:variety_eq,
+			   													:user_telephone_number_cont)
+  end
 end

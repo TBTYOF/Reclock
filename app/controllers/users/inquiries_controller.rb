@@ -41,6 +41,9 @@ class Users::InquiriesController < ApplicationController
 
 	def index
 		@user = current_user
+		@q = @user.inquiries.ransack(params[:q])
+		@inquiries = @q.result(distinct: true).page(params[:page]).reverse_order
+
 		respond_to do |format|
 		  format.html
 		  format.js {render '/shared/inquiries/index.js.erb'}
@@ -93,4 +96,8 @@ class Users::InquiriesController < ApplicationController
 																		:body,
 																		:is_read)
 	end
+
+	def search_params
+    params.require(:q).permit(:s)
+  end
 end

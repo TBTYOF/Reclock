@@ -65,7 +65,7 @@
 
 			<div id="tab3" class="tab inquiries">
 				<% if @user.inquiries.present? %>
-					<%= render '/shared/inquiries/index', user: @user %>
+					<%= render '/shared/inquiries/index', user: @user, inquiries: @inquiries %>
 				<% else %>
 					まだお問合せはありません
 				<% end %>
