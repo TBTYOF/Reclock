@@ -1,4 +1,6 @@
 class Admins::InquiriesController < ApplicationController
+	before_action :authenticate_admin!
+
 	def index
 		if params[:search].present?
 			@q = Inquiry.ransack(search_params)

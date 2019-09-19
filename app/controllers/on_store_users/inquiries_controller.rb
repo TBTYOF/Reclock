@@ -1,4 +1,13 @@
 class OnStoreUsers::InquiriesController < ApplicationController
+	before_action :authenticate_on_store_user!
+	# URLの直接入力を弾く
+	before_action :ensure_correct_on_store_user
+  def ensure_correct_on_store_user
+    if current_on_store_user.id != params[:on_store_user_id].to_i
+      redirect_to on_store_users_on_store_user_home_path(current_on_store_user)
+    end
+  end
+
 	def new
 		@inquiry = Inquiry.new
 		@order = Order.find(params[:order_id])
@@ -30,8 +39,7 @@ class OnStoreUsers::InquiriesController < ApplicationController
 		if params[:partial_key].present?
 			@order = Order.find(params[:order_id])
 			@shop = current_on_store_user
-			@q = @shop.inquiries.ransack(params[:q])
-			@inquiries = @q.result(distinct: true).page(params[:page]).reverse_order
+			@inquiries = @order.inquiries
 
 			@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
 
@@ -60,8 +68,6 @@ class OnStoreUsers::InquiriesController < ApplicationController
 		@reply_new_url = "/on_store_users/on_store_users/#{@shop.id}/inquiries/#{@inquiry.id}/replies/new"
 		if params[:partial_key].present?
 			@partial_key = params[:partial_key]
-		end
-		if params[:order_id].present?
 			@order = Order.find(params[:order_id])
 			@reply_new_url = "/on_store_users/on_store_users/#{@shop.id}/orders/#{@order.id}/inquiries/#{@inquiry.id}/replies/new"
 		end
