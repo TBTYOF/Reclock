@@ -11,6 +11,8 @@ class Users::UsersController < ApplicationController
 
   def show
     @user = current_user
+    @q = @user.inquiries.ransack(params[:q])
+    @inquiries = @q.result(distinct: true).page(params[:page]).reverse_order
   end
 
   def home

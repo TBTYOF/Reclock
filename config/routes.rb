@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   namespace :users do
   	get '/about' => 'users#about', as: 'about'
   	get '/shops' => 'on_store_users#index', as: 'on_store_users_index'
-  	get '/shops/:id' => 'on_store_users#show', as: 'on_store_users_show'
+  	get '/shops/:id'    => 'on_store_users#show', as: 'on_store_users_show'
+    get '/shops/search' => 'on_store_users#search', as: 'search'
     resources :users ,only:[:show, :edit, :update] do
       get '/withdrawal' => 'users#withdrawal', as: 'withdrawal'
       get '/shops/:shop_id/inquiry/new' => 'inquiries#new', as: 'inquiry_new'
@@ -33,7 +34,7 @@ Rails.application.routes.draw do
   	get '/form' => 'on_store_users#form', as: 'form'
     post '/form/ok' => 'on_store_users#form', as: 'form_ok'
     resources :on_store_users ,only:[:show, :edit, :update] do
-    	get '/sales' => 'on_store_users#sales', as: 'sales'
+    	# get '/sales' => 'on_store_users#sales', as: 'sales'
       get '/withdrawal' => 'on_store_users#withdrawal', as: 'withdrawal'
     	resources :reviews, only:[:index, :destroy]
     	resources :inquiries, only:[:index, :show] do

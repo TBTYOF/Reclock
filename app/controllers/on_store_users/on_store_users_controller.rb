@@ -1,5 +1,6 @@
 class OnStoreUsers::OnStoreUsersController < ApplicationController
 	def home
+		@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
 		render 'on_store_users/home'
 	end
 
@@ -10,9 +11,13 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 			OnStoreUserMailer.with(email: @email).welcome_stor_owner.deliver_later
 			redirect_to on_store_users_form_path
 		end
+		if on_store_user_signed_in?
+	    @search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
+	  end
 	end
 
 	def show
+    @search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
 	end
 
 	def edit
@@ -20,6 +25,8 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 		@major_category = @on_store_user.major_categories.build
 		@middle_category = @major_category.middle_categories.build
     @minor_category = @middle_category.minor_categories.build
+
+    @search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
 	end
 
 	def update
@@ -28,10 +35,8 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 		redirect_to on_store_users_on_store_user_path(@on_store_user)
 	end
 
-	def sales
-	end
-
 	def withdrawal
+		@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
 	end
 
 	def quit

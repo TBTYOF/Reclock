@@ -17,4 +17,5 @@ class OnStoreUser < ApplicationRecord
   def self.serch_address(address)
   	where("address like ?", "%#{address}%")
 	end
+
 end

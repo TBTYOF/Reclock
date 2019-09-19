@@ -7,6 +7,14 @@
 		<%= f.submit "test", name: "serch" %>
 	<% end %>
 
+	<%= search_form_for(@q, url:users_on_store_users_index_path) do |f| %>
+
+		<%= f.label :major_categories_name_cont, 'サービス概要' %>
+		<%= f.search_field :major_category_name_or_name_or_minor_categories_name_cont %>
+
+		<%= f.submit "serch", name: "serch" %>
+	<% end %>
+
 	<% @shops.each do |shop| %>
 		<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1" style="margin-bottom: 50px;">
 			<div class="col-sm-5">
@@ -45,5 +53,5 @@
 			</div>
 		</div>
 	<% end %>
-	<%= paginate @shops, class: "paginate" %>
+	<%#= paginate @shops, class: "paginate" %>
 </div>

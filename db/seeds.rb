@@ -136,9 +136,10 @@ User.all.length.times do |n|
 	model = %w[RX-78 ZGMF-X10A X-18999 M-72]
 	symptom = "サンプル　"
 	symptom = "#{symptom * 20}"
-	2.times do |i| # 各ユーザ毎に3つ持つ
+	2.times do |i| # 各ユーザ毎に2つ持つ
 		Order.create!( user_id: user.id,
 										on_store_user_id: shop_id,
+										serial_number: OnStoreUser.find(shop_id).orders.count + 1,
 										variety: rand(1..7),
 										pickup: rand(1..4),
 										maker: maker[rand(0..7)],

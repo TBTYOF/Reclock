@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2019_09_08_072700) do
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
     t.integer "on_store_user_id"
+    t.integer "serial_number"
     t.integer "variety", default: 1, null: false
     t.integer "pickup", default: 1, null: false
     t.string "maker"
