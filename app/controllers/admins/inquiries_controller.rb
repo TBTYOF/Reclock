@@ -2,7 +2,7 @@ class Admins::InquiriesController < ApplicationController
 	def index
 		if params[:search].present?
 			@q = Inquiry.ransack(search_params)
-			@orders = @q.result(distinct: true).page(params[:page]).reverse_order
+			@inquiries = @q.result(distinct: true).page(params[:page]).reverse_order
 		else
 			@q = Inquiry.ransack(params[:q])
 			@inquiries = @q.result(distinct: true).page(params[:page]).reverse_order
