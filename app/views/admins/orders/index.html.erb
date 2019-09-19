@@ -1,0 +1,59 @@
+<div class="container">
+	<div class="col-sm-12 col-xs-12">
+		<div>
+			<%= search_form_for(@q,  url: admins_orders_path, class: "form-inline" ) do |f| %>
+
+				<%= f.label :user_name_cont, 'ユーザ名' %>
+				<%= f.search_field :user_name_cont %>
+
+				<%= f.label :repair_status_eq, '修理状況' %>
+				<%= f.select :repair_status_eq, [["集荷前", 1], ["見積前", 2], ["修理中", 3], ["修理完了", 4], ["支払済み", 5], ["納品済", 6], ["取引完了", 7], ["キャンセル", 8]], :include_blank => '指定なし' %>
+
+				<%= f.label :variety_eq, '品種' %>
+				<%= f.select :variety_eq, [["未選択", 1], ["掛時計", 2], ["置時計", 3], ["ホールクロック", 4], ["腕時計", 5], ["懐中時計", 6], ["その他", 7]], :include_blank => '指定なし' %>
+
+				<%= f.submit "検索", name: "serch" %>
+				<%= link_to "リセット", admins_orders_path, class: "btn " %>
+			<% end %>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th><%= sort_link(@q, :id, '管理No') %></th>
+					<th><%= sort_link(@q, :repair_status, '修理状況') %></th>
+					<th><%= sort_link(@q, :variety, '品種') %></th>
+					<th>お客様</th>
+					<th>電話番号</th>
+					<th>データ</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @orders.each do |order| %>
+					<tr>
+						<td><%= link_to order.id, admins_order_path(order) %></td>
+						<td><%= order.repair_status %></td>
+						<td><%= order.variety %></td>
+						<td><%= order.user.name %></td>
+						<td><%= order.user.telephone_number %></td>
+						<td>
+							<% if order.delivery_day == nil %>
+								受付日：
+							<% else %>
+								納品日：
+							<% end %>
+						</td>
+						<td>
+							<% if order.delivery_day == nil %>
+								<%= order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %>
+							<% else %>
+								<%= order.delivery_day.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<%= paginate @orders, class: "paginate" %>
+	</div>
+</div>

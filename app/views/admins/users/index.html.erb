@@ -1,0 +1,43 @@
+<div class="container">
+	<div class="col-sm-12 col-xs-12">
+		<div>
+			<%= search_form_for(@q,  url: admins_users_path, class: "form-inline" ) do |f| %>
+
+				<%= f.label :name_cont, '氏名' %>
+				<%= f.search_field :name_cont %>
+
+				<%= f.label :telephone_number_cont, '電話番号' %>
+				<%= f.search_field :telephone_number_cont %>
+
+				<%= f.label :email_cont, 'メールアドレス' %>
+				<%= f.search_field :email_cont %>
+
+				<%= f.submit "検索", name: "serch" %>
+				<%= link_to "リセット", admins_users_path, class: "btn " %>
+			<% end %>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th><%= sort_link(@q, :id, 'ユーザID') %></th>
+					<th>ユーザ名</th>
+					<th>ユーザ名（かな）</th>
+					<th>電話番号</th>
+					<th>メールアドレス</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @users.each do |user| %>
+					<tr>
+						<td><%= link_to user.id, admins_user_path(user) %></td>
+						<td><%= user.name %></td>
+						<td><%= user.name_kana %></td>
+						<td><%= user.telephone_number %></td>
+						<td><%= user.email %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<%= paginate @users, class: "paginate" %>
+	</div>
+</div>

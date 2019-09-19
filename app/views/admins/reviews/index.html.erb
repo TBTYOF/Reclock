@@ -1,0 +1,51 @@
+<div class="container">
+	<div>
+			<%= search_form_for(@q,  url: admins_reviews_path, class: "form-inline" ) do |f| %>
+
+				<%= f.label :user_name_cont, 'ユーザ名' %>
+				<%= f.search_field :user_name_cont %>
+
+				<%= f.label :on_store_user_shop_name_cont, '出店者(店舗名)' %>
+				<%= f.search_field :on_store_user_shop_name_cont %>
+
+				<%= f.submit "検索", name: "serch" %>
+				<%= link_to "リセット", admins_reviews_path, class: "btn " %>
+			<% end %>
+		</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th><%= sort_link(@q, :id, 'レビューID') %></th>
+				<th>タイトル</th>
+				<th>ユーザ名</th>
+				<th>出店者(店舗名)</th>
+				<th>投稿日</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @reviews.each_with_index do |review, index| %>
+				<tr>
+					<td><%= review.id %></td>
+					<td><%= review.title %></td>
+					<td><%= review.user.name %></td>
+					<td><%= review.on_store_user.shop_name %></td>
+					<td><%= review.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[review.created_at.wday]}) %H:%M") %></td>
+					<td><span class="btn btn-default trigger-<%= index %>">レビューを表示</span></td>
+					<td>削除</td>
+				</tr>
+				<tr style="display: none; word-break: break-all;" id="body-<%= index %>">
+					<td colspan="7"><%= review.body %></td>
+				</tr>
+
+				<script>
+					$('.trigger-<%= index %>').on('click', function() {
+							$('#body-<%= index %>').toggle();
+							return false;
+					});
+				</script>
+			<% end %>
+		</tbody>
+	</table>
+</div>

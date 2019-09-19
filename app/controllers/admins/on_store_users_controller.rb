@@ -14,7 +14,6 @@ class Admins::OnStoreUsersController < ApplicationController
 	end
 
 	def quit
-		
 	end
 
 	def search_params
