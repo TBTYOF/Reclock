@@ -13,6 +13,7 @@
 				<%= f.select :variety_eq, [["未選択", 1], ["掛時計", 2], ["置時計", 3], ["ホールクロック", 4], ["腕時計", 5], ["懐中時計", 6], ["その他", 7]], :include_blank => '指定なし' %>
 
 				<%= f.submit "検索", name: "serch" %>
+				<%= link_to "リセット", admins_orders_path, class: "btn " %>
 			<% end %>
 		</div>
 		<table class="table">
