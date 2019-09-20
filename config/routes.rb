@@ -55,7 +55,7 @@ Rails.application.routes.draw do
     resources :users, only:[:index, :show]
     resources :on_store_users, only:[:index, :show]
     resources :inquiries, only:[:index, :show]
-    resources :reviews, only:[:index, :show]
+    resources :reviews, only:[:index, :show, :destroy]
   end
 
   if Rails.env.development?

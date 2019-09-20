@@ -1,40 +1,51 @@
 <div class="container">
-	<h2 class="font-size4">マイページ</h2>
+	<h2 class="font-size5" style="margin: 40px 20px">マイページ</h2>
 	<div class="row">
-		<div class="col-sm-9 col-sm-offset-1 col-xs-9 col-xs-offset-1">
-			<div>
-				<ul class="list-group">
-					<li class="list-group-item">代表者名</li>
+		<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+			<div style="margin-bottom: 50px;">
+				<ul class="list-group font-size3">
 					<li class="list-group-item">
-						<%= current_on_store_user.owner_name %> (<%= current_on_store_user.owner_name_kana %>)
+						代表者名：<%= current_on_store_user.owner_name %> (<%= current_on_store_user.owner_name_kana %>)
 					</li>
-					<li class="list-group-item">店舗名</li>
-					<li class="list-group-item"><%= current_on_store_user.shop_name %></li>
-					<li class="list-group-item">電話番号</li>
-					<li class="list-group-item"><%= current_on_store_user.telephone_number %></li>
-					<li class="list-group-item">メールアドレス</li>
-					<li class="list-group-item"><%= current_on_store_user.email %></li>
-					<li class="list-group-item">住所</li>
-					<li class="list-group-item"><%= current_on_store_user.postcode %></li>
-					<li class="list-group-item"><%= current_on_store_user.address %></li>
-					<li class="list-group-item">最寄駅</li>
 					<li class="list-group-item">
+						店舗名　：<%= current_on_store_user.shop_name %>
+					</li>
+					<li class="list-group-item">
+						電話番号：<%= current_on_store_user.telephone_number %>
+					</li>
+					<li class="list-group-item">
+						メールアドレス：
+					</li>
+					<li class="list-group-item" style="border-top: none;">
+						<%= current_on_store_user.email %>
+					</li>
+					<li class="list-group-item">
+						住所：
+					</li>
+					<li class="list-group-item" style="border-top: none;">
+						〒 <%= current_on_store_user.postcode.insert(3, '-') %>
+					</li>
+					<li class="list-group-item" style="border-top: none;">
+						<%= current_on_store_user.address %>
+					</li>
+					<li class="list-group-item">
+						最寄駅：
 						<% if current_on_store_user.closest_station.present? %>
 							<%= current_on_store_user.closest_station %>
 						<% else %>
 							未登録
 						<% end %>
 					</li>
-					<li class="list-group-item">駐車場</li>
 					<li class="list-group-item">
+						駐車場：
 						<% if current_on_store_user.parking.present? %>
 							<%= current_on_store_user.parking %>
 						<% else %>
 							未登録
 						<% end %>
 					</li>
-					<li class="list-group-item">店舗情報 公開/非公開</li>
 					<li class="list-group-item">
+						店舗情報：
 						<% if current_on_store_user.is_public == true %>
 							公開中
 						<% else %>
@@ -47,9 +58,9 @@
 				</ul>
 			</div>
 
-			<div class="row">
-				<h3>ご挨拶</h3>
-				<div class="col-sm-12 col-xs-12">
+			<div class="row" style="margin-bottom: 200px;">
+				<h3 class="font-size4" style="margin-bottom: 20px;">ご挨拶</h3>
+				<div class="col-sm-12 col-xs-12 font-size3" style="margin-bottom: 50px;">
 					<% if current_on_store_user.greeting.present? %>
 						<%= current_on_store_user.greeting %>
 					<% else %>
@@ -57,36 +68,36 @@
 					<% end %>
 				</div>
 
-				<h3>店舗画像</h3>
-				<div class="col-sm-12 col-xs-12">
+				<h3 class="font-size4" style="margin-bottom: 20px;">店舗画像</h3>
+				<div class="col-sm-10 col-xs-10 col-sm-offset-2 col-xs-offset-2" style="margin-bottom: 50px;">
 					<%= attachment_image_tag current_on_store_user, :image, :fill, 350, 350, format: 'jpeg', fallback: "/no_image.jpg", size:'350x350' %>
 				</div>
 
-				<h3>スライドショー用画像</h3>
-				<div class="col-sm-12 col-xs-12">
+				<h3 class="font-size4" style="margin-bottom: 20px;">スライドショー用画像</h3>
+				<div class="col-sm-12 col-xs-12" style="margin-bottom: 50px;">
 					<% if current_on_store_user.on_store_user_images.present? %>
-						<% current_on_store_user.on_store_user_images.each do |image| %>
-							<%= attachment_image_tag image, :image, :limit, "800!", 500, format: 'jpeg' %>
+						<% current_on_store_user.on_store_user_images.each_with_index do |image, i| %>
+							<% i += 1 %>
+							<h4 class="font-size3">(<%= i %>)</h4>
+							<div style="margin-bottom: 30px;">
+								<%= attachment_image_tag image, :image, :limit, "700!", 500, format: 'jpeg' %>
+							</div>
 						<% end %>
 					<% else %>
 							未登録
 					<% end %>
 				</div>
 
-				<h3>サービス概要</h3>
-				<div class="col-sm-12 col-xs-12">
+				<h3 class="font-size4" style="margin-bottom: 20px;">サービス概要</h3>
+				<div class="col-sm-12 col-xs-12 font-size3" style="word-break: break-all;">
 					<% if current_on_store_user.major_categories.present? %>
 						<% current_on_store_user.major_categories.each do |major_category| %>
-							<div class="row">
-								<div class="col-sm-3">
-									<%= major_category.name %>
+							<div class="row" style="margin-bottom: 20px;">
+								<div class="row" style="margin-bottom: 15px;">
+									<strong><%= major_category.name %></strong>
 								</div>
 								<% major_category.middle_categories.each_with_index do |middle_category, i| %>
-									<% if i == 0 %>
-										<div class="col-sm-9">
-									<% else %>
-										<div class="col-sm-9 col-sm-offset-3">
-									<% end %>
+									<div class="col-sm-12" style="margin-bottom: 15px;">
 										<div class="col-sm-5">
 											<%= middle_category.name %>
 										</div>

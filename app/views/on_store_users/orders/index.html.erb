@@ -1,21 +1,26 @@
 <div class="container">
 	<div class="col-sm-12 col-xs-12">
-		<div>
+		<div class="font-size2" style="margin: 30px 0;">
 			<%= search_form_for(@search, as: :search, url: on_store_users_on_store_user_orders_path(current_on_store_user), class: "form-inline" ) do |f| %>
 
-				<%= f.label :user_name_cont, 'ユーザ名' %>
-				<%= f.search_field :user_name_cont %>
-
-				<%= f.label :repair_status_eq, '修理状況' %>
-				<%= f.select :repair_status_eq, [["集荷前", 1], ["見積前", 2], ["修理中", 3], ["修理完了", 4], ["支払済み", 5], ["納品済", 6], ["取引完了", 7], ["キャンセル", 8]], :include_blank => '指定なし' %>
-
-				<%= f.label :variety_eq, '品種' %>
-				<%= f.select :variety_eq, [["未選択", 1], ["掛時計", 2], ["置時計", 3], ["ホールクロック", 4], ["腕時計", 5], ["懐中時計", 6], ["その他", 7]], :include_blank => '指定なし' %>
-
-				<%= f.submit "検索", name: "serch" %>
+				<div class="form-group">
+					<%= f.label :user_name_cont, 'ユーザ名' %>
+					<%= f.search_field :user_name_cont, class: "form-control" %>
+				</div>
+				<div class="form-group">
+					<%= f.label :repair_status_eq, '修理状況' %>
+					<%= f.select :repair_status_eq, [["集荷前", 1], ["見積前", 2], ["修理中", 3], ["修理完了", 4], ["支払済み", 5], ["納品済", 6], ["取引完了", 7], ["キャンセル", 8]], :include_blank => '指定なし' %>
+				</div>
+				<div class="form-group">
+					<%= f.label :variety_eq, '品種' %>
+					<%= f.select :variety_eq, [["未選択", 1], ["掛時計", 2], ["置時計", 3], ["ホールクロック", 4], ["腕時計", 5], ["懐中時計", 6], ["その他", 7]], :include_blank => '指定なし' %>
+				</div>
+				<div class="form-group">
+					<%= f.submit "検索", name: "serch", class: "btn btn-default" %>
+				</div>
 			<% end %>
 		</div>
-		<table class="table">
+		<table class="table font-size2">
 			<thead>
 				<tr>
 					<th><%= sort_link(@search, :id, '管理No') %></th>
@@ -30,19 +35,19 @@
 			<tbody>
 				<% @orders.each do |order| %>
 					<tr>
-						<td><%= link_to order.serial_number, on_store_users_on_store_user_order_path(current_on_store_user, order) %></td>
-						<td><%= order.repair_status %></td>
-						<td><%= order.variety %></td>
-						<td><%= order.user.name %></td>
-						<td><%= order.user.telephone_number %></td>
-						<td>
+						<td style="padding-top: 15px; padding-bottom: 15px;"><%= link_to order.serial_number, on_store_users_on_store_user_order_path(current_on_store_user, order) %></td>
+						<td style="padding-top: 15px; padding-bottom: 15px;"><%= order.repair_status %></td>
+						<td style="padding-top: 15px; padding-bottom: 15px;"><%= order.variety %></td>
+						<td style="padding-top: 15px; padding-bottom: 15px;"><%= order.user.name %></td>
+						<td style="padding-top: 15px; padding-bottom: 15px;"><%= order.user.telephone_number %></td>
+						<td style="padding-top: 15px; padding-bottom: 15px;">
 							<% if order.delivery_day == nil %>
 								受付日：
 							<% else %>
 								納品日：
 							<% end %>
 						</td>
-						<td>
+						<td style="padding-top: 15px; padding-bottom: 15px;">
 							<% if order.delivery_day == nil %>
 								<%= order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %>
 							<% else %>
@@ -56,3 +61,10 @@
 		<%= paginate @orders, class: "paginate" %>
 	</div>
 </div>
+
+<style type="text/css" media="screen">
+	td {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+</style>

@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table font-size2">
 	<thead>
 		<tr>
 			<th>
@@ -19,9 +19,13 @@
 		<% inquiries.each do |inquiry| %>
 			<tr>
 				<% if user_signed_in? %>
-					<td><%= link_to inquiry.on_store_user.shop_name, users_on_store_users_show_path(inquiry.on_store_user) %></td>
-					<td><%= inquiry.title %></td>
-					<td>
+					<td style="padding-top: 15px; padding-bottom: 15px;">
+						<%= link_to inquiry.on_store_user.shop_name, users_on_store_users_show_path(inquiry.on_store_user) %>
+					</td>
+					<td style="padding-top: 15px; padding-bottom: 15px;">
+						<%= inquiry.title %>
+					</td>
+					<td style="padding-top: 15px; padding-bottom: 15px;">
 						<% if inquiry.order_id == nil %>
 							注文前
 						<% else %>
@@ -29,9 +33,13 @@
 						<% end %>
 					</td>
 				<% else %>
-					<td><%= inquiry.user.name %> 様</td>
-					<td><%= inquiry.title %></td>
-					<td>
+					<td style="padding-top: 15px; padding-bottom: 15px;">
+						<%= inquiry.user.name %> 様
+					</td>
+					<td style="padding-top: 15px; padding-bottom: 15px;">
+						<%= inquiry.title %>
+					</td>
+					<td style="padding-top: 15px; padding-bottom: 15px;">
 						<% if inquiry.order_id == nil %>
 							注文前
 						<% else %>
@@ -39,14 +47,14 @@
 						<% end %>
 					</td>
 				<% end %>
-				<td>
+				<td style="padding-top: 15px; padding-bottom: 15px;">
 					<% if inquiry.replies.count == 0 %>
 						<%= inquiry.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[inquiry.created_at.wday]}) %H:%M") %>
 					<% else %>
 						<%= inquiry.replies.last.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[inquiry.replies.last.created_at.wday]}) %H:%M") %>
 					<% end %>
 				</td>
-				<td>
+				<td style="padding-top: 15px; padding-bottom: 15px;">
 					<% if user_signed_in? %>
 						<% if inquiry.order_id == nil %>
 							<%= link_to "内容を見る", users_user_inquiry_path(user, inquiry, shop_id: inquiry.on_store_user.id), remote: true, class: "btn btn-default" %>
@@ -61,7 +69,7 @@
 						<% end %>
 					<% end %>
 				</td>
-				<td style="color: red;">
+				<td style="color: red; padding-top: 15px; padding-bottom: 15px;">
 					<% if user_signed_in? %>
 						<% if inquiry.user_read == false %>
 							<strong>未読</strong>
