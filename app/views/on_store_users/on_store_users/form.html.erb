@@ -4,7 +4,6 @@
   <div class="col-sm-6 col-xs-6" style="margin-bottom: 50px;">
     <h2 class="font-size4" style="margin-bottom: 30px;">出店者仮登録</h2>
     <%= form_with model: @on_store_user, url: on_store_users_form_ok_path, local: true do |f| %>
-      <%#= render "devise/shared/error_messages", resource: resource %>
       <div class="row">
         <div class="field font-size2 col-sm-10 col-xs-10" style="margin-bottom: 15px">
           <%= f.label :email, "メールアドレス" %><br />
@@ -18,3 +17,15 @@
       </div>
     <% end %>
   </div>
+
+  <script>
+  $(function() {
+    $(document).on('click', 'input[type=submit]', function() {
+      // バリデーション
+      if ($('#on_store_user_email').val() == '') {
+        alert('未入力の項目があります');
+        return false;
+      }
+    })
+  })
+</script>

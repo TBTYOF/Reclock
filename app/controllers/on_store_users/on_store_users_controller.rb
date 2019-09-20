@@ -46,8 +46,15 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 
 	def update
 		@on_store_user = OnStoreUser.find(params[:id])
-		@on_store_user.update(on_store_user_params)
-		redirect_to on_store_users_on_store_user_path(@on_store_user)
+		if @on_store_user.update(on_store_user_params)
+			redirect_to on_store_users_on_store_user_path(@on_store_user)
+		else
+			@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
+			@major_category = @on_store_user.major_categories.build
+			@middle_category = @major_category.middle_categories.build
+	    @minor_category = @middle_category.minor_categories.build
+			render :edit
+		end
 	end
 
 	def withdrawal
