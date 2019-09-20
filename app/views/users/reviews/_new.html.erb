@@ -4,13 +4,13 @@
 		<div class="row">
 			<div class="field font-size3 col-sm-8 col-xs-8" style="margin-bottom: 30px">
 			  <%= f.label :title, "レビュータイトル" %><br/>
-			  <%= f.text_field :title, class: "col-sm-8 col-xs-8" %>
+			  <%= f.text_field :title, placeholder: 'タイトル(50文字以内):', class: "col-sm-8 col-xs-8" %>
 			</div>
 	 </div>
 		<div class="row">
 			<div class="field font-size3 col-sm-12 col-xs-12" style="margin-bottom: 30px">
 			  <%= f.label :body, "本文" %><br/>
-			  <%= f.text_area :body, rows:10, style: "resize: none;", class: "col-sm-12 col-xs-12" %>
+			  <%= f.text_area :body, rows:10, placeholder: '本文(1000文字以内):', style: "resize: none;", class: "col-sm-12 col-xs-12" %>
 	 		</div>
 		</div>
 		<div class="actions col-sm-4 col-xs-4" style="margin-bottom: 20px">
@@ -21,3 +21,18 @@
 		</div>
 	<% end %>
 </div>
+
+<script>
+	$(function() {
+    $(document).on('click', 'input[type=submit]', function() {
+    	// バリデーション
+      if ($('#inquiry_title').val() == '') {
+      	alert('タイトルが未入力です。');
+      }
+      if ($('#inquiry_body').val() == '') {
+      	alert('本文が未入力です');
+      }
+      return false;
+    })
+  })
+</script>

@@ -9,7 +9,9 @@
 	</p>
 </div>
 <div class="row">
-	<p class="font-size3 col-sm-12 col-xs-12" style="word-break: break-all;"><%= @order.reviews.first.body %></p>
+	<p class="font-size3 col-sm-12 col-xs-12" style="word-break: break-all;">
+		<%== h(@order.reviews.first.body).gsub(/\R/, "<br />") %>
+	</p>
 </div>
 
 <% if defined? user %>
