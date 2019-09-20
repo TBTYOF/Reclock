@@ -2,18 +2,25 @@
   <div class="col-sm-9 col-xs-9 col-sm-offset-1 col-xs-offset-1" style="margin-bottom: 150px;">
     <h2 class="font-size4" style="margin-bottom: 50px;">修理依頼申込み</h2>
     <%= form_with model: Order.new, url: users_user_orders_path, local: true do |f| %>
-      <%#= render "devise/shared/error_messages", resource: resource %>
+
+      <% if @order.errors.any? %>
+        <div id="error_explanation" class="alert alert-warning row">
+          <h2><%= pluralize(@order.errors.count, "箇所") %> エラーがあります:</h2>
+          <ul>
+          <% @order.errors.full_messages.each do |msg| %>
+            <li class="font-size2"><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
       <%= f.hidden_field :on_store_user_id, :value => @shop.id %>
-      <!-- 動作確認用コード -->
-      <%= f.hidden_field :charge, :value => 50000 %>
-      <%= f.hidden_field :repair_status, :value => '修理完了' %>
-      <!-- ここまで -->
 
       <div class="col-sm-12 col-xs-12">
         <div class="row">
           <div class="field font-size3 col-sm-6 col-xs-6" style="margin-bottom: 30px">
-            <%= f.label :variety, "品種" %>
-            <%= f.select :variety, Order.varieties.keys, autofocus: true, class: "col-sm-6 col-xs-6" %>
+            <%= f.label :variety, "※品種(必須)", style: "color: red;" %>
+            <%= f.select :variety, Order.varieties.keys, :include_blank => '未選択', :selected => '未選択', autofocus: true, class: "col-sm-6 col-xs-6" %>
           </div>
         </div>
 
@@ -30,7 +37,7 @@
 
         <div class="row" style="margin-bottom: 50px">
           <div class="field font-size3 col-sm-12 col-xs-12">
-            <%= f.label :symptom, "症状" %><br />
+            <%= f.label :symptom, "※症状(必須)", style: "color: red;" %><br />
             <%= f.text_area :symptom, rows:10, class: "col-sm-12 col-xs-12", placeholder: '症状を入力して下さい:', style: "resize: none; " %>
           </div>
         </div>
@@ -44,8 +51,8 @@
 
          <div class="row">
           <div class="field font-size3 col-sm-6 col-xs-6" style="margin-bottom: 50px">
-            <%= f.label :pickup, "集荷方法" %>
-            <%= f.select :pickup, Order.pickups.keys,class: "col-sm-11 col-xs-11" %>
+            <%= f.label :pickup, "※集荷方法(必須)", style: "color: red;" %>
+            <%= f.select :pickup, Order.pickups.keys, :include_blank => '未選択', :selected => '未選択', class: "col-sm-11 col-xs-11" %>
           </div>
         </div>
 

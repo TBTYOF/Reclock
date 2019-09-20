@@ -15,11 +15,15 @@ class Users::OrdersController < ApplicationController
 	end
 
 	def create
-		user = current_user
-		order = user.orders.new(order_params)
-		order.serial_number = order.on_store_user.orders.count + 1
-		order.save
-		redirect_to users_user_order_path(user, order)
+		@user = current_user
+		@order = @user.orders.new(order_params)
+		@order.serial_number = @order.on_store_user.orders.count + 1
+		if @order.save
+			redirect_to users_user_order_path(@user, @order)
+		else
+			@shop = @order.on_store_user
+			render :new
+		end
 	end
 
 	def show
