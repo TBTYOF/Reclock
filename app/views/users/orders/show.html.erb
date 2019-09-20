@@ -7,7 +7,9 @@
 				<div id="tab-menu1" class="col-sm-6 col-xs-6">
 	        <a href="#tab1" class="active col-sm-3 col-xs-3 btn btn-default">注文詳細</a>
 	        <a href="#tab2" class="col-sm-3 col-xs-3 btn btn-default">お問合せ</a>
-	        <a href="#tab3" class="col-sm-3 col-xs-3 btn btn-default">レビュー</a>
+	        <% if @order.payment != nil %>
+	        	<a href="#tab3" class="col-sm-3 col-xs-3 btn btn-default">レビュー</a>
+	        <% end %>
 	      </div>
 	      <div class="col-sm-2 col-sm-offset-1">
 	      	<p class="btn btn-success">QRコードを表示</p>
@@ -89,16 +91,23 @@
 						</table>
 					</div>
 				</div>
-				<% if @order.repair_status != "集荷前" || @order.repair_status != "見積前" || @order.repair_status != "修理中" || @order.repair_status != "キャンセル" %>
-					<div class="row">
-						<div class="col-sm-12">
-							<h3 class="font-size3">支払情報</h3>
-							<table class="table font-size2">
-								<tbody>
-									<tr>
-										<td class="cell-title">料金</td>
-										<td class="cell-body"><%= @order.charge %></td>
-									</tr>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<h3 class="font-size3">支払情報</h3>
+						<table class="table font-size2">
+							<tbody>
+								<tr>
+									<td class="cell-title">料金</td>
+									<td class="cell-body">
+										<% if @order.charge == nil %>
+											見積前
+										<% else %>
+											<%= @order.charge %>
+										<% end %>
+									</td>
+								</tr>
+								<% if @order.repair_status != "集荷前" && @order.repair_status != "見積前" && @order.repair_status != "修理中" && @order.repair_status != "キャンセル" %>
 									<tr>
 										<% if @order.payment == nil %>
 											<td class="cell-title"></td>
@@ -108,11 +117,11 @@
 											<td class="cell-body"><%= @order.payment %></td>
 										<% end %>
 									</tr>
-								</tbody>
-							</table>
-						</div>
+								<% end %>
+							</tbody>
+						</table>
 					</div>
-				<% end %>
+				</div>
 			</div>
 
 			<!-- お問合せフォーム -->
@@ -121,19 +130,21 @@
 			</div>
 
 			<!-- レビュー -->
-			<div id="tab3" class="tab">
-				<% if @user.review_by?(@order) %>
-					<div class="col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1" id="review-edit">
-						<%= render '/users/reviews/show', order: @order, user: @user %>
-					</div>
-				<% else %>
-					<div>
-						<div class="col-sm-12 col-xs-12" id="review">
-							<%= link_to "レビューを書く", new_users_user_order_review_path(@user, @order), remote: true, class: "btn btn-default font-size3" %>
+			<% if @order.payment != nil %>
+				<div id="tab3" class="tab">
+					<% if @user.review_by?(@order) %>
+						<div class="col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1" id="review-edit">
+							<%= render '/users/reviews/show', order: @order, user: @user %>
 						</div>
-					</div>
-				<% end %>
-			</div>
+					<% else %>
+						<div>
+							<div class="col-sm-12 col-xs-12" id="review">
+								<%= link_to "レビューを書く", new_users_user_order_review_path(@user, @order), remote: true, class: "btn btn-default font-size3" %>
+							</div>
+						</div>
+					<% end %>
+				</div>
+			<% end %>
 
 		</div>
 	</div>

@@ -22,11 +22,12 @@ class Users::ReviewsController < ApplicationController
 	def create
 		@user = current_user
 		@order = Order.find(params[:order_id])
-		review = @user.reviews.new(review_params)
-		review.order_id = @order.id
-		review.on_store_user_id = @order.on_store_user.id
-		review.save
+		@review = @user.reviews.new(review_params)
+		@review.order_id = @order.id
+		@review.on_store_user_id = @order.on_store_user.id
+		@review.save
 		redirect_to users_user_order_path(@user, @order)
+		end
 	end
 
 	def show
