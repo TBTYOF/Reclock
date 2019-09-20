@@ -32,15 +32,15 @@ class DeviseCreateOnStoreUsers < ActiveRecord::Migration[5.2]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      t.string  :owner_name
-      t.string  :owner_name_kana
-      t.string  :shop_name
+      t.string  :owner_name, null: false
+      t.string  :owner_name_kana, null: false
+      t.string  :shop_name, null: false
       t.string  :image_id
       t.string  :business_hours
       t.string  :holiday
-      t.string  :telephone_number
-      t.string  :postcode
-      t.string  :address
+      t.string  :telephone_number, null: false
+      t.string  :postcode, null: false
+      t.string  :address, null: false
       t.string  :closest_station
       t.string  :parking
       t.string  :greeting

@@ -2,7 +2,11 @@
   <nav class="container">
     <div class="container-fluid">
       <div class="navbar-header">
-        <%= link_to 'Re:clock', on_store_users_on_store_user_home_path(current_on_store_user), class: "navbar-brand active",id: "top" %>
+        <% if on_store_user_signed_in? %>
+          <%= link_to 'Re:clock', on_store_users_on_store_user_home_path(current_on_store_user), class: "navbar-brand active",id: "top" %>
+        <% else %>
+          <%= link_to 'Re:clock', root_path, class: "navbar-brand active",id: "top" %>
+        <% end %>
       </div>
       <% if on_store_user_signed_in? %>
         <div class="col-sm-5 col-xs-5">
