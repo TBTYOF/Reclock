@@ -1,40 +1,48 @@
 <div class="container">
 	<% if current_on_store_user.reviews.present? %>
-		<table class="table">
+		<div class="font-size2" style="margin-bottom: 30px;">
+			<%= search_form_for(@q, url:on_store_users_on_store_user_reviews_path(current_on_store_user), class: "form-inline") do |f| %>
+				<div class="form-group">
+					<%= f.label :user_name_cont, 'ユーザ名' %>
+					<%= f.search_field :user_name_cont %>
+				</div>
+				<div class="form-group">
+					<%= f.submit "検索", name: "serch", class: "btn btn-default" %>
+				</div>
+			<% end %>
+		</div>
+		<table class="table font-size2">
+			<thead>
+				<tr>
+					<th><%= sort_link(@q, :id, 'レビューID') %></th>
+					<th>タイトル</th>
+					<th>ユーザ名</th>
+					<th>投稿日</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
 			<tbody>
-				<% current_on_store_user.reviews.reverse.each_with_index do |review, index| %>
+				<% @reviews.each_with_index do |review, index| %>
 					<tr>
-						<td>タイトル：<%= review.title %></td>
-						<td>投稿日：<%= review.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[review.created_at.wday]}) %H:%M") %></td>
-						<td>投稿者：<%= review.user.name %></td>
+						<td><%= review.id %></td>
+						<td><%= review.title %></td>
+						<td><%= review.user.name %></td>
+						<td><%= review.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[review.created_at.wday]}) %H:%M") %></td>
+						<td><span class="btn btn-default trigger-<%= index %>">レビューを表示</span></td>
 						<td><%= link_to '注文明細を見る', on_store_users_on_store_user_order_path(current_on_store_user, review.order), class: "btn btn-default" %></td>
-					</tr>
-					<tr style="word-break: break-all;">
-						<% if review.body.length > 300 %>
-							<td colspan="4" id="limit-body-<%= index %>"><%= review.body[0..300] %> ...</td>
-						<% else %>
-							<td colspan="4"><%= review.body %></td>
-						<% end %>
+						<td>
+							<%= link_to "削除", on_store_users_on_store_user_review_path(current_on_store_user, review), method: :delete, class: "btn btn-danger", data: { confirm: "本当に削除しますか？" } %>
+						</td>
 					</tr>
 					<tr style="display: none; word-break: break-all;" id="body-<%= index %>">
-						<td colspan="4"><%= review.body %></td>
+						<td colspan="7"><%== h(review.body).gsub(/\R/, "<br />") %></td>
 					</tr>
-					<% if review.body.length > 300 %>
-						<tr class="trigger-<%= index %>">
-							<td></td>
-							<td>全文を表示</td>
-						</tr>
-						<tr style="display: none;" class="trigger-<%= index %>">
-							<td></td>
-							<td>　 戻す</td>
-						</tr>
-					<% end %>
 
 					<script>
 						$('.trigger-<%= index %>').on('click', function() {
-									$('#limit-body-<%= index %>').toggle();
 								$('#body-<%= index %>').toggle();
-								$('.trigger-<%= index %>').toggle();
 								return false;
 						});
 					</script>

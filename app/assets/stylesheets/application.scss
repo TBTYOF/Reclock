@@ -18,6 +18,20 @@
 
  html, body {
   height: 100%;
+  word-break: break-all;
+}
+
+.boder {
+	border-radius: 5px;
+	border: 2px solid gray;
+}
+
+.border-top {
+	border-top: 1px solid #ddd;
+}
+
+.teble-margin {
+	 margin-top: 20px;
 }
 
 .font-size1 {

@@ -1,5 +1,5 @@
-<div class="navbar navbar-default" style="width: 100%;">
-  <nav class="container">
+<div class="navbar navbar-default font-size2" style="width: 100%; line-height: 50px; margin-bottom: 50px;">
+  <nav class="container" style="margin: 0 5%; width: 90%;">
     <div class="container-fluid">
       <div class="navbar-header">
         <% if on_store_user_signed_in? %>
@@ -9,7 +9,7 @@
         <% end %>
       </div>
       <% if on_store_user_signed_in? %>
-        <div class="col-sm-5 col-xs-5">
+        <div class="col-sm-4 col-xs-4">
           <%= search_form_for(@search, as: :search, url: on_store_users_on_store_user_orders_path(current_on_store_user), class: "form-inline" ) do |f| %>
             <%= f.label :user_telephone_number_cont, style: "display: none;" %>
             <%= f.search_field :user_telephone_number_cont, placeholder: '電話番号:', class: "form-control" %>
@@ -41,3 +41,12 @@
     </div>
   </nav>
 </div>
+
+<style type="text/css" media="(max-width: 768px)">
+  nav .form-control {
+    font-size: 13px;
+  }
+  .font-size2 {
+    font-size: 13px;
+  }
+</style>

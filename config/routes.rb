@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     	# get '/sales' => 'on_store_users#sales', as: 'sales'
       get '/home' => 'on_store_users#home', as: 'home'
       get '/withdrawal' => 'on_store_users#withdrawal', as: 'withdrawal'
+      resources :on_store_user_images ,only:[:edit, :destroy]
     	resources :reviews, only:[:index, :destroy]
     	resources :inquiries, only:[:index, :show] do
   			resources :replies, only:[:new, :create]
@@ -55,7 +56,7 @@ Rails.application.routes.draw do
     resources :users, only:[:index, :show]
     resources :on_store_users, only:[:index, :show]
     resources :inquiries, only:[:index, :show]
-    resources :reviews, only:[:index, :show]
+    resources :reviews, only:[:index, :show, :destroy]
   end
 
   if Rails.env.development?
