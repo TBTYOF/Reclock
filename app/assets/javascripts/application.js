@@ -28,7 +28,7 @@ $(document).on('turbolinks:load', function(){
 	    $('#sp-menu').removeClass('off');
 	    $('#sp-menu').animate({'marginRight':'100%'},300).addClass('on');
 	  }else{
-	  	$('#hm-icon').css('background-color', '#fff');
+	  	$('#hm-icon').css('background-color', '#fefefe');
 	    $('#sp-menu').addClass('off');
 	    $('#sp-menu').animate({'marginRight':'0px'},300);
 	  }
