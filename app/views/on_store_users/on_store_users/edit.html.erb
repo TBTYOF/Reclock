@@ -1,11 +1,11 @@
 <div class="container">
   <div class="col-sm-9 col-xs-9 col-sm-offset-1 col-xs-offset-1" style="margin-bottom: 50px;">
-    <h2 class="font-size4" style="margin-bottom: 30px;">登録情報変更</h2>
+    <h2 class="font-size4" style="margin-bottom: 50px;">登録情報変更</h2>
     <%= form_for(@on_store_user, url: on_store_users_on_store_user_path) do |f| %>
       <%= render "/layouts/error_messages", model: f.object %>
       <div class="col-sm-12 col-xs-12">
 
-        <div class="row">
+        <div class="row" style="margin-bottom: 50px;">
           <h3 class="font-size3"><strong>公開/非公開</strong></h3>
           <div class="row font-size2">
             <div class="field font-size2" style="margin-bottom: 15px">
@@ -17,7 +17,7 @@
           </div>
         </div>
 
-        <div class="row font-size2">
+        <div class="row font-size2" style="margin-bottom: 50px;">
           <h3 class="font-size3"><strong>登録者情報</strong></h3>
           <div class="row">
             <div class="field font-size2 col-sm-6 col-xs-6" style="margin-bottom: 15px">
@@ -41,7 +41,7 @@
           </div>
         </div>
 
-        <div class="row font-size2">
+        <div class="row font-size2" style="margin-bottom: 50px;">
           <h3 class="font-size3"><strong>店舗情報</strong></h3>
           <div class="row">
             <div class="field font-size2 col-sm-11 col-xs-11" style="margin-bottom: 10px">
@@ -88,7 +88,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="margin-bottom: 50px;">
           <h3 class="font-size3"><strong>店舗詳細ページ情報</strong></h3>
           <div class="row">
             <div class="field font-size2 col-sm-12 col-xs-12" style="margin-bottom: 10px">
@@ -97,22 +97,25 @@
             </div>
           </div>
           <div class="row">
-            <div class="field font-size2 col-sm-9 col-xs-9" style="margin-bottom: 30px">
+            <div class="field font-size2 col-sm-12 col-xs-12" style="margin-bottom: 30px">
               <%= f.label :image, "店舗一覧ページ：店舗画像", class: "font-size3" %><br />
               全店舗一覧ページに載せる画像を選択してください（１枚）
               <%= f.attachment_field :image, class: "font-size2" %>
             </div>
           </div>
           <div class="row">
-            <div class="field font-size2 col-sm-9 col-xs-9" style="margin-bottom: 30px">
+            <div class="field font-size2 col-sm-12 col-xs-12" style="margin-bottom: 30px">
               <%= f.label :on_store_user_images_images, "店舗詳細ページ：スライドショーの画像", class: "font-size3" %><br />
               店舗詳細ページのスライドショーに載せる画像を選択してください（複数枚選択出来ます）
               <%= f.attachment_field :on_store_user_images_images, multiple: true, class: "font-size2" %>
             </div>
+            <div id="images" class="row">
+              <%= render '/on_store_users/on_store_user_images/edit' %>
+            </div>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="margin-bottom: 50px;">
           <h3 class="font-size3"><strong>サービス概要編集</strong></h3>
           <div id="major_categories" class="font-size2">
             <%= f.fields_for :major_categories do |major_category| %>
@@ -127,7 +130,7 @@
 
         <div class="row">
           <div class="actions col-sm-9 col-xs-9" style="margin-bottom: 20px">
-            <%= f.submit "変更", class: "btn btn-info font-size2" %>
+            <%= f.submit "確定", class: "btn btn-primary font-size3" %>
           </div>
         </div>
       </div>

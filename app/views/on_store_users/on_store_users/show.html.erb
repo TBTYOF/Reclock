@@ -1,8 +1,12 @@
 <div class="container">
-	<h2 class="font-size5" style="margin: 40px 20px">マイページ</h2>
+	<h2 class="font-size5 col-sm-7 col-xs-8" style="margin: 40px 20px">マイページ</h2>
+	<div style="margin-top: 60px;">
+		<%= link_to "登録情報を変更", edit_on_store_users_on_store_user_path(current_on_store_user), class: "btn btn-info font-size3" %>
+	</div>
+
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-			<div style="margin-bottom: 50px;">
+			<div style="margin-bottom: 70px;">
 				<ul class="list-group font-size3">
 					<li class="list-group-item">
 						代表者名：<%= current_on_store_user.owner_name %> (<%= current_on_store_user.owner_name_kana %>)
@@ -52,29 +56,26 @@
 							非公開
 						<% end %>
 					</li>
-					<li class="list-group-item">
-						<%= link_to "登録情報を編集する", edit_on_store_users_on_store_user_path(current_on_store_user), class: "btn btn-info" %>
-					</li>
 				</ul>
 			</div>
 
 			<div class="row" style="margin-bottom: 200px;">
 				<h3 class="font-size4" style="margin-bottom: 20px;">ご挨拶</h3>
-				<div class="col-sm-12 col-xs-12 font-size3" style="margin-bottom: 50px;">
+				<div class="col-sm-12 col-xs-12 font-size3" style="margin-bottom: 70px;">
 					<% if current_on_store_user.greeting.present? %>
-						<%= current_on_store_user.greeting %>
+						<%= text_br(current_on_store_user.greeting) %>
 					<% else %>
 						未登録
 					<% end %>
 				</div>
 
 				<h3 class="font-size4" style="margin-bottom: 20px;">店舗画像</h3>
-				<div class="col-sm-10 col-xs-10 col-sm-offset-2 col-xs-offset-2" style="margin-bottom: 50px;">
+				<div class="col-sm-10 col-xs-10 col-sm-offset-2 col-xs-offset-2" style="margin-bottom: 70px;">
 					<%= attachment_image_tag current_on_store_user, :image, :fill, 350, 350, format: 'jpeg', fallback: "/no_image.jpg", size:'350x350' %>
 				</div>
 
 				<h3 class="font-size4" style="margin-bottom: 20px;">スライドショー用画像</h3>
-				<div class="col-sm-12 col-xs-12" style="margin-bottom: 50px;">
+				<div class="col-sm-12 col-xs-12" style="margin-bottom: 70px;">
 					<% if current_on_store_user.on_store_user_images.present? %>
 						<% current_on_store_user.on_store_user_images.each_with_index do |image, i| %>
 							<% i += 1 %>
