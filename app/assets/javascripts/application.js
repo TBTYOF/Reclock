@@ -24,9 +24,11 @@ $(document).on('turbolinks:load', function(){
 		$('.menu-trigger').toggleClass('active');
 
 		if($('#sp-menu').hasClass('off')){
+			$('#hm-icon').css('background-color', 'rgba(0,0,0,0)');
 	    $('#sp-menu').removeClass('off');
 	    $('#sp-menu').animate({'marginRight':'100%'},300).addClass('on');
 	  }else{
+	  	$('#hm-icon').css('background-color', '#fff');
 	    $('#sp-menu').addClass('off');
 	    $('#sp-menu').animate({'marginRight':'0px'},300);
 	  }

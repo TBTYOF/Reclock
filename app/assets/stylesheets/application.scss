@@ -63,8 +63,9 @@ footer li {
   #hm-icon {
  position: fixed;
  right: 2%;
- top: 25px;
  z-index: 1001;
+ padding: 25px 10px 10px 10px;
+ background-color: #fff;
  }
 
  .menu-trigger, .menu-trigger span {
