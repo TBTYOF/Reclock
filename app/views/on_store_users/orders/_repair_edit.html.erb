@@ -1,0 +1,37 @@
+<div class="col-sm-3 col-xs-3" style="margin-top: 20px;">
+	<%= link_to "戻る",on_store_users_on_store_user_order_path(current_on_store_user, order, key: "repair"), remote: true, class: "btn btn-default font-size2" %>
+</div>
+
+<div class="row"></div>
+
+<%= form_with model: order, url: on_store_users_on_store_user_order_path(current_on_store_user, order) do |f| %>
+	<div class="col-sm-12 col-xs-12">
+
+		<div class="col-sm-12 col-xs-12 border-top teble-margin">
+			<div class="col-sm-3 col-xs-3 teble-margin">
+				<%= f.label :repair_status, "修理状況" %>
+			</div>
+			<div class="col-sm-9 col-xs-9 teble-margin font-size3">
+				<%= f.select :repair_status, Order.repair_statuses.keys %>
+			</div>
+		</div>
+
+		<div class="col-sm-12 col-xs-12 border-top teble-margin">
+			<div class="col-sm-3 col-xs-3 teble-margin">
+				<%= f.label :repair_detail, "修理内容" %>
+			</div>
+			<div class="col-sm-9 col-xs-9 teble-margin">
+				<%= f.text_area :repair_detail, rows:10, class: "col-sm-12 col-xs-12", placeholder: '症状を入力して下さい:', style: "resize: none; " %>
+			</div>
+		</div>
+
+		<%= f.hidden_field :repair_key, :value => true %>
+
+		<div class="col-sm-12 col-xs-12 teble-margin">
+			<div class="col-sm-3 col-xs-3 teble-margin">
+				<%= f.submit "確定", data: { confirm: "⚠取引完了を選択すると以後の変更ができなくなります" }, class: "btn btn-info font-size3" %>
+			</div>
+		</div>
+
+	</div>
+<% end %>

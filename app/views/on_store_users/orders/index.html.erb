@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="col-sm-12 col-xs-12">
-		<div class="font-size2" style="margin: 30px 0;">
+		<div class="font-size2" style="margin-bottom: 30px;">
 			<%= search_form_for(@search, as: :search, url: on_store_users_on_store_user_orders_path(current_on_store_user), class: "form-inline" ) do |f| %>
 
 				<div class="form-group">
@@ -13,7 +13,7 @@
 				</div>
 				<div class="form-group">
 					<%= f.label :variety_eq, '品種' %>
-					<%= f.select :variety_eq, [["未選択", 1], ["掛時計", 2], ["置時計", 3], ["ホールクロック", 4], ["腕時計", 5], ["懐中時計", 6], ["その他", 7]], :include_blank => '指定なし' %>
+					<%= f.select :variety_eq, [["掛時計", 1], ["置時計", 2], ["ホールクロック", 3], ["腕時計", 4], ["懐中時計", 5], ["その他", 6]], :include_blank => '指定なし' %>
 				</div>
 				<div class="form-group">
 					<%= f.submit "検索", name: "serch", class: "btn btn-default" %>

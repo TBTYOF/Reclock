@@ -22,6 +22,13 @@ class OnStoreUsers::OrdersController < ApplicationController
 		@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
 		@order = Order.find(params[:id])
 
+		if params[:key] == "repair"
+			respond_to do |format|
+		  	format.html
+		  	format.js {render '/on_store_users/orders/repair_detail.js.erb'}
+		  end
+		end
+
 		respond_to do |format|
 	  	format.html
 	  	format.js
@@ -30,8 +37,18 @@ class OnStoreUsers::OrdersController < ApplicationController
 
 	def edit
 		@order = Order.find(params[:id])
-		if params[:key].present?
-			render '/on_store_users/orders/charge.js.erb'
+		if params[:key] == "charge"
+
+			respond_to do |format|
+		  	format.html
+		  	format.js {render '/on_store_users/orders/charge.js.erb'}
+		  end
+		elsif params[:key] == "repair"
+
+			respond_to do |format|
+		  	format.html
+		  	format.js {render '/on_store_users/orders/repair_edit.js.erb'}
+		  end
 		end
 
 		respond_to do |format|
@@ -44,10 +61,17 @@ class OnStoreUsers::OrdersController < ApplicationController
 		@order = Order.find(params[:id])
 		@order.update(order_params)
 
-		respond_to do |format|
-	  	format.html {redirect_to on_store_users_on_store_user_order_path(current_on_store_user, @order)}
-	  	format.js {render '/on_store_users/orders/show.js.erb'}
-	  end
+		if params[:order][:repair_key].present?
+			respond_to do |format|
+		  	format.html
+		  	format.js {render '/on_store_users/orders/repair_detail.js.erb'}
+		  end
+		else
+			respond_to do |format|
+		  	format.html {redirect_to on_store_users_on_store_user_order_path(current_on_store_user, @order)}
+		  	format.js {render '/on_store_users/orders/show.js.erb'}
+		  end
+		end
 	end
 
 	private
