@@ -10,7 +10,7 @@ class Users::OnStoreUsersController < ApplicationController
 			@shops = @shops.serch_address(params[:address])
 		end
 		if params[:q].present?
-			@q =  MiddleCategory.ransack(search_params)
+			@q = MiddleCategory.ransack(search_params)
 			categories = @q.result(distinct: true)
 	    @shops = category_sarch(categories)
 	  end
@@ -18,6 +18,7 @@ class Users::OnStoreUsersController < ApplicationController
 
 	def show
 		@shop = OnStoreUser.find(params[:id])
+		@reviews = @shop.reviews.page(params[:page]).reverse_order
 		@inquiries = Inquiry.where(user_id: current_user, on_store_user_id:  @shop.id, order_id: nil)
 	end
 

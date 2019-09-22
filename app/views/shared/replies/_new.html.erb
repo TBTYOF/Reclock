@@ -1,11 +1,22 @@
 <%= form_with model: Reply.new, url: @reply_creat_url do |f| %>
 	<div class="row">
-		<div class="field font-size3 col-sm-12 col-xs-12" style="margin-bottom: 30px">
-			 <%= f.label :body, "本文" %><br/>
-			 <%= f.text_area :body, placeholder: '返信文(1000文字以内):', rows:10, style: "resize: none;", class: "col-sm-12 col-xs-12" %>
+		<div class="form-group font-size3 col-sm-12 col-xs-12" style="margin-bottom: 30px">
+			 <%= f.label :body, "返信文：" %><br/>
+			 <%= f.text_area :body, placeholder: '返信文(1000文字以内):', rows:10, style: "resize: none;", class: "form-control font-size3" %>
 		</div>
 	</div>
+	<div class="actions col-md-2 col-xs-3" style="margin-bottom: 20px">
+		<%= f.submit "返信", name: "new_riply", class: "btn btn-success font-size3" %>
+	</div>
 	<div class="actions col-sm-4 col-xs-4" style="margin-bottom: 20px">
-		<%= f.submit "返信", name: "new_riply", class: "btn btn-info font-size3" %>
+		<% if user_signed_in? %>
+			<% if defined? @order %>
+				<%= link_to "戻る", users_user_order_path(current_user, @order),  class: "btn btn-default font-size3" %>
+			<% else %>
+				<%= link_to "キャンセル", users_on_store_users_show_path(@inquiry.on_store_user.id), class: "btn btn-default font-size3" %>
+			<% end %>
+		<% else %>
+			<%= link_to "戻る", on_store_users_on_store_user_order_path(current_on_store_user, @order), class: "btn btn-default font-size3" %>
+		<% end %>
 	</div>
 <% end %>

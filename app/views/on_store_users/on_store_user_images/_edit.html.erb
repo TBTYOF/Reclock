@@ -5,10 +5,10 @@
 			(<%= i %>)　
 			<%= link_to "削除", on_store_users_on_store_user_on_store_user_image_path(current_on_store_user, image),  method: :delete, remote: true, data: { confirm: "削除します" }, class: "btn btn-danger" %>
 		</h4>
-		<div style="margin-bottom: 30px;">
+		<div class="col-md-12 col-xs-12" style="margin-bottom: 30px;">
 			<%= attachment_image_tag image, :image, :limit, "700!", 500, format: 'jpeg' %>
 		</div>
 	<% end %>
 <% else %>
-		未登録
+		<h4>未登録</h4>
 <% end %>
