@@ -99,7 +99,9 @@
 									<tr>
 										<td class="cell-title"><strong>料金</strong></td>
 										<td class="cell-body">
-											<%= @order.charge.to_s(:delimited) %>円　
+											<% if @order.charge.present? %>
+												<%= @order.charge.to_s(:delimited) %>円　
+											<% end %>
 											<% if @order.repair_status != "取引完了" %>
 												<%= link_to "編集",edit_on_store_users_on_store_user_order_path(current_on_store_user, @order, key: "charge"), remote: true, class: "btn btn-default font-size2" %>
 											<% end %>

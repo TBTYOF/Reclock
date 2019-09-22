@@ -1,25 +1,37 @@
-<div class="container">
+<div class="container" style="margin-bottom: 150px;">
+	<div class="body-boder col-md-7 col-xs-11" style="margin: 50px 0 50px 0;">
+		<h2 class="font-size5" style="padding-left: 50px;">注文明細ページ</h2>
+	</div>
 
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
 			<!-- タブメニュー -->
 			<div class="row">
-				<div id="tab-menu1" class="col-sm-6 col-xs-6">
-	        <a href="#tab1" class="active col-sm-3 col-xs-3 btn btn-default">注文詳細</a>
-	        <a href="#tab2" class="col-sm-3 col-xs-3 btn btn-default">お問合せ</a>
+				<div id="tab-menu" class="col-md-10 col-xs-12">
+	        <a href="#tab1" class="active col-sm-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
+		      	注文明細
+		      </a>
+	        <a href="#tab2" class="col-sm-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
+		      	お問合せ
+		      </a>
 	        <% if @order.payment != nil %>
-	        	<a href="#tab3" class="col-sm-3 col-xs-3 btn btn-default">レビュー</a>
+	        	<a href="#tab3" class="col-sm-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
+		      	レビュー
+		      </a>
 	        <% end %>
 	      </div>
-	      <div class="col-sm-2 col-sm-offset-1">
+
+	      <!-- <div class="col-sm-2 col-sm-offset-1">
 	      	<p class="btn btn-success">QRコードを表示</p>
-	      </div>
+	      </div> -->
+
 			</div>
 			<!-- 注文情報 -->
-			<div id="tab1" class="tab">
+			<div id="tab1" class="tab body-boder col-sm-12 col-xs-12">
 				<div class="row">
-					<div class="col-sm-12">
-						<table class="table font-size2">
+					<div class="col-sm-12" style="padding-top: 20px;">
+						<h3 class="font-size4">注文情報</h3>
+						<table class="table font-size3">
 							<tbody>
 								<tr>
 									<td class="cell-title">注文ID</td>
@@ -41,10 +53,11 @@
 						</table>
 					</div>
 				</div>
-				<div class="row">
+
+				<div class="row" style="margin-bottom: 50px;">
 					<div class="col-sm-12">
-						<h3 class="font-size3">商品情報</h3>
-						<table class="table font-size2">
+						<h3 class="font-size4">商品情報</h3>
+						<table class="table font-size3">
 							<tbody>
 								<tr>
 									<td class="cell-title">品種</td>
@@ -60,13 +73,13 @@
 								</tr>
 								<tr>
 									<td class="cell-title">症状</td>
-									<td class="cell-body"><%= @order.symptom %></td>
+									<td class="cell-body"><%= text_br(@order.symptom) %></td>
 								</tr>
 							</tbody>
 						</table>
 						<% if @order.order_images.count != 0 %>
-							<div class="row">
-								<h3>画像</h3>
+							<div class="col-sm-12 col-xs-12">
+								<h3 class="font-size4">画像</h3>
 								<div class="container-fluid" style="height: 400px; width: 700px; background-color: gray;">
 									<div class="theTarget">
 										<% @order.order_images.each do |image| %>
@@ -78,24 +91,33 @@
 						<% end %>
 					</div>
 				</div>
-				<div class="row">
+
+				<div class="row" style="margin-bottom: 50px;">
 					<div class="col-sm-12">
-						<h3 class="font-size3">修理状況</h3>
-						<table class="table font-size2">
+						<h3 class="font-size4">修理状況</h3>
+						<table class="table font-size3">
 							<tbody>
 								<tr>
-									<td class="cell-title">修理状況: <%= @order.repair_status %></td>
-									<td class="cell-body">更新日: <%= @order.updated_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@order.created_at.wday]}) %H:%M") %></td>
+									<td class="cell-title">修理状況</td>
+									<td class="cell-body"><%= @order.repair_status %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">更新日</td>
+									<td class="cell-body"><%= @order.updated_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@order.created_at.wday]}) %H:%M") %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">修理内容</td>
+									<td class="cell-body"><%= text_br(@order.repair_detail) %></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row" style="margin-bottom: 20px;">
 					<div class="col-sm-12">
-						<h3 class="font-size3">支払情報</h3>
-						<table class="table font-size2">
+						<h3 class="font-size4">支払情報</h3>
+						<table class="table font-size3">
 							<tbody>
 								<tr>
 									<td class="cell-title">料金</td>
@@ -103,15 +125,15 @@
 										<% if @order.charge == nil %>
 											見積前
 										<% else %>
-											<%= @order.charge %>
+											<%= @order.charge.to_s(:delimited) %>円
 										<% end %>
 									</td>
 								</tr>
 								<% if @order.repair_status != "集荷前" && @order.repair_status != "見積前" && @order.repair_status != "修理中" && @order.repair_status != "キャンセル" %>
 									<tr>
 										<% if @order.payment == nil %>
-											<td class="cell-title"></td>
-											<td class="cell-body"><%= link_to '支払&評価へ進む', edit_users_user_order_path(@user, @order) %></td>
+											<td class="cell-title" style="border-top: none;"></td>
+											<td class="cell-body" style="border-top: none;"><%= link_to '支払&評価へ進む', edit_users_user_order_path(@user, @order), class: "btn btn-primary font-size3" %></td>
 										<% else %>
 											<td class="cell-title">支払方法</td>
 											<td class="cell-body"><%= @order.payment %></td>
@@ -125,13 +147,13 @@
 			</div>
 
 			<!-- お問合せフォーム -->
-			<div id="tab2" class="tab inquiries">
+			<div id="tab2" class="tab inquiries body-boder col-sm-12 col-xs-12" style="min-height: 300px;">
 				<%= render '/shared/inquiries/inquiry', inquiries: @order.inquiries, shop: @order.on_store_user,order: @order %>
 			</div>
 
 			<!-- レビュー -->
 			<% if @order.payment != nil %>
-				<div id="tab3" class="tab">
+				<div id="tab3" class="tab body-boder col-sm-12 col-xs-12" style="min-height: 300px;">
 					<% if @user.review_by?(@order) %>
 						<div class="col-sm-10 col-xs-10 col-sm-offset-1 col-xs-offset-1" id="review-edit">
 							<%= render '/users/reviews/show', order: @order, user: @user %>
@@ -139,7 +161,7 @@
 					<% else %>
 						<div>
 							<div class="col-sm-12 col-xs-12" id="review">
-								<%= link_to "レビューを書く", new_users_user_order_review_path(@user, @order), remote: true, class: "btn btn-default font-size3" %>
+								<%= link_to "レビューを書く", new_users_user_order_review_path(@user, @order), remote: true, class: "btn btn-default font-size4" %>
 							</div>
 						</div>
 					<% end %>
@@ -176,9 +198,9 @@
 
 	$('.tab[id != "tab1"]').hide();
 
-	$('#tab-menu1 a').on('click', function() {
+	$('#tab-menu a').on('click', function() {
   	$(".tab").hide();
-  	$("#tab-menu1 .active").removeClass("active");
+  	$("#tab-menu .active").removeClass("active");
   	$(this).addClass("active");
   	$($(this).attr("href")).show();
   	return false;
