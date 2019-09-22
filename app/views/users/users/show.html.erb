@@ -1,5 +1,5 @@
 <div class="container" style="min-height: 500px; margin-bottom: 150px;">
-	<div class="body-boder col-sm-5 col-xs-5" style="margin: 50px 0 50px 0;">
+	<div class="body-boder col-md-5 col-xs-8" style="margin: 50px 0 50px 0;">
 		<h2 class="font-size5" style="padding-left: 10px;">マイページ</h2>
 	</div>
 	<div class="row">
@@ -23,7 +23,7 @@
 			<div id="tab1" class="tab body-boder font-size3 col-sm-12 col-xs-12">
 				<div class="row">
 					<div class="col-sm-3 col-xs-3 col-sm-offset-1 col-xs-offset-1 teble-margin">
-						<strong>氏名（かな） 　：</strong>
+						<strong>氏名(かな)</strong>
 					</div>
 					<div class="col-sm-8 col-xs-8 teble-margin">
 						<%= @user.name %> (<%= @user.name_kana %>)
@@ -32,7 +32,7 @@
 
 				<div class="row border-top teble-margin">
 					<div class="col-sm-3 col-xs-3 col-sm-offset-1 col-xs-offset-1 teble-margin">
-						<strong>住 　所 　 　 　：</strong>
+						<strong>住 　所</strong>
 					</div>
 					<div class="col-sm-8 col-xs-8 teble-margin">
 						〒 <%= @user.postcode.insert(3, '-') %>
@@ -44,7 +44,7 @@
 
 				<div class="row border-top teble-margin">
 					<div class="col-sm-3 col-xs-3 col-sm-offset-1 col-xs-offset-1 teble-margin">
-						<strong>電話番号 　 　 ：</strong>
+						<strong>電話番号</strong>
 					</div>
 					<div class="col-sm-8 col-xs-8 teble-margin">
 						<%= @user.telephone_number %>
@@ -52,8 +52,8 @@
 				</div>
 
 				<div class="row border-top teble-margin">
-					<div class="col-sm-3 col-xs-3 col-sm-offset-1 col-xs-offset-1 teble-margin">
-						<strong>メールアドレス：</strong>
+					<div class="col-md-3 col-xs-4 col-md-offset-1 teble-margin">
+						<strong>メールアドレス</strong>
 					</div>
 					<div class="col-sm-8 col-xs-8 teble-margin">
 						<%= @user.email %>
@@ -71,7 +71,7 @@
 				<table class="table">
 					<thead class="font-size3">
 						<tr>
-							<th>修理状況</th>
+							<th>状況</th>
 							<th>修理店</th>
 							<th>受付日</th>
 							<th>納品日</th>
@@ -85,16 +85,22 @@
 								<tr>
 									<td><%= order.repair_status %></td>
 									<td><%= link_to order.on_store_user.shop_name[0..11], users_on_store_users_show_path(order.on_store_user) %></td>
-									<td><%= order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %></td>
+									<td><%= order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]})") %></td>
 									<td>
 										<% if order.delivery_day == nil %>
 											未納
 										<% else %>
-											<%= order.delivery_day.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %>
+											<%= order.delivery_day.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]})") %>
 										<% end %>
 									</td>
-									<td><%= order.charge %></td>
-									<td><%= link_to "明細を見る", users_user_order_path(@user, order), class: "btn btn-default" %></td>
+									<td>
+										<% if order.charge.present? %>
+											<%= order.charge.to_s(:delimited) %>円
+										<% else %>
+											未確定
+										<% end %>
+									</td>
+									<td><%= link_to "明細へ", users_user_order_path(@user, order), class: "btn btn-default" %></td>
 								</tr>
 							<% end %>
 						</tbody>
@@ -108,7 +114,7 @@
 				</table>
 			</div>
 
-			<div id="tab3" class="tab inquiries body-boder col-sm-12 col-xs-12" style="min-height: 300px;">
+			<div id="tab3" class="tab inquiries body-boder col-md-12 col-xs-12" style="min-height: 300px;">
 				<% if @user.inquiries.present? %>
 					<%= render '/shared/inquiries/index', user: @user, inquiries: @inquiries %>
 				<% else %>
@@ -133,3 +139,5 @@
   	return false;
 	});
 </script>
+
+

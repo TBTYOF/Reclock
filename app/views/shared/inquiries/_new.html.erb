@@ -1,45 +1,36 @@
-<div class="inquiry-form">
+<div class="inquiry-form col-md-10 col-xs-12 col-md-offset-1">
+	<h2 class="font-size4" style="margin-bottom: 20px;"><strong>新規お問合せ</strong></h4>
+
 	<%= form_with model: Inquiry.new, url: @inquiry_creat_url do |f| %>
 		<!-- 注文に紐づく問合せかどうか -->
 		<% if defined? @order == false %>
       <%= f.hidden_field :order_id, :value => @order.id %>
      <% end %>
 		<div class="row">
-			<div class="field font-size3 col-sm-8 col-xs-8" style="margin-bottom: 30px">
+			<div class="form-group font-size3 col-sm-8 col-xs-8" style="margin-bottom: 30px">
 			  <%= f.label :title, "件名" %><br/>
-			  <%= f.text_field :title, placeholder: '件名(50文字以内):', class: "col-sm-8 col-xs-8" %>
+			  <%= f.text_field :title, placeholder: '件名(50文字以内):', class: "form-control font-size3" %>
 			</div>
 		</div>
 		<div class="row">
-			<div class="field font-size3 col-sm-12 col-xs-12" style="margin-bottom: 30px">
+			<div class="form-group font-size3 col-sm-12 col-xs-12" style="margin-bottom: 30px">
 			  <%= f.label :body, "本文" %><br/>
-			  <%= f.text_area :body, placeholder: '本文(1000文字以内):', rows:10, style: "resize: none;", class: "col-sm-12 col-xs-12" %>
+			  <%= f.text_area :body, placeholder: '本文(1000文字以内):', rows:10, style: "resize: none;", class: "form-control font-size3" %>
 			</div>
 		</div>
 		<div class="actions col-sm-4 col-xs-4" style="margin-bottom: 20px">
-			<%= f.submit "投稿", class: "btn btn-info font-size3" %>
+			<%= f.submit "投稿", name: "new_inquiry", class: "btn btn-info font-size3" %>
+		</div>
+		<div class="actions col-sm-4 col-xs-4" style="margin-bottom: 20px">
+			<% if user_signed_in? %>
+				<% if defined? @order %>
+					<%= link_to "戻る", users_user_order_path(@user, @order),  class: "btn btn-default font-size3" %>
+				<% else %>
+					<%= link_to "戻る", users_on_store_users_show_path(@shop), class: "btn btn-default font-size3" %>
+				<% end %>
+			<% else %>
+				<%= link_to "戻る", on_store_users_on_store_user_order_path(current_on_store_user, @order), class: "btn btn-default font-size3" %>
+			<% end %>
 		</div>
 	<% end %>
 </div>
-
-<script>
-	$(function() {
-    $(document).on('click', 'input[type=submit]', function() {
-    	// バリデーション
-      if ($('#inquiry_title').val() == '') {
-      	alert('未入力の項目があります');
-        return false;
-      }
-      if ($('#inquiry_body').val() == '') {
-      	alert('未入力の項目があります');
-        return false;
-      }
-      // フォーム見えなくする
-      $('.inquiry-form').addClass('hidden');
-      // 投稿したらトップへ戻る
-      $('body, html').animate({
-      	scrollTop:0
-			    }, 800);
-    })
-  })
-</script>
