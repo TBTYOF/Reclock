@@ -19,11 +19,6 @@
  html, body {
   height: 100%;
   word-break: break-all;
-  background-color: #f2f2f2;
-}
-
-header, footer {
-	background-color: #fefefe;
 }
 
 .body-white {
@@ -35,9 +30,14 @@ header, footer {
 }
 
 .body-boder {
-	background-color:  #f2f2f2;
-	border-radius: 5px;
+	background-color:  #fefefe;
+	border-radius: 10px;
 	border: 1px solid  #f2f2f2;
+	box-shadow: 10px 10px 10px;
+}
+
+.margin-top {
+	margin-top: 50px;
 }
 
 .border-top {
@@ -127,6 +127,14 @@ footer li {
 	-webkit-transform: translateY(-20px) rotate(45deg);
 	transform: translateY(-20) rotate(-45deg);
 	background-color: #fff;
+}
+
+#menu-text {
+	position: fixed;
+	top: 0;
+	right: 8%;
+	background-color: #fefefe;
+	padding: 20px 0 11px 0;
 }
 
 #sp-menu {

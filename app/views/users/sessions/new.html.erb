@@ -1,30 +1,31 @@
-<div class="container">
-  <div class="col-sm-7 col-xs-7 col-sm-offset-3 col-xs-offset-3 body-boder" style="margin-bottom: 50px;">
+<div class="container" style="margin-top: 100px; margin-bottom: 150px; ">
+  <div class="col-sm-6 col-xs-6 col-sm-offset-3 col-xs-offset-3 body-boder" style="padding: 50px;">
     <h2 class="font-size4" style="margin-bottom: 30px;">ログイン</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field font-size3" style="margin-bottom: 10px">
+      <div class="form-group font-size3 col-sm-10 col-xs-10" style="margin-bottom: 20px">
         <%= f.label :email, "メールアドレス" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
 
-      <div class="field font-size3" style="margin-bottom: 10px">
+      <div class="form-group font-size3 col-sm-10 col-xs-10" style="margin-bottom: 20px">
         <%= f.label :password, "パスワード" %><br />
-        <%= f.password_field :password, autocomplete: "current-password" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
       </div>
 
       <% if devise_mapping.rememberable? %>
-        <div class="field font-size2" style="margin-bottom: 10px">
+        <div class="form-group font-size2 col-sm-10 col-xs-10" style="margin-bottom: 20px">
           <%= f.check_box :remember_me %>
           <%= f.label :remember_me, "ログインしたままにする" %>
         </div>
       <% end %>
 
-      <div class="actions font-size3" style="margin-bottom: 20px">
-        <%= f.submit "ログイン", class: "btn btn-success" %>
+      <div class="actions form-group col-sm-10 col-xs-10" style="margin-bottom: 30px">
+        <%= f.submit "ログイン", class: "btn btn-success font-size3" %>
       </div>
     <% end %>
-
-    <%= render "users/shared/links" %>
+    <div class="col-sm-10 col-xs-10">
+      <%= render "users/shared/links" %>
+    </div>
   </div>
 </div>

@@ -20,6 +20,24 @@
 
 // ハンバーガーメニュー
 $(document).on('turbolinks:load', function(){
+	// スクロール時の動作
+	var _window = $(window),
+	    Bottom;
+
+	_window.on('scroll',function(){
+			Bottom = $('.scroll').outerHeight();
+
+	    if (_window.scrollTop() > Bottom){
+	        $('#menu-text').slideUp();
+	    }
+	    else {
+	        $('#menu-text').slideDown();
+	    }
+	});
+
+	_window.trigger('scroll');
+
+	// クリック時の動作
 	$('.trigger').on('click', function(){
 		$('.menu-trigger').toggleClass('active');
 
