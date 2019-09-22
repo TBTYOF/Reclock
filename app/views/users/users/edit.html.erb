@@ -1,44 +1,47 @@
 <div class="container" style="margin-top: 100px; margin-bottom: 150px; ">
-  <div class="col-sm-6 col-xs-6 col-sm-offset-3 col-xs-offset-3 body-boder" style="padding: 50px;">
+  <div class="col-sm-8 col-xs-8 col-sm-offset-2 col-xs-offset-2 body-boder" style="padding: 50px;">
     <h2 class="font-size4" style="margin-bottom: 30px;">会員情報編集</h2>
 
     <%= form_with model: @user, url: users_user_path, local: true do |f| %>
       <%= render "/layouts/error_messages", model: f.object %>
 
-      <div class="field form-group font-size2 col-sm-6 col-xs-6" style="margin-bottom: 20px">
+      <div class="field form-group font-size3 col-sm-6 col-xs-6" style="margin-bottom: 20px">
         <%= f.label :name, "(氏名)" %><br />
-        <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: '氏名:', autocomplete: "name" %>
+        <%= f.text_field :name, autofocus: true, class: "form-control font-size3", placeholder: '氏名:', autocomplete: "name" %>
       </div>
-      <div class="field form-group font-size2 col-sm-6 col-xs-6" style="margin-bottom: 20px">
+      <div class="field form-group font-size3 col-sm-6 col-xs-6" style="margin-bottom: 20px">
         <%= f.label :name_kana, "(かな)" %><br />
-        <%= f.text_field :name_kana, class: "form-control", placeholder: 'ふりがな:', autocomplete: "name-kana" %>
+        <%= f.text_field :name_kana, class: "form-control font-size3", placeholder: 'ふりがな:', autocomplete: "name-kana" %>
       </div>
 
-      <div class="field form-group font-size2 col-sm-6 col-xs-6" style="margin-bottom: 20px">
+      <div class="field form-group font-size3 col-sm-6 col-xs-6" style="margin-bottom: 20px">
         <%= f.label :postcode, "〒 郵便番号" %><br />
-        <%= f.telephone_field :postcode, onKeyUp: "countLength(value);", placeholder: 'ハイフン無し:', autocomplete: "postcode", id: "postcode", class: "form-control" %>
+        <%= f.telephone_field :postcode, onKeyUp: "countLength(value);", placeholder: 'ハイフン無し:', autocomplete: "postcode", id: "postcode", class: "form-control font-size3" %>
       </div>
-      <div class="field form-group address-form font-size2 col-sm-12 col-xs-12" style="margin-bottom: 20px; display: none;">
+      <div class="field form-group address-form font-size3 col-sm-12 col-xs-12" style="margin-bottom: 20px; display: none;">
         <%= f.label :address, "続きを入力してください" %><br />(「建物名」「号室」などもご入力ください)
-        <%= f.text_area :address, rows:2, class: "form-control", style: "resize: none; ", id: "address" %>
+        <%= f.text_area :address, rows:2, class: "form-control font-size3", style: "resize: none; ", id: "address" %>
       </div>
 
-      <div class="field form-group font-size2 col-sm-10 col-xs-10" style="margin-bottom: 20px">
+      <div class="field form-group font-size3 col-sm-10 col-xs-10" style="margin-bottom: 20px">
         <%= f.label :telephone_number, "電話番号" %><br />
-        <%= f.telephone_field :telephone_number, placeholder: '電話番号:', class: "form-control", autocomplete: "telephone_number" %>
+        <%= f.telephone_field :telephone_number, placeholder: '電話番号:', class: "form-control font-size3", autocomplete: "telephone_number" %>
       </div>
-      <div class="field form-group font-size2 col-sm-10 col-xs-10" style="margin-bottom: 20px">
+      <div class="field form-group font-size3 col-sm-10 col-xs-10" style="margin-bottom: 20px">
         <%= f.label :email, "メールアドレス" %><br />
-        <%= f.email_field :email, placeholder: 'メールアドレス:', class: "form-control", autocomplete: "email" %>
+        <%= f.email_field :email, placeholder: 'メールアドレス:', class: "form-control font-size3", autocomplete: "email" %>
       </div>
 
-      <div class="actions form-group col-sm-9 col-xs-9" style="margin-bottom: 20px">
+      <div class="actions form-group col-sm-3 col-xs-3" style="margin-bottom: 20px">
         <%= f.submit "変更", class: "btn btn-info font-size3" %>
+      </div>
+      <div class="actions form-group col-sm-6 col-xs-6" style="margin-bottom: 20px">
+        <%= link_to "戻る", users_user_path(@user), class: "btn btn-default font-size3" %>
       </div>
     <% end %>
 
     <div class="col-sm-12 col-xs-12">
-    	<h2 class="font-size4" style="margin-bottom: 30px;">クレジットカード</h2>
+    	<h2 class="font-size4" style="margin-bottom: 30px;">カード登録</h2>
     	<p class="btn btn-info" style="background-color: yellow; color: black;">クレジットカード情報入力</p>
     </div>
   </div>

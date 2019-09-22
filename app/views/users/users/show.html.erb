@@ -67,9 +67,9 @@
 				</div>
 			</div>
 
-			<div id="tab2" class="tab">
+			<div id="tab2" class="tab body-boder col-sm-12 col-xs-12" style="min-height: 300px;">
 				<table class="table">
-					<thead>
+					<thead class="font-size3">
 						<tr>
 							<th>修理状況</th>
 							<th>修理店</th>
@@ -79,32 +79,42 @@
 							<th></th>
 						</tr>
 					</thead>
-					<tbody>
-						<% @user.orders.reverse.each do |order| %>
+					<% if @user.orders.present? %>
+						<tbody class="font-size2">
+							<% @user.orders.reverse.each do |order| %>
+								<tr>
+									<td><%= order.repair_status %></td>
+									<td><%= link_to order.on_store_user.shop_name[0..11], users_on_store_users_show_path(order.on_store_user) %></td>
+									<td><%= order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %></td>
+									<td>
+										<% if order.delivery_day == nil %>
+											未納
+										<% else %>
+											<%= order.delivery_day.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %>
+										<% end %>
+									</td>
+									<td><%= order.charge %></td>
+									<td><%= link_to "明細を見る", users_user_order_path(@user, order), class: "btn btn-default" %></td>
+								</tr>
+							<% end %>
+						</tbody>
+					<% else %>
+						<tbody class="font-size2">
 							<tr>
-								<td><%= order.repair_status %></td>
-								<td><%= link_to order.on_store_user.shop_name, users_on_store_users_show_path(order.on_store_user) %></td>
-								<td><%= order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %></td>
-								<td>
-									<% if order.delivery_day == nil %>
-										未納
-									<% else %>
-										<%= order.delivery_day.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %>
-									<% end %>
-								</td>
-								<td><%= order.charge %></td>
-								<td><%= link_to "明細を見る", users_user_order_path(@user, order), class: "btn btn-default" %></td>
+								<td>まだ注文がありません</td>
 							</tr>
-						<% end %>
-					</tbody>
+						</tbody>
+					<% end %>
 				</table>
 			</div>
 
-			<div id="tab3" class="tab inquiries">
+			<div id="tab3" class="tab inquiries body-boder col-sm-12 col-xs-12" style="min-height: 300px;">
 				<% if @user.inquiries.present? %>
 					<%= render '/shared/inquiries/index', user: @user, inquiries: @inquiries %>
 				<% else %>
-					まだお問合せはありません
+				<div class="col-sm-5 col-xs-5" style="margin-top: 30px;">
+					<p class="font-size3">まだお問合せはありません</p>
+				</div>
 				<% end %>
 			</div>
 
