@@ -27,7 +27,6 @@ class Users::ReviewsController < ApplicationController
 		@review.on_store_user_id = @order.on_store_user.id
 		@review.save
 		redirect_to users_user_order_path(@user, @order)
-		end
 	end
 
 	def show
