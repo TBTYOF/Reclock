@@ -20,41 +20,41 @@
 
       <div class="col-sm-12 col-xs-12" style="padding-top: 50px;">
         <div class="row">
-          <div class="field font-size3 col-sm-6 col-xs-6" style="margin-bottom: 30px">
+          <div class="form-group font-size3 col-sm-6 col-xs-6" style="margin-bottom: 30px">
             <%= f.label :variety, "※品種(必須)", style: "color: red;" %>
-            <%= f.select :variety, Order.varieties.keys, :include_blank => '未選択', :selected => '未選択', autofocus: true, class: "col-sm-6 col-xs-6" %>
+            <%= f.select :variety, Order.varieties.keys, :include_blank => '未選択', :selected => '未選択', autofocus: true, class: "form-control" %>
           </div>
         </div>
 
         <div class="row" style="margin-bottom: 50px">
-        	<div class="field font-size3 col-sm-6 col-xs-6">
+        	<div class="field form-group font-size3 col-sm-6 col-xs-6">
             <%= f.label :maker, "メーカー" %><br />
-            <%= f.text_field :maker, class: "col-sm-11 col-xs-11", placeholder: 'メーカー名:', autocomplete: "maker" %>
+            <%= f.text_field :maker, class: "form-control font-size3", placeholder: 'メーカー名:', autocomplete: "maker" %>
           </div>
-          <div class="field font-size3 col-sm-6 col-xs-6">
+          <div class="field form-group font-size3 col-sm-6 col-xs-6">
             <%= f.label :model, "型番" %><br />
-            <%= f.text_field :model, class: "col-sm-11 col-xs-11", placeholder: '型番:', autocomplete: "model" %>
+            <%= f.text_field :model, class: "form-control font-size3", placeholder: '型番:', autocomplete: "model" %>
           </div>
         </div>
 
         <div class="row" style="margin-bottom: 50px">
-          <div class="field font-size3 col-sm-12 col-xs-12">
+          <div class="field form-group font-size3 col-sm-12 col-xs-12">
             <%= f.label :symptom, "※症状(必須)", style: "color: red;" %><br />
-            <%= f.text_area :symptom, rows:10, class: "col-sm-12 col-xs-12", placeholder: '症状を入力して下さい(1000文字以内):', style: "resize: none; " %>
+            <%= f.text_area :symptom, rows:10, class: "form-control font-size3", placeholder: '症状を入力して下さい(1000文字以内):', style: "resize: none; " %>
           </div>
         </div>
 
         <div class="row">
-          <div class="field font-size3 col-sm-9 col-xs-9" style="margin-bottom: 30px">
+          <div class="font-size3 col-sm-9 col-xs-9" style="margin-bottom: 30px">
             <%= f.label :order_images_images, "時計の画像", class: "font-size3" %><br />
             <%= f.attachment_field :order_images_images, multiple: true, class: "font-size2" %>
           </div>
         </div>
 
          <div class="row">
-          <div class="field font-size3 col-sm-6 col-xs-6" style="margin-bottom: 50px">
+          <div class="form-group font-size3 col-sm-6 col-xs-6" style="margin-bottom: 50px">
             <%= f.label :pickup, "※集荷方法(必須)", style: "color: red;" %>
-            <%= f.select :pickup, Order.pickups.keys, :include_blank => '未選択', :selected => '未選択', class: "col-sm-11 col-xs-11" %>
+            <%= f.select :pickup, Order.pickups.keys, :include_blank => '未選択', :selected => '未選択', class: "form-control" %>
           </div>
         </div>
 
