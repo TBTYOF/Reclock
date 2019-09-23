@@ -61,6 +61,20 @@
 					</div>
 				</div>
 
+				<% if card_by?(@user) %>
+					<div class="row border-top teble-margin">
+						<div class="col-sm-3 col-xs-3 col-sm-offset-1 col-xs-offset-1 teble-margin">
+							<strong>カード情報</strong>
+						</div>
+						<div class="col-sm-8 col-xs-8 teble-margin">
+							<%= @default_card_information.brand %>　**** **** **** <%= @default_card_information.last4 %>
+						</div>
+						<div class="col-sm-8 col-xs-8 col-sm-offset-4 col-xs-offset-4 teble-margin">
+							有効期限： <%= @default_card_information.exp_month %>/<%= @default_card_information.exp_year %>
+						</div>
+					</div>
+	      <% end %>
+
 				<div class="row border-top teble-margin" style="margin-bottom: 40px;">
 					<div class="col-sm-3 col-xs-3 col-sm-offset-1 col-xs-offset-1 teble-margin">
 						<%= link_to "登録情報を編集する", edit_users_user_path(@user), class: "btn btn-info font-size3" %>

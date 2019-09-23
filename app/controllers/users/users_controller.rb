@@ -10,6 +10,12 @@ class Users::UsersController < ApplicationController
 
   def edit
     @user = current_user
+    card = Card.where(user_id: @user.id).first
+    if card.present?
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      customer = Payjp::Customer.retrieve(card.customer_id)
+      @default_card_information = customer.cards.retrieve(card.card_id)
+    end
   end
 
   def update
@@ -25,6 +31,12 @@ class Users::UsersController < ApplicationController
     @user = current_user
     @q = @user.inquiries.ransack(params[:q])
     @inquiries = @q.result(distinct: true).page(params[:page]).reverse_order
+    card = Card.where(user_id: @user.id).first
+    if card.present?
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      customer = Payjp::Customer.retrieve(card.customer_id)
+      @default_card_information = customer.cards.retrieve(card.card_id)
+    end
   end
 
   def home

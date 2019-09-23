@@ -82,3 +82,5 @@ gem 'payjp'
 gem 'ransack'
 
 gem 'rails-i18n'
+
+gem 'dotenv-rails'
