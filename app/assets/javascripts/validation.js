@@ -42,4 +42,12 @@ $(function() {
         return false;
       }
     })
+
+    $(document).on('click', 'input[name = serch_service]', function() {
+      // バリデーション
+      if ($('#q_major_category_name_or_name_or_minor_categories_name_cont').val() == '') {
+        alert('検索内容が未入力です');
+        return false;
+      }
+    })
   })

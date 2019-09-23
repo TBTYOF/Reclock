@@ -16,7 +16,7 @@
 				<%= link_to "キャンセル", users_on_store_users_show_path(@inquiry.on_store_user.id), class: "btn btn-default font-size3" %>
 			<% end %>
 		<% else %>
-			<%= link_to "戻る", on_store_users_on_store_user_order_path(current_on_store_user, @order), class: "btn btn-default font-size3" %>
+			<%= link_to "戻る", on_store_users_on_store_user_inquiries_path(current_on_store_user), class: "btn btn-default font-size3" %>
 		<% end %>
 	</div>
 <% end %>

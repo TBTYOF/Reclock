@@ -48,7 +48,7 @@
 						<strong>電話番号</strong>
 					</div>
 					<div class="col-sm-8 col-xs-8 teble-margin">
-						<%= @user.telephone_number %>
+						<%= telephone_ber(@user.telephone_number) %>
 					</div>
 				</div>
 
@@ -106,7 +106,7 @@
 							<% end %>
 						</tbody>
 					<% else %>
-						<tbody class="font-size2">
+						<tbody class="font-size3">
 							<tr>
 								<td>まだ注文がありません</td>
 							</tr>

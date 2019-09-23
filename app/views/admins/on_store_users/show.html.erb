@@ -11,11 +11,11 @@
 					<li class="list-group-item">店舗名</li>
 					<li class="list-group-item"><%= current_on_store_user.shop_name %></li>
 					<li class="list-group-item">電話番号</li>
-					<li class="list-group-item"><%= current_on_store_user.telephone_number %></li>
+					<li class="list-group-item"><%= telephone_ber(current_on_store_user.telephone_number %></li>
 					<li class="list-group-item">メールアドレス</li>
 					<li class="list-group-item"><%= current_on_store_user.email %></li>
 					<li class="list-group-item">住所</li>
-					<li class="list-group-item"><%= current_on_store_user.postcode %></li>
+					<li class="list-group-item"><%= current_on_store_user.postcode.insert(3, '-') %></li>
 					<li class="list-group-item"><%= current_on_store_user.address %></li>
 					<li class="list-group-item">最寄駅</li>
 					<li class="list-group-item">

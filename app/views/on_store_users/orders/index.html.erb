@@ -39,7 +39,7 @@
 						<td style="padding-top: 15px; padding-bottom: 15px;"><%= order.repair_status %></td>
 						<td style="padding-top: 15px; padding-bottom: 15px;"><%= order.variety %></td>
 						<td style="padding-top: 15px; padding-bottom: 15px;"><%= order.user.name %></td>
-						<td style="padding-top: 15px; padding-bottom: 15px;"><%= order.user.telephone_number %></td>
+						<td style="padding-top: 15px; padding-bottom: 15px;"><%= telephone_ber(order.user.telephone_number) %></td>
 						<td style="padding-top: 15px; padding-bottom: 15px;">
 							<% if order.delivery_day == nil %>
 								受付日：

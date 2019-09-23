@@ -35,7 +35,7 @@
 						<td><%= link_to on_store_user.id, admins_on_store_user_path(on_store_user) %></td>
 						<td><%= on_store_user.shop_name %></td>
 						<td><%= on_store_user.owner_name %></td>
-						<td><%= on_store_user.telephone_number %></td>
+						<td><%= telephone_ber(on_store_user.telephone_number) %></td>
 						<td><%= on_store_user.email %></td>
 					</tr>
 				<% end %>

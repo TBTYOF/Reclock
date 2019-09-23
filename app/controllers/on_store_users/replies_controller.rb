@@ -13,6 +13,7 @@ class OnStoreUsers::RepliesController < ApplicationController
 		@inquiry = Inquiry.find(params[:inquiry_id])
 		@reply_creat_url = "/on_store_users/on_store_users/#{current_on_store_user.id}/inquiries/#{@inquiry.id}/replies"
 		if params[:order_id].present?
+			binding.pry
 			@order = Order.find(params[:order_id])
 			@reply_creat_url = "/on_store_users/on_store_users/#{current_on_store_user.id}/orders/#{@order.id}/inquiries/#{@inquiry.id}/replies"
 		end
