@@ -21,9 +21,23 @@
   word-break: break-all;
 }
 
-.boder {
-	border-radius: 5px;
-	border: 2px solid gray;
+.body-white {
+	background-color: #fefefe;
+}
+
+.body-gray{
+	background-color: #f2f2f2;
+}
+
+.body-boder {
+	background-color:  #fefefe;
+	border-radius: 10px;
+	border: 1px solid  #f2f2f2;
+	box-shadow: 10px 10px 10px;
+}
+
+.margin-top {
+	margin-top: 50px;
 }
 
 .border-top {
@@ -63,8 +77,9 @@ footer li {
   #hm-icon {
  position: fixed;
  right: 2%;
- top: 25px;
  z-index: 1001;
+ padding: 25px 10px 10px 10px;
+ background-color: #fefefe;
  }
 
  .menu-trigger, .menu-trigger span {
@@ -112,6 +127,14 @@ footer li {
 	-webkit-transform: translateY(-20px) rotate(45deg);
 	transform: translateY(-20) rotate(-45deg);
 	background-color: #fff;
+}
+
+#menu-text {
+	position: fixed;
+	top: 0;
+	right: 8%;
+	background-color: #fefefe;
+	padding: 20px 0 11px 0;
 }
 
 #sp-menu {

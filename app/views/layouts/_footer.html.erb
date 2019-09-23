@@ -1,4 +1,4 @@
-<footer style="width: 100%; height: 80px; background-color: #f6f6f6;" class="container">
+<footer style="width: 100%; height: 80px; background-color: #f8f8f8;" class="container">
 	<% if request.fullpath.match?(/^\/admins\/*/) %>
       <div class="col-md-5"></div>
 			<div class="col-md-5" style="margin-top: 20px;">
@@ -22,9 +22,7 @@
           お問合せ
         </li>
         <li>
-          <% if user_signed_in? %>
-          	<%= link_to '退会する', users_user_withdrawal_path(current_user) %>
-	         <% elsif on_store_user_signed_in? %>
+          <% if on_store_user_signed_in? %>
 	          <%= link_to '退会する', on_store_users_on_store_user_withdrawal_path(current_on_store_user) %>
 	        <% end %>
         </li>

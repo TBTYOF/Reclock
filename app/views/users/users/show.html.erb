@@ -1,40 +1,78 @@
-<div class="container">
-	<h2 class="font-size4">マイページ</h2>
+<div class="container" style="min-height: 500px; margin-bottom: 150px;">
+
+	<div class="body-boder col-md-5 col-xs-8" style="margin: 50px 0 50px 0;">
+		<h2 class="font-size5" style="padding-left: 10px;">マイページ</h2>
+	</div>
+
 	<div class="row">
-		<div class="col-sm-9 col-sm-offset-1 col-xs-9 col-xs-offset-1">
-
+		<div class="col-sm-12 col-xs-12">
 			<!-- タブメニュー -->
-		<div class="row">
-			<div id="tab-menu" class="col-sm-6 col-xs-6">
-	      <a href="#tab1" class="active col-sm-3 col-xs-3 btn btn-default">登録情報</a>
-	      <a href="#tab2" class="col-sm-3 col-xs-3 btn btn-default">注文一覧</a>
-	      <a href="#tab3" class="col-sm-3 col-xs-3 btn btn-default">問合せ一覧</a>
-	    </div>
-	    <div class="col-sm-2 col-sm-offset-1">
-	      <p class="btn btn-success">QRコードを表示</p>
-	    </div>
-		</div>
-
-			<div id="tab1" class="tab">
-				<ul class="list-group">
-					<li class="list-group-item">名前</li>
-					<li class="list-group-item"><%= @user.name %></li>
-					<li class="list-group-item">住所</li>
-					<li class="list-group-item"><%= @user.postcode %></li>
-					<li class="list-group-item"><%= @user.address %></li>
-					<li class="list-group-item">電話番号</li>
-					<li class="list-group-item"><%= @user.telephone_number %></li>
-					<li class="list-group-item">メールアドレス</li>
-					<li class="list-group-item"><%= @user.email %></li>
-					<li class="list-group-item"><%= link_to "登録情報を編集する", edit_users_user_path(@user), class: "btn btn-info" %></li>
-				</ul>
+			<div class="row">
+				<div id="tab-menu" class="col-md-10 col-xs-12">
+		      <a href="#tab1" class="active col-sm-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
+		      	登録情報
+		      </a>
+		      <a href="#tab2" class="col-sm-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
+		      	注文
+		      </a>
+		      <a href="#tab3" class="col-sm-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
+		      	問合せ
+		      </a>
+		    </div>
 			</div>
 
-			<div id="tab2" class="tab">
+			<div id="tab1" class="tab body-boder font-size3 col-sm-12 col-xs-12">
+				<div class="row">
+					<div class="col-sm-3 col-xs-3 col-sm-offset-1 col-xs-offset-1 teble-margin">
+						<strong>氏名(かな)</strong>
+					</div>
+					<div class="col-sm-8 col-xs-8 teble-margin">
+						<%= @user.name %> (<%= @user.name_kana %>)
+					</div>
+				</div>
+
+				<div class="row border-top teble-margin">
+					<div class="col-sm-3 col-xs-3 col-sm-offset-1 col-xs-offset-1 teble-margin">
+						<strong>住 　所</strong>
+					</div>
+					<div class="col-sm-8 col-xs-8 teble-margin">
+						〒 <%= @user.postcode.insert(3, '-') %>
+					</div>
+					<div class="col-sm-8 col-xs-8 col-sm-offset-4 col-xs-offset-4 teble-margin">
+						<%= text_br(@user.address) %>
+					</div>
+				</div>
+
+				<div class="row border-top teble-margin">
+					<div class="col-sm-3 col-xs-3 col-sm-offset-1 col-xs-offset-1 teble-margin">
+						<strong>電話番号</strong>
+					</div>
+					<div class="col-sm-8 col-xs-8 teble-margin">
+						<%= telephone_ber(@user.telephone_number) %>
+					</div>
+				</div>
+
+				<div class="row border-top teble-margin">
+					<div class="col-md-3 col-xs-4 col-md-offset-1 teble-margin">
+						<strong>メールアドレス</strong>
+					</div>
+					<div class="col-sm-8 col-xs-8 teble-margin">
+						<%= @user.email %>
+					</div>
+				</div>
+
+				<div class="row border-top teble-margin" style="margin-bottom: 40px;">
+					<div class="col-sm-3 col-xs-3 col-sm-offset-1 col-xs-offset-1 teble-margin">
+						<%= link_to "登録情報を編集する", edit_users_user_path(@user), class: "btn btn-info font-size3" %>
+					</div>
+				</div>
+			</div>
+
+			<div id="tab2" class="tab body-boder col-sm-12 col-xs-12" style="min-height: 300px;">
 				<table class="table">
-					<thead>
+					<thead class="font-size3">
 						<tr>
-							<th>修理状況</th>
+							<th>状況</th>
 							<th>修理店</th>
 							<th>受付日</th>
 							<th>納品日</th>
@@ -42,32 +80,48 @@
 							<th></th>
 						</tr>
 					</thead>
-					<tbody>
-						<% @user.orders.reverse.each do |order| %>
+					<% if @user.orders.present? %>
+						<tbody class="font-size2">
+							<% @user.orders.reverse.each do |order| %>
+								<tr>
+									<td><%= order.repair_status %></td>
+									<td><%= link_to order.on_store_user.shop_name[0..11], users_on_store_users_show_path(order.on_store_user) %></td>
+									<td><%= order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]})") %></td>
+									<td>
+										<% if order.delivery_day == nil %>
+											未納
+										<% else %>
+											<%= order.delivery_day.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]})") %>
+										<% end %>
+									</td>
+									<td>
+										<% if order.charge.present? %>
+											<%= order.charge.to_s(:delimited) %>円
+										<% else %>
+											未確定
+										<% end %>
+									</td>
+									<td><%= link_to "明細へ", users_user_order_path(@user, order), class: "btn btn-default" %></td>
+								</tr>
+							<% end %>
+						</tbody>
+					<% else %>
+						<tbody class="font-size3">
 							<tr>
-								<td><%= order.repair_status %></td>
-								<td><%= link_to order.on_store_user.shop_name, users_on_store_users_show_path(order.on_store_user) %></td>
-								<td><%= order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %></td>
-								<td>
-									<% if order.delivery_day == nil %>
-										未納
-									<% else %>
-										<%= order.delivery_day.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %>
-									<% end %>
-								</td>
-								<td><%= order.charge %></td>
-								<td><%= link_to "明細を見る", users_user_order_path(@user, order), class: "btn btn-default" %></td>
+								<td>まだ注文がありません</td>
 							</tr>
-						<% end %>
-					</tbody>
+						</tbody>
+					<% end %>
 				</table>
 			</div>
 
-			<div id="tab3" class="tab inquiries">
+			<div id="tab3" class="tab inquiries body-boder col-md-12 col-xs-12" style="min-height: 300px;">
 				<% if @user.inquiries.present? %>
 					<%= render '/shared/inquiries/index', user: @user, inquiries: @inquiries %>
 				<% else %>
-					まだお問合せはありません
+				<div class="col-sm-5 col-xs-5" style="margin-top: 30px;">
+					<p class="font-size3">まだお問合せはありません</p>
+				</div>
 				<% end %>
 			</div>
 
@@ -86,3 +140,5 @@
   	return false;
 	});
 </script>
+
+

@@ -21,14 +21,23 @@
 
     <%= yield %>
 
-    <%= render "/layouts/footer" %>
+    <!--URLの先頭に'admin'があれば'true'-->
+    <% if request.fullpath.match?(/^\/admins\/*/) %>
+      <%= render "/layouts/footer" %>
+    <% elsif request.fullpath.match?(/^\/on_store_users\/*/) %>
+      <%= render "/layouts/footer" %>
+    <% else %>
+      <%= render "/layouts/user_footer" %>
+    <% end %>
+
   </body>
 </html>
 
-<% if user_signed_in? %>
+<% if request.fullpath.match?(/^\/admins\/*/) || request.fullpath.match?(/^\/on_store_users\/*/) %>
+<% else %>
+  <style type="text/css" media="screen">
+    body {
+      background-color: #f2f2f2;
+    }
+  </style>
 <% end %>
-
-<style type="text/css" media="screen">
-  body {
-  }
-</style>

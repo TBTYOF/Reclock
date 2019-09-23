@@ -1,34 +1,42 @@
 <% inquiry.replies.each_with_index do |reply,index| %>
 	<% index += 1 %>
 	<table class="table">
-		<tbody>
+		<tbody class="font-size3">
 			<tr>
-				<td><%= index %>.</td>
-				<td>
-					<!-- is_writerがfalseでユーザ投稿 -->
-					<% if reply.is_writer == false %>
-						「<%= reply.inquiry.user.name %>」の返信
-					<% else %>
-						「<%= reply.inquiry.on_store_user.shop_name %>」の返信
-					<% end %>
+				<td style="padding-top: 15px; padding-bottom: 15px;">
+					<strong>
+						<%= index %>. 
+						<!-- is_writerがfalseでユーザ投稿 -->
+						<% if reply.is_writer == false %>
+							 <%= reply.inquiry.user.name %> の返信
+						<% else %>
+							 <%= reply.inquiry.on_store_user.shop_name %> の返信
+						<% end %>
+					</strong>
 				</td>
-				<td>投稿日時： <%= reply.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[reply.created_at.wday]}) %H:%M") %></td>
 			</tr>
 			<tr>
-				<td>返信文：</td>
+				<td style="padding-top: 15px; padding-bottom: 15px;">
+					<strong>　投稿日時： </strong>
+					<%= reply.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[reply.created_at.wday]}) %H:%M") %>
+				</td>
 			</tr>
 			<tr>
-				<td colspan="3">
-					<%= reply.body %>
+				<td style="padding-top: 15px; padding-bottom: 15px;"><strong>　返信文：</strong></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="padding-top: 15px; padding-bottom: 15px;">
+					　<%= text_br(reply.body) %>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 <% end %>
-	<div class="col-sm-12 col-xs-12" id="replies">
+	<div class="col-sm-12 col-xs-12" id="replies" style="margin-bottom: 40px;">
 		<% if defined? order %>
-			<%= link_to "返信", reply_new_url, remote: true, class: "btn btn-success" %>
+			<%= link_to "返信", reply_new_url, remote: true, class: "btn btn-success font-size3" %>
 		<% else %>
-			<%= link_to "返信", reply_new_url, remote: true, class: "btn btn-success" %>
+			<%= link_to "返信", reply_new_url, remote: true, class: "btn btn-success font-size3" %>
 		<% end %>
 	</div>

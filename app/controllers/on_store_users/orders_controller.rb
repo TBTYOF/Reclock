@@ -62,10 +62,14 @@ class OnStoreUsers::OrdersController < ApplicationController
 		@order.update(order_params)
 
 		if params[:order][:repair_key].present?
-			respond_to do |format|
-		  	format.html
-		  	format.js {render '/on_store_users/orders/repair_detail.js.erb'}
-		  end
+			if @order.repair_status == "取引完了"
+				redirect_to on_store_users_on_store_user_order_path(current_on_store_user, @order)
+			else
+				respond_to do |format|
+			  	format.html
+			  	format.js {render '/on_store_users/orders/repair_detail.js.erb'}
+			  end
+			end
 		else
 			respond_to do |format|
 		  	format.html {redirect_to on_store_users_on_store_user_order_path(current_on_store_user, @order)}

@@ -65,7 +65,7 @@ class Users::InquiriesController < ApplicationController
 			@order = Order.find(params[:order_id])
 			@inquiries = @order.inquiries
 		else
-			@inquiries = Inquiry.where(user_id: current_user, on_store_user_id:  @shop.id, order_id: nil)
+			@inquiries = Inquiry.where(user_id: current_user, on_store_user_id:  @shop.id)
 		end
 
 		respond_to do |format|

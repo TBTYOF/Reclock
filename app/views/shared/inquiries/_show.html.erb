@@ -1,64 +1,87 @@
+<div style="margin: 30px 30px;">
+	<% if user_signed_in? %>
+		<% if @partial_key == "order" %>
+			<%= link_to "一覧へ戻る", users_user_inquiries_key_path(@user, @shop, order_id: @order), remote: true, class: "btn btn-default font-size3" %>
+		<% elsif @partial_key == "shop" %>
+			<%= link_to "一覧へ戻る", users_user_inquiries_key_path(@user, @shop), remote: true, class: "btn btn-default font-size3" %>
+		<% else %>
+			<%= link_to "一覧へ戻る", users_user_inquiries_path(@user), remote: true, class: "btn btn-default font-size3" %>
+		<% end %>
+	<% else %>
+		<% if @partial_key == "order" %>
+			<%= link_to "一覧へ戻る", on_store_users_on_store_user_order_inquiries_path(@shop, @order, partial_key: "order"), remote: true, class: "btn btn-default font-size3" %>
+		<% else %>
+			<%= link_to "一覧へ戻る", on_store_users_on_store_user_inquiries_path(@shop), remote: true, class: "btn btn-default font-size3" %>
+		<% end %>
+	<% end %>
+</div>
+
 <table class="table">
-	<thead>
-		<tr>
-			<% if defined? @partial_key %>
+	<tbody class="font-size3">
+		<% if defined? @partial_key %>
+		<% else %>
+			<% if user_signed_in? %>
+				<tr>
+					<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+						<strong>宛先</strong>
+					</td>
+					<td class="cell-body" style="padding-top: 15px; padding-bottom: 15px;">
+						<%= link_to @inquiry.on_store_user.shop_name, users_on_store_users_show_path(@inquiry.on_store_user) %>
+					</td>
+				</tr>
 			<% else %>
-				<% if user_signed_in? %>
-					<th>問合せ先</th>
-				<% else %>
-					<th>問合せ元</th>
-				<% end %>
+				<tr>
+					<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+						<strong>差出人</strong>
+					</td>
+					<td class="cell-body" style="padding-top: 15px; padding-bottom: 15px;">
+						<%= @inquiry.user.name %> (<%= @inquiry.user.name_kana %>)
+					</td>
+				</tr>
 			<% end %>
-			<th>件名</th>
-			<th>注文ID</th>
-			<th>最終投稿日</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
+		<% end %>
 		<tr>
-			<% if defined? @partial_key %>
-				<% else %>
-					<td><%= link_to @inquiry.on_store_user.shop_name, users_on_store_users_show_path(@inquiry.on_store_user) %></td>
-				<% end %>
-			<td><%= @inquiry.title %></td>
-			<td>
+			<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+				<strong>件名</strong>
+			</td>
+			<td class="cell-body" style="padding-top: 15px; padding-bottom: 15px;">
+				<%= @inquiry.title %>
+			</td>
+		</tr>
+		<tr>
+			<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+				<strong>注文ID</strong>
+			</td>
+			<td class="cell-body" style="padding-top: 15px; padding-bottom: 15px;">
 				<% if @inquiry.order_id == nil %>
 					注文前
 				<% else %>
 					<%= link_to @inquiry.order_id, users_user_order_path(@user, @inquiry.order_id) %>
 				<% end %>
 			</td>
-			<td>
+		</tr>
+		<tr>
+			<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+				<strong>最近の投稿日</strong>
+			</td>
+			<td class="cell-body" style="padding-top: 15px; padding-bottom: 15px;">
 				<% if @inquiry.replies.count == 0 %>
 					<%= @inquiry.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@inquiry.created_at.wday]}) %H:%M") %>
 				<% else %>
 					<%= @inquiry.replies.last.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@inquiry.replies.last.created_at.wday]}) %H:%M") %>
 				<% end %>
 			</td>
-			<td>
-				<% if user_signed_in? %>
-					<% if @partial_key == "order" %>
-						<%= link_to "一覧へ戻る", users_user_inquiries_key_path(@user, @shop, order_id: @order), remote: true, class: "btn btn-default" %>
-					<% elsif @partial_key == "shop" %>
-						<%= link_to "一覧へ戻る", users_user_inquiries_key_path(@user, @shop), remote: true, class: "btn btn-default" %>
-					<% else %>
-						<%= link_to "一覧へ戻る", users_user_inquiries_path(@user), remote: true, class: "btn btn-default" %>
-					<% end %>
-				<% else %>
-					<% if @partial_key == "order" %>
-						<%= link_to "一覧へ戻る", on_store_users_on_store_user_order_inquiries_path(@shop, @order, partial_key: "order"), remote: true, class: "btn btn-default" %>
-					<% else %>
-						<%= link_to "一覧へ戻る", on_store_users_on_store_user_inquiries_path(@shop), remote: true, class: "btn btn-default" %>
-					<% end %>
-				<% end %>
+		</tr>
+		<tr>
+			<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+				<strong>本文：</strong>
 			</td>
+			<td></td>
 		</tr>
 		<tr>
-			<td>本文：</td>
-		</tr>
-		<tr>
-			<td colspan="5"><%= @inquiry.body %></td>
+			<td colspan="2" style="border-top: none; padding-top: 15px; padding-bottom: 15px;">
+				<%= text_br(@inquiry.body) %>
+			</td>
 		</tr>
 	</tbody>
 </table>

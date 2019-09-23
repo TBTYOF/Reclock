@@ -35,7 +35,7 @@
 						<td><%= order.repair_status %></td>
 						<td><%= order.variety %></td>
 						<td><%= order.user.name %></td>
-						<td><%= order.user.telephone_number %></td>
+						<td><%= telephone_ber(order.user.telephone_number) %></td>
 						<td>
 							<% if order.delivery_day == nil %>
 								受付日：

@@ -1,0 +1,21 @@
+<footer class="container-fluid" style="background-image: url(/footer.jpeg); background-size: cover; background-position: bottom; height: 120px;">
+  <ul class="nav navbar-nav navbar-right font-size2" style="color: #fff;">
+    <li>
+    	利用規約
+    </li>
+    <li>
+    	運営会社
+    </li>
+    <li>
+      サイトマップ
+    </li>
+    <li>
+      お問合せ
+    </li>
+    <li>
+      <% if user_signed_in? %>
+      	<%= link_to '退会する', users_user_withdrawal_path(current_user), class: "font-size2", style: "padding: 5px 0; color: #fff;" %>
+      <% end %>
+    </li>
+  </ul>
+</footer>

@@ -1,24 +1,27 @@
 class Users::OnStoreUsersController < ApplicationController
 
 	def index
-		if params[:address] == nil
-			@q = MiddleCategory.ransack(params[:q])
-			@shops = OnStoreUser.page(params[:page]).reverse_order
-		else
+		if params[:address].present?
 			@q = MiddleCategory.ransack(params[:q])
 			@shops = OnStoreUser.page(params[:page]).reverse_order
 			@shops = @shops.serch_address(params[:address])
+			@search_by = params[:address]
+		else
+			@q = MiddleCategory.ransack(params[:q])
+			@shops = OnStoreUser.page(params[:page]).reverse_order
 		end
 		if params[:q].present?
-			@q =  MiddleCategory.ransack(search_params)
+			@q = MiddleCategory.ransack(search_params)
 			categories = @q.result(distinct: true)
 	    @shops = category_sarch(categories)
+	    @search_by = "service"
 	  end
 	end
 
 	def show
 		@shop = OnStoreUser.find(params[:id])
-		@inquiries = Inquiry.where(user_id: current_user, on_store_user_id:  @shop.id, order_id: nil)
+		@reviews = @shop.reviews.page(params[:page]).reverse_order
+		@inquiries = Inquiry.where(user_id: current_user, on_store_user_id:  @shop.id)
 	end
 
 	private

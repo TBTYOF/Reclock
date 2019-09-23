@@ -20,13 +20,33 @@
 
 // ハンバーガーメニュー
 $(document).on('turbolinks:load', function(){
+	// スクロール時の動作
+	var _window = $(window),
+	    Bottom;
+
+	_window.on('scroll',function(){
+			Bottom = $('.scroll').outerHeight();
+
+	    if (_window.scrollTop() > Bottom){
+	        $('#menu-text').slideUp();
+	    }
+	    else {
+	        $('#menu-text').slideDown();
+	    }
+	});
+
+	_window.trigger('scroll');
+
+	// クリック時の動作
 	$('.trigger').on('click', function(){
 		$('.menu-trigger').toggleClass('active');
 
 		if($('#sp-menu').hasClass('off')){
+			$('#hm-icon').css('background-color', 'rgba(0,0,0,0)');
 	    $('#sp-menu').removeClass('off');
 	    $('#sp-menu').animate({'marginRight':'100%'},300).addClass('on');
 	  }else{
+	  	$('#hm-icon').css('background-color', '#fefefe');
 	    $('#sp-menu').addClass('off');
 	    $('#sp-menu').animate({'marginRight':'0px'},300);
 	  }

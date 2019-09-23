@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container margin-top">
 	<div class="col-sm-12 col-xs-12">
 		<div class="font-size2" style="margin-bottom: 30px;">
 			<%= search_form_for(@search, as: :search, url: on_store_users_on_store_user_orders_path(current_on_store_user), class: "form-inline" ) do |f| %>
@@ -39,7 +39,7 @@
 						<td style="padding-top: 15px; padding-bottom: 15px;"><%= order.repair_status %></td>
 						<td style="padding-top: 15px; padding-bottom: 15px;"><%= order.variety %></td>
 						<td style="padding-top: 15px; padding-bottom: 15px;"><%= order.user.name %></td>
-						<td style="padding-top: 15px; padding-bottom: 15px;"><%= order.user.telephone_number %></td>
+						<td style="padding-top: 15px; padding-bottom: 15px;"><%= telephone_ber(order.user.telephone_number) %></td>
 						<td style="padding-top: 15px; padding-bottom: 15px;">
 							<% if order.delivery_day == nil %>
 								受付日：

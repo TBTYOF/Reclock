@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container margin-top">
 	<h2 class="font-size5 col-sm-7 col-xs-8" style="margin: 40px 20px">マイページ</h2>
 	<div style="margin-top: 60px;">
 		<%= link_to "登録情報を変更", edit_on_store_users_on_store_user_path(current_on_store_user), class: "btn btn-info font-size3" %>
 	</div>
 
 	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+		<div class="col-md-10 col-md-offset-1 col-xs-12">
 			<div style="margin-bottom: 70px;">
 				<ul class="list-group font-size3">
 					<li class="list-group-item">
@@ -15,7 +15,7 @@
 						店舗名　：<%= current_on_store_user.shop_name %>
 					</li>
 					<li class="list-group-item">
-						電話番号：<%= current_on_store_user.telephone_number %>
+						電話番号：<%= telephone_ber(current_on_store_user.telephone_number) %>
 					</li>
 					<li class="list-group-item">
 						メールアドレス：
@@ -65,12 +65,12 @@
 					<% if current_on_store_user.greeting.present? %>
 						<%= text_br(current_on_store_user.greeting) %>
 					<% else %>
-						未登録
+						<p class="font-size3">未登録</p>
 					<% end %>
 				</div>
 
 				<h3 class="font-size4" style="margin-bottom: 20px;">店舗画像</h3>
-				<div class="col-sm-10 col-xs-10 col-sm-offset-2 col-xs-offset-2" style="margin-bottom: 70px;">
+				<div class="col-md-10 col-xs-12 col-md-offset-2" style="margin-bottom: 70px;">
 					<%= attachment_image_tag current_on_store_user, :image, :fill, 350, 350, format: 'jpeg', fallback: "/no_image.jpg", size:'350x350' %>
 				</div>
 
@@ -85,7 +85,7 @@
 							</div>
 						<% end %>
 					<% else %>
-							未登録
+						<p class="font-size3">未登録</p>
 					<% end %>
 				</div>
 
@@ -117,7 +117,7 @@
 							</div>
 						<% end %>
 					<% else %>
-						未登録
+						<p class="font-size3">未登録</p>
 					<% end %>
 				</div>
 			</div>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container margin-top">
 	<% if current_on_store_user.reviews.present? %>
 		<div class="font-size2" style="margin-bottom: 30px;">
 			<%= search_form_for(@q, url:on_store_users_on_store_user_reviews_path(current_on_store_user), class: "form-inline") do |f| %>
@@ -50,8 +50,8 @@
 			</tbody>
 		</table>
 	<% else %>
-		<div>
-			<p>まだレビューはありません</p>
+		<div style="min-height: 500px;">
+			<p class="font-size3">まだレビューはありません</p>
 		</div>
 	<% end %>
 </div>

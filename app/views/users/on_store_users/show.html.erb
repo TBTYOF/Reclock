@@ -1,88 +1,123 @@
-<div class="container">
-	<div class="row">
-		<div id="tab-menu1" class="col-sm-6 col-xs-6">
-      <a href="#tab1" class="active col-sm-3 col-xs-3 btn btn-default">店舗情報</a>
-      <a href="#tab2" class="col-sm-3 col-xs-3 btn btn-default">レビュー</a>
-      <a href="#tab3" class="col-sm-3 col-xs-3 btn btn-default">問合せフォーム</a>
-    </div>
-    <% if user_signed_in? %>
-	    <div class="col-sm-2 col-sm-offset-1">
-	      <%= link_to "修理を依頼する", new_users_user_order_path(current_user, on_store_user_id: @shop.id), class: "btn btn-success" %>
-	    </div>
-	  <% end %>
+<div class="container" style="min-height: 500px; margin-bottom: 150px;">
+
+	<div class="body-boder col-md-7 col-xs-11" style="margin: 50px 0 50px 0;">
+		<h2 class="font-size5" style="padding-left: 40px;">店舗詳細ページ</h2>
 	</div>
 
-	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
-			<h2 class="font-size4"><%= @shop.shop_name %></h2>
-			<div class="row">
-				<div class="container-fluid" style="height: 300px; padding: 0;">
-					<div class="theTarget">
-						<div style="background-image: url(/image1.jpg);"></div>
-						<div style="background-image: url(/image3.jpg);"></div>
-						<div style="background-image: url(/image4.jpeg);"></div>
+	<div class="col-sm-12 col-xs-12">
+		<!-- タブメニュー -->
+		<div class="row">
+			<div id="tab-menu" class="col-md-10 col-xs-12 col-md-offset-1">
+	      <a href="#tab1" class="active col-sm-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
+	      	店舗情報
+	      </a>
+	      <a href="#tab2" class="col-sm-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
+	      	レビュー
+	      </a>
+	      <a href="#tab3" class="col-sm-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
+	      	問合せ
+	      </a>
+	    </div>
+		</div>
+
+		<div class="col-md-10 col-md-offset-1 col-xs-12 body-boder">
+			<div class="col-md-12 col-xs-12" style="margin-bottom: 50px;">
+				<h2 class="font-size4" style="margin: 30px 0;"><%= @shop.shop_name %></h2>
+				<div class="row">
+					<div class="col-md-12 col-xs-12" style="height: 300px; padding: 0;">
+						<% if @shop.on_store_user_images.present? %>
+							<div class="theTarget">
+								<% @shop.on_store_user_images.each do |image| %>
+									<%= attachment_image_tag image, :image, :fill, 300, 100, format: 'jpeg' %>
+								<% end %>
+							</div>
+						<% else %>
+							<img src="/no_image.jpg" alt="no_image" style="height: 300px; width: 100%;">
+						<% end %>
 					</div>
 				</div>
 			</div>
 
 			<div id="tab1" class="tab">
-				<div class="row">
+				<div class="row" style="margin-bottom: 50px;">
 					<div class="col-sm-12">
-						<h3 class="font-size3">ご挨拶</h3>
-						<%= @shop.greeting %>
+						<h3 class="font-size4" style="border-bottom: 2px solid #ddd">ご挨拶</h3>
+						<div>
+							<p class="font-size3">
+								<% if @shop.greeting == nil %>
+									<p class="font-size3">未登録</p>
+								<% else %>
+									<%= text_br(@shop.greeting) %>
+								<% end %>
+							</p>
+						</div>
 					</div>
 				</div>
 
-				<div class="row">
-					<h3>サービス概要</h3>
-					<div class="col-sm-12 col-xs-12">
+				<div class="row" style="margin-bottom: 50px;">
+					<div class="col-md-12 col-xs-12">
+						<h3 class="font-size4" style="border-bottom: 2px solid #ddd">サービス概要</h3>
 						<% if @shop.major_categories.present? %>
 							<% @shop.major_categories.each do |major_category| %>
-								<div class="row">
-									<div class="col-sm-3">
-										<%= major_category.name %>
+								<div class="row font-size2">
+									<div class="col-md-3 col-xs-3" style="padding-top: 10px; padding-bottom: 10px;">
+										<strong><%= major_category.name %></strong>
 									</div>
 									<% major_category.middle_categories.each_with_index do |middle_category, i| %>
 										<% if i == 0 %>
-											<div class="col-sm-9">
+											<div class="col-md-9 col-xs-9">
 										<% else %>
-											<div class="col-sm-9 col-sm-offset-3">
+											<div class="col-md-9 col-md-offset-3 col-xs-9 col-xs-offset-3">
 										<% end %>
-											<div class="col-sm-5">
+											<div class="col-md-5 col-xs-5" style="padding-top: 10px; padding-bottom: 10px;">
 												<%= middle_category.name %>
 											</div>
-											<div class="col-sm-7">
-												<% middle_category.minor_categories.each do |minor_category| %>
-													<div class="col-sm-6">
-														<%= minor_category.name %>
-													</div>
-													<div class="col-sm-6">
-														<%= minor_category.quote %>
-													</div>
-												<% end %>
+											<div class="col-md-7 col-xs-7">
+												<div class="row">
+													<% middle_category.minor_categories.each do |minor_category| %>
+														<div class="col-md-6 col-xs-6" style="padding-top: 10px; padding-bottom: 10px;">
+															<%= minor_category.name %>
+														</div>
+														<div class="col-md-6 col-xs-6" style="padding-top: 10px; padding-bottom: 10px;">
+															<%= minor_category.quote %>
+														</div>
+													<% end %>
+												</div>
 											</div>
 										</div>
 									<% end %>
 								</div>
 							<% end %>
 						<% else %>
-							未登録
+							<p class="font-size3">未登録</p>
 						<% end %>
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row" style="margin-bottom: 50px;">
 					<div class="col-sm-12">
-						<h3 class="font-size3">店舗情報</h3>
-						<table class="table font-size2">
+						<h3 class="font-size4">店舗情報</h3>
+						<table class="table font-size3">
 							<tbody>
 								<tr>
 									<td class="cell-title">営業時間</td>
-									<td class="cell-body"><%= @shop.business_hours %></td>
+									<td class="cell-body">
+										<% if @shop.business_hours == nil %>
+											未登録
+										<% else %>
+											<%= @shop.business_hours %>
+										<% end %>
+									</td>
 								</tr>
 								<tr>
 									<td class="cell-title">定休日</td>
-									<td class="cell-body"><%= @shop.holiday %></td>
+									<td class="cell-body">
+										<% if @shop.holiday == nil %>
+											未登録
+										<% else %>
+											<%= @shop.holiday %>
+										<% end %>
+									</td>
 								</tr>
 								<tr>
 									<td class="cell-title">電話番号</td>
@@ -90,11 +125,17 @@
 								</tr>
 								<tr>
 									<td class="cell-title">最寄駅</td>
-									<td class="cell-body"><%= @shop.closest_station %></td>
+									<td class="cell-body">
+										<% if @shop.closest_station == nil %>
+											未登録
+										<% else %>
+											<%= @shop.closest_station %>
+										<% end %>
+									</td>
 								</tr>
 								<tr>
 									<td class="cell-title">住所</td>
-									<td class="cell-body"><%= @shop.postcode %></td>
+									<td class="cell-body"><%= @shop.postcode.insert(3, '-') %></td>
 								</tr>
 								<tr>
 									<td class="cell-title" style="border: none;"></td>
@@ -106,44 +147,74 @@
 								</tr>
 								<tr>
 									<td class="cell-title">駐車場</td>
-									<td class="cell-body"><%= @shop.parking %></td>
+									<td class="cell-body">
+										<% if @shop.parking == nil %>
+											未登録
+										<% else %>
+											<%= @shop.parking %>
+										<% end %>
+									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
+
+				<% if user_signed_in? %>
+			    <div class="col-sm-2 col-xs-4" style="margin-bottom: 50px;">
+			      <%= link_to "修理を依頼する", new_users_user_order_path(current_user, on_store_user_id: @shop.id), class: "btn btn-success font-size3" %>
+			    </div>
+			  <% end %>
 			</div>
 
 			<div id="tab2" class="tab">
 				<div>
 					<% if @shop.reviews.count != 0 %>
-						<table class="table">
+						<table class="table font-size3">
 							<tbody>
-								<% @shop.reviews.reverse.each_with_index do |review, index| %>
+								<% @reviews.each_with_index do |review, index| %>
 									<tr>
-										<td><%= review.title %></td>
-										<td><%= review.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[review.created_at.wday]}) %H:%M") %></td>
+										<td style="padding-top: 15px; padding-bottom: 15px; margin-top: 50px;" colspan="3">
+											<strong>タイトル： </strong><%= review.title %>
+										</td>
+									</tr>
+									<tr>
+										<td style="padding-top: 15px; padding-bottom: 15px;" colspan="3">
+											<strong>投稿日時： </strong>
+											<%= review.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[review.created_at.wday]}) %H:%M") %>
+										</td>
 									</tr>
 									<tr>
 										<% if review.body.length > 300 %>
-											<td colspan="2" id="limit-body-<%= index %>"><%= review.body[0..300] %> ...</td>
+											<td style="padding-top: 15px; padding-bottom: 15px;" id="limit-body-<%= index %>" colspan="3">
+												<%= text_br(review.body)[0..300] %>　.....
+											</td>
 										<% else %>
-											<td colspan="2"><%= review.body %></td>
+											<td style="padding-top: 15px; padding-bottom: 15px;" colspan="3">
+												<%= text_br(review.body) %>
+											</td>
 										<% end %>
 									</tr>
 									<tr style="display: none;" id="body-<%= index %>">
-										<td colspan="2"><%= review.body %></td>
+										<td style="padding-top: 15px; padding-bottom: 15px;" colspan="3">
+											<%= text_br(review.body) %>
+										</td>
 									</tr>
 									<% if review.body.length > 300 %>
 										<tr class="trigger-<%= index %>">
-											<td></td>
-											<td>全文を表示</td>
+											<td style="width: 37%;"></td>
+											<td class="all-text">全文を表示</td>
+											<td style="width: 37%;"></td>
 										</tr>
 										<tr style="display: none;" class="trigger-<%= index %>">
-											<td></td>
-											<td>　 戻す</td>
+											<td style="width: 37%;"></td>
+											<td class="all-text">　 戻す</td>
+											<td style="width: 37%;"></td>
 										</tr>
 									<% end %>
+									<tr>
+										<td style="height: 100px; border: none;"></td>
+									</tr>
 
 									<script>
 										$('.trigger-<%= index %>').on('click', function() {
@@ -156,9 +227,10 @@
 								<% end %>
 							</tbody>
 						</table>
+						<%= paginate @reviews, class: "paginate" %>
 					<% else %>
 						<div>
-							<p>まだレビューはありません</p>
+							<p class="font-size3" style="margin-bottom: 50px;">まだレビューはありません</p>
 						</div>
 					<% end %>
 				</div>
@@ -168,12 +240,15 @@
 				<% if user_signed_in? %>
 					<%= render '/shared/inquiries/inquiry', inquiries: @inquiries, shop: @shop %>
 				<% else %>
-					ログイン後にお問合せ出来ます
-					ログインは<%= link_to "こちら", new_user_session_path %>
-					新規登録は<%= link_to "こちら", new_user_registration_path %>
+					<p class="font-size3">ログイン後にお問合せ出来ます</p>
+					<p class="font-size3" style="margin-bottom: 50px;">
+						ログインは<%= link_to "こちら", new_user_session_path %>
+						新規登録は<%= link_to "こちら", new_user_registration_path %>
+					</p>
 				<% end %>
 			</div>
 
+		</div>
 		</div>
 	</div>
 </div>
@@ -205,11 +280,18 @@
 
 	$('.tab[id != "tab1"]').hide();
 
-	$('#tab-menu1 a').on('click', function() {
+	$('#tab-menu a').on('click', function() {
   	$(".tab").hide();
-  	$("#tab-menu1 .active").removeClass("active");
+  	$("#tab-menu .active").removeClass("active");
   	$(this).addClass("active");
   	$($(this).attr("href")).show();
   	return false;
 	});
 </script>
+
+<style>
+	.all-text:hover {
+  cursor: pointer;
+  background-color: #f6f6f6;
+}
+</style>
