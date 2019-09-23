@@ -1,0 +1,6 @@
+<div class="col-sm-12 col-xs-12">
+	<h2 class="font-size4" style="margin-bottom: 30px;">カード登録</h2>
+	<%= form_tag(pay_users_user_card_index_path, method: :post, id: 'charge-form',  name: "inputForm") do %>
+     <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="<%= ENV["PAYJP_PUBLIC_KEY"] %>"  ></script>
+  <% end %>
+</div>

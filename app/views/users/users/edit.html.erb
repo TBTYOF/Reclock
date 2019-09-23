@@ -41,8 +41,33 @@
     <% end %>
 
     <div class="col-sm-12 col-xs-12">
-    	<h2 class="font-size4" style="margin-bottom: 30px;">カード登録</h2>
-    	<p class="btn btn-info" style="background-color: yellow; color: black;">クレジットカード情報入力</p>
+      <% if card_by?(@user) %>
+        <h2 class="font-size4" style="margin-bottom: 30px;">カード情報</h2>
+        <table class="table font-size3">
+          <tbody>
+            <tr>
+              <td>
+                <%= @default_card_information.brand %>　**** **** **** <%= @default_card_information.last4 %>
+              </td>
+            </tr>
+            <tr>
+              <td style="border-top: none;">
+                有効期限： <%= @default_card_information.exp_month %>/<%= @default_card_information.exp_year %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row" style="margin-left: 10px;">
+          <%= link_to "カード情報を削除", delete_users_user_card_index_path(@user), method: :post, class: "btn btn-danger font-size3" %>
+        </div>
+      <% else %>
+        <h2 class="font-size4" style="margin-bottom: 30px;">カード登録</h2>
+          <div class="col-sm-12 col-xs-12">
+            <%= form_tag(pay_users_user_card_index_path(@user), method: :post, id: 'charge-form',  name: "inputForm") do %>
+               <script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="<%= ENV["PAYJP_PUBLIC_KEY"] %>" data-text="新規カード登録" data-submit-text="カード情報を登録" ></script>
+            <% end %>
+          </div>
+      <% end %>
     </div>
   </div>
 </div>
