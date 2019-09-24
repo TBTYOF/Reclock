@@ -1,0 +1,14 @@
+<% if current_on_store_user.on_store_user_images.present? %>
+	<% current_on_store_user.on_store_user_images.each_with_index do |image, i| %>
+		<% i += 1 %>
+		<h4 class="font-size3 col-sm-3 col-xs-3">
+			(<%= i %>)　
+			<%= link_to "削除", on_store_users_on_store_user_on_store_user_image_path(current_on_store_user, image),  method: :delete, remote: true, data: { confirm: "削除します" }, class: "btn btn-danger" %>
+		</h4>
+		<div class="col-md-12 col-xs-12" style="margin-bottom: 30px;">
+			<%= attachment_image_tag image, :image, :limit, "700!", 500, format: 'jpeg' %>
+		</div>
+	<% end %>
+<% else %>
+		<h4>未登録</h4>
+<% end %>

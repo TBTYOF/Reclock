@@ -1,0 +1,2 @@
+module OnStoreUsers::OnStoreUserImagesHelper
+end

@@ -1,0 +1,1 @@
+$("#reqlies").html("<%= escape_javascript(render partial:'/shared/replies/show', :locals => { :inquiry => @inquiry, :order => @order, :shop => @shop, reply_new_url: @reply_new_url }) %>");

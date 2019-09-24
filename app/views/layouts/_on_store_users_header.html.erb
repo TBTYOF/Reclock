@@ -1,0 +1,52 @@
+<header class="navbar navbar-default font-size2" style="width: 100%; line-height: 50px; margin-bottom: 0;">
+  <nav class="container" style="margin: 0 5%; width: 90%;">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <% if on_store_user_signed_in? %>
+          <%= link_to 'Re:clock', on_store_users_on_store_user_home_path(current_on_store_user), class: "navbar-brand active",id: "top" %>
+        <% else %>
+          <%= link_to 'Re:clock', root_path, class: "navbar-brand active",id: "top" %>
+        <% end %>
+      </div>
+      <% if on_store_user_signed_in? %>
+        <div class="col-sm-4 col-xs-4">
+          <%= search_form_for(@search, as: :search, url: on_store_users_on_store_user_orders_path(current_on_store_user), class: "form-inline" ) do |f| %>
+            <%= f.label :user_telephone_number_cont, style: "display: none;" %>
+            <%= f.search_field :user_telephone_number_cont, placeholder: '電話番号:', class: "form-control" %>
+            <%= f.submit "検索", name: "serch", class: "btn btn-default" %>
+          <% end %>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= link_to '管理台帳', on_store_users_on_store_user_orders_path(current_on_store_user) %>
+          </li>
+          <li>
+          	<%= link_to '問合せ一覧', on_store_users_on_store_user_inquiries_path(current_on_store_user) %>
+          </li>
+          <li>
+            <%= link_to 'レビュー一覧', on_store_users_on_store_user_reviews_path(current_on_store_user) %>
+          </li>
+          <li>
+            <%= link_to 'マイページ', on_store_users_on_store_user_path(current_on_store_user) %>
+          </li>
+          <li>
+             <%= link_to 'ログアウト', destroy_on_store_user_session_url, method: :delete %>
+          </li>
+        </ul>
+      <% else %>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "ログイン", new_on_store_user_session_path %></li>
+        </ul>
+      <% end %>
+    </div>
+  </nav>
+</header>
+
+<style type="text/css" media="(max-width: 768px)">
+  nav .form-control {
+    font-size: 13px;
+  }
+  .font-size2 {
+    font-size: 13px;
+  }
+</style>

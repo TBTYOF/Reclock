@@ -1,0 +1,46 @@
+<div class="container">
+	<div class="col-md-12 col-xs-12">
+		<div>
+			<%= search_form_for(@q,  url: admins_on_store_users_path, class: "form-inline" ) do |f| %>
+
+				<%= f.label :shop_name_cont, '店舗名' %>
+				<%= f.search_field :shop_name_cont %>
+
+				<%= f.label :owner_name_cont, '代表者名' %>
+				<%= f.search_field :owner_name_cont %>
+
+				<%= f.label :telephone_number_cont, '電話番号' %>
+				<%= f.search_field :telephone_number_cont %>
+
+				<%= f.label :email_cont, 'メールアドレス' %>
+				<%= f.search_field :email_cont %>
+
+				<%= f.submit "検索", name: "serch" %>
+				<%= link_to "リセット", on_store_users_path, class: "btn " %>
+			<% end %>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th><%= sort_link(@q, :id, '出店者ID') %></th>
+					<th>店舗名</th>
+					<th>代表者名</th>
+					<th>電話番号</th>
+					<th>メールアドレス</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @on_store_users.each do |on_store_user| %>
+					<tr>
+						<td><%= link_to on_store_user.id, admins_on_store_user_path(on_store_user) %></td>
+						<td><%= on_store_user.shop_name %></td>
+						<td><%= on_store_user.owner_name %></td>
+						<td><%= telephone_ber(on_store_user.telephone_number) %></td>
+						<td><%= on_store_user.email %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<%= paginate @on_store_users, class: "paginate" %>
+	</div>
+</div>

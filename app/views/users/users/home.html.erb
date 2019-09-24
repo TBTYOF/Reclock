@@ -1,0 +1,295 @@
+<div class="container-fluid body-gray" style="width: 100%;">
+	<div class="row scroll1" style="height: 500px; padding: 0; margin-right: -15px;">
+		<div class="theTarget">
+			<div style="background-image: url(/image1.jpg);"></div>
+			<div style="background-image: url(/image3.jpg);"></div>
+			<div style="background-image: url(/image4.jpeg);"></div>
+		</div>
+	</div>
+
+
+	<div class="row margin scroll2">
+		<div class="col-md-11 col-md-offset-1 col-xs-12" style="margin-bottom: 50px;">
+			<div class="col-sm-12 col-xs-12">
+				<p class="font-size4">時計の修理でお困りではないですか？<br>私達が力になります！</p>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4 col-xs-4">
+					<p class="btn btn-default font-size3" id="tutrial-trigger">初めての方へ</p>
+				</div>
+				<div class="col-sm-4 col-xs-4">
+					<%= link_to "修理店を探す", users_on_store_users_index_path, class: "btn btn-default font-size3" %>
+				</div>
+				<div class="col-sm-4 col-xs-4">
+					<%= link_to "出店希望の方へ", on_store_users_form_path, class: "btn btn-default font-size3" %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section class="row tutrial" style="display: none;">
+		<div class="row body-white scroll3">
+			<div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+				<h3 class="font-size4" 	style="margin-bottom: 40px;">
+					Re:clockとは
+				</h3>
+				<p class="font-size3">
+					時計修理受注サイトです。<br>
+					「見積」「集荷」「修理」「納品」までご提供しております。
+				</p>
+			</div>
+		</div>
+
+		<div class="row margin scroll4" >
+			<div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+				<h3 class="font-size4" 	style="margin-bottom: 40px;">
+					ご利用の流れ
+				</h3>
+			</div>
+			<div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+				<div class="col-sm-2 col-xs-3"	style="max-width: 130px; padding: 0;">
+					<p class="btn btn-default font-size3" id="btn1">①探す▶</p>
+				</div>
+				<div class="col-sm-2 col-xs-3" style="max-width: 159px; padding: 0;">
+					<p class="btn btn-default font-size3" id="btn2">②申込む▶</p>
+				</div>
+				<div class="col-sm-2 col-xs-5" style="padding: 0;">
+					<p class="btn btn-default font-size3" id="btn3">③集荷&見積▶</p>
+				</div>
+				<div class="col-sm-2 col-xs-4" style="padding: 0;">
+					<p class="btn btn-default font-size3" id="btn4">④修理&納品▶</p>
+				</div>
+				<div class="col-sm-2 col-xs-4" style="padding: 0;">
+					<p class="btn btn-default font-size3" id="btn5">⑤支払&評価</p>
+				</div>
+				<div class="col-sm-12 col-xs-12 font-size2">
+					<p>※②以降のサービスご利用には「会員登録」が必要になります</p>
+					<p>
+						新規登録ご希望の方は "<%= link_to 'こちら', new_user_registration_path %>"
+					</p>
+					<p>
+						会員の方は "<%= link_to 'こちら', new_user_session_path %>"
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row margin body-white scroll5" id="tutrial1">
+			<div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+				<h4 class="font-size4" style="margin: 50px 0 40px 0;">
+					①修理店を検索
+				</h4>
+				<p class="font-size3">
+					 まずは修理店の検索を行います。<br>
+					<strong>「お近くの修理店」</strong>や<strong>「時計の種類」</strong>で<br>
+					ご希望に合った修理店を検索します。
+				</p>
+			</div>
+		</div>
+
+		<div class="row margin scroll6" id="tutrial2">
+			<div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+				<h4 class="font-size4" style="margin: 50px 0 40px 0;">
+					②修理依頼を申し込む
+				</h4>
+					<p class="font-size3">
+						修理店が見つかったら<strong>「注文フォーム」</strong>に<br>
+						必要事項を記入し修理依頼を申込みます。<br>
+						<br>
+						申込み後、<strong>マイページ</strong>	から依頼内容が確認でき、<br>
+						修理に関する連絡を同ページ内で行います。<br>
+						<br>
+						※注文前にご不明な点がございましたら、<br>
+						各修理店の詳細ページからお問い合わせ出来ます。
+					</p>
+			</div>
+		</div>
+
+		<div class="row margin body-white scroll7" id="tutrial3" style="margin-bottom: 0px;">
+			<div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+				<h4 class="font-size4" style="margin: 50px 0 40px 0;">
+					③集荷
+				</h4>
+				<p class="font-size3">
+					集荷方法は以下<strong>３つから選択</strong>出来ます。<br>
+					<br>
+					　「修理店が集荷にお伺いする」<br>
+					　「ご自身で宅配サービス（クロネコヤマトや郵便局など）を申込む」<br>
+					　「ご自身で修理店に持参する」<br>
+					<br>
+					※「注文詳細」または「店舗詳細」ページからお問合せ出来ます。
+				</p>
+				<h4 class="font-size4" style="margin: 50px 0 40px 0;">
+					　見積
+				</h4>
+				<p class="font-size3">
+					お品物の状態や修理内容に応じて、<br>
+					<strong>料金や納品予定日に変動</strong>がございます。<br>
+					また、状態によってはご希望に添えない事がございます。
+				</p>
+			</div>
+		</div>
+
+		<div class="row margin scroll8" id="tutrial4">
+			<div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+				<h4 class="font-size4" style="margin: 50px 0 40px 0;">
+					④修理期間中
+				</h4>
+				<p class="font-size3">
+					<strong>マイページ</strong>	でお預かりしたお品物の修理状況を<br>
+					確認頂けます。<br>
+				</p>
+				<h4 class="font-size4" style="margin: 50px 0 40px 0;">
+					　納品
+				</h4>
+				<p class="font-size3">
+					納品方法は以下<strong>３つから選択</strong>出来ます。<br>
+					<br>
+					　「修理店がお届けする」<br>
+					　「宅配サービス（クロネコヤマトや郵便局など）を利用する」<br>
+					　「ご自身が直接修理店から受け取る」<br>
+					<br>
+					※「注文詳細」または「店舗詳細」ページからお問合せ出来ます。
+				</p>
+			</div>
+		</div>
+
+		<div class="row margin body-white scroll9" id="tutrial5" style="padding-bottom: 100px; margin-bottom: 0;">
+			<div class="col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+				<h4 class="font-size4" style="margin: 50px 0 40px 0;">
+					⑤支払
+				</h4>
+				<p class="font-size3">
+					支払方法は以下<strong>３つから選択</strong>出来ます。<br>
+					<br>
+					　「現金支払」<br>
+					　「銀行振込」<br>
+					　「クレジットカード払い」（マイページで事前に登録）
+				</p>
+				<h4 class="font-size4" style="margin: 50px 0 40px 0;">
+					　評価
+				</h4>
+				<p class="font-size3">
+					支払まで終わりましたら<strong>修理店を評価しましょう。</strong>	<br>
+					今後のサービス発展のためにご協力をお願い致します！<br>
+				</p>
+			</div>
+		</div>
+	</section>
+
+</div>
+
+<script>
+	$('document').on('turbolinks:load', function(){
+		$('.theTarget').skippr();
+	});
+
+	$('.theTarget').skippr({
+		// "fade" or "slide"
+		transition: 'fade',
+		speed: 1000,
+		// easingの種類
+		easing: 'easeOutQuart',
+		// "block" or "bubble"
+		navType: 'bubble',
+		// "div" or "img"
+		childrenElementType: 'div',
+		arrows: true,
+		// スライドショーの自動再生
+		autoPlay: true,
+		autoPlayDuration: 4000,
+	// キーボードの矢印キーによるスライド送りの設定
+		keyboardOnAlways: true,
+	// 1枚目のスライド表示時に戻る矢印を表示するか
+		hidePrevious: false
+	});
+
+	// 初めての方へからスクロール
+  $('#tutrial-trigger').on('click', function() {
+  	$('.row').slideDown();
+  	// スクロールトップの高さを取得(offset:座標取得)
+  	var pos = $('section').offset().top;
+    $('html, body').animate({scrollTop: pos});
+	});
+
+  // 各チュートリアルへスクロール
+	$('#btn1').on('click', function() {
+  	var pos = $('#tutrial1').offset().top;
+    $('html, body').animate({scrollTop: pos});
+	});
+	$('#btn2').on('click', function() {
+  	var pos = $('#tutrial2').offset().top;
+    $('html, body').animate({scrollTop: pos});
+	});
+	$('#btn3').on('click', function() {
+  	var pos = $('#tutrial3').offset().top;
+    $('html, body').animate({scrollTop: pos});
+	});
+	$('#btn4').on('click', function() {
+  	var pos = $('#tutrial4').offset().top;
+    $('html, body').animate({scrollTop: pos});
+	});
+	$('#btn5').on('click', function() {
+  	var pos = $('#tutrial5').offset().top;
+    $('html, body').animate({scrollTop: pos});
+	});
+
+	var _window = $(window),
+	    scrollBottom, scrollBottom1, scrollBottom2, scrollBottom3, scrollBottom4,
+	    scrollBottom5, scrollBottom6, scrollBottom7, scrollBottom8, scrollBottom9;
+
+	_window.on('scroll',function(){
+			scrollBottom = $('.scroll').outerHeight();
+	    scrollBottom1 = scrollBottom + $('.scroll1').outerHeight();
+	    scrollBottom2 = scrollBottom1 + $('.scroll2').outerHeight(true);
+	    scrollBottom3 = scrollBottom2 + $('.scroll3').outerHeight();
+	    scrollBottom4 = scrollBottom2 + $('.scroll3').outerHeight(true) + $('.scroll4').outerHeight(true);
+	    scrollBottom5 = scrollBottom4 + $('.scroll5').outerHeight();
+	    scrollBottom6 = scrollBottom4 + $('.scroll5').outerHeight(true) + $('.scroll6').outerHeight(true);
+	    scrollBottom7 = scrollBottom6 + $('.scroll7').outerHeight(true);
+	    scrollBottom8 = scrollBottom7 + $('.scroll8').outerHeight(true);
+
+	    if (_window.scrollTop() > scrollBottom){
+	        $('#hm-icon').css('background-color', '#fefefe');
+	    }
+	    if(_window.scrollTop() > scrollBottom1){
+	        $('#hm-icon').css('background-color', '#f2f2f2');
+	    }
+	    if(_window.scrollTop() > scrollBottom2){
+	        $('#hm-icon').css('background-color', '#fefefe');
+	    }
+	    if(_window.scrollTop() > scrollBottom3){
+	        $('#hm-icon').css('background-color', '#f2f2f2');
+	    }
+	    if(_window.scrollTop() > scrollBottom4){
+	        $('#hm-icon').css('background-color', '#fefefe');
+	    }
+	    if(_window.scrollTop() > scrollBottom5){
+	        $('#hm-icon').css('background-color', '#f2f2f2');
+	    }
+	    if(_window.scrollTop() > scrollBottom6){
+	        $('#hm-icon').css('background-color', '#fefefe');
+	    }
+	    if(_window.scrollTop() > scrollBottom7){
+	        $('#hm-icon').css('background-color', '#f2f2f2');
+	    }
+	    if(_window.scrollTop() > scrollBottom8){
+	        $('#hm-icon').css('background-color', '#fefefe');
+	    }
+	});
+
+	_window.trigger('scroll');
+</script>
+
+<style type="text/css" media="screen">
+	.margin {
+		margin-bottom: 50px;
+	}
+	.col-sm-11, .col-xs-11 {
+		width: 89.99%;
+	}
+	.row {
+		margin-right: -7px;
+	}
+</style>

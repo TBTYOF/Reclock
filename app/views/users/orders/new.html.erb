@@ -1,0 +1,68 @@
+<div class="container" style="margin-top: 100px; margin-bottom: 150px; ">
+  <div class="body-boder col-md-7 col-xs-10" style="margin-bottom: 50px;">
+    <h2 class="font-size5" style="padding-left: 50px;">修理依頼申込み</h2>
+  </div>
+  <div class="col-md-9 col-xs-10 col-sm-offset-1 col-xs-offset-1 body-boder" style="margin-bottom: 50px;">
+    <%= form_with model: Order.new, url: users_user_orders_path, local: true do |f| %>
+
+      <% if @order.errors.any? %>
+        <div id="error_explanation" class="alert alert-warning row">
+          <h2><%= pluralize(@order.errors.count, "箇所") %> エラーがあります:</h2>
+          <ul>
+          <% @order.errors.full_messages.each do |msg| %>
+            <li class="font-size2"><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= f.hidden_field :on_store_user_id, :value => @shop.id %>
+
+      <div class="col-sm-12 col-xs-12" style="padding-top: 50px;">
+        <div class="row">
+          <div class="form-group font-size3 col-sm-6 col-xs-6" style="margin-bottom: 30px">
+            <%= f.label :variety, "※品種(必須)", style: "color: red;" %>
+            <%= f.select :variety, Order.varieties.keys, :include_blank => '未選択', :selected => '未選択', autofocus: true, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 50px">
+        	<div class="field form-group font-size3 col-sm-6 col-xs-6">
+            <%= f.label :maker, "メーカー" %><br />
+            <%= f.text_field :maker, class: "form-control font-size3", placeholder: 'メーカー名:', autocomplete: "maker" %>
+          </div>
+          <div class="field form-group font-size3 col-sm-6 col-xs-6">
+            <%= f.label :model, "型番" %><br />
+            <%= f.text_field :model, class: "form-control font-size3", placeholder: '型番:', autocomplete: "model" %>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 50px">
+          <div class="field form-group font-size3 col-sm-12 col-xs-12">
+            <%= f.label :symptom, "※症状(必須)", style: "color: red;" %><br />
+            <%= f.text_area :symptom, rows:10, class: "form-control font-size3", placeholder: '症状を入力して下さい(1000文字以内):', style: "resize: none; " %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="font-size3 col-sm-9 col-xs-9" style="margin-bottom: 30px">
+            <%= f.label :order_images_images, "時計の画像", class: "font-size3" %><br />
+            <%= f.attachment_field :order_images_images, multiple: true, class: "font-size2" %>
+          </div>
+        </div>
+
+         <div class="row">
+          <div class="form-group font-size3 col-sm-6 col-xs-6" style="margin-bottom: 50px">
+            <%= f.label :pickup, "※集荷方法(必須)", style: "color: red;" %>
+            <%= f.select :pickup, Order.pickups.keys, :include_blank => '未選択', :selected => '未選択', class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="actions col-sm-4 col-xs-4" style="padding-bottom: 50px;">
+        	<%= f.submit "申込む", class: "btn btn-info font-size3", data: { confirm: "この情報で申込みます" } %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<table class="table">
+	<thead class="font-size3">
+		<tr>
+			<th>
+				<% if user_signed_in? %>
+					宛先
+				<% else %>
+					差出人
+				<% end %>
+			</th>
+			<th style="width: 30%;">件名</th>
+			<th style="width: 15%;"><%= sort_link(@q, :order_id, '注文') %></th>
+			<th style="width: 20%;"><%= sort_link(@q, :created_at, '投稿日') %></th>
+			<th style="width: 10%; color: red;">未読</th>
+		</tr>
+	</thead>
+	<tbody class="font-size2">
+		<% inquiries.each do |inquiry| %>
+			<tr>
+				<% if user_signed_in? %>
+					<td style="padding-top: 15px; padding-bottom: 15px;">
+						<%= link_to inquiry.on_store_user.shop_name, users_on_store_users_show_path(inquiry.on_store_user) %>
+					</td>
+					<td style="padding-top: 15px; padding-bottom: 15px;">
+						<%= inquiry.title %>
+					</td>
+					<td style="padding-top: 15px; padding-bottom: 15px;">
+						<% if inquiry.order_id == nil %>
+							注文前
+						<% else %>
+							<%= link_to inquiry.order_id, users_user_order_path(user, inquiry.order_id) %>
+						<% end %>
+					</td>
+				<% else %>
+					<td style="padding-top: 15px; padding-bottom: 15px;">
+						<%= inquiry.user.name %> 様
+					</td>
+					<td style="padding-top: 15px; padding-bottom: 15px;">
+						<%= inquiry.title %>
+					</td>
+					<td style="padding-top: 15px; padding-bottom: 15px;">
+						<% if inquiry.order_id == nil %>
+							注文前
+						<% else %>
+							<%= link_to inquiry.order_id, on_store_users_on_store_user_order_path(user, inquiry.order_id) %>
+						<% end %>
+					</td>
+				<% end %>
+				<td style="padding-top: 15px; padding-bottom: 15px;">
+					<% if inquiry.replies.count == 0 %>
+						<%= inquiry.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[inquiry.created_at.wday]})") %>
+					<% else %>
+						<%= inquiry.replies.last.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[inquiry.replies.last.created_at.wday]})") %>
+					<% end %>
+				</td>
+				<td style="padding-top: 15px; padding-bottom: 15px;">
+					<!-- ユーザか出店者か -->
+					<% if user_signed_in? %>
+						<!-- 注文前か後か -->
+						<% if inquiry.order_id == nil %>
+							<!-- 既読か未読か -->
+							<% if inquiry.user_read == false %>
+								<%= link_to "内容へ", users_user_inquiry_path(user, inquiry, shop_id: inquiry.on_store_user.id), remote: true, class: "btn btn-danger" %>
+							<% else %>
+								<%= link_to "内容へ", users_user_inquiry_path(user, inquiry, shop_id: inquiry.on_store_user.id), remote: true, class: "btn btn-default" %>
+							<% end %>
+						<% else %>
+							<!-- 既読か未読か -->
+							<% if inquiry.user_read == false %>
+								<%= link_to "内容へ", users_user_inquiry_path(user, inquiry, shop_id: inquiry.on_store_user.id, order_id: inquiry.order.id), remote: true, class: "btn btn-danger" %>
+							<% else %>
+								<%= link_to "内容へ", users_user_inquiry_path(user, inquiry, shop_id: inquiry.on_store_user.id, order_id: inquiry.order.id), remote: true, class: "btn btn-default" %>
+							<% end %>
+						<% end %>
+					<% else %>
+						<!-- 注文前か後か -->
+						<% if inquiry.order_id == nil %>
+							<!-- 既読か未読か -->
+							<% if inquiry.on_store_user_read == false %>
+								<%= link_to "内容へ", on_store_users_on_store_user_inquiry_path(user, inquiry), remote: true, class: "btn btn-danger" %>
+							<% else %>
+								<%= link_to "内容へ", on_store_users_on_store_user_inquiry_path(user, inquiry), remote: true, class: "btn btn-default" %>
+							<% end %>
+						<% else %>
+							<!-- 既読か未読か -->
+							<% if inquiry.on_store_user_read == false %>
+								<%= link_to "内容へ", on_store_users_on_store_user_order_inquiry_path(user, inquiry.order.id,inquiry), remote: true, class: "btn btn-danger" %>
+							<% else %>
+								<%= link_to "内容へ", on_store_users_on_store_user_order_inquiry_path(user, inquiry.order.id,inquiry), remote: true, class: "btn btn-default" %>
+							<% end %>
+						<% end %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<%= paginate inquiries, class: "paginate" %>

@@ -1,0 +1,109 @@
+<div class="container">
+	<h2 class="font-size4">マイページ</h2>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1 col-xs-12">
+			<div>
+				<ul class="list-group">
+					<li class="list-group-item">代表者名</li>
+					<li class="list-group-item">
+						<%= current_on_store_user.owner_name %> (<%= current_on_store_user.owner_name_kana %>)
+					</li>
+					<li class="list-group-item">店舗名</li>
+					<li class="list-group-item"><%= current_on_store_user.shop_name %></li>
+					<li class="list-group-item">電話番号</li>
+					<li class="list-group-item"><%= telephone_ber(current_on_store_user.telephone_number %></li>
+					<li class="list-group-item">メールアドレス</li>
+					<li class="list-group-item"><%= current_on_store_user.email %></li>
+					<li class="list-group-item">住所</li>
+					<li class="list-group-item"><%= current_on_store_user.postcode.insert(3, '-') %></li>
+					<li class="list-group-item"><%= current_on_store_user.address %></li>
+					<li class="list-group-item">最寄駅</li>
+					<li class="list-group-item">
+						<% if current_on_store_user.closest_station.present? %>
+							<%= current_on_store_user.closest_station %>
+						<% else %>
+							未登録
+						<% end %>
+					</li>
+					<li class="list-group-item">駐車場</li>
+					<li class="list-group-item">
+						<% if current_on_store_user.parking.present? %>
+							<%= current_on_store_user.parking %>
+						<% else %>
+							未登録
+						<% end %>
+					</li>
+					<li class="list-group-item">店舗情報 公開/非公開</li>
+					<li class="list-group-item">
+						<% if current_on_store_user.is_public == true %>
+							公開中
+						<% else %>
+							非公開
+						<% end %>
+					</li>
+					<li class="list-group-item">
+						<%= link_to "登録情報を編集する", edit_on_store_users_on_store_user_path(current_on_store_user), class: "btn btn-info" %>
+					</li>
+				</ul>
+			</div>
+
+			<div class="row">
+				<h3>ご挨拶</h3>
+				<div class="col-sm-12 col-xs-12">
+					<% if current_on_store_user.greeting.present? %>
+							<%= current_on_store_user.greeting %>
+						<% else %>
+							未登録
+						<% end %>
+				</div>
+				<h3>店舗画像</h3>
+				<div class="col-sm-12 col-xs-12">
+					<%= attachment_image_tag current_on_store_user, :image, :fill, 350, 350, format: 'jpeg', fallback: "/no_image.jpg", size:'350x350' %>
+				</div>
+				<h3>スライドショー用画像</h3>
+				<div class="col-sm-12 col-xs-12">
+					<% if current_on_store_user.on_store_user_images.present? %>
+						<% current_on_store_user.on_store_user_images.each do |image| %>
+							<%= attachment_image_tag image, :image, :limit, "800!", 500, format: 'jpeg' %>
+						<% end %>
+					<% else %>
+							未登録
+					<% end %>
+				</div>
+				<h3>サービス概要</h3>
+				<div class="col-sm-12 col-xs-12">
+					<% if current_on_store_user.major_categories.present? %>
+						<% current_on_store_user.major_categories.each do |major_category| %>
+							<div class="row">
+								<div class="col-sm-3">
+									<%= major_category.name %>
+								</div>
+								<% major_category.middle_categories.each do |middle_category| %>
+									<div class="col-sm-9">
+										<div class="col-sm-5">
+											<%= middle_category.name %>
+										</div>
+										<div class="col-sm-7">
+											<% middle_category.minor_categories.each do |minor_category| %>
+												<div class="col-sm-6">
+													<%= minor_category.name %>
+												</div>
+												<div class="col-sm-6">
+													<%= minor_category.quote %>
+												</div>
+											<% end %>
+										</div>
+									</div>
+								<% end %>
+							</div>
+						<% end %>
+					<% else %>
+						未登録
+					<% end %>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</div>

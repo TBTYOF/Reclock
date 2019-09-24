@@ -1,0 +1,25 @@
+<div class="col-md-10 col-xs-12 col-md-offset-1">
+	<h2 class="font-size4" style="margin-bottom: 20px;"><strong>修理店を評価する</strong></h4>
+
+	<%= form_with model: Review.new, url: users_user_order_reviews_path(@user, @order) do |f| %>
+
+		<div class="row">
+			<div class="form-group font-size3 col-sm-8 col-xs-8" style="margin-bottom: 30px">
+			  <%= f.label :title, "レビュータイトル" %><br/>
+			  <%= f.text_field :title, placeholder: 'タイトル(50文字以内):', class: "form-control font-size3" %>
+			</div>
+	 </div>
+		<div class="row">
+			<div class="form-group font-size3 col-sm-12 col-xs-12" style="margin-bottom: 30px">
+			  <%= f.label :body, "本文" %><br/>
+			  <%= f.text_area :body, rows:10, placeholder: '本文(1000文字以内):', style: "resize: none;", class: "form-control font-size3" %>
+	 		</div>
+		</div>
+		<div class="actions col-sm-4 col-xs-4" style="margin-bottom: 50px">
+			<%= f.submit "投稿する", name: "new_review", class: "btn btn-info font-size3" %>
+		</div>
+		<div class="col-sm-4 col-xs-4" style="margin-bottom: 50px">
+			<%= link_to "後でする", users_user_order_path(@user, @order), class: "btn btn-default font-size3" %>
+		</div>
+	<% end %>
+</div>

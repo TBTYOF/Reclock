@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Reclock</title>
+    <title>Re:clock</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,34 @@
   </head>
 
   <body>
+    <!--URLの先頭に'admin'があれば'true'-->
+    <% if request.fullpath.match?(/^\/admins\/*/) %>
+      <%= render "/layouts/admins_header" %>
+    <% elsif request.fullpath.match?(/^\/on_store_users\/*/) %>
+      <%= render "/layouts/on_store_users_header" %>
+    <% else %>
+      <%= render "/layouts/users_header" %>
+    <% end %>
+
     <%= yield %>
+
+    <!--URLの先頭に'admin'があれば'true'-->
+    <% if request.fullpath.match?(/^\/admins\/*/) %>
+      <%= render "/layouts/footer" %>
+    <% elsif request.fullpath.match?(/^\/on_store_users\/*/) %>
+      <%= render "/layouts/footer" %>
+    <% else %>
+      <%= render "/layouts/user_footer" %>
+    <% end %>
+
   </body>
 </html>
+
+<% if request.fullpath.match?(/^\/admins\/*/) || request.fullpath.match?(/^\/on_store_users\/*/) %>
+<% else %>
+  <style type="text/css" media="screen">
+    body {
+      background-color: #f2f2f2;
+    }
+  </style>
+<% end %>

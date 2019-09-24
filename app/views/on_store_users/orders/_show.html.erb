@@ -1,0 +1,86 @@
+<% if order.repair_status != "取引完了" %>
+	<div class="col-sm-3 col-xs-3" style="margin-top: 20px;">
+		<%= link_to "編集",edit_on_store_users_on_store_user_order_path(current_on_store_user, order), remote: true, class: "btn btn-default font-size2" %>
+	</div>
+<% end %>
+<div class="row"></div>
+<div class="col-sm-12 col-xs-12">
+
+	<div class="col-sm-12 col-xs-12 border-top teble-margin" style="margin-top: 10px;">
+		<div class="col-sm-3 col-xs-3 teble-margin">
+			<strong>品種</strong>
+		</div>
+		<div class="col-sm-9 col-xs-9 teble-margin">
+			<%= order.variety %>
+		</div>
+	</div>
+
+	<div class="col-sm-12 col-xs-12 border-top teble-margin">
+		<div class="col-sm-3 col-xs-3 teble-margin">
+			<strong>メーカー</strong>
+		</div>
+		<div class="col-sm-9 col-xs-9 teble-margin">
+			<%= order.maker %>
+		</div>
+	</div>
+
+	<div class="col-sm-12 col-xs-12 border-top teble-margin">
+		<div class="col-sm-3 col-xs-3 teble-margin">
+			<strong>型番</strong>
+		</div>
+		<div class="col-sm-9 col-xs-9 teble-margin">
+			<%= order.model %>
+		</div>
+	</div>
+
+	<div class="col-sm-12 col-xs-12 border-top teble-margin">
+		<div class="col-sm-3 col-xs-3 teble-margin">
+			<strong>症状</strong>
+		</div>
+		<div class="col-sm-9 col-xs-9 teble-margin">
+			<%= text_br(order.symptom) %>
+		</div>
+	</div>
+
+	<% if order.order_images.present? %>
+		<div class="row">
+			<div class="col-sm-12 col-xs-12">
+				<div class="row teble-margin" style="margin-bottom: 15px;">
+					<strong style="margin-left: 47px;">画像</strong>
+				</div>
+				<div class="container-fluid" style="height: 400px; width: 700px; background-color: gray;">
+					<div class="theTarget">
+						<% order.order_images.each do |image| %>
+							<div style="padding-left: 40px;"><%= attachment_image_tag image, :image, :fill, 600, 400, format: 'jpeg' %></div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+</div>
+
+<script>
+	$('document').on('turbolinks:load', function(){
+		$('.theTarget').skippr();
+	});
+
+	$('.theTarget').skippr({
+		// "fade" or "slide"
+		transition: 'slide',
+		speed: 500,
+		// easingの種類
+		easing: 'easeOutQuart',
+		// "block" or "bubble"
+		navType: 'bubble',
+		// "div" or "img"
+		childrenElementType: 'div',
+		arrows: true,
+		// スライドショーの自動再生
+		autoPlay: false,
+	// キーボードの矢印キーによるスライド送りの設定
+		keyboardOnAlways: true,
+	// 1枚目のスライド表示時に戻る矢印を表示するか
+		hidePrevious: false
+	});
+</script>

@@ -1,0 +1,41 @@
+<div class="container">
+	<div class="row home">
+		<div class="col-md-8 col-md-offset-2 home_menu">
+			<div class="center jumbotron">
+				<div class="home_menu_item">
+					<%= link_to '出店者一覧', admins_on_store_users_path, class:"btn btn-info btn-block" %>
+			  </div>
+			  <div class="home_menu_item">
+					<%= link_to 'ユーザ一覧', admins_users_path, class:"btn btn-info btn-block" %>
+				</div>
+				<div class="home_menu_item">
+					<%= link_to '注文一覧', admins_orders_path, class:"btn btn-info btn-block" %>
+				</div>
+				<div class="home_menu_item">
+					<%= link_to '問合せ一覧', admins_inquiries_path, class:"btn btn-info btn-block" %>
+				</div>
+				<div class="home_menu_item">
+					<%= link_to 'レビュー一覧', admins_reviews_path, class:"btn btn-info btn-block" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.home{
+		margin:30px 0
+	}
+
+	.center{
+		text-align:center;
+	}
+
+	.home_menu .btn{
+		font-size:50px;
+	}
+
+	.home_menu_item{
+		margin-bottom:40px;
+	}
+</style>

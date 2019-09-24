@@ -1,0 +1,27 @@
+<% if order.repair_status != "取引完了" %>
+	<div class="col-sm-3 col-xs-3" style="margin-top: 20px;">
+		<%= link_to "編集",edit_on_store_users_on_store_user_order_path(current_on_store_user, order, key: "repair"), remote: true, class: "btn btn-default font-size2" %>
+	</div>
+<% end %>
+<div class="row"></div>
+<div class="col-sm-12 col-xs-12">
+
+	<div class="col-sm-12 col-xs-12 border-top teble-margin">
+		<div class="col-sm-3 col-xs-3 teble-margin">
+			<strong>現在</strong>
+		</div>
+		<div class="col-sm-9 col-xs-9 teble-margin">
+			「<%= order.repair_status %>」　更新日: <%= order.updated_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[order.created_at.wday]}) %H:%M") %>
+		</div>
+	</div>
+
+	<div class="col-sm-12 col-xs-12 border-top teble-margin">
+		<div class="col-sm-3 col-xs-3 teble-margin">
+			<strong>症状</strong>
+		</div>
+		<div class="col-sm-9 col-xs-9 teble-margin">
+			<%= text_br(order.repair_detail) %>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,16 @@
+<%= form_with model: order, url: on_store_users_on_store_user_order_path(current_on_store_user, order), local: true do |f| %>
+	<div class="row">
+		<div class="col-sm-3 col-xs-3">
+			<h4><strong>料金変更</strong></h4>
+		</div>
+		<div class="col-sm-2 col-xs-2">
+			<%= f.text_field :charge, class: "form-control font-size2", placeholder: '半角数字:', autocomplete: "charge" %>
+		</div>
+		<div class="col-sm-1 col-xs-1">
+			<p class="font-size2">円</p>
+		</div>
+		<div class="col-sm-3 col-xs-3">
+			<%= f.submit "変更", data: { confirm: "料金を変更します。" }, class: "btn btn-primary font-size2" %>
+		</div>
+	</div>
+<% end %>
