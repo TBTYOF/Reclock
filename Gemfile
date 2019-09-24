@@ -89,6 +89,9 @@ gem 'rails-i18n'
 gem 'dotenv-rails'
 
 # デプロイ後に使用
-gem 'json'
-gem 'mysql2'
+group :product do
+  gem 'json'
+  gem 'mysql2'
+end
+
 gem 'listen', '>= 3.0.5', '< 3.2'
