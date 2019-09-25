@@ -23,7 +23,7 @@
 			<div class="col-md-8 col-xs-7 font-size3" style="margin-top: 40px;">
 				<%= form_with(url:users_on_store_users_index_path, method: :get, local: true) do |f| %>
 					<%= f.label :"市から探す" %>
-					<%= f.select :address, {横浜市: "横浜市", 川崎市: "川崎市", 相模原市: "相模原市", 厚木市: "厚木市", 海老名市: "海老名市"}, class: "btn btn-default" %>
+					<%= f.select :address, {横浜市: "横浜市", 川崎市: "川崎市", 相模原市: "相模原市", 厚木市: "厚木市", 海老名市: "海老名市"}, class: "btn btn-default", style: "margin-top: 15px;" %>
 					<%= f.submit "検索", name: "serch", class: "btn btn-default font-size2" %>
 				<% end %>
 			</div>

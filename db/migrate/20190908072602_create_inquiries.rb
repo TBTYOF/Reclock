@@ -1,6 +1,7 @@
 class CreateInquiries < ActiveRecord::Migration[5.2]
   def change
-    create_table :inquiries, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
+    # create_table :inquiries, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
+    create_table :inquiries do |t|
       t.references :user, foreign_key: true
       t.references :on_store_user, foreign_key: true
     	t.integer :order_id

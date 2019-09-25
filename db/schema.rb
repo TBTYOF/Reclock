@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 2019_09_23_134935) do
     t.integer "user_id"
     t.integer "on_store_user_id"
     t.integer "order_id"
-    t.string "title"
-    t.text "body"
+    t.string "title", null: false
+    t.text "body", null: false
     t.boolean "user_read", default: false, null: false
     t.boolean "on_store_user_read", default: false, null: false
     t.datetime "created_at", null: false
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_134935) do
 
   create_table "on_store_user_images", force: :cascade do |t|
     t.integer "on_store_user_id"
-    t.string "image_id"
+    t.string "image_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["on_store_user_id"], name: "index_on_store_user_images_on_on_store_user_id"
@@ -93,15 +93,15 @@ ActiveRecord::Schema.define(version: 2019_09_23_134935) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "owner_name"
-    t.string "owner_name_kana"
-    t.string "shop_name"
+    t.string "owner_name", null: false
+    t.string "owner_name_kana", null: false
+    t.string "shop_name", null: false
     t.string "image_id"
     t.string "business_hours"
     t.string "holiday"
-    t.string "telephone_number"
-    t.string "postcode"
-    t.string "address"
+    t.string "telephone_number", null: false
+    t.string "postcode", null: false
+    t.string "address", null: false
     t.string "closest_station"
     t.string "parking"
     t.string "greeting"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_134935) do
 
   create_table "order_images", force: :cascade do |t|
     t.integer "order_id"
-    t.string "image_id"
+    t.string "image_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_images_on_order_id"
@@ -124,12 +124,12 @@ ActiveRecord::Schema.define(version: 2019_09_23_134935) do
   create_table "orders", force: :cascade do |t|
     t.integer "user_id"
     t.integer "on_store_user_id"
-    t.integer "serial_number"
-    t.integer "variety", default: 1, null: false
-    t.integer "pickup", default: 1, null: false
+    t.integer "serial_number", null: false
+    t.integer "variety", null: false
+    t.integer "pickup", null: false
     t.string "maker"
     t.string "model"
-    t.text "symptom"
+    t.text "symptom", null: false
     t.integer "repair_status", default: 1, null: false
     t.text "repair_detail"
     t.integer "payment"
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_134935) do
 
   create_table "replies", force: :cascade do |t|
     t.integer "inquiry_id"
-    t.text "body"
+    t.text "body", null: false
     t.boolean "is_writer", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -155,8 +155,8 @@ ActiveRecord::Schema.define(version: 2019_09_23_134935) do
     t.integer "user_id"
     t.integer "on_store_user_id"
     t.integer "order_id"
-    t.string "title"
-    t.text "body"
+    t.string "title", null: false
+    t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["on_store_user_id"], name: "index_reviews_on_on_store_user_id"
@@ -175,11 +175,11 @@ ActiveRecord::Schema.define(version: 2019_09_23_134935) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "name"
-    t.string "name_kana"
-    t.string "telephone_number"
-    t.string "postcode"
-    t.string "address"
+    t.string "name", null: false
+    t.string "name_kana", null: false
+    t.string "telephone_number", null: false
+    t.string "postcode", null: false
+    t.string "address", null: false
     t.boolean "is_quit", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
