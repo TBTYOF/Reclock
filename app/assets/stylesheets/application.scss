@@ -73,6 +73,15 @@ select {
 	word-break: break-all;
 }
 
+.cell-title {
+	width: 25%;
+}
+
+.cell-body {
+	width: 75%;
+	word-break: break-all;
+}
+
 .form-height {
 	height: 50px;
 }
