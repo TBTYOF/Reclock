@@ -1,9 +1,15 @@
 class Users::UsersController < ApplicationController
   before_action :authenticate_user!, except: [:home, :about]
   # URL直入力弾く
-  before_action :ensure_correct_user, except:[:home, :about]
+  before_action :ensure_correct_user, except:[:home, :about, :withdrawal]
   def ensure_correct_user
     if current_user.id != params[:id].to_i
+      redirect_to root_path
+    end
+  end
+  before_action :ensure_correct_user, only:[:withdrawal]
+  def ensure_correct_user
+    if current_user.id != params[:user_id].to_i
       redirect_to root_path
     end
   end
