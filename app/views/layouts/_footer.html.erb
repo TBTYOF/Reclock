@@ -23,7 +23,7 @@
         </li>
         <li>
           <% if on_store_user_signed_in? %>
-	          <%= link_to '退会する', on_store_users_on_store_user_withdrawal_path(current_on_store_user) %>
+	          <%= link_to '退会する', on_store_users_on_store_user_withdrawal_path(current_on_store_user), style: "padding: 5px 0; margin-bottom: 20px;" %>
 	        <% end %>
         </li>
       </ul>
