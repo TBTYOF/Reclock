@@ -1,5 +1,6 @@
 class CreateOrders < ActiveRecord::Migration[5.2]
   def change
+  	# デプロイ時に入れ替える
     # create_table :orders, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
     create_table :orders do |t|
     	t.references :user, foreign_key: true
