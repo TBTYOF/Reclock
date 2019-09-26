@@ -55,9 +55,10 @@ class Users::OrdersController < ApplicationController
 		if params[:commit] == "後でする"
 			redirect_to users_user_order_path(@user, @order)
 		else
+			@review_create_key = true
 			respond_to do |format|
 		  	format.html
-		  	format.js {render '/users/reviews/new.js.erb', order: @order, user: @user}
+		  	format.js {render '/users/reviews/new.js.erb', order: @order, user: @user, review_create_key: @review_create_key}
 		  end
 		end
 	end
