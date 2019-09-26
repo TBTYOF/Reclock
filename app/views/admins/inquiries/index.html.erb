@@ -1,73 +1,75 @@
-<div class="container">
-	<div>
-		<%= search_form_for(@q, url:admins_inquiries_path) do |f| %>
-			<div class="form-group row">
-				<%= f.label :user_name_cont, 'ユーザ名' %>
-				<%= f.search_field :user_name_cont %>
-				<%= f.label :on_store_user_shop_name_cont, '出店者(店舗名)' %>
-				<%= f.search_field :on_store_user_shop_name_cont %>
-			</div>
-			<div class="form-group">
-				<%= f.label :on_store_user_read_in, '出店者未読' %>
-				<%= f.check_box 'on_store_user_read_in',{},checked_value = "false" %>
-				<%= f.label :on_store_user_read_in, '出店者既読' %>
-				<%= f.check_box 'on_store_user_read_in',{},checked_value = "true" %>
-				<%= f.label :user_read_in, 'ユーザ未読' %>
-				<%= f.check_box 'user_read_in',{},checked_value = "false" %>
-				<%= f.label :user_read_in, 'ユーザ既読' %>
-				<%= f.check_box 'user_read_in',{},checked_value = "true" %>
-			</div>
+<div class="container margin-top">
+	<div class="col-sm-12 col-xs-12">
+		<div style="margin-bottom: 50px;" class="font-size2">
+			<%= search_form_for(@q, url:admins_inquiries_path) do |f| %>
+				<div class="form-group row">
+					<%= f.label :user_name_cont, 'ユーザ名' %>
+					<%= f.search_field :user_name_cont %>
+					<%= f.label :on_store_user_shop_name_cont, '出店者(店舗名)' %>
+					<%= f.search_field :on_store_user_shop_name_cont %>
+				</div>
+				<div class="form-group">
+					<%= f.label :on_store_user_read_in, '出店者未読' %>
+					<%= f.check_box 'on_store_user_read_in',{},checked_value = "false" %>
+					<%= f.label :on_store_user_read_in, '出店者既読' %>
+					<%= f.check_box 'on_store_user_read_in',{},checked_value = "true" %>
+					<%= f.label :user_read_in, 'ユーザ未読' %>
+					<%= f.check_box 'user_read_in',{},checked_value = "false" %>
+					<%= f.label :user_read_in, 'ユーザ既読' %>
+					<%= f.check_box 'user_read_in',{},checked_value = "true" %>
+				</div>
 
-			<%= f.submit "検索", name: "serch" %>
-			<%= link_to "リセット", admins_inquiries_path, class: "btn " %>
-		<% end %>
-	</div>
-	<div class="inquiries">
-		<% if @inquiries.present? %>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>
-							<%= sort_link(@q, :id, '問合せID') %>
-						</th>
-						<th>件名</th>
-						<th>ユーザ名</th>
-						<th>出店者（店舗名）</th>
-						<th>問合せ日</th>
-						<th>ユーザ（既読/未読）</th>
-						<th>出店者（既読/未読）</th>
-					</tr>
-				</thead>
-				<tbody>
-					<% @inquiries.each do |inquiry| %>
+				<%= f.submit "検索", name: "serch", class: "btn btn-default" %>
+				<%= link_to "リセット", admins_inquiries_path, class: "btn btn-default" %>
+			<% end %>
+		</div>
+		<div class="inquiries">
+			<% if @inquiries.present? %>
+				<table class="table">
+					<thead  class="font-size2">
 						<tr>
-							<td><%= link_to inquiry.id, admins_inquiry_path(inquiry) %></td>
-							<td><%= inquiry.title %></td>
-							<td><%= inquiry.user.name %></td>
-							<td><%= inquiry.on_store_user.shop_name %></td>
-							<td><%= inquiry.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[inquiry.created_at.wday]}) %H:%M") %></td>
-							<td>
-								<% if inquiry.user_read == false %>
-									<strong style="color: red">未読</strong>
-								<% else %>
-									<strong>既読</strong>
-								<% end %>
-							</td>
-							<td>
-								<% if inquiry.on_store_user_read == false %>
-									<strong style="color: red">未読</strong>
-								<% else %>
-									<strong>既読</strong>
-								<% end %>
-							</td>
+							<th>
+								<%= sort_link(@q, :id, '問合せID') %>
+							</th>
+							<th>件名</th>
+							<th>ユーザ名</th>
+							<th>出店者（店舗名）</th>
+							<th>問合せ日</th>
+							<th>ユーザ（既読/未読）</th>
+							<th>出店者（既読/未読）</th>
 						</tr>
-					<% end %>
-				</tbody>
-			</table>
+					</thead>
+					<tbody  class="font-size2">
+						<% @inquiries.each do |inquiry| %>
+							<tr>
+								<td><%= link_to inquiry.id, admins_inquiry_path(inquiry) %></td>
+								<td><%= inquiry.title %></td>
+								<td><%= inquiry.user.name %></td>
+								<td><%= inquiry.on_store_user.shop_name %></td>
+								<td><%= inquiry.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[inquiry.created_at.wday]}) %H:%M") %></td>
+								<td>
+									<% if inquiry.user_read == false %>
+										<strong style="color: red">未読</strong>
+									<% else %>
+										<strong>既読</strong>
+									<% end %>
+								</td>
+								<td>
+									<% if inquiry.on_store_user_read == false %>
+										<strong style="color: red">未読</strong>
+									<% else %>
+										<strong>既読</strong>
+									<% end %>
+								</td>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
 
-			<%= paginate @inquiries, class: "paginate" %>
-		<% else %>
-			まだお問合せはありません
-		<% end %>
+				<%= paginate @inquiries, class: "paginate" %>
+			<% else %>
+				まだお問合せはありません
+			<% end %>
+		</div>
 	</div>
 </div>

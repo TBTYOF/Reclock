@@ -1,1 +1,242 @@
-show.html.erb
+<div class="container margin-top" style="margin-bottom: 150px;">
+
+	<div class="col-md-5 col-xs-8" style="margin: 50px 0 50px 0;">
+		<h2 class="font-size4" style="padding-left: 10px;">注文詳細</h2>
+	</div>
+
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1 col-xs-12">
+
+			<!-- タブメニュー -->
+			<div class="row">
+				<div id="tab-menu1" class="col-sm-9 col-xs-9">
+	        <a href="#tab1" class="active col-sm-3 col-xs-3 btn btn-default font-size3">注文詳細</a>
+	        <% if @order.reviews.present? %>
+	        	<a href="#tab2" class="col-sm-3 col-xs-3 btn btn-default font-size3">レビュー</a>
+	        <% end %>
+	      </div>
+			</div>
+			<!-- 注文情報 -->
+			<div id="tab1" class="tab">
+				<div class="row">
+					<div class="col-sm-12">
+						<table class="table font-size2">
+							<tbody>
+								<tr>
+									<td class="cell-title"><strong>管理No(注文ID)</strong></td>
+									<td class="cell-body"><%= @order.serial_number %>（<%= @order.id %>）</td>
+								</tr>
+								<tr>
+									<td class="cell-title"><strong>受付日</strong></td>
+									<td class="cell-body"><%= @order.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@order.created_at.wday]}) %H:%M") %></td>
+								</tr>
+								<tr>
+									<td class="cell-title"><strong>集荷方法</strong></td>
+									<td class="cell-body"><%= @order.pickup %></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<h3 class="font-size3">お客様情報</h3>
+						<table class="table font-size2">
+							<tbody>
+								<tr>
+									<td class="cell-title"><strong>お名前(かな)</strong></td>
+									<td class="cell-body"><%= @order.user.name %>（<%= @order.user.name_kana %>）</td>
+								</tr>
+								<tr>
+									<td class="cell-title"><strong>電話番号</strong></td>
+									<td class="cell-body"><%= telephone_ber(@order.user.telephone_number) %></td>
+								</tr>
+								<tr>
+									<td class="cell-title"><strong>メールアドレス</strong></td>
+									<td class="cell-body"><%= @order.user.email %></td>
+								</tr>
+								<tr>
+									<td class="cell-title"><strong>ご住所</strong></td>
+									<td class="cell-body">〒 <%= @order.user.postcode %></td>
+								</tr>
+								<tr>
+									<td class="cell-title" style="border-top: none;"></td>
+									<td class="cell-body" style="border-top: none;"><%= @order.user.address %></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="row" style="margin-bottom: 50px;">
+					<div class="col-sm-12">
+						<div class="col-sm-3 col-xs-3">
+							<h3 class="font-size3">商品情報</h3>
+						</div>
+						<div class="font-size2 row" id="item">
+							<div class="col-sm-12 col-xs-12">
+
+								<div class="col-sm-12 col-xs-12 border-top teble-margin" style="margin-top: 10px;">
+									<div class="col-sm-3 col-xs-3 teble-margin">
+										<strong>品種</strong>
+									</div>
+									<div class="col-sm-9 col-xs-9 teble-margin">
+										<%= @order.variety %>
+									</div>
+								</div>
+
+								<div class="col-sm-12 col-xs-12 border-top teble-margin">
+									<div class="col-sm-3 col-xs-3 teble-margin">
+										<strong>メーカー</strong>
+									</div>
+									<div class="col-sm-9 col-xs-9 teble-margin">
+										<%= @order.maker %>
+									</div>
+								</div>
+
+								<div class="col-sm-12 col-xs-12 border-top teble-margin">
+									<div class="col-sm-3 col-xs-3 teble-margin">
+										<strong>型番</strong>
+									</div>
+									<div class="col-sm-9 col-xs-9 teble-margin">
+										<%= @order.model %>
+									</div>
+								</div>
+
+								<div class="col-sm-12 col-xs-12 border-top teble-margin">
+									<div class="col-sm-3 col-xs-3 teble-margin">
+										<strong>症状</strong>
+									</div>
+									<div class="col-sm-9 col-xs-9 teble-margin">
+										<%= text_br(@order.symptom) %>
+									</div>
+								</div>
+
+								<% if @order.order_images.present? %>
+									<div class="row">
+										<div class="col-sm-12 col-xs-12">
+											<div class="row teble-margin" style="margin-bottom: 15px;">
+												<strong style="margin-left: 47px;">画像</strong>
+											</div>
+											<div class="container-fluid" style="height: 400px; width: 700px; background-color: gray;">
+												<div class="theTarget">
+													<% @order.order_images.each do |image| %>
+														<div style="padding-left: 40px;"><%= attachment_image_tag image, :image, :fill, 600, 400, format: 'jpeg' %></div>
+													<% end %>
+												</div>
+											</div>
+										</div>
+									</div>
+								<% end %>
+							</div>
+
+							<script>
+								$('document').on('turbolinks:load', function(){
+									$('.theTarget').skippr();
+								});
+
+								$('.theTarget').skippr({
+									// "fade" or "slide"
+									transition: 'slide',
+									speed: 500,
+									// easingの種類
+									easing: 'easeOutQuart',
+									// "block" or "bubble"
+									navType: 'bubble',
+									// "div" or "img"
+									childrenElementType: 'div',
+									arrows: true,
+									// スライドショーの自動再生
+									autoPlay: false,
+								// キーボードの矢印キーによるスライド送りの設定
+									keyboardOnAlways: true,
+								// 1枚目のスライド表示時に戻る矢印を表示するか
+									hidePrevious: false
+								});
+							</script>
+						</div>
+					</div>
+				</div>
+
+				<div class="row" style="margin-bottom: 50px;">
+					<div class="col-sm-12">
+						<div class="col-sm-3 col-xs-3">
+							<h3 class="font-size3">修理状況</h3>
+						</div>
+						<div class="font-size2 row" id="repair">
+							<div class="col-sm-12 col-xs-12">
+
+								<div class="col-sm-12 col-xs-12 border-top teble-margin">
+									<div class="col-sm-3 col-xs-3 teble-margin">
+										<strong>現在</strong>
+									</div>
+									<div class="col-sm-9 col-xs-9 teble-margin">
+										「<%= @order.repair_status %>」　更新日: <%= @order.updated_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@order.created_at.wday]}) %H:%M") %>
+									</div>
+								</div>
+
+								<div class="col-sm-12 col-xs-12 border-top teble-margin">
+									<div class="col-sm-3 col-xs-3 teble-margin">
+										<strong>症状</strong>
+									</div>
+									<div class="col-sm-9 col-xs-9 teble-margin">
+										<%= text_br(@order.repair_detail) %>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<h3 class="font-size3">支払情報</h3>
+						<table class="table font-size2">
+							<tbody>
+								<tr>
+									<td class="cell-title"><strong>料金</strong></td>
+									<td class="cell-body">
+										<% if @order.charge.present? %>
+											<%= @order.charge.to_s(:delimited) %>円　
+										<% end %>
+									</td>
+								</tr>
+								<tr>
+									<% if @order.payment == nil %>
+										<td class="cell-title"></td>
+										<td class="cell-body"></td>
+									<% else %>
+										<td class="cell-title"><strong>支払方法</strong></td>
+										<td class="cell-body"><%= @order.payment %></td>
+									<% end %>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row" id="charge"></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- レビュー -->
+			<% if @order.reviews.present? %>
+				<div id="tab2" class="tab">
+					<%= render '/users/reviews/show', order: @order %>
+				</div>
+			<% end %>
+
+		</div>
+	</div>
+</div>
+
+<script>
+	$('.tab[id != "tab1"]').hide();
+
+	$('#tab-menu1 a').on('click', function() {
+  	$(".tab").hide();
+  	$("#tab-menu1 .active").removeClass("active");
+  	$(this).addClass("active");
+  	$($(this).attr("href")).show();
+  	return false;
+	});
+</script>
