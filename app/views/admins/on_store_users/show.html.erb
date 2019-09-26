@@ -1,5 +1,5 @@
 <div class="container">
-	<h2 class="font-size4">マイページ</h2>
+	<h2 class="font-size4">店舗詳細</h2>
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1 col-xs-12">
 			<div>
@@ -51,10 +51,10 @@
 				<h3>ご挨拶</h3>
 				<div class="col-sm-12 col-xs-12">
 					<% if current_on_store_user.greeting.present? %>
-							<%= current_on_store_user.greeting %>
-						<% else %>
-							未登録
-						<% end %>
+						<%= current_on_store_user.greeting %>
+					<% else %>
+						未登録
+					<% end %>
 				</div>
 				<h3>店舗画像</h3>
 				<div class="col-sm-12 col-xs-12">

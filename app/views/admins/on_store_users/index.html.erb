@@ -16,11 +16,11 @@
 				<%= f.search_field :email_cont %>
 
 				<%= f.submit "検索", name: "serch" %>
-				<%= link_to "リセット", on_store_users_path, class: "btn " %>
+				<%= link_to "リセット", admins_on_store_users_path, class: "btn " %>
 			<% end %>
 		</div>
 		<table class="table">
-			<thead>
+			<thead class="font-size3">
 				<tr>
 					<th><%= sort_link(@q, :id, '出店者ID') %></th>
 					<th>店舗名</th>
@@ -29,7 +29,7 @@
 					<th>メールアドレス</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="font-size2">
 				<% @on_store_users.each do |on_store_user| %>
 					<tr>
 						<td><%= link_to on_store_user.id, admins_on_store_user_path(on_store_user) %></td>

@@ -9,10 +9,18 @@ class OnStoreUsers::OrdersController < ApplicationController
   end
 
 	def index
-		if params[:search].present?
-			@search = current_on_store_user.orders.ransack(search_params)
-			@orders = @search.result(distinct: true).page(params[:page]).reverse_order
+		if params[:search].present? || params[:q].present?
+			if params[:q].present?
+				@q = current_on_store_user.orders.ransack(search_params)
+				@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
+				@orders = @q.result(distinct: true).page(params[:page]).reverse_order
+			else
+				@q = current_on_store_user.orders.ransack(params[:q])
+				@search = current_on_store_user.orders.ransack(telephone_number_search_params)
+				@orders = @search.result(distinct: true).page(params[:page]).reverse_order
+			end
 		else
+			@q = current_on_store_user.orders.ransack(params[:q])
 			@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
 			@orders = @search.result(distinct: true).page(params[:page]).reverse_order
 		end
@@ -96,11 +104,13 @@ class OnStoreUsers::OrdersController < ApplicationController
 																	order_images_images: [])
 	end
 
-	def search_params
-		params.require(:search).permit(:s,
+	def telephone_number_search_params
+		params.require(:search).permit(:user_telephone_number_cont)
+  end
+  def search_params
+		params.require(:q).permit(:s,
     															:user_name_cont,
 			   													:repair_status_eq,
-			   													:variety_eq,
-			   													:user_telephone_number_cont)
+			   													:variety_eq)
   end
 end
