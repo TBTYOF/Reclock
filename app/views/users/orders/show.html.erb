@@ -1,35 +1,30 @@
-<div class="container" style="margin-bottom: 150px;">
+<div class="container-fluid" style="margin-bottom: 150px;">
 	<div class="body-boder col-md-7 col-xs-11" style="margin: 50px 0 50px 0;">
 		<h2 class="font-size5" style="padding-left: 50px;">注文明細ページ</h2>
 	</div>
 
 	<div class="row">
-		<div class="col-md-11 col-md-offset-1 col-xs-12">
+		<div class="col-md-11 margin-left col-xs-12">
 			<!-- タブメニュー -->
 			<div class="row">
 				<div id="tab-menu" class="col-md-10 col-xs-12">
-	        <a href="#tab1" class="active col-sm-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
+	        <a href="#tab1" class="active col-md-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
 		      	注文明細
 		      </a>
-	        <a href="#tab2" class="col-sm-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
+	        <a href="#tab2" class="col-md-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
 		      	お問合せ
 		      </a>
 	        <% if @order.payment != nil %>
-	        	<a href="#tab3" class="col-sm-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
+	        	<a href="#tab3" class="col-md-4 col-xs-4 btn btn-default font-size4" style="box-shadow: 10px 10px 10px;">
 		      	レビュー
 		      </a>
 	        <% end %>
 	      </div>
-
-	      <!-- <div class="col-sm-2 col-sm-offset-1">
-	      	<p class="btn btn-success">QRコードを表示</p>
-	      </div> -->
-
 			</div>
 			<!-- 注文情報 -->
-			<div id="tab1" class="tab body-boder col-sm-12 col-xs-12">
+			<div id="tab1" class="tab body-boder col-md-12 col-xs-12">
 				<div class="row">
-					<div class="col-sm-12" style="padding-top: 20px;">
+					<div class="col-md-12" style="padding-top: 20px;">
 						<h3 class="font-size4">注文情報</h3>
 						<table class="table font-size3">
 							<tbody>
@@ -55,7 +50,7 @@
 				</div>
 
 				<div class="row" style="margin-bottom: 50px;">
-					<div class="col-sm-12">
+					<div class="col-md-12">
 						<h3 class="font-size4">商品情報</h3>
 						<table class="table font-size3">
 							<tbody>
@@ -93,7 +88,7 @@
 				</div>
 
 				<div class="row" style="margin-bottom: 50px;">
-					<div class="col-sm-12">
+					<div class="col-md-12">
 						<h3 class="font-size4">修理状況</h3>
 						<table class="table font-size3">
 							<tbody>
@@ -115,7 +110,7 @@
 				</div>
 
 				<div class="row" style="margin-bottom: 20px;">
-					<div class="col-sm-12">
+					<div class="col-md-12">
 						<h3 class="font-size4">支払情報</h3>
 						<table class="table font-size3">
 							<tbody>
@@ -147,19 +142,19 @@
 			</div>
 
 			<!-- お問合せフォーム -->
-			<div id="tab2" class="tab inquiries body-boder col-sm-12 col-xs-12" style="min-height: 300px;">
+			<div id="tab2" class="tab inquiries body-boder col-md-12 col-xs-12" style="min-height: 300px;">
 				<%= render '/shared/inquiries/inquiry', inquiries: @order.inquiries, shop: @order.on_store_user,order: @order %>
 			</div>
 
 			<!-- レビュー -->
 			<% if @order.payment != nil %>
-				<div id="tab3" class="tab body-boder col-sm-12 col-xs-12" style="min-height: 300px;">
+				<div id="tab3" class="tab body-boder col-md-12 col-xs-12" style="min-height: 300px;">
 					<% if @user.review_by?(@order) %>
-						<div class="col-sm-12 col-xs-12 review_section">
+						<div class="col-md-12 col-xs-12 review_section">
 							<%= render '/users/reviews/show', order: @order, user: @user %>
 						</div>
 					<% else %>
-						<div class="col-sm-12 col-xs-12 review_section" style="margin-top: 30px;">
+						<div class="col-md-12 col-xs-12 review_section" style="margin-top: 30px;">
 							<%= link_to "レビューを書く", new_users_user_order_review_path(@user, @order), remote: true, class: "btn btn-primary font-size4", style: "margin: 50px 0 0 25%;" %>
 						</div>
 					<% end %>
