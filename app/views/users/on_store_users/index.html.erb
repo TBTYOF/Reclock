@@ -1,4 +1,4 @@
-<div class="container" style="min-height: 500px; margin-bottom: 150px;">
+<div class="container-fluid" style="min-height: 500px; margin-bottom: 150px;">
 
 	<% if @search_by.present? %>
 		<% if @search_by == "service" %>
@@ -18,13 +18,13 @@
 
 
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1 col-xs-12 body-boder">
+		<div class="col-md-11 margin-left col-xs-12 body-boder">
 
 			<div class="col-md-8 col-xs-7 font-size3" style="margin-top: 40px;">
 				<%= form_with(url:users_on_store_users_index_path, method: :get, local: true) do |f| %>
 					<%= f.label :"市から探す" %>
 					<%= f.select :address, {横浜市: "横浜市", 川崎市: "川崎市", 相模原市: "相模原市", 厚木市: "厚木市", 海老名市: "海老名市"}, class: "btn btn-default", style: "margin-top: 15px;" %>
-					<%= f.submit "検索", name: "serch", class: "btn btn-default font-size2" %>
+					<%= f.submit "検索", name: "serch", class: "btn btn-default font-size2", style: "margin-bottom: 10px;" %>
 				<% end %>
 			</div>
 			<div class="col-md-4 col-xs-4 font-size3" style="margin-top: 40px;">
@@ -109,6 +109,17 @@
 
 		</div>
 	</div>
+
+	<style type="text/css" media="screen">
+		.cell-title {
+			width: 25%;
+		}
+
+		.cell-body {
+			width: 75%;
+			word-break: break-all;
+		}
+	</style>
 
 	<style type="text/css" media="(min-width: 992px)">
 		.padding {

@@ -1,19 +1,31 @@
-<div class="container margin-top">
-  <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
-    <div class="alert-form">
-     <h1><strong>退会に関して</strong></h1>
-      <p class="alert alert-danger"><strong>*Re:clock会員退会前に、以下注意事項を必ずご確認ください。</strong></p>
-      <h2><strong>退会時の注意点</strong></h2>
-      <ul>
-        <li>退会処理を実行すると、今までに投稿した記事などが<span>すべて削除されます。</span></li>
-        <li>退会後はマイページが閲覧できなくなり、<span>過去の注文履歴などをご確認いただくことができなくなります。</span>ご注意ください。</li>
-        <li>再度会員登録いただいても、前回入会時の注文履歴は<span>参照いただけません。</span></li>
-      </ul>
+<div class="container-fluid" style="min-height: 500px; margin-bottom: 150px;">
 
-      <div class="select-actions">
-        <a href="#" title="" class="btn btn-danger">退会する</a>
-        <%= link_to "戻る", on_store_users_on_store_user_home_path(current_on_store_user),class:"btn btn-info" %>
+  <div class="col-md-5 col-xs-9" style="margin: 50px 0 50px 0;">
+    <h2 class="font-size5" style="padding-left: 10px;">退会に関して</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-md-10 margin-left col-xs-12">
+      <div class="col-md-11 margin-left col-xs-12" style="margin-top: 40px;">
+        <p class="alert alert-danger font-size3"><strong>*Re:clock会員退会前に、以下注意事項を必ずご確認ください。</strong></p>
       </div>
+
+      <div class="row" style="margin-bottom: 40px;">
+        <div class="col-md-11 margin-left col-xs-12">
+          <h2 class="font-4"><strong>退会時の注意点</strong></h2>
+          <ul class="font-size3">
+            <li>退会処理を実行すると、今までに投稿した記事などが<span>すべて削除されます。</span></li>
+            <li>退会後はマイページが閲覧できなくなり、<span>過去の注文履歴などをご確認いただくことができなくなります。</span>ご注意ください。</li>
+            <li>再度会員登録いただいても、前回入会時の注文履歴は<span>参照いただけません。</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-xs-4 margin-left" style="margin-bottom: 40px;">
+        <a href="#" title="" class="btn btn-danger font-size3">退会する</a>
+        <%= link_to "戻る", on_store_users_on_store_user_home_path(current_on_store_user),class: "btn btn-info font-size3" %>
+      </div>
+
     </div>
   </div>
 </div>

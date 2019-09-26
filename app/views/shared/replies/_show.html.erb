@@ -17,17 +17,17 @@
 			</tr>
 			<tr>
 				<td style="padding-top: 15px; padding-bottom: 15px;">
-					<strong>　投稿日時： </strong>
+					<strong>投稿日時： </strong>
 					<%= reply.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[reply.created_at.wday]}) %H:%M") %>
 				</td>
 			</tr>
 			<tr>
-				<td style="padding-top: 15px; padding-bottom: 15px;"><strong>　返信文：</strong></td>
+				<td style="padding-top: 15px; padding-bottom: 15px;"><strong>返信文：</strong></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="padding-top: 15px; padding-bottom: 15px;">
-					　<%= text_br(reply.body) %>
+					<%= text_br(reply.body) %>
 				</td>
 			</tr>
 		</tbody>
