@@ -1,85 +1,101 @@
-<div class="container">
-	<h2 class="font-size4">マイページ</h2>
+<div class="container margin-top">
+	<h2 class="font-size5 col-sm-7 col-xs-8" style="margin: 40px 20px">出店者詳細</h2>
+
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1 col-xs-12">
-			<div>
-				<ul class="list-group">
-					<li class="list-group-item">代表者名</li>
+			<div style="margin-bottom: 70px;">
+				<ul class="list-group font-size3">
 					<li class="list-group-item">
-						<%= current_on_store_user.owner_name %> (<%= current_on_store_user.owner_name_kana %>)
+						代表者名：<%= @on_store_user.owner_name %> (<%= @on_store_user.owner_name_kana %>)
 					</li>
-					<li class="list-group-item">店舗名</li>
-					<li class="list-group-item"><%= current_on_store_user.shop_name %></li>
-					<li class="list-group-item">電話番号</li>
-					<li class="list-group-item"><%= telephone_ber(current_on_store_user.telephone_number %></li>
-					<li class="list-group-item">メールアドレス</li>
-					<li class="list-group-item"><%= current_on_store_user.email %></li>
-					<li class="list-group-item">住所</li>
-					<li class="list-group-item"><%= current_on_store_user.postcode.insert(3, '-') %></li>
-					<li class="list-group-item"><%= current_on_store_user.address %></li>
-					<li class="list-group-item">最寄駅</li>
 					<li class="list-group-item">
-						<% if current_on_store_user.closest_station.present? %>
-							<%= current_on_store_user.closest_station %>
+						店舗名　：<%= @on_store_user.shop_name %>
+					</li>
+					<li class="list-group-item">
+						電話番号：<%= telephone_ber(@on_store_user.telephone_number) %>
+					</li>
+					<li class="list-group-item">
+						メールアドレス：
+					</li>
+					<li class="list-group-item" style="border-top: none;">
+						<%= @on_store_user.email %>
+					</li>
+					<li class="list-group-item">
+						住所：
+					</li>
+					<li class="list-group-item" style="border-top: none;">
+						〒 <%= @on_store_user.postcode.insert(3, '-') %>
+					</li>
+					<li class="list-group-item" style="border-top: none;">
+						<%= @on_store_user.address %>
+					</li>
+					<li class="list-group-item">
+						最寄駅：
+						<% if @on_store_user.closest_station.present? %>
+							<%= @on_store_user.closest_station %>
 						<% else %>
 							未登録
 						<% end %>
 					</li>
-					<li class="list-group-item">駐車場</li>
 					<li class="list-group-item">
-						<% if current_on_store_user.parking.present? %>
-							<%= current_on_store_user.parking %>
+						駐車場：
+						<% if @on_store_user.parking.present? %>
+							<%= @on_store_user.parking %>
 						<% else %>
 							未登録
 						<% end %>
 					</li>
-					<li class="list-group-item">店舗情報 公開/非公開</li>
 					<li class="list-group-item">
-						<% if current_on_store_user.is_public == true %>
+						店舗情報：
+						<% if @on_store_user.is_public == true %>
 							公開中
 						<% else %>
 							非公開
 						<% end %>
 					</li>
-					<li class="list-group-item">
-						<%= link_to "登録情報を編集する", edit_on_store_users_on_store_user_path(current_on_store_user), class: "btn btn-info" %>
-					</li>
 				</ul>
 			</div>
 
-			<div class="row">
-				<h3>ご挨拶</h3>
-				<div class="col-sm-12 col-xs-12">
-					<% if current_on_store_user.greeting.present? %>
-							<%= current_on_store_user.greeting %>
-						<% else %>
-							未登録
-						<% end %>
-				</div>
-				<h3>店舗画像</h3>
-				<div class="col-sm-12 col-xs-12">
-					<%= attachment_image_tag current_on_store_user, :image, :fill, 350, 350, format: 'jpeg', fallback: "/no_image.jpg", size:'350x350' %>
-				</div>
-				<h3>スライドショー用画像</h3>
-				<div class="col-sm-12 col-xs-12">
-					<% if current_on_store_user.on_store_user_images.present? %>
-						<% current_on_store_user.on_store_user_images.each do |image| %>
-							<%= attachment_image_tag image, :image, :limit, "800!", 500, format: 'jpeg' %>
-						<% end %>
+			<div class="row" style="margin-bottom: 200px;">
+				<h3 class="font-size4" style="margin-bottom: 20px;">ご挨拶</h3>
+				<div class="col-sm-12 col-xs-12 font-size3" style="margin-bottom: 70px;">
+					<% if @on_store_user.greeting.present? %>
+						<%= text_br(@on_store_user.greeting) %>
 					<% else %>
-							未登録
+						<p class="font-size3">未登録</p>
 					<% end %>
 				</div>
-				<h3>サービス概要</h3>
-				<div class="col-sm-12 col-xs-12">
-					<% if current_on_store_user.major_categories.present? %>
-						<% current_on_store_user.major_categories.each do |major_category| %>
-							<div class="row">
-								<div class="col-sm-3">
-									<%= major_category.name %>
+
+				<h3 class="font-size4" style="margin-bottom: 20px;">店舗画像</h3>
+				<div class="col-md-10 col-xs-12 col-md-offset-2" style="margin-bottom: 70px;">
+					<%= attachment_image_tag @on_store_user, :image, :fill, 350, 350, format: 'jpeg', fallback: "/no_image.jpg", size:'350x350' %>
+				</div>
+
+				<h3 class="font-size4" style="margin-bottom: 20px;">スライドショー用画像</h3>
+				<div class="col-sm-12 col-xs-12" style="margin-bottom: 70px;">
+					<% if @on_store_user.on_store_user_images.present? %>
+						<% @on_store_user.on_store_user_images.each_with_index do |image, i| %>
+							<% i += 1 %>
+							<h4 class="font-size3">(<%= i %>)</h4>
+							<div style="margin-bottom: 30px;">
+								<%= attachment_image_tag image, :image, :limit, "700!", 500, format: 'jpeg' %>
+							</div>
+						<% end %>
+					<% else %>
+						<p class="font-size3">未登録</p>
+					<% end %>
+				</div>
+
+				<h3 class="font-size4" style="margin-bottom: 20px;">サービス概要</h3>
+				<div class="col-sm-12 col-xs-12 font-size3" style="word-break: break-all;">
+					<% if @on_store_user.major_categories.present? %>
+						<% @on_store_user.major_categories.each do |major_category| %>
+							<div class="row" style="margin-bottom: 20px;">
+								<div class="row" style="margin-bottom: 15px;">
+									<strong><%= major_category.name %></strong>
 								</div>
-								<% major_category.middle_categories.each do |middle_category| %>
-									<div class="col-sm-9">
+								<% major_category.middle_categories.each_with_index do |middle_category, i| %>
+									<div class="col-sm-12" style="margin-bottom: 15px;">
 										<div class="col-sm-5">
 											<%= middle_category.name %>
 										</div>
@@ -98,11 +114,10 @@
 							</div>
 						<% end %>
 					<% else %>
-						未登録
+						<p class="font-size3">未登録</p>
 					<% end %>
 				</div>
 			</div>
-
 
 		</div>
 	</div>

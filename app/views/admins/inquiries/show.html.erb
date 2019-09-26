@@ -1,1 +1,116 @@
-show.html.erb
+<div class="container" style="margin: 50px 30px;">
+
+	<div class="col-md-5 col-xs-8" style="margin: 50px 0 50px 0;">
+		<h2 class="font-size4" style="padding-left: 10px;">問合せ詳細</h2>
+	</div>
+
+	<table class="table">
+		<tbody class="font-size3">
+			<tr>
+				<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+					<strong>問合せID</strong>
+				</td>
+				<td class="cell-body" style="padding-top: 15px; padding-bottom: 15px;">
+					<%= @inquiry.id %>
+				</td>
+			</tr>
+			<tr>
+				<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+					<strong>宛先</strong>
+				</td>
+				<td class="cell-body" style="padding-top: 15px; padding-bottom: 15px;">
+					<%= @inquiry.on_store_user.shop_name %>
+				</td>
+			</tr>
+			<tr>
+				<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+					<strong>差出人</strong>
+				</td>
+				<td class="cell-body" style="padding-top: 15px; padding-bottom: 15px;">
+					<%= @inquiry.user.name %> (<%= @inquiry.user.name_kana %>)
+				</td>
+			</tr>
+			<tr>
+				<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+					<strong>件名</strong>
+				</td>
+				<td class="cell-body" style="padding-top: 15px; padding-bottom: 15px;">
+					<%= @inquiry.title %>
+				</td>
+			</tr>
+			<tr>
+				<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+					<strong>注文ID</strong>
+				</td>
+				<td class="cell-body" style="padding-top: 15px; padding-bottom: 15px;">
+					<% if @inquiry.order_id == nil %>
+						注文前
+					<% else %>
+						<%= link_to @inquiry.order_id, admins_order_path(@inquiry.order_id) %>
+					<% end %>
+				</td>
+			</tr>
+			<tr>
+				<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+					<strong>最近の投稿日</strong>
+				</td>
+				<td class="cell-body" style="padding-top: 15px; padding-bottom: 15px;">
+					<% if @inquiry.replies.count == 0 %>
+						<%= @inquiry.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@inquiry.created_at.wday]}) %H:%M") %>
+					<% else %>
+						<%= @inquiry.replies.last.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[@inquiry.replies.last.created_at.wday]}) %H:%M") %>
+					<% end %>
+				</td>
+			</tr>
+			<tr>
+				<td class="cell-title" style="padding-top: 15px; padding-bottom: 15px;">
+					<strong>本文：</strong>
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="border-top: none; padding-top: 15px; padding-bottom: 15px;">
+					<%= text_br(@inquiry.body) %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div id="reqlies">
+		<% @inquiry.replies.each_with_index do |reply,index| %>
+			<% index += 1 %>
+			<table class="table">
+				<tbody class="font-size3">
+					<tr>
+						<td style="padding-top: 15px; padding-bottom: 15px;">
+							<strong>
+								<%= index %>. 
+								<!-- is_writerがfalseでユーザ投稿 -->
+								<% if reply.is_writer == false %>
+									 <%= reply.inquiry.user.name %> の返信
+								<% else %>
+									 <%= reply.inquiry.on_store_user.shop_name %> の返信
+								<% end %>
+							</strong>
+						</td>
+					</tr>
+					<tr>
+						<td style="padding-top: 15px; padding-bottom: 15px;">
+							<strong>　投稿日時： </strong>
+							<%= reply.created_at.strftime("%Y/%m/%d(#{%w(日 月 火 水 木 金 土)[reply.created_at.wday]}) %H:%M") %>
+						</td>
+					</tr>
+					<tr>
+						<td style="padding-top: 15px; padding-bottom: 15px;"><strong>　返信文：</strong></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="padding-top: 15px; padding-bottom: 15px;">
+							　<%= text_br(reply.body) %>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		<% end %>
+	</div>
+</div>

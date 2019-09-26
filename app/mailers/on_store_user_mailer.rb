@@ -1,5 +1,5 @@
 class OnStoreUserMailer < ApplicationMailer
-	default from: 'sing_up@reclock.com'
+	default from: 'welcome_stor_owner@reclock.work'
 
   def welcome_stor_owner
     @email = params[:email]

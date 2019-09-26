@@ -13,31 +13,31 @@ Admin.create!( name: "Administrater",
 							 password_confirmation: 'password'
 							 )
 # テストユーザ生成
-User.create!( name: "武藤遊戯",
-							name_kana: "むとうゆうぎ",
-							telephone_number: 0120555555,
-							email: "test@test",
+User.create!( name: "山田太郎",
+							name_kana: "やまだたろう",
+							telephone_number: "0801231234",
+							email: "user@test.com",
 						  postcode: 1500041,
-						  address: "東京都渋谷区神南１－１－１－１",
-						  password: "tttttt",
-						  password_confirmation: "tttttt",
+						  address: "東京都渋谷区神南１丁目１９−１０ パークウェースクエア2 4F",
+						  password: "testuser",
+						  password_confirmation: "testuser",
 						  )
 # テスト出店者生成
-OnStoreUser.create!( owner_name: "海馬瀬人",
-								owner_name_kana: "かいばせと",
-								shop_name: "海馬コーポレーション",
+OnStoreUser.create!( owner_name: "山田　花子",
+								owner_name_kana: "やまだ　はなこ",
+								shop_name: "山田花子時計店",
 								# image_id:,
-								telephone_number: 0120555555,
-							  email: "on@on",
-							  postcode: 1500041,
-							  address: "神奈川県横浜市緑区2-1-23",
+								telephone_number: "0451231234",
+							  email: "store@test.com",
+							  postcode: 2350023,
+							  address: "神奈川県横浜市磯子区１丁目１番１号",
 							  business_hours: "朝8時から夕方5時まで",
 								holiday: "土日祝日",
-							  closest_station: "ドミノ町駅",
+							  closest_station: "磯子駅",
 							  parking: "路駐OK",
-							  greeting: "最強のデュエリストよ、かもん",
-							  password: "oooooo",
-							  password_confirmation: "oooooo",
+							  greeting: "サンプル",
+							  password: "storeuser",
+							  password_confirmation: "storeuser",
 							  is_public: true
 							  # is_quit: is_quit
 							  )
@@ -46,14 +46,14 @@ OnStoreUser.create!( owner_name: "海馬瀬人",
 51.times do |n|
 	last_name = %w[山口 安倍 後藤 伊藤 斎藤 高橋 高田 高山 山田 藤本 藤井 藤崎 伊達 プルースト]
 	first_name = %w[家康 義経 家光 光圀 忠家 義久 サルヴァドール 信長 小次郎 武蔵 豊久 元就 正宗 氏政]
-	owner_name = "#{last_name[rand(0..13)]}#{first_name[rand(0..13)]}"
-	last_name_kana = %w[やまぐち あべ ごとう いとう さいとう たかはし たかだ たかやま やまだ ふじもと ふじい ふじさき だて ぷるーすと]
-	first_name_kana = %w[いえやす よすつね いえみつ みつくに ただいえ よしひさ さるゔぁどーる のぶなが こじろう むさし とよひさ もとなり まさむね うじまさ]
-	owner_name_kana = "#{last_name_kana[rand(0..13)]}#{first_name_kana[rand(0..13)]}"
+	owner_name = "#{last_name[rand(0..13)]}　#{first_name[rand(0..13)]}"
+	owner_name_kana = "さんぷるてんぽ"
 	shop1 = %w[山口 安倍 後藤 伊藤 斎藤 高橋 高田 高山 山田 藤本 藤井 藤崎 伊達 プルースト]
-	shop2 = %w[工房 店 Shop ワークス (株) .co 修理店]
+	shop2 = %w[工房 店 Shop ワークス (株) 商会 修理店]
 	shop_name = "#{shop1[rand(0..13)]}#{shop2[rand(0..6)]}"
-	telephone_number = format('%011d',(rand(10..19))**7) # 適当な11桁
+	number1 = [40, 41, 42, 43, 44, 45, 46, 47, 48]
+	num     = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+	telephone_number = format('%011d',"#{number1[rand(0..8)]}#{(0...8).map{ num[rand(10)]}.join}")
 	email = "#{(0...20).map{ ('A'..'Z').to_a[rand(26)] }.join}@seeds.com"
 	postcode = format('%07d',(rand(10..19))**5) # 適当な7桁
 	address1 = %w[神奈川県横浜市 神奈川県川崎市 神奈川県相模原市 神奈川県厚木市 神奈川県海老名市 神奈川県藤沢市]
@@ -61,22 +61,27 @@ OnStoreUser.create!( owner_name: "海馬瀬人",
 	parking = %w[有り 無し 店の前にスペース有り タイムズ提携]
 	business_hours = %w[9:00~18:00 10時から19時 AM9時~PM5時 不定期]
 	holiday = %w[土日 水曜金曜 年中無休 土日・祝日 月曜日 火曜金曜 金曜土曜 不定期]
-	closest_station = %w[JR品川駅 JR目黒駅 東急自由が丘駅 京急鶴見駅 半蔵門駅 虎ノ門駅 六本木一丁目駅 渋谷駅]
 	greeting = "サンプル　"
 	greeting = "#{greeting * 20}"
+	image = %w[a15a89208f3204e0898f022f3965e2b250c63c0c79986e290b7f88e187cc
+						 7b825d78cf33b0b6bfd0386a2fde4098db4ede03678506a21a901bd7c033
+						 0f85f4a01ba6fb7cb6f6154e15b54e56f597c9a4d39e9f2e2736f15bdc2a
+						 d9eb824a8a7dbc3f09ef2f9b5e983a38aa19ece7ef83f836f3363d398a41
+						 ecb2f51d2456ed1e14929135965b44cae205a16984bb2986ed5a9d86bc9d
+						 aa2dfea583cea7b7af714c249fbe95a515d31cf843d45c7897157ce743ae]
 	password = "password"
 	# is_quit = [false, true]
 	OnStoreUser.create!( owner_name: owner_name,
 								owner_name_kana: owner_name_kana,
 								shop_name: shop_name,
-								# image_id:,
+								image_id: image.sample,
 								telephone_number: telephone_number,
 							  email: email,
 							  postcode: postcode,
 							  address: address,
 							  business_hours: business_hours.sample,
 								holiday: holiday.sample,
-							  closest_station: closest_station.sample,
+							  closest_station: "◯◯駅",
 							  parking: parking.sample,
 							  greeting: greeting,
 							  password: password,
@@ -88,10 +93,12 @@ end
 # ユーザ生成
 51.times do |n|
 	last_name = %w[山口 安倍 後藤 伊藤 斎藤 高橋 高田 高山 山田 藤本 藤井 藤崎 伊達 島津 織田 北条 武田 上杉 南部 筒井 足利]
-	first_name = %w[家康 義経 家光 光圀 忠家 義久 サルヴァドール 信長 小次郎 武蔵 豊久 元就 正宗 氏政]
-	name = "#{last_name[rand(0..21)]}#{first_name[rand(0..13)]}"
-	name_kana = "さんぷるたろう"
-	telephone_number = format('%011d',(rand(10..19))**7) # 適当な11桁
+	first_name = %w[家康 義経 家光 光圀 忠家 義久 又兵衛 信長 小次郎 武蔵 豊久 元就 正宗 氏政]
+	name = "#{last_name[rand(0..20)]}#{first_name[rand(0..13)]}"
+	name_kana = "さんぷるゆーざ"
+	number1 = [80, 90, 50, 70]
+	num     = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+	telephone_number = format('%011d',"#{number1[rand(0..3)]}#{(0...8).map{ num[rand(10)]}.join}")
 	email = "#{(0...20).map{ ('A'..'Z').to_a[rand(26)] }.join}@seeds.com"
 	postcode = format('%07d',(rand(10..19))**5) # 適当な7桁
 	address1 = %w[神奈川県横浜市 神奈川県川崎市 神奈川県相模原市 神奈川県厚木市 神奈川県海老名市 神奈川県藤沢市]
@@ -150,7 +157,7 @@ User.all.length.times do |n|
 										payment: rand(1..3),
 										charge: 50000,
 										delivery: rand(1..4),
-										delivery_day: DateTime.now
+										# delivery_day: DateTime.now
 								  )
 	end
 end
