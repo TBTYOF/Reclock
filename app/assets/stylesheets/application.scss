@@ -21,6 +21,11 @@
   word-break: break-all;
 }
 
+select {
+	margin-top: 10px;
+	border-radius: 5px;
+}
+
 .body-white {
 	background-color: #fefefe;
 }
@@ -175,4 +180,28 @@ footer li {
  .open {
  font-size: 38px;
  color: #111;
+ }
+
+ @media screen and (max-width: 991px) {
+	.font-size1 {
+	font-size: 14.83px;
+	}
+	.font-size2 {
+		font-size: 24px;
+	}
+	.font-size3 {
+		font-size: 38.832px;
+	}
+	.font-size4 {
+		font-size: 62.83px;
+	}
+	.font-size5 {
+		font-size: 101.65px;
+	}
+ }
+
+ @media screen and (min-width: 992px) {
+	.mergin-left {
+		margin-left: 5%;
+	}
  }

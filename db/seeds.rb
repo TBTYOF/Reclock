@@ -16,7 +16,7 @@ Admin.create!( name: "Administrater",
 User.create!( name: "山田太郎",
 							name_kana: "やまだたろう",
 							telephone_number: "0801231234",
-							email: "test@test",
+							email: "user@test.",
 						  postcode: 1500041,
 						  address: "東京都渋谷区神南１丁目１９−１０ パークウェースクエア2 4F",
 						  password: "testuser",
@@ -157,7 +157,7 @@ User.all.length.times do |n|
 										payment: rand(1..3),
 										charge: 50000,
 										delivery: rand(1..4),
-										delivery_day: DateTime.now
+										# delivery_day: DateTime.now
 								  )
 	end
 end
