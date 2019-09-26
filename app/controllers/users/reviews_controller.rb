@@ -27,10 +27,14 @@ class Users::ReviewsController < ApplicationController
 		@review.on_store_user_id = @order.on_store_user.id
 		@review.save
 
-		respond_to do |format|
-	  	format.html {redirect_to users_user_order_path(@user, @order)}
-	  	format.js {render '/users/reviews/show.js.erb', order: @order, user: @user}
-	  end
+		if params[:review][:review_create_key].present?
+			redirect_to users_user_order_path(@user, @order)
+		else
+			respond_to do |format|
+		  	format.html {redirect_to users_user_order_path(@user, @order)}
+		  	format.js {render '/users/reviews/show.js.erb', order: @order, user: @user}
+		  end
+		end
 	end
 
 	def show

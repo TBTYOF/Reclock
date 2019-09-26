@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="form-group font-size3 col-sm-8 col-xs-8" style="margin-bottom: 30px">
 			  <%= f.label :title, "レビュータイトル" %><br/>
-			  <%= f.text_field :title, placeholder: 'タイトル(50文字以内):', class: "form-control font-size3" %>
+			  <%= f.text_field :title, placeholder: 'タイトル(50文字以内):', class: "form-control form-height font-size3" %>
 			</div>
 	 </div>
 		<div class="row">
@@ -15,6 +15,11 @@
 			  <%= f.text_area :body, rows:10, placeholder: '本文(1000文字以内):', style: "resize: none;", class: "form-control font-size3" %>
 	 		</div>
 		</div>
+
+		<% if defined? @review_create_key %>
+			<%= f.hidden_field :review_create_key, :value => @review_create_key %>
+		<% end %>
+
 		<div class="actions col-sm-4 col-xs-4" style="margin-bottom: 50px">
 			<%= f.submit "投稿する", name: "new_review", class: "btn btn-info font-size3" %>
 		</div>

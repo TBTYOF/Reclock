@@ -13,7 +13,7 @@
 			<% end %>
 		</div>
 	<table class="table">
-		<thead>
+		<thead class="font-size3">
 			<tr>
 				<th><%= sort_link(@q, :id, 'レビューID') %></th>
 				<th>タイトル</th>
@@ -24,7 +24,7 @@
 				<th></th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="font-size2">
 			<% @reviews.each_with_index do |review, index| %>
 				<tr>
 					<td><%= review.id %></td>

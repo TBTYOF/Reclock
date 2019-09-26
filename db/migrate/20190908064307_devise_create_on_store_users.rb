@@ -2,7 +2,9 @@
 
 class DeviseCreateOnStoreUsers < ActiveRecord::Migration[5.2]
   def change
-    create_table :on_store_users, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
+    # デプロイ時に入れ替える
+    # create_table :on_store_users, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
+    create_table :on_store_users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""

@@ -11,17 +11,17 @@ class OnStoreUsers::ReviewsController < ApplicationController
 	def index
 		@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
 		if params[:search].present?
-			@q = Review.ransack(search_params)
+			@q = current_on_store_user.reviews.ransack(search_params)
 			@reviews = @q.result(distinct: true).page(params[:page]).reverse_order
 		else
-			@q = Review.ransack(params[:q])
+			@q = current_on_store_user.reviews.ransack(params[:q])
 			@reviews = @q.result(distinct: true).page(params[:page]).reverse_order
 		end
 	end
 
 	def destroy
 		@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
-		@q = Review.ransack(params[:q])
+		@q = current_on_store_user.reviews.ransack(params[:q])
 		@reviews = @q.result(distinct: true).page(params[:page]).reverse_order
 		review = Review.find(params[:id])
 		review.destroy
