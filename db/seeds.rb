@@ -112,7 +112,7 @@ end
 
 # 注文前問合せを生成
 User.all.length.times do |n|
-	3.times do |i| # 各ユーザ毎に3つ持つ
+	3.times do |i|
 		title = "title-#{n+1}"
 		body = "body-#{(n+1)}"*100
 		flag = %w[true false]
@@ -134,6 +134,7 @@ User.all.length.times do |n|
 	user = User.find(n+1)
 	maker = %w[CASIO CITIZEN OMEGA ROLEX 川村時計 源 サンプルクロックス 友村商事]
 	model = %w[RX-78 ZGMF-X10A X-18999 M-72]
+	charge = [7_000, 15_000, 4_000, 30_000, 50_000, 85_000, 100_000]
 	symptom = "サンプル　"
 	symptom = "#{symptom * 20}"
 	2.times do |i| # 各ユーザ毎に2つ持つ
@@ -148,7 +149,7 @@ User.all.length.times do |n|
 										repair_status: rand(1..8),
 										repair_detail: symptom,
 										payment: rand(1..3),
-										charge: 50000,
+										charge: charge[rand(0..5)],
 										delivery: rand(1..4),
 										# delivery_day: DateTime.now
 								  )
@@ -185,16 +186,25 @@ Order.all.length.times do |n|
 end
 
 # サービス概要を生成
+# OnStoreUser.all.length.times do |n|
+# 		on_store_user = OnStoreUser.find(n+1)
+# 		name = %w[ゼンマイ式(一般国産) ゼンマイ式(舶来) 重錘式(ホールクロック) 全般]
+# 		MajorCategory.create!(on_store_user_id: on_store_user.id,
+# 													name: name[rand(0..3)]
+# 								  			)
+# end
 OnStoreUser.all.length.times do |n|
-		on_store_user = OnStoreUser.find(n+1)
+	on_store_user = OnStoreUser.find(n+1)
+	2.times do |i|
 		name = %w[ゼンマイ式(一般国産) ゼンマイ式(舶来) 重錘式(ホールクロック) 全般]
 		MajorCategory.create!(on_store_user_id: on_store_user.id,
 													name: name[rand(0..3)]
 								  			)
+	end
 end
 MajorCategory.all.length.times do |n|
 	major_category = MajorCategory.find(n+1)
-	2.times do |i| # 各ユーザ毎に3つ持つ
+	2.times do |i|
 		name = %w[クォーツムーブ交換 目覚まし時計 掛、置時計 チャイム付き(メロディ) 国産(時打ちのみ)]
 		MiddleCategory.create!(major_category_id: major_category.id,
 														name: name[rand(0..4)]
@@ -203,7 +213,7 @@ MajorCategory.all.length.times do |n|
 end
 MiddleCategory.all.length.times do |n|
 	middle_category = MiddleCategory.find(n+1)
-	3.times do |i| # 各ユーザ毎に3つ持つ
+	3.times do |i|
 		name = %w[分解掃除 部品交換 ゼンマイ交換 部品新規作成 振り子付き 時報付き 通常時計のみ]
 		quote = %w[7,000円 15,000円 プラス4,000 30,000円 50,000円 別途見積もり]
 		MinorCategory.create!(middle_category_id: middle_category.id,
