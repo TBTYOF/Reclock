@@ -34,6 +34,8 @@ class OnStoreUser < ApplicationRecord
   validates :address,
             presence: true,
             length: { maximum: 100, message: "100文字以内で入力して下さい"}
+  validates :greeting,
+            length: { maximum: 1000, message: "1000文字以内で入力して下さい"}
 
   def self.serch_address(address)
   	where("address like ?", "%#{address}%")
