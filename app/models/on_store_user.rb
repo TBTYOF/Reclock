@@ -25,6 +25,7 @@ class OnStoreUser < ApplicationRecord
   validates :telephone_number,
             presence: true,
             length: { maximum: 20, message: "20文字以内で入力して下さい"},
+            length: { minimum: 8,  message: "電話番号が短すぎます"},
             format: { with: /\A[0-9]+\z/ , message: "半角数字を入力してください" }
   validates :postcode,
             presence: true,
@@ -33,6 +34,8 @@ class OnStoreUser < ApplicationRecord
   validates :address,
             presence: true,
             length: { maximum: 100, message: "100文字以内で入力して下さい"}
+  validates :greeting,
+            length: { maximum: 1000, message: "1000文字以内で入力して下さい"}
 
   def self.serch_address(address)
   	where("address like ?", "%#{address}%")

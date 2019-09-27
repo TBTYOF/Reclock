@@ -6,13 +6,13 @@
 				<h2 class="font-size5" >検索"サービス内容"</h2>
 			</div>
 		<% else %>
-			<div class="body-boder col-md-8 col-xs-12" style="margin: 50px;">
+			<div class="body-boder col-md-8 col-xs-11" style="margin: 40px;">
 				<h2 class="font-size5" style="padding-left: 10px;">検索"<%= @search_by %>"</h2>
 			</div>
 		<% end %>
 	<% else %>
-		<div class="body-boder col-md-4 col-xs-6" style="margin: 50px;">
-			<h2 class="font-size5" style="padding-left: 10px;">店舗一覧</h2>
+		<div class="body-boder col-md-5 col-xs-7" style="margin: 50px;">
+			<h2 class="font-size5" style="padding-left: 10px;">全店舗一覧</h2>
 		</div>
 	<% end %>
 
@@ -20,22 +20,25 @@
 	<div class="row">
 		<div class="col-md-11 margin-left col-xs-12 body-boder">
 
-			<div class="col-md-8 col-xs-7 font-size3" style="margin-top: 40px;">
+			<div class="col-md-8 col-xs-8 font-size3" style="margin-top: 40px;">
 				<%= form_with(url:users_on_store_users_index_path, method: :get, local: true) do |f| %>
 					<%= f.label :"市から探す" %>
 					<%= f.select :address, {横浜市: "横浜市", 川崎市: "川崎市", 相模原市: "相模原市", 厚木市: "厚木市", 海老名市: "海老名市"}, class: "btn btn-default", style: "margin-top: 15px;" %>
 					<%= f.submit "検索", name: "serch", class: "btn btn-default font-size2", style: "margin-bottom: 10px;" %>
 				<% end %>
 			</div>
-			<div class="col-md-4 col-xs-4 font-size3" style="margin-top: 40px;">
-				<%= link_to "全店一覧へ戻る", users_on_store_users_index_path, class: "btn btn-default font-size2" %>
-			</div>
 
-			<div class="col-md-8 col-xs-12 font-size3" style="margin: 20px 0 40px 0;">
+			<% if @search_by.present? %>
+				<div class="col-md-4 col-xs-4 font-size3" style="margin-top: 40px;">
+					<%= link_to "全店一覧へ戻る", users_on_store_users_index_path, class: "btn btn-default font-size2" %>
+				</div>
+			<% end %>
+
+			<div class="col-md-12 col-xs-12 font-size3" style="margin: 40px 0 60px 0;">
 				<%= search_form_for(@q, url:users_on_store_users_index_path, class: "form-inline") do |f| %>
 				<div class="form-group">
 					<%= f.label :major_categories_name_cont, 'サービス内容から探す' %>
-					<%= f.search_field :major_category_name_or_name_or_minor_categories_name_cont, class: "form-control" %>
+					<%= f.search_field :major_category_name_or_name_or_minor_categories_name_cont, size:"50", class: "form-control" %>
 				</div>
 					<%= f.submit "検索", name: "serch_service", class: "btn btn-default font-size2" %>
 				<% end %>
@@ -109,17 +112,6 @@
 
 		</div>
 	</div>
-
-	<style type="text/css" media="screen">
-		.cell-title {
-			width: 25%;
-		}
-
-		.cell-body {
-			width: 75%;
-			word-break: break-all;
-		}
-	</style>
 
 	<style type="text/css" media="(min-width: 992px)">
 		.padding {

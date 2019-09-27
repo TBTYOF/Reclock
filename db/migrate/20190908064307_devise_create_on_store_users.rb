@@ -45,7 +45,7 @@ class DeviseCreateOnStoreUsers < ActiveRecord::Migration[5.2]
       t.string  :address, null: false
       t.string  :closest_station
       t.string  :parking
-      t.string  :greeting
+      t.text    :greeting
       t.boolean :is_public, default: false, null: false
       t.boolean :is_quit, default: false, null: false
 
