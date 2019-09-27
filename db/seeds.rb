@@ -63,18 +63,11 @@ OnStoreUser.create!( owner_name: "山田　花子",
 	holiday = %w[土日 水曜金曜 年中無休 土日・祝日 月曜日 火曜金曜 金曜土曜 不定期]
 	greeting = "サンプル　"
 	greeting = "#{greeting * 20}"
-	image = %w[a15a89208f3204e0898f022f3965e2b250c63c0c79986e290b7f88e187cc
-						 7b825d78cf33b0b6bfd0386a2fde4098db4ede03678506a21a901bd7c033
-						 0f85f4a01ba6fb7cb6f6154e15b54e56f597c9a4d39e9f2e2736f15bdc2a
-						 d9eb824a8a7dbc3f09ef2f9b5e983a38aa19ece7ef83f836f3363d398a41
-						 ecb2f51d2456ed1e14929135965b44cae205a16984bb2986ed5a9d86bc9d
-						 aa2dfea583cea7b7af714c249fbe95a515d31cf843d45c7897157ce743ae]
 	password = "password"
 	# is_quit = [false, true]
 	OnStoreUser.create!( owner_name: owner_name,
 								owner_name_kana: owner_name_kana,
 								shop_name: shop_name,
-								image_id: image.sample,
 								telephone_number: telephone_number,
 							  email: email,
 							  postcode: postcode,
