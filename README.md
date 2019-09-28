@@ -7,7 +7,7 @@ PC版HOME画面
 スマホ版HOME画面
 <img src="https://github.com/TBTYOF/images/blob/master/reclock/home_sp.jpg" alt="HOME_SP" title="サンプル">
 
-**各画面紹介**
+各画面紹介
   *HOME
   *このサイトについて
   *修理店一覧
