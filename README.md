@@ -1,11 +1,22 @@
 # Re:clock
 時計修理店を検索し、修理依頼を受注できるWEBサイトです（デモ運営のみ）。
   
-## 実際のサイト
+**実際のサイト**
 エンドユーザは[こちら](http://reclock.work/)
+  
 ストアユーザは[こちら](http://reclock.work/on_store_users/sign_up)
 　　
-## 作成目的
+## 制作目的
+プログラミング学習目的で制作しました。
+  
+父の仕事の関係で"時計修理"をテーマにしています。
+  
+当業界は現在技術者の高齢化に伴い、ホールクロック（あの大きなノッポの古時計）などの大型の時計の修理依頼を断る店舗も増えてきているそうです。
+  
+ニーズはあるが技術的に応えられない、であれば応えられる技術者とお客様を繋ぐサービスを作ってみようと考え制作しました。
+  
+　　
+## 
 プログラミング学習目的で作成しました。
   
 父の仕事の関係で"時計修理"をテーマにしています。
@@ -19,6 +30,7 @@
 ### PC版HOME画面
   
 <img src="https://github.com/TBTYOF/images/blob/master/reclock/home_pc.PNG" alt="HOME_PC" title="サンプル">
+  
 ### スマホ版HOME画面
   
 <img src="https://github.com/TBTYOF/images/blob/master/reclock/home_sp.jpg" alt="HOME_SP" title="サンプル">
