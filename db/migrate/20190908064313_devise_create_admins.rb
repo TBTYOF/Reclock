@@ -3,8 +3,8 @@
 class DeviseCreateAdmins < ActiveRecord::Migration[5.2]
   def change
     # デプロイ時に入れ替える
-    create_table :admins, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
-    # create_table :admins do |t|
+    # create_table :admins, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
+    create_table :admins do |t|
       ## Database authenticatable
       t.string :name
       t.string :email,              null: false, default: ""
