@@ -12,7 +12,7 @@ PC版HOME画面
   
 各画面紹介
   *HOME
-   *このサイトについて
+    *このサイトについて
   *修理店一覧
   *修理店詳細
   *サインイン/サインアップ
@@ -24,9 +24,6 @@ PC版HOME画面
   *出店希望者向け
   *退会ページ
   
-## エンドユーザページ
-PC版HOME画面
-<img src="https://github.com/TBTYOF/images/blob/master/reclock/home_pc.PNG" alt="HOME_PC" title="サンプル">
   
   
   
