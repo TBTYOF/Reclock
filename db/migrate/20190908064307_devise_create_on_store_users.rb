@@ -3,8 +3,8 @@
 class DeviseCreateOnStoreUsers < ActiveRecord::Migration[5.2]
   def change
     # デプロイ時に入れ替える
-    # create_table :on_store_users, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
-    create_table :on_store_users do |t|
+    create_table :on_store_users, :options => 'ENGINE=InnoDB ROW_FORMAT=DYNAMIC' do |t|
+    # create_table :on_store_users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -45,7 +45,7 @@ class DeviseCreateOnStoreUsers < ActiveRecord::Migration[5.2]
       t.string  :address, null: false
       t.string  :closest_station
       t.string  :parking
-      t.string  :greeting
+      t.text    :greeting
       t.boolean :is_public, default: false, null: false
       t.boolean :is_quit, default: false, null: false
 

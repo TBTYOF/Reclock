@@ -59,30 +59,26 @@
 						<h3 class="font-size4" style="border-bottom: 2px solid #ddd">サービス概要</h3>
 						<% if @shop.major_categories.present? %>
 							<% @shop.major_categories.each do |major_category| %>
-								<div class="row font-size2">
-									<div class="col-md-3 col-xs-3" style="padding-top: 10px; padding-bottom: 10px;">
+								<div class="row">
+									<div class="col-md-12 col-xs-12 font-size3" style="padding-top: 10px; padding-bottom: 10px;">
 										<strong><%= major_category.name %></strong>
 									</div>
 									<% major_category.middle_categories.each_with_index do |middle_category, i| %>
-										<% if i == 0 %>
-											<div class="col-md-9 col-xs-9">
-										<% else %>
-											<div class="col-md-9 col-md-offset-3 col-xs-9 col-xs-offset-3">
-										<% end %>
+										<div class="col-md-12 col-xs-12 font-size3">
 											<div class="col-md-5 col-xs-5" style="padding-top: 10px; padding-bottom: 10px;">
 												<%= middle_category.name %>
 											</div>
 											<div class="col-md-7 col-xs-7">
-												<div class="row">
-													<% middle_category.minor_categories.each do |minor_category| %>
+												<% middle_category.minor_categories.each do |minor_category| %>
+													<div class="row">
 														<div class="col-md-6 col-xs-6" style="padding-top: 10px; padding-bottom: 10px;">
 															<%= minor_category.name %>
 														</div>
 														<div class="col-md-6 col-xs-6" style="padding-top: 10px; padding-bottom: 10px;">
 															<%= minor_category.quote %>
 														</div>
-													<% end %>
-												</div>
+													</div>
+												<% end %>
 											</div>
 										</div>
 									<% end %>
@@ -161,8 +157,12 @@
 				</div>
 
 				<% if user_signed_in? %>
-			    <div class="col-sm-2 col-xs-4" style="margin-bottom: 50px;">
+					<div class="col-sm-2 col-xs-4" style="margin-bottom: 50px;">
 			      <%= link_to "修理を依頼する", new_users_user_order_path(current_user, on_store_user_id: @shop.id), class: "btn btn-success font-size3" %>
+			    </div>
+				<% else %>
+			    <div class="col-sm-2 col-xs-4" style="margin-bottom: 50px;">
+			      <%= link_to "修理を依頼する(ログイン)", new_user_session_path, class: "btn btn-success font-size3" %>
 			    </div>
 			  <% end %>
 			</div>
