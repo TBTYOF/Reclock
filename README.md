@@ -66,7 +66,15 @@
   * レビュー一覧
   
 ## ダウンロード
-[こちら](https://github.com/TBTYOF/Reclock)
+[こちら](https://github.com/TBTYOF/Reclock)のページから任意のディレクトリへ"git clone"して下さい。
+　　
+  
+## 開発者の皆様へ
+ローカル環境で動作確認をする際は"develop branch"を使用して下さい。
+"master branch" は本番環境用の設定をしているため、"rails db:migrate"が実行できません。
+
+## 使用しているライブラリ
+
   
   
   
