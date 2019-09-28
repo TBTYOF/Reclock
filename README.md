@@ -3,26 +3,26 @@
   
 ## エンドユーザページ
   
-PC版HOME画面
+### PC版HOME画面
   
 <img src="https://github.com/TBTYOF/images/blob/master/reclock/home_pc.PNG" alt="HOME_PC" title="サンプル">
-スマホ版HOME画面
+### スマホ版HOME画面
   
 <img src="https://github.com/TBTYOF/images/blob/master/reclock/home_sp.jpg" alt="HOME_SP" title="サンプル">
   
-各画面紹介
+### 各画面紹介
   * HOME
-    * このサイトについて
-  *修理店一覧
-  *修理店詳細
-  *サインイン/サインアップ
-  *マイページ
-  *登録情報編集
-  *新規注文
-  *注文詳細
-  *注文編集
-  *出店希望者向け
-  *退会ページ
+  * このサイトについて
+  * 修理店一覧
+  * 修理店詳細
+  * サインイン/サインアップ
+  * マイページ
+  * 登録情報編集
+  * 新規注文
+  * 注文詳細
+  * 注文編集
+  * 出店希望者向け
+  * 退会ページ
   
   
   
