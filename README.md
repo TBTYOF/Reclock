@@ -1,4 +1,4 @@
-# H1Re:clock
+# H1 Re:clock
 時計修理店を検索し、修理依頼を受注できるWEBサイトです（デモ運営のみ）。
   
 ## エンドユーザページ
@@ -11,8 +11,8 @@ PC版HOME画面
 <img src="https://github.com/TBTYOF/images/blob/master/reclock/home_sp.jpg" alt="HOME_SP" title="サンプル">
   
 各画面紹介
-  *HOME
-    *このサイトについて
+  * HOME
+    * このサイトについて
   *修理店一覧
   *修理店詳細
   *サインイン/サインアップ
