@@ -2,7 +2,7 @@
 時計修理店を検索し、修理依頼を受注できるWEBサイトです（デモ運営のみ）。
   
 **実際のサイト**
-　　
+  
 エンドユーザは[こちら](http://reclock.work/)
   
 ストアユーザは[こちら](http://reclock.work/on_store_users/sign_up)
