@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_134935) do
     t.string "address", null: false
     t.string "closest_station"
     t.string "parking"
-    t.string "greeting"
+    t.text "greeting"
     t.boolean "is_public", default: false, null: false
     t.boolean "is_quit", default: false, null: false
     t.datetime "created_at", null: false
