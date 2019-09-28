@@ -2,6 +2,8 @@
 
 <img src="https://github.com/TBTYOF/images/blob/master/reclock/home_pc.PNG" alt="HOME_PC" title="サンプル">
 
+<img src="https://github.com/TBTYOF/images/blob/master/reclock/home_sp.jpg" alt="HOME_SP" title="サンプル">
+
 Things you may want to cover:
 
 * Ruby version
