@@ -24,8 +24,7 @@ class OnStoreUser < ApplicationRecord
             presence: true
   validates :telephone_number,
             presence: true,
-            length: { maximum: 20, message: "20文字以内で入力して下さい"},
-            length: { minimum: 8,  message: "電話番号が短すぎます"},
+            length: { in: 9..20, message: "9~20文字以内で入力して下さい"},
             format: { with: /\A[0-9]+\z/ , message: "半角数字を入力してください" }
   validates :postcode,
             presence: true,
@@ -41,4 +40,7 @@ class OnStoreUser < ApplicationRecord
   	where("address like ?", "%#{address}%")
 	end
 
+  def self.pablic?(on_store_users)
+    where(is_public: true)
+  end
 end

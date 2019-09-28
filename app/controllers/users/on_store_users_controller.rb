@@ -4,16 +4,16 @@ class Users::OnStoreUsersController < ApplicationController
 		if params[:address].present?
 			@q = MiddleCategory.ransack(params[:q])
 			@shops = OnStoreUser.page(params[:page]).reverse_order
-			@shops = @shops.serch_address(params[:address])
+			@shops = @shops.pablic?(@shops).serch_address(params[:address])
 			@search_by = params[:address]
 		else
 			@q = MiddleCategory.ransack(params[:q])
-			@shops = OnStoreUser.page(params[:page]).reverse_order
+			@shops = OnStoreUser.pablic?(@shops).page(params[:page]).reverse_order
 		end
 		if params[:q].present?
 			@q = MiddleCategory.ransack(search_params)
 			categories = @q.result(distinct: true)
-	    @shops = category_sarch(categories)
+	    @shops = @shops.pablic?(@shops)
 	    @search_by = "service"
 	  end
 	end
