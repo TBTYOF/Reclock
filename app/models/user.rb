@@ -12,7 +12,7 @@ class User < ApplicationRecord
             length: { maximum: 50, message: "50文字以内で入力して下さい"}
   validates :telephone_number,
             presence: true,
-            length: { maximum: 20, message: "20文字以内で入力して下さい"},
+            length: { in: 9..20, message: "9~20文字以内で入力して下さい"},
             format: { with: /\A[0-9]+\z/ , message: "半角数字を入力してください" }
   validates :postcode,
             presence: true,
