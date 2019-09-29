@@ -72,6 +72,7 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 																					:image,
 																					:business_hours,
 																					:holiday,
+																					:email,
 																					:telephone_number,
 																					:postcode,
 																					:address,
