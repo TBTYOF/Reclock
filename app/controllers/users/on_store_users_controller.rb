@@ -12,9 +12,8 @@ class Users::OnStoreUsersController < ApplicationController
 		end
 		if params[:q].present?
 			@q = MiddleCategory.ransack(search_params)
-			categories = @q.result(distinct: true).reverse_order
+			categories = @q.result(distinct: true)
 			@shops = store_sarch(categories)
-	    # @shops = is_public?(@shops)
 	    @search_by = "service"
 	  end
 	end
