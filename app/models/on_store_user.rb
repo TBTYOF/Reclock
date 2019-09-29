@@ -40,7 +40,7 @@ class OnStoreUser < ApplicationRecord
   	where("address like ?", "%#{address}%")
 	end
 
-  def self.pablic?(on_store_users)
+  def self.public?(on_store_users)
     where(is_public: true)
   end
 end
