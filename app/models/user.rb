@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  enum is_quit:{利用中: false, 退会済み: true}
+
   validates :name,
             presence: true,
             length: { maximum: 50, message: "50文字以内で入力して下さい"}

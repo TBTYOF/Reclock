@@ -8,15 +8,25 @@ Rails.application.routes.draw do
 
 	devise_for :admins
   devise_for :on_store_users
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions:      'users/sessions',
+    #passwords:     'users/passwords',
+    #registrations: 'users/registrations'
+  }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  namespace :users do
+    devise_scope :user do
+      get '/logout', to: 'sessions#destroy', as: 'logout'
+    end
+  end
 
   namespace :users do
   	get '/about' => 'users#about', as: 'about'
   	get '/shops' => 'on_store_users#index', as: 'on_store_users_index'
   	get '/shops/:id'    => 'on_store_users#show', as: 'on_store_users_show'
     get '/shops/search' => 'on_store_users#search', as: 'search'
-    resources :users ,only:[:show, :edit, :update] do
+    resources :users ,only:[:show, :edit, :update, :destroy] do
       get '/withdrawal' => 'users#withdrawal', as: 'withdrawal'
       get '/shops/:shop_id/inquiry/new' => 'inquiries#new', as: 'inquiry_new'
       post '/shops/:shop_id/inquiry' => 'inquiries#create', as: 'inquiry_create'
@@ -64,8 +74,8 @@ Rails.application.routes.draw do
   namespace :admins do
     get '', to:'admins#home'
     resources :orders, only:[:index, :show]
-    resources :users, only:[:index, :show]
-    resources :on_store_users, only:[:index, :show]
+    resources :users, except:[:edit]
+    resources :on_store_users, except:[:edit]
     resources :inquiries, only:[:index, :show]
     resources :reviews, only:[:index, :show, :destroy]
   end

@@ -14,9 +14,21 @@ class Admins::OnStoreUsersController < ApplicationController
 		@on_store_user = OnStoreUser.find(params[:id])
 	end
 
-	def quit
+	def update
+		on_store_user = OnStoreUser.find(params[:id])
+		on_store_user.is_quit = "利用中"
+		on_store_user.save
+		redirect_back(fallback_location: root_path)
 	end
 
+	def destroy
+		on_store_user = OnStoreUser.find(params[:id])
+		on_store_user.is_quit = "退会済み"
+		on_store_user.save
+		redirect_back(fallback_location: root_path)
+	end
+
+	private
 	def search_params
     params.require(:q).permit(:s,
     													:shop_name_cont,

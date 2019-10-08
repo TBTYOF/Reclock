@@ -54,7 +54,11 @@ class Users::UsersController < ApplicationController
   def withdrawal
   end
 
-  def quit
+  def destroy
+    user = User.find(params[:id])
+    user.is_quit = true
+    user.save
+    redirect_to users_logout_path
   end
 
   private

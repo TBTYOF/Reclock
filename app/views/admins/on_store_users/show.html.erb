@@ -53,6 +53,14 @@
 							非公開
 						<% end %>
 					</li>
+					<li class="list-group-item">
+						ステータス：<%= @on_store_user.is_quit %> 　 　
+						<% if @on_store_user.is_quit == "利用中" %>
+							<%= link_to "強制退会", admins_on_store_user_path(@on_store_user), method: :delete, class: "btn btn-danger font-size3" %>
+						<% else %>
+							<%= link_to "利用再会", admins_on_store_user_path(@on_store_user), method: :patch, class: "btn btn-info font-size3" %>
+						<% end %>
+					</li>
 				</ul>
 			</div>
 
