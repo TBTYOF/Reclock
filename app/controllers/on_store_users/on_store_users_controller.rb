@@ -61,8 +61,12 @@ class OnStoreUsers::OnStoreUsersController < ApplicationController
 		@search = current_on_store_user.orders.ransack(params[:search], search_key: :search)
 	end
 
-	def quit
-	end
+	def destroy
+    on_store_user = OnStoreUser.find(params[:id])
+    on_store_user.is_quit = true
+    on_store_user.save
+    redirect_to on_store_users_logout_path
+  end
 
 	private
 	def on_store_user_params

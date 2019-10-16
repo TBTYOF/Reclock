@@ -7,7 +7,11 @@ Rails.application.routes.draw do
 	root 'users/users#home'
 
 	devise_for :admins
-  devise_for :on_store_users
+  devise_for :on_store_users, controllers: {
+    sessions:      'on_store_users/sessions',
+    #passwords:     'users/passwords',
+    #registrations: 'users/registrations'
+  }
   devise_for :users, controllers: {
     sessions:      'users/sessions',
     #passwords:     'users/passwords',
@@ -53,7 +57,7 @@ Rails.application.routes.draw do
   namespace :on_store_users do
   	get '/form' => 'on_store_users#form', as: 'form'
     post '/form/ok' => 'on_store_users#form', as: 'form_ok'
-    resources :on_store_users ,only:[:show, :edit, :update] do
+    resources :on_store_users ,only:[:show, :edit, :update, :destroy] do
     	# get '/sales' => 'on_store_users#sales', as: 'sales'
       get '/home' => 'on_store_users#home', as: 'home'
       get '/withdrawal' => 'on_store_users#withdrawal', as: 'withdrawal'
@@ -69,6 +73,12 @@ Rails.application.routes.draw do
   			end
 		  end
   	end
+  end
+
+  namespace :on_store_users do
+    devise_scope :on_store_user do
+      get '/logout', to: 'sessions#destroy', as: 'logout'
+    end
   end
 
   namespace :admins do

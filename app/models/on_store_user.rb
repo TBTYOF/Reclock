@@ -38,10 +38,12 @@ class OnStoreUser < ApplicationRecord
   validates :greeting,
             length: { maximum: 1000, message: "1000文字以内で入力して下さい"}
 
+  #公開・利用中の出店者のみ検索
   def self.public_and_is_quit?
     where(is_public: true, is_quit: "利用中")
   end
 
+  # 個別で使用するタイミングの可能性を考慮してコメントアウト
   # def self.public?
   #   where(is_public: true)
   # end

@@ -22,7 +22,7 @@
       </div>
 
       <div class="col-md-4 col-xs-4 margin-left" style="margin-bottom: 40px;">
-        <a href="#" title="" class="btn btn-danger font-size3">退会する</a>
+        <%= link_to "退会する", on_store_users_on_store_user_path(current_on_store_user), method: :delete, class: "btn btn-danger font-size3" %>
         <%= link_to "戻る", on_store_users_on_store_user_home_path(current_on_store_user),class: "btn btn-info font-size3" %>
       </div>
 
