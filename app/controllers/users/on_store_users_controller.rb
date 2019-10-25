@@ -16,7 +16,7 @@ class Users::OnStoreUsersController < ApplicationController
 	def show
 		@shop = OnStoreUser.find(params[:id])
 		@reviews = @shop.reviews.page(params[:page]).reverse_order
-		@inquiries = Inquiry.where(user_id: current_user, on_store_user_id:  @shop.id)
+		@inquiries = Inquiry.where(user_id: current_user, on_store_user_id:  @shop.id, order_id: nil)
 	end
 
 	private
