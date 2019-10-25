@@ -26,6 +26,8 @@ class Users::ReviewsController < ApplicationController
 		@review.order_id = @order.id
 		@review.on_store_user_id = @order.on_store_user.id
 		@review.save
+		# 出店者へ通知
+		OnStoreUserMailer.with(review: @review).new_review.deliver_later
 
 		if params[:review][:review_create_key].present?
 			redirect_to users_user_order_path(@user, @order)

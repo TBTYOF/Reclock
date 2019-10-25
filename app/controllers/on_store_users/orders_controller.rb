@@ -68,6 +68,8 @@ class OnStoreUsers::OrdersController < ApplicationController
 	def update
 		@order = Order.find(params[:id])
 		@order.update(order_params)
+		# エンドユーザへ通知
+		UserMailer.with(order: @order).update_order.deliver_later
 
 		if params[:order][:repair_key].present?
 			if @order.repair_status == "取引完了"
