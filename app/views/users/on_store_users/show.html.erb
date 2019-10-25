@@ -241,6 +241,14 @@
 			</div>
 
 			<div id="tab3" class="tab inquiries">
+				<div class="col-md-12 col-xs-12">
+	        <p class="alert alert-success font-size3">
+	        	<strong>
+	        		*注文後の修理状況等に関するお問合せは、下記ページからお問合せ下さい。<br>
+	        		「マイページ」▶「注文」▶「明細へ」▶「お問合せ」
+	        	</strong>
+	        </p>
+	      </div>
 				<% if user_signed_in? %>
 					<%= render '/shared/inquiries/inquiry', inquiries: @inquiries, shop: @shop %>
 				<% else %>
