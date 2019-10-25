@@ -43,7 +43,7 @@ OnStoreUser.create!( owner_name: "山田　花子",
 							  )
 
 # 出店者を生成
-51.times do |n|
+31.times do |n|
 	last_name = %w[山口 安倍 後藤 伊藤 斎藤 高橋 高田 高山 山田 藤本 藤井 藤崎 伊達 プルースト]
 	first_name = %w[家康 義経 家光 光圀 忠家 義久 サルヴァドール 信長 小次郎 武蔵 豊久 元就 正宗 氏政]
 	owner_name = "#{last_name[rand(0..13)]}　#{first_name[rand(0..13)]}"
@@ -88,7 +88,7 @@ OnStoreUser.create!( owner_name: "山田　花子",
 							  )
 end
 # ユーザ生成
-51.times do |n|
+41.times do |n|
 	last_name = %w[山口 安倍 後藤 伊藤 斎藤 高橋 高田 高山 山田 藤本 藤井 藤崎 伊達 島津 織田 北条 武田 上杉 南部 筒井 足利]
 	first_name = %w[家康 義経 家光 光圀 忠家 義久 又兵衛 信長 小次郎 武蔵 豊久 元就 正宗 氏政]
 	name = "#{last_name[rand(0..20)]}#{first_name[rand(0..13)]}"
