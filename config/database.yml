@@ -27,6 +27,6 @@ production:
   charset  : utf8mb4
   encoding : utf8mb4
   collation: utf8mb4_general_ci
-  host     : reclock.c6irulkq4ppg.ap-northeast-1.rds.amazonaws.com
-  username : root
-  password : hogehoge
+  host     : ENV["HOST"]
+  username : ENV["DATA_BASE_USER_NAME"]
+  password : ENV["DATA_BASE_PASSWORD"]

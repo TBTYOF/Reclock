@@ -9,14 +9,26 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    user = User.find_by(email: params[:user][:email])
+    if user.is_quit == "退会済み"
+      flash[:danger] = "退会済みアカウントです"
+      redirect_to root_path and return
+    end
+    super
+  end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+  #この時点では通常ログアウトか退会処理後自動ログアウトか区別できない
+    if current_user.is_quit == "退会済み"
+      reset_session
+      flash[:info] = "退会手続きが完了しました"
+      redirect_to root_path and return
+    else
+      super
+    end
+  end
 
   # protected
 

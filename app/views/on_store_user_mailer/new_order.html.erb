@@ -1,0 +1,28 @@
+<h1 class="font-size3">"<%= @order.user.name %> 様"から注文があります。</h1>
+<br/>
+
+<p class="font-size2">
+  注文を確認するには、「ログイン後」に「管理台帳」から「注文詳細ページ」にてご確認頂けます。
+</p>
+
+<p class="font-size2">
+  「管理台帳」は<a href="<%= @order_index_url %>">"こちら"</a>をクリックしてください。
+</p>
+<p class="font-size2">
+  「注文詳細ページ」は<a href="<%= @order_show_url %>">"こちら"</a>をクリックしてください。
+</p>
+
+<!-- テスト用 -->
+<p class="font-size2">
+  「ログイン」は<a href="http://localhost:3000/on_store_users/sign_in">"こちら"</a>をクリックしてください。
+</p>
+
+<!-- デプロイ時はコメントアウトを外す -->
+<!-- <p class="font-size2">
+  「ログイン」は<a href="http://reclock.work/on_store_users/sign_in">"こちら"</a>をクリックしてください。
+</p> -->
+
+<p>
+	Re:clock運営より自動送信<br>
+	※このメールは送信専用です、返信はご遠慮下さい
+</p>

@@ -32,7 +32,7 @@
 								<% end %>
 							</div>
 						<% else %>
-							<img src="/no_image.jpg" alt="no_image" style="height: 300px; width: 100%;">
+							<img src="/no_image.jpg" alt="no_image" style="height: 500px; width: 100%;">
 						<% end %>
 					</div>
 				</div>
@@ -118,6 +118,10 @@
 								<tr>
 									<td class="cell-title">電話番号</td>
 									<td class="cell-body"><%= telephone_ber(@shop.telephone_number) %></td>
+								</tr>
+								<tr>
+									<td class="cell-title">e-mail</td>
+									<td class="cell-body"><%= @shop.email %></td>
 								</tr>
 								<tr>
 									<td class="cell-title">最寄駅</td>

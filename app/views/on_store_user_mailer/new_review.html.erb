@@ -1,0 +1,29 @@
+<h1 class="font-size3">"<%= @review.user.name %> 様"からレビューが届いています</h1>
+<br/>
+
+<p>レビュータイトル：<%= @review.title %></p>
+
+<p>本文:</p>
+<p><%= h(@review.body).gsub(/\R/, "<br />").html_safe %></p>
+<br/>
+
+<p class="font-size2">
+  サイト内でレビューを確認する際は、「ログイン後にレビュー一覧」よりご確認頂けます。
+</p>
+
+<p class="font-size2">
+  「レビュー一覧」は<a href="<%= @url %>">"こちら"</a>をクリックしてください。
+</p>
+<!-- テスト用 -->
+<p class="font-size2">
+  「ログイン」は<a href="http://localhost:3000/on_store_users/sign_in">"こちら"</a>をクリックしてください。
+</p>
+<!-- デプロイ時はコメントアウトを外す -->
+<!-- <p class="font-size2">
+  「ログイン」は<a href="http://reclock.work/on_store_users/sign_in">"こちら"</a>をクリックしてください。
+</p> -->
+
+<p>
+	Re:clock運営より自動送信<br>
+	※このメールは送信専用です、返信はご遠慮下さい
+</p>

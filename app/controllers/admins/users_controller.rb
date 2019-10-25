@@ -15,10 +15,21 @@ class Admins::UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
-	def quit
-		
+	def update
+		user = User.find(params[:id])
+		user.is_quit = "利用中"
+		user.save
+		redirect_back(fallback_location: root_path)
 	end
 
+	def destroy
+		user = User.find(params[:id])
+		user.is_quit = "退会済み"
+		user.save
+		redirect_back(fallback_location: root_path)
+	end
+
+	private
 	def search_params
     params.require(:q).permit(:s,
     													:name_cont,

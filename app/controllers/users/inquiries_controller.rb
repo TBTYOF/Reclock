@@ -41,6 +41,8 @@ class Users::InquiriesController < ApplicationController
 			# partial表示のためのインスタンス変数（注文前）
 			@inquiries = Inquiry.where(user_id: current_user, on_store_user_id:  @shop.id, order_id: nil)
 		end
+		# 出店者へ通知
+		OnStoreUserMailer.with(on_store_user: @shop, inquiry: inquiry).new_inquiry.deliver_later
 
 		respond_to do |format|
 		  format.html
