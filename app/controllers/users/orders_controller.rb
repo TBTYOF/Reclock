@@ -19,6 +19,8 @@ class Users::OrdersController < ApplicationController
 		@order = @user.orders.new(order_params)
 		@order.serial_number = @order.on_store_user.orders.count + 1
 		if @order.save
+			# 出店者へ通知
+			OnStoreUserMailer.with(order: @order).new_order.deliver_later
 			redirect_to users_user_order_path(@user, @order)
 		else
 			@shop = @order.on_store_user
@@ -52,6 +54,8 @@ class Users::OrdersController < ApplicationController
 			@order.repair_status = "取引完了"
 		end
 		@order.save
+		# 出店者へ通知
+		OnStoreUserMailer.with(order: @order).update_order.deliver_later
 		if params[:commit] == "後でする"
 			redirect_to users_user_order_path(@user, @order)
 		else

@@ -22,12 +22,15 @@ class OnStoreUsers::InquiriesController < ApplicationController
 	def create
 		@shop = current_on_store_user
 		@order = Order.find(params[:inquiry][:order_id])
+		user = @order.user
 		inquiry = @shop.inquiries.new(inquiry_params)
-		inquiry.user_id = @order.user.id
+		inquiry.user_id = user.id
 		inquiry.order_id = @order.id
 		inquiry.on_store_user_read = true
 		@inquiries = @order.inquiries
 		inquiry.save
+		# エンドユーザへ通知
+		UserMailer.with(user: user, inquiry: inquiry).new_inquiry.deliver_later
 
 		respond_to do |format|
 		  format.html

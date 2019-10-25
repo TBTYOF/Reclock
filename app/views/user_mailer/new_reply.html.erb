@@ -1,0 +1,34 @@
+<h1 class="font-size3">"<%= @inquiry.on_store_user.shop_name %>"からお問合せに返信があります。</h1>
+<br/>
+
+<p>件名：<%= @inquiry.title %></p>
+
+<p>返信内容:</p>
+<p><%= h(@reply.body).gsub(/\R/, "<br />").html_safe %></p>
+<br/>
+
+<p class="font-size2">
+  サイト内で返信内容を確認する際は、「ログイン後にマイページ」よりご確認頂けます。
+</p>
+
+<p class="font-size2">
+  「マイページ」は<a href="<%= @url %>">"こちら"</a>をクリックしてください。
+</p>
+<!-- テスト用 -->
+<!-- <p class="font-size2">
+  「ログイン」は<a href="http://localhost:3000/users/sign_in">"こちら"</a>をクリックしてください。
+</p> -->
+
+<!-- デプロイ時はコメントアウトを外す -->
+<p class="font-size2">
+  「ログイン」は<a href="http://reclock.work/users/sign_in">"こちら"</a>をクリックしてください。
+</p>
+
+<p class="font-size2">
+  「トップページ」は<a href="http://localhost:3000">"こちら"</a>をクリックしてください。
+</p>
+
+<p>
+	Re:clock運営より自動送信<br>
+	※このメールは送信専用です、返信はご遠慮下さい
+</p>

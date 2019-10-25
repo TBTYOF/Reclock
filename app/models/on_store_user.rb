@@ -4,6 +4,8 @@ class OnStoreUser < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  enum is_quit:{利用中: false, 退会済み: true}
+
   attachment :image
 
   has_many :orders
@@ -36,11 +38,17 @@ class OnStoreUser < ApplicationRecord
   validates :greeting,
             length: { maximum: 1000, message: "1000文字以内で入力して下さい"}
 
-  def self.serch_address(address)
-  	where("address like ?", "%#{address}%")
-	end
-
-  def self.pablic?(on_store_users)
-    where(is_public: true)
+  #公開・利用中の出店者のみ検索
+  def self.public_and_is_quit?
+    where(is_public: true, is_quit: "利用中")
   end
+
+  # 個別で使用するタイミングの可能性を考慮してコメントアウト
+  # def self.public?
+  #   where(is_public: true)
+  # end
+
+  # def self.is_quit?
+  #   where(is_quit: "利用中")
+  # end
 end

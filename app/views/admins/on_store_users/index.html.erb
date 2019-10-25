@@ -1,4 +1,4 @@
-<div class="container margin-top">
+<div class="container-fluid margin-top">
 	<div class="col-md-12 col-xs-12">
 		<div style="margin-bottom: 50px;" class="font-size2">
 			<%= search_form_for(@q,  url: admins_on_store_users_path, class: "form-inline" ) do |f| %>
@@ -30,6 +30,7 @@
 					<th>代表者名</th>
 					<th>電話番号</th>
 					<th>メールアドレス</th>
+					<th>ステータス</th>
 				</tr>
 			</thead>
 			<tbody class="font-size2">
@@ -40,6 +41,7 @@
 						<td><%= on_store_user.owner_name %></td>
 						<td><%= telephone_ber(on_store_user.telephone_number) %></td>
 						<td><%= on_store_user.email %></td>
+						<td><%= on_store_user.is_quit %></td>
 					</tr>
 				<% end %>
 			</tbody>

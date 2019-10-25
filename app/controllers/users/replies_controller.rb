@@ -24,6 +24,8 @@ class Users::RepliesController < ApplicationController
 		# 未読処理
 		@inquiry.on_store_user_read = false
 		@inquiry.save
+		# 出店者へ通知
+		OnStoreUserMailer.with(inquiry: @inquiry, reply: reply).new_reply.deliver_later
 
 		if params[:order_id] != nil
 			@order = Order.find(params[:order_id])
