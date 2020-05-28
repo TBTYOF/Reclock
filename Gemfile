@@ -75,7 +75,7 @@ gem 'devise-i18n-views'
 
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
-gem 'kaminari','~> 1.1.1'
+gem 'kaminari','~> 1.2.1'
 
 # for nested form
 gem "cocoon"
